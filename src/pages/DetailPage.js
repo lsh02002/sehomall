@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { DetailItem, OnAddToCart } from "../api/ItemApi";
+import { AddToCart, DetailItem } from "../api/ItemApi";
 import Layout from "../components/Layout";
 import { CartContext } from "../api/cartContextApi";
+import { LoginContext } from "../api/loginContextApi";
 
 const DetailPage = () => {
+  const { isLogin } = useContext(LoginContext);
   const [item, setItem] = useState(null);
   const { id } = useParams();
   const { setCartCount } = useContext(CartContext);
@@ -19,6 +21,15 @@ const DetailPage = () => {
         console.log(err);
       });
   }, [id]);
+
+  const OnAddToCartClick = () => {
+    if (!isLogin) {
+      alert("장바구니 기능은 로그인 하셔야 합니다.");
+      return;
+    }
+
+    AddToCart(id, setCartCount);
+  };
 
   return (
     <Layout>
@@ -36,7 +47,9 @@ const DetailPage = () => {
             </>
           )}
           <BuyNow>Buy Now</BuyNow>
-          <AddToCart onClick={()=>OnAddToCart(id, setCartCount)}>Add To Cart</AddToCart>
+          <AddToCartButton onClick={OnAddToCartClick}>
+            Add To Cart
+          </AddToCartButton>
         </Info>
       </Main>
     </Layout>
@@ -95,7 +108,7 @@ const BuyNow = styled.button`
   cursor: pointer;
 `;
 
-const AddToCart = styled.button`
+const AddToCartButton = styled.button`
   margin-top: 10px;
   width: 100%;
   border: none;

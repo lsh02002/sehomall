@@ -10,15 +10,18 @@ const Header = () => {
   const { cartCount, setCartCount } = useContext(CartContext);
 
   useEffect(() => {
-    CountCartItems()
-      .then((res) => {
-        console.log(res);
-        setCartCount(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+    if (isLogin) {
+      CountCartItems()
+        .then((res) => {
+          console.log(res);
+          setCartCount(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [isLogin, setCartCount]);
+  
   const OnLogout = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
       localStorage.removeItem("token");

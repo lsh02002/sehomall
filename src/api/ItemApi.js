@@ -70,7 +70,7 @@ const CountCartItems = async () => {
   });
 };
 
-const OnAddToCart = (id, setCartCount) => {
+const AddToCart = (id, setCartCount) => {
   AddCart(id, 1, true)
     .then((res) => {
       console.log(res);
@@ -115,6 +115,46 @@ const UpdateCartItem = async (itemId, count, checked) => {
   );
 };
 
+const CountHeart = async (itemId) => {
+  const Token = localStorage.getItem("token");
+  return axios.get(`${BASE_URL}/heart/count/${itemId}`, {
+    headers: {
+      Token,
+    },
+  });
+}
+
+const IsHearted = async (itemId) => {
+  const Token = localStorage.getItem("token");
+  return axios.get(`${BASE_URL}/heart/is-hearted/${itemId}`, {
+    headers: {
+      Token,
+    },
+  });
+};
+
+const InsertHeart = async (itemId) => {
+  const Token = localStorage.getItem("token");
+  return axios.post(
+    `${BASE_URL}/heart/${itemId}`,
+    {},
+    {
+      headers: {
+        Token,
+      },
+    }
+  );
+};
+
+const DeleteHeart = async (itemId) => {
+  const Token = localStorage.getItem("token");
+  return axios.delete(`${BASE_URL}/heart/${itemId}`, {
+    headers: {
+      Token,
+    },
+  });
+};
+
 export {
   getItems,
   CategoryItems,
@@ -124,7 +164,11 @@ export {
   AddCart,
   FindCartItems,
   CountCartItems,
-  OnAddToCart,
+  AddToCart,
   DelCartItem,
   UpdateCartItem,
+  CountHeart,
+  IsHearted,
+  InsertHeart,
+  DeleteHeart,
 };

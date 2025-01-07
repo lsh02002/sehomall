@@ -9,7 +9,7 @@ const CartPage = () => {
   const { totalPrice, setTotalPrice, items, setItems, isDeleting, isEditing } =
     useContext(CartContext);
 
-  useEffect(() => {
+  useEffect(() => {    
     FindCartItems()
       .then((res) => {
         console.log(res);
