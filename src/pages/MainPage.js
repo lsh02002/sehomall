@@ -39,7 +39,7 @@ export default MainPage;
 
 const Main = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: start;
   align-items: center;
   width: calc(100% - 190px);
   margin: 10px 0 0 10px;

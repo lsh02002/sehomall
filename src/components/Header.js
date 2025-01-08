@@ -7,7 +7,7 @@ import { CountCartItems } from "../api/ItemApi";
 
 const Header = () => {
   const { isLogin, setIsLogin } = useContext(LoginContext);
-  const { cartCount, setCartCount } = useContext(CartContext);
+  const { cartCount, setCartCount, isDeleting } = useContext(CartContext);
 
   useEffect(() => {
     if (isLogin) {
@@ -20,8 +20,8 @@ const Header = () => {
           console.log(err);
         });
     }
-  }, [isLogin, setCartCount]);
-  
+  }, [isLogin, setCartCount, isDeleting]);
+
   const OnLogout = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
       localStorage.removeItem("token");
@@ -30,26 +30,26 @@ const Header = () => {
   };
 
   return (
-    <>
-      <Container>
-        <Title>
-          <Link to="/">MADGOAT</Link>
-        </Title>
-        <Menu>
-          <Link to="/search">SEARCH</Link>
-          {!isLogin ? (
-            <Link to="/login">LOGIN</Link>
-          ) : (
-            <>
-              <Link to="/enroll">ENROLL</Link>
-              <Link onClick={OnLogout}>LOGOUT</Link>
-              <Link to="/mypage">MYPAGE</Link>
-              <Link to="/cart">CART({cartCount})</Link>
-            </>
-          )}
-        </Menu>
-      </Container>
-    </>
+    <Container>
+      <Title>
+        <Link to="/">MADGOAT</Link>
+      </Title>
+      <Menu>
+        <Link to="/search">SEARCH</Link>
+        {!isLogin ? (
+          <Link to="/login">LOGIN</Link>
+        ) : (
+          <>
+            <Link to="/enroll">ENROLL</Link>
+            <Link onClick={OnLogout}>LOGOUT</Link>
+            <Link to="/mypage">MYPAGE</Link>
+            <Link to="/cart">
+              CART<span>({cartCount})</span>
+            </Link>
+          </>
+        )}
+      </Menu>
+    </Container>
   );
 };
 
@@ -79,4 +79,7 @@ const Menu = styled.div`
   align-items: center;
   width: 300px;
   font-size: 12px;
+  span {
+    color: red;
+  }
 `;

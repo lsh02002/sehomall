@@ -13,7 +13,7 @@ const CartPage = () => {
     FindCartItems()
       .then((res) => {
         console.log(res);
-        setItems(res.data);
+        setItems(res.data.cartAllSearchResponses);
       })
       .catch((err) => {
         console.log(err);

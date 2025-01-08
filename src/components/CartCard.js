@@ -80,7 +80,7 @@ const CartCard = ({ item }) => {
         <button onClick={onSub}>-</button>
       </Count>
       <DeleteItem>
-        <button onClick={() => onDel(item.itemId)}>카트 아이템 삭제</button>
+        <button onClick={() => onDel(item.itemId)}>아이템 삭제</button>
       </DeleteItem>
     </Container>
   );

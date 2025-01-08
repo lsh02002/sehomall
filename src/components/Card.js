@@ -116,7 +116,7 @@ const Container = styled.article`
     }
   }
   box-sizing: border-box;
-  margin: 10px;
+  margin: 20px;
   border: 1px solid lightgray;
   position: relative;
 `;
