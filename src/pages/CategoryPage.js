@@ -35,6 +35,7 @@ const CategoryPage = () => {
                 image={item.files[0].fileUrl}
                 name={item.name}
                 price={item.price}
+                heartCount={item.heartCount}
               />
             ))}
         </Items>

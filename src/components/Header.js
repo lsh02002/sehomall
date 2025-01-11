@@ -44,7 +44,7 @@ const Header = () => {
             <Link onClick={OnLogout}>LOGOUT</Link>
             <Link to="/mypage">MYPAGE</Link>
             <Link to="/cart">
-              CART<span>({cartCount})</span>
+              CART<span>{cartCount}</span>
             </Link>
           </>
         )}
@@ -77,9 +77,17 @@ const Menu = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 300px;
-  font-size: 12px;
+  width: 400px;
+  font-size: 14px;
   span {
-    color: red;
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-color: gray;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 14px;
+    padding-left: 2px;
   }
 `;

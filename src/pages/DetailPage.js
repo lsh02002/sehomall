@@ -5,6 +5,7 @@ import { AddToCart, DetailItem } from "../api/ItemApi";
 import Layout from "../components/Layout";
 import { CartContext } from "../api/cartContextApi";
 import { LoginContext } from "../api/loginContextApi";
+import HeartCount from "../components/HeartCount";
 
 const DetailPage = () => {
   const { isLogin } = useContext(LoginContext);
@@ -44,6 +45,7 @@ const DetailPage = () => {
               <span>{item.description}</span>
               <span>Size {item.size}</span>
               <span>Care Guide {item.careGuide}</span>
+              <HeartCount id={item.id} heartCount={item.heartCount} />
             </>
           )}
           <BuyNow>Buy Now</BuyNow>
@@ -93,7 +95,7 @@ const Info = styled.div`
   }
   span {
     width: 100%;
-    padding: 0 10px;
+    padding: 0px 10px;
     box-sizing: border-box;
     font-size: 20px;
   }
