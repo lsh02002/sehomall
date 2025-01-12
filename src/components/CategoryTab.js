@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Card from "./Card";
+import CardTwo from "./CardTwo";
 
 const CategoryTab = ({ cate, setCate, cateItems }) => {
   const OnTabClick = (cat) => {
@@ -45,7 +45,7 @@ const CategoryTab = ({ cate, setCate, cateItems }) => {
           <div id="tab1">
             <Items>
               {cateItems.length > 0 ? (
-                cateItems.map((item) => <Card item={item} />)
+                cateItems.map((item) => <CardTwo item={item} />)
               ) : (
                 <em>상품이 없습니다.</em>
               )}
@@ -56,7 +56,7 @@ const CategoryTab = ({ cate, setCate, cateItems }) => {
           <div id="tab2">
             <Items>
               {cateItems.length > 0 ? (
-                cateItems.map((item) => <Card item={item} />)
+                cateItems.map((item) => <CardTwo item={item} />)
               ) : (
                 <em>상품이 없습니다.</em>
               )}
@@ -67,7 +67,7 @@ const CategoryTab = ({ cate, setCate, cateItems }) => {
           <div id="tab3">
             <Items>
               {cateItems.length > 0 ? (
-                cateItems.map((item) => <Card item={item} />)
+                cateItems.map((item) => <CardTwo item={item} />)
               ) : (
                 <em>상품이 없습니다.</em>
               )}
@@ -78,7 +78,7 @@ const CategoryTab = ({ cate, setCate, cateItems }) => {
           <div id="tab4">
             <Items>
               {cateItems.length > 0 ? (
-                cateItems.map((item) => <Card item={item} />)
+                cateItems.map((item) => <CardTwo item={item} />)
               ) : (
                 <em>상품이 없습니다.</em>
               )}
@@ -89,7 +89,7 @@ const CategoryTab = ({ cate, setCate, cateItems }) => {
           <div id="tab5">
             <Items>
               {cateItems.length > 0 ? (
-                cateItems.map((item) => <Card item={item} />)
+                cateItems.map((item) => <CardTwo item={item} />)
               ) : (
                 <em>상품이 없습니다.</em>
               )}
@@ -141,7 +141,7 @@ const TabInner = styled.div`
   .tabs > div {
     display: flex;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
   }
 `;
 
@@ -157,6 +157,6 @@ const Items = styled.div`
     display: inline-block;
     text-align: left;
     width: 100%;
-    padding-left: 100px;    
+    padding-left: 100px;
   }
 `;

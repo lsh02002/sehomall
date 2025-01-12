@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 // import required modules
 import { Navigation } from "swiper/modules";
-import Card from "./Card";
+import CardOne from "./CardOne";
 
 function ItemSlider({ items }) {
   return (
@@ -30,7 +30,7 @@ function ItemSlider({ items }) {
         {items.length > 0 &&
           items.map((item) => (
             <SwiperSlide>
-              <Card key={item.id} item={item} />
+              <CardOne key={item.id} item={item} />
             </SwiperSlide>
           ))}
       </Swiper>

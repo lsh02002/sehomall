@@ -18,6 +18,7 @@ const Category = () => {
       <CatLink to={"/about"}>ABOUT</CatLink>
       <CatLink to={"/notice"}>NOTICE</CatLink>
       <CatLink to={"/contact"}>CONTACT</CatLink>
+      <CatLink to={"/mystory"}>MYSTORY</CatLink>
       <CatLink to={"/instagram"}>INSTAGRAM</CatLink>
     </Container>
   );
@@ -33,7 +34,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 200px;
   margin-top: 10px;
-  padding: 30px 30px 0 0;
+  padding: 30px 0 30px 0;
   // border: 1px solid lightgray;
   left: 0;
   top: 0;
@@ -46,7 +47,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.div`
-  width: 150px;
+  width: 100%;
   font-size: 40px;
   color: crimson;
   span {
@@ -55,6 +56,10 @@ const Title = styled.div`
 `;
 
 const CatLink = styled(Link)`
-  width: 150px;
-  padding-bottom: 3px;
+  width: 100%;
+  padding: 0 0 0 30px;
+  box-sizing: border-box;
+  &:hover {
+    background-color: rgba(82, 72, 72, 0.1);
+  }
 `;

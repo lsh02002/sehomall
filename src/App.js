@@ -20,6 +20,7 @@ const Notice = lazy(() => import("./pages/NoticePage"));
 const Contact = lazy(() => import("./pages/ContactPage"));
 const Instagram = lazy(() => import("./pages/InstagramPage"));
 const Search = lazy(() => import("./pages/SearchPage"));
+const MyStory = lazy(() => import("./pages/MyStoryPage"));
 
 function App() {
   const { setIsLogin } = useContext(LoginContext);
@@ -120,6 +121,14 @@ function App() {
             }
           />
           <Route
+            path="/mystory"
+            element={
+              <Suspense fallback={Loading}>
+                <MyStory />
+              </Suspense>
+            }
+          />
+          <Route
             path="/instagram"
             element={
               <Suspense fallback={Loading}>
@@ -150,6 +159,6 @@ const Container = styled.div`
   justify-content: start;
   align-items: center;
   flex-direction: column;
-  width: 100vw;  
+  width: 100vw;
   position: relative;
 `;

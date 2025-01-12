@@ -45,7 +45,13 @@ const DetailPage = () => {
               <span>{item.description}</span>
               <span>Size {item.size}</span>
               <span>Care Guide {item.careGuide}</span>
-              <HeartCount id={item.id} heartCount={item.heartCount} isDetail />
+              <span>
+                <HeartCount
+                  id={item.id}
+                  heartCount={item.heartCount}
+                  isClicked
+                />
+              </span>
             </>
           )}
           <BuyNow>Buy Now</BuyNow>
@@ -94,10 +100,13 @@ const Info = styled.div`
     box-sizing: border-box;
   }
   span {
-    width: 100%;
-    padding: 0px 10px;
+    width: 200px;
+    padding: 0px 0px;
     box-sizing: border-box;
     font-size: 20px;
+  }
+  span:last-of-type {
+  width: 100px;    
   }
 `;
 

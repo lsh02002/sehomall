@@ -7,7 +7,7 @@ import { CartContext } from "../api/cartContextApi";
 import { LoginContext } from "../api/loginContextApi";
 import HeartCount from "./HeartCount";
 
-const Card = ({ item }) => {
+const CardTwo = ({ item }) => {
   const { setCartCount } = useContext(CartContext);
   const { isLogin } = useContext(LoginContext);
 
@@ -36,31 +36,32 @@ const Card = ({ item }) => {
           onClick={OnAddToCartClick}
         />
       </CartImage>
-      <Link to={`/detail/${item.id}`}>
-        <SelectedItem>
-          <div>{item.name}</div>
-          <span>{item.price.toLocaleString()}원</span>
-          <div>조회수: {item.views}</div>
-          <div>등록날짜: {item.createAt}</div>
-        </SelectedItem>
-      </Link>
     </Container>
   );
 };
 
-export default Card;
+export default CardTwo;
 
 const Container = styled.article`
   width: 240px;
   height: 330px;
-  // overflow: hidden;
-  img {
-    margin: 2px;
-    object-fit: cover;   
-  }
-  box-sizing: border-box;
+  box-sizing: border-box;  
   margin: 20px;
   position: relative;
+  transition: 0.4s;
+  img {
+    margin: 2px;
+    object-fit: cover;
+    transition: 0.1s;
+  }
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+  }
+  a {
+    text-decoration: none;
+    color: black;
+  }
 `;
 
 const Title = styled.span`
@@ -79,41 +80,18 @@ const Price = styled.span`
 
 const CartImage = styled.div`
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 75px;
   height: 24px;
-  right: 0px;
+  right: 10px;
   bottom: 35px;
   z-index: 10;
   img {
     width: 24px;
     height: 24px;
     object-fit: cover;
-  }
-  span {
-    color: red;
-  }
-`;
-
-const SelectedItem = styled.div`
-  position: absolute;
-  width: calc(100% + 20px);
-  height: calc(100% + 20px);
-  top: -10px;
-  left: -10px;
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  transition: 0.5s;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  &:hover {
-    opacity: 1;
-  }
-  div {
-    color: white;
-    padding-bottom: 5px;
   }
   span {
     color: red;

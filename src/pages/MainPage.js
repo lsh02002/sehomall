@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import Banner from "../components/BannerSlider";
 import ItemSlider from "../components/ItemSlider";
 import CategoryTab from "../components/CategoryTab";
+import Intro from "../components/Intro";
 
 const MainPage = () => {
   const [newItems, setNewItems] = useState([]);
@@ -40,15 +41,16 @@ const MainPage = () => {
 
   return (
     <Layout>
-      <Banner />
+      <Banner />      
       <Title>인기있는 아이템</Title>
       <Main>
         <ItemSlider items={popularItems} />
-      </Main>
+      </Main>      
       <Title>새로운 아이템</Title>
       <Main>
         <ItemSlider items={newItems} />
       </Main>
+      <Intro />
       <Title>전체 상품</Title>
       <Main>
         <CategoryTab cate={cate} setCate={setCate} cateItems={cateItems} />

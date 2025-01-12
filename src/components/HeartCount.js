@@ -5,7 +5,7 @@ import { DeleteHeart, InsertHeart, IsHearted } from "../api/ItemApi";
 import Like from "../assets/heart.svg";
 import LikeSolid from "../assets/heart-solid.svg";
 
-const HeartCount = ({ id, heartCount, isDetail }) => {
+const HeartCount = ({ id, heartCount, isClicked }) => {
   const { isLogin } = useContext(LoginContext);
   const [isHearted, setIsHearted] = useState(false);
   const [countHeart, setCountHeart] = useState(0);
@@ -14,7 +14,7 @@ const HeartCount = ({ id, heartCount, isDetail }) => {
     if (isLogin) {
       IsHearted(id)
         .then((res) => {
-          console.log("heart:" + res.data);
+          console.log("heart:" + heartCount);
           setIsHearted(res.data);
           setCountHeart(heartCount);
         })
@@ -56,38 +56,53 @@ const HeartCount = ({ id, heartCount, isDetail }) => {
   };
 
   return (
-    <HeartImage>
-      {!isHearted ? <img src={Like} alt="" /> : <img src={LikeSolid} alt="" />}
+    <Container>
+      <HeartImage>
+        {!isHearted ? (
+          <img src={Like} alt="" />
+        ) : (
+          <img src={LikeSolid} alt="" />
+        )}
+      </HeartImage>
       <span>{countHeart}</span>
-      {isDetail && (
-        <button style={{ cursor: "pointer" }} onClick={OnLikeClick}>
-          찜 누르기
-        </button>
-      )}
-    </HeartImage>
+      {isClicked && <button onClick={OnLikeClick}>찜 누르기</button>}
+    </Container>
   );
 };
 
 export default HeartCount;
 
-const HeartImage = styled.span`
+const Container = styled.div`
+  width: 160px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;    
+  span {
+    color: red;
+    padding-left: 15px;
+    margin-right: 10px;
+  }
+  button {
+    border: none;
+    width: 130px;  
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    padding: 2px 5px;
+    &:hover {
+      background-color: rgba(255, 0, 0, 0.8);
+    }
+`;
+
+const HeartImage = styled.div`
+  right: 10px;
+  width: 24px;
+  height: 24px;
   text-align: left;
   img {
     width: 24px;
     height: 24px;
     object-fit: cover;
-  }
-  span {
-    color: red;
-  }
-
-  button {
-    border: none;
-    background-color: red;
-    color: white;
-    padding: 2px 5px;
-    &:hover {
-      background-color: rgba(255, 0, 0, 0.8);
-    }
   }
 `;

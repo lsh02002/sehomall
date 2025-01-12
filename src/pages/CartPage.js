@@ -36,7 +36,7 @@ const CartPage = () => {
         )}
         <TotalSum>
           총 합계 : <span>{totalPrice.toLocaleString()}원</span>
-        </TotalSum>
+        </TotalSum>        
       </Main>
     </Layout>
   );
@@ -45,6 +45,7 @@ const CartPage = () => {
 export default CartPage;
 
 const Main = styled.div`
+margin-top: 100px;
   width: 100%;
   display: flex;
   justify-content: center;
