@@ -1,18 +1,22 @@
 import axios from "axios";
 import { BASE_URL } from "./baseUrl";
 
-const getItems = async () => {
-  return axios.get(`${BASE_URL}/api/items?sort=createAt,DESC&size=3`, {
-    headers: {
-      credentials: "include",
-    },
-  });
+const NewItems = async () => {
+  return axios.get(`${BASE_URL}/api/items?sort=createAt,DESC&size=10`);
 };
 
 const CategoryItems = async (category) => {
-  return axios.get(
-    `${BASE_URL}/api/items/category/${category}?sort=createAt,DESC`
-  );
+  if (category === "ALL") {
+    return axios.get(`${BASE_URL}/api/items?sort=createAt,DESC`);
+  } else {
+    return axios.get(
+      `${BASE_URL}/api/items/category/${category}?sort=createAt,DESC`
+    );
+  }
+};
+
+const PopularItems = async () => {
+  return axios.get(`${BASE_URL}/api/items?sort=views,DESC&size=10`);
 };
 
 const UserLogin = async (email, password) => {
@@ -122,7 +126,7 @@ const CountHeart = async (itemId) => {
       Token,
     },
   });
-}
+};
 
 const IsHearted = async (itemId) => {
   const Token = localStorage.getItem("token");
@@ -156,8 +160,9 @@ const DeleteHeart = async (itemId) => {
 };
 
 export {
-  getItems,
+  NewItems,
   CategoryItems,
+  PopularItems,
   UserLogin,
   EnrollItem,
   DetailItem,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "../components/Card";
-import { CategoryItems } from "../api/ItemApi";
+import { CategoryItems, NewItems } from "../api/ItemApi";
 import { useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 
@@ -10,35 +10,47 @@ const CategoryPage = () => {
   const { cat } = useParams();
 
   useEffect(() => {
-    CategoryItems(cat)
-      .then((res) => {
-        console.log(res.data.content);
-        setItems(res.data.content);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (cat === "new") {
+      NewItems(cat)
+        .then((res) => {
+          console.log(res.data.content);
+          setItems(res.data.content);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      CategoryItems(cat)
+        .then((res) => {
+          console.log(res.data.content);
+          setItems(res.data.content);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [cat]);
 
   return (
     <Layout>
-      <Main>
+      <Main>        
+        <ItemsInner>
         <Title>
-          <span>카테고리</span> : {cat}
+          {cat && cat !== "new" && (
+            <div>
+              <span>카테고리</span> : {cat}
+            </div>
+          )}
         </Title>
-        <Items>
-          {items &&
-            items.map((item) => (
-              <Card
-                key={item.id}
-                id={item.id}
-                image={item.files[0].fileUrl}
-                name={item.name}
-                price={item.price}
-                heartCount={item.heartCount}
-              />
-            ))}
-        </Items>
+          <Items>
+            {items &&
+              items.map((item) => (
+                <Card
+                  item={item}
+                />
+              ))}
+          </Items>
+        </ItemsInner>
       </Main>
     </Layout>
   );
@@ -52,7 +64,7 @@ const Main = styled.div`
   align-items: start;
   flex-direction: column;
   width: 100%;
-  margin: 10px;  
+  margin: 10px;
 `;
 
 const Title = styled.h1`
@@ -62,10 +74,19 @@ const Title = styled.h1`
   }
 `;
 
+const ItemsInner = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
 const Items = styled.div`
+  max-width: 1280px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;  
-  flex-wrap: wrap;  
+  width: 100%;
+  flex-wrap: wrap;
 `;

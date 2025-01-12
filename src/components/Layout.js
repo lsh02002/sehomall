@@ -5,8 +5,10 @@ import styled from "styled-components";
 const Layout = ({ children }) => {
   return (
     <Container>
-      <Category />
-      <Main>{children}</Main>
+      <Main>
+        <Category />
+        {children}
+      </Main>
     </Container>
   );
 };
@@ -15,16 +17,17 @@ export default Layout;
 
 const Container = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: start;
-  width: 100%;
+  width: 100vw;
   box-sizing: border-box;  
 `;
 
 const Main = styled.div`
   padding-top: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
-  width: calc(100vw - 190px);
+  flex-direction: column;
+  width: 100vw;
 `;

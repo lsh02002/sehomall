@@ -1,36 +1,57 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Card from "../components/Card";
-import { getItems } from "../api/ItemApi";
+import { CategoryItems, NewItems, PopularItems } from "../api/ItemApi";
 import Layout from "../components/Layout";
+import Banner from "../components/BannerSlider";
+import ItemSlider from "../components/ItemSlider";
+import CategoryTab from "../components/CategoryTab";
 
 const MainPage = () => {
-  const [items, setItems] = useState([]);
+  const [newItems, setNewItems] = useState([]);
+  const [popularItems, setPopularItems] = useState([]);
+  const [cateItems, setCateItems] = useState([]);
+  const [cate, setCate] = useState("ALL");
 
-  useEffect(() => {
-    getItems()
+  useEffect(() => {    
+    NewItems()
       .then((res) => {
-        setItems(res.data.content);
+        console.log(res);
+        setNewItems(res.data.content);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+    PopularItems()
+      .then((res) => {
+        console.log(res);
+        setPopularItems(res.data.content);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      CategoryItems(cate)
+      .then((res) => {        
+        setCateItems(res.data.content);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [cate]);
 
   return (
     <Layout>
+      <Banner />
+      <Title>인기있는 아이템</Title>
       <Main>
-        {items &&
-          items.map((item) => (
-            <Card
-              key={item.id}
-              id={item.id}
-              image={item.files[0].fileUrl}
-              name={item.name}
-              price={item.price}
-              heartCount={item.heartCount}
-            />
-          ))}
+        <ItemSlider items={popularItems} />
+      </Main>
+      <Title>새로운 아이템</Title>
+      <Main>
+        <ItemSlider items={newItems} />
+      </Main>
+      <Title>전체 상품</Title>
+      <Main>
+        <CategoryTab cate={cate} setCate={setCate} cateItems={cateItems} />
       </Main>
     </Layout>
   );
@@ -40,10 +61,16 @@ export default MainPage;
 
 const Main = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
-  width: calc(100% - 190px);
-  margin: 10px 0 0 10px;
-  flex-wrap: wrap;
-  box-sizing: border-box;
+  width: 100vw;
+  // flex-wrap: wrap;
+  box-sizing: border-box;  
+`;
+
+const Title = styled.div`
+  width: 100%;
+  max-width: 1400px;
+  font-size: 1.4em;
+  margin: 80px 0 10px 0;
 `;

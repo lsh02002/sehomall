@@ -10,14 +10,17 @@ const LoginPage = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errMessage, setErrMessage] = useState("");
 
   const navigate = useNavigate();
 
   const OnEmailChange = (e) => {
+    setErrMessage("");
     setEmail(e.target.value);
   };
 
   const OnPasswordChange = (e) => {
+    setErrMessage("");
     setPassword(e.target.value);
   };
 
@@ -30,7 +33,8 @@ const LoginPage = () => {
         navigate("/");
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err);        
+          setErrMessage(err.response.data.detailMessage);        
       });
   };
 
@@ -54,6 +58,7 @@ const LoginPage = () => {
             onChange={(e) => OnPasswordChange(e)}
           />
         </Password>
+        {errMessage && <Error>{errMessage}</Error>}
         <Login onClick={OnLogin}>로그인</Login>
       </Main>
     </Layout>
@@ -106,10 +111,15 @@ const Password = styled.div`
 `;
 
 const Login = styled.button`
-  margin-top: 30px;
+  margin-top: 20px;
   width: 100%;
   border: none;
   padding: 10px;
   background-color: pink;
   cursor: pointer;
+`;
+
+const Error = styled.span`
+color: red;
+padding: 20px 0 0 0;
 `;

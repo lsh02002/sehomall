@@ -45,7 +45,7 @@ const DetailPage = () => {
               <span>{item.description}</span>
               <span>Size {item.size}</span>
               <span>Care Guide {item.careGuide}</span>
-              <HeartCount id={item.id} heartCount={item.heartCount} />
+              <HeartCount id={item.id} heartCount={item.heartCount} isDetail />
             </>
           )}
           <BuyNow>Buy Now</BuyNow>

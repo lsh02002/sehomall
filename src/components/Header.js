@@ -31,9 +31,6 @@ const Header = () => {
 
   return (
     <Container>
-      <Title>
-        <Link to="/">MADGOAT</Link>
-      </Title>
       <Menu>
         <Link to="/search">SEARCH</Link>
         {!isLogin ? (
@@ -56,21 +53,16 @@ const Header = () => {
 export default Header;
 
 const Container = styled.header`
+  position: fixed;
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
-  height: 50px;
+  height: 70px;
   width: 100%;
-  border: 1px solid lightgray;
   box-sizing: border-box;
   padding-right: 10px;
-`;
-
-const Title = styled.div`
-  padding: 10px;
-  padding-top: 15px;
-  font-size: 1.1em;
-  color: crimson;
+  opacity: 1;
+  z-index: 10;
 `;
 
 const Menu = styled.div`
@@ -79,6 +71,11 @@ const Menu = styled.div`
   align-items: center;
   width: 400px;
   font-size: 14px;
+  background-color: rgba(255, 255, 255, 0.65);
+  a {
+    text-decoration: none;
+    color: black;
+  }
   span {
     display: inline-block;
     width: 15px;

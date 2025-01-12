@@ -97,7 +97,7 @@ const Container = styled.article`
   overflow: hidden;
   box-sizing: border-box;
   margin: 10px;
-  border: 1px solid #000;
+  border: 1px solid lightgray;
   padding: 5px;
   img {
     width: 100px;

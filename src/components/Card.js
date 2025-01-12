@@ -7,7 +7,7 @@ import { CartContext } from "../api/cartContextApi";
 import { LoginContext } from "../api/loginContextApi";
 import HeartCount from "./HeartCount";
 
-const Card = ({ id, image, name, price, heartCount }) => {
+const Card = ({ item }) => {
   const { setCartCount } = useContext(CartContext);
   const { isLogin } = useContext(LoginContext);
 
@@ -17,20 +17,33 @@ const Card = ({ id, image, name, price, heartCount }) => {
       return;
     }
 
-    AddToCart(id, setCartCount);
+    AddToCart(item.id, setCartCount);
   };
 
   return (
     <Container>
-      <Link to={`/detail/${id}`}>
-        <img width="230px" height="230px" src={image} alt="" />
-        <Title>{name}</Title>
-        <Price>{price.toLocaleString()}원</Price>
+      <Link to={`/detail/${item.id}`}>
+        <img width="230px" height="230px" src={item.files[0].fileUrl} alt="" />
+        <Title>{item.name}</Title>
+        <Price>{item.price.toLocaleString()}원</Price>
       </Link>
       <CartImage>
-        <HeartCount id={id} heartCount={heartCount} />
-        <img src={ShoppingCart} alt="" onClick={OnAddToCartClick} />
+        <HeartCount id={item.id} heartCount={item.heartCount} />
+        <img
+          style={{ cursor: "pointer" }}
+          src={ShoppingCart}
+          alt=""
+          onClick={OnAddToCartClick}
+        />
       </CartImage>
+      <Link to={`/detail/${item.id}`}>
+        <SelectedItem>
+          <div>{item.name}</div>
+          <span>{item.price.toLocaleString()}원</span>
+          <div>조회수: {item.views}</div>
+          <div>등록날짜: {item.createAt}</div>
+        </SelectedItem>
+      </Link>
     </Container>
   );
 };
@@ -38,20 +51,15 @@ const Card = ({ id, image, name, price, heartCount }) => {
 export default Card;
 
 const Container = styled.article`
-  width: 250px;
+  width: 240px;
   height: 330px;
-  overflow: hidden;
+  // overflow: hidden;
   img {
-    padding: 0px 10px;
-    object-fit: cover;
-    transition: 0.3s;
-    &:hover {
-      transform: scale(1.09);
-    }
+    margin: 2px;
+    object-fit: cover;   
   }
   box-sizing: border-box;
   margin: 20px;
-  border: 1px solid lightgray;
   position: relative;
 `;
 
@@ -71,16 +79,41 @@ const Price = styled.span`
 
 const CartImage = styled.div`
   position: absolute;
-  width: 100px;  
+  width: 75px;
   height: 24px;
-  right: 10px;
+  right: 0px;
   bottom: 35px;
-  cursor: pointer;
   z-index: 10;
-  img {  
+  img {
     width: 24px;
     height: 24px;
     object-fit: cover;
+  }
+  span {
+    color: red;
+  }
+`;
+
+const SelectedItem = styled.div`
+  position: absolute;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  top: -10px;
+  left: -10px;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  transition: 0.5s;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  &:hover {
+    opacity: 1;
+  }
+  div {
+    color: white;
+    padding-bottom: 5px;
   }
   span {
     color: red;
