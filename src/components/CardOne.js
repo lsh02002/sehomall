@@ -42,6 +42,7 @@ const CardOne = ({ item }) => {
           <span>{item.price.toLocaleString()}원</span>
           <div>조회수: {item.views}</div>
           <div>등록날짜: {item.createAt}</div>
+          <div>등록자: {item.userNickname}</div>
         </SelectedItem>
       </Link>
     </Container>
