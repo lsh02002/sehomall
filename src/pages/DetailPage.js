@@ -1,17 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { AddToCart, DetailItem } from "../api/ItemApi";
+import { AddToCart, DetailItem, GetReviews } from "../api/ItemApi";
 import Layout from "../components/Layout";
 import { CartContext } from "../api/cartContextApi";
 import { LoginContext } from "../api/loginContextApi";
 import HeartCount from "../components/HeartCount";
+import ReviewCard from "../components/ReviewCard";
+import ReviewEnroll from "../components/ReviewEnroll";
 
 const DetailPage = () => {
   const { isLogin } = useContext(LoginContext);
   const [item, setItem] = useState(null);
   const { id } = useParams();
   const { setCartCount } = useContext(CartContext);
+  const [reviews, setReviews] = useState([]);
+  const [isReview, setIsReview] = useState(false);
 
   useEffect(() => {
     DetailItem(id)
@@ -21,6 +25,10 @@ const DetailPage = () => {
       .catch((err) => {
         console.log(err);
       });
+    GetReviews(id).then((res) => {
+      console.log(res.data.content);
+      setReviews(res.data.content);
+    });
   }, [id]);
 
   const OnAddToCartClick = () => {
@@ -60,6 +68,17 @@ const DetailPage = () => {
           </AddToCartButton>
         </Info>
       </Main>
+      <ReviewTitle>
+        <span>상품 구매 후기({item && item.reviewCount})</span>
+        <button onClick={()=>setIsReview(true)}>후기 등록</button>
+      </ReviewTitle>
+      {isReview && (
+        <Review>
+          <ReviewEnroll itemId={item && item.id} itemName={item && item.name} setIsReview={setIsReview} />
+        </Review>
+      )}
+      {reviews.length > 0 &&
+        reviews.map((review) => <ReviewCard review={review} />)}
     </Layout>
   );
 };
@@ -72,6 +91,7 @@ const Main = styled.div`
   align-items: center;
   width: calc(100% - 190px);
   margin: 40px 0 0 10px;
+  position: relative;  
 `;
 
 const Image = styled.div`
@@ -106,7 +126,7 @@ const Info = styled.div`
     font-size: 20px;
   }
   span:last-of-type {
-  width: 100px;    
+    width: 100px;
   }
 `;
 
@@ -127,4 +147,25 @@ const AddToCartButton = styled.button`
   background-color: #fff;
   cursor: pointer;
   border: 1px solid black;
+`;
+
+const Review = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 5;
+`;
+
+const ReviewTitle = styled.div`
+  width: 100%;
+  max-width: 870px;
+  margin-top: 80px;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
 `;

@@ -26,15 +26,15 @@ const LoginPage = () => {
 
   const OnLogin = () => {
     UserLogin(email, password)
-      .then((res) => {
-        console.log(res);
+      .then((res) => {        
         localStorage.setItem("token", res.headers.token);
+        localStorage.setItem("nickname", res.data.data.nickname);
         setIsLogin(true);
         navigate("/");
       })
       .catch((err) => {
-        console.log(err);        
-          setErrMessage(err.response.data.detailMessage);        
+        console.log(err);
+        setErrMessage(err.response.data.detailMessage);
       });
   };
 
@@ -120,6 +120,6 @@ const Login = styled.button`
 `;
 
 const Error = styled.span`
-color: red;
-padding: 20px 0 0 0;
+  color: red;
+  padding: 20px 0 0 0;
 `;

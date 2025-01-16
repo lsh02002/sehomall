@@ -43,6 +43,7 @@ const CardOne = ({ item }) => {
           <div>조회수: {item.views}</div>
           <div>등록날짜: {item.createAt}</div>
           <div>등록자: {item.userNickname}</div>
+          <div>Review 수: {item.reviewCount}</div>
         </SelectedItem>
       </Link>
     </Container>

@@ -17,8 +17,7 @@ const Category = () => {
       <CatLink to={"/cat/SCARVES"}>SCARVES</CatLink>
       <CatLink to={"/about"}>ABOUT</CatLink>
       <CatLink to={"/notice"}>NOTICE</CatLink>
-      <CatLink to={"/contact"}>CONTACT</CatLink>
-      <CatLink to={"/mystory"}>MYSTORY</CatLink>
+      <CatLink to={"/contact"}>CONTACT</CatLink>      
       <CatLink to={"/instagram"}>INSTAGRAM</CatLink>
     </Container>
   );

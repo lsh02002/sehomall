@@ -17,16 +17,6 @@ const Intro = () => {
             </div>
           </div>
         </Link>
-        <Link to="/mystory">
-          <div class="main__intro-container">
-            <h2 class="main__intro-title main__intro-title--black">
-              개발자 소개
-            </h2>
-            <span class="main__intro-description main__intro-description--black">
-              클론코딩 개발자 소개
-            </span>
-          </div>
-        </Link>
         <Link to="/notice">
           <div class="main__intro-container-img">
             <img class="main__intro-image" src={Intro02} alt="" />
@@ -34,6 +24,16 @@ const Intro = () => {
               <h2 class="main__intro-title">공지사항</h2>
               <span class="main__intro-description">알려드릴 소식</span>
             </div>
+          </div>
+        </Link>
+        <Link to="https://github.com/lsh02002">
+          <div class="main__intro-container">
+            <h2 class="main__intro-title main__intro-title--black">
+              개발자 깃허브
+            </h2>
+            <span class="main__intro-description main__intro-description--black">
+              개발자의 웹 관련 소스들
+            </span>
           </div>
         </Link>
         <Link to="/contact">

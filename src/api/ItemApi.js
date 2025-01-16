@@ -159,6 +159,19 @@ const DeleteHeart = async (itemId) => {
   });
 };
 
+const GetReviews = async (itemId) => {
+  return axios.get(`${BASE_URL}/review/items/${itemId}`);
+};
+
+const EnrollReview = async (formDataToSend) => {
+  const Token = localStorage.getItem("token");
+  return axios.post(`${BASE_URL}/review`, formDataToSend, {
+    headers: {
+      Token,
+    },
+  });
+};
+
 export {
   NewItems,
   CategoryItems,
@@ -176,4 +189,6 @@ export {
   IsHearted,
   InsertHeart,
   DeleteHeart,
+  GetReviews,
+  EnrollReview,
 };

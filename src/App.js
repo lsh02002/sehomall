@@ -20,7 +20,6 @@ const Notice = lazy(() => import("./pages/NoticePage"));
 const Contact = lazy(() => import("./pages/ContactPage"));
 const Instagram = lazy(() => import("./pages/InstagramPage"));
 const Search = lazy(() => import("./pages/SearchPage"));
-const MyStory = lazy(() => import("./pages/MyStoryPage"));
 
 function App() {
   const { setIsLogin } = useContext(LoginContext);
@@ -119,15 +118,7 @@ function App() {
                 <Contact />
               </Suspense>
             }
-          />
-          <Route
-            path="/mystory"
-            element={
-              <Suspense fallback={Loading}>
-                <MyStory />
-              </Suspense>
-            }
-          />
+          />          
           <Route
             path="/instagram"
             element={

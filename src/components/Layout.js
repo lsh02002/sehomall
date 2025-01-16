@@ -20,7 +20,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: start;
   width: 100vw;
-  box-sizing: border-box;  
+  box-sizing: border-box;
 `;
 
 const Main = styled.div`
