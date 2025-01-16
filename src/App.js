@@ -20,6 +20,7 @@ const Notice = lazy(() => import("./pages/NoticePage"));
 const Contact = lazy(() => import("./pages/ContactPage"));
 const Instagram = lazy(() => import("./pages/InstagramPage"));
 const Search = lazy(() => import("./pages/SearchPage"));
+const Review = lazy(() => import("./pages/ReviewPage"));
 
 function App() {
   const { setIsLogin } = useContext(LoginContext);
@@ -118,7 +119,7 @@ function App() {
                 <Contact />
               </Suspense>
             }
-          />          
+          />
           <Route
             path="/instagram"
             element={
@@ -133,6 +134,15 @@ function App() {
             element={
               <Suspense fallback={Loading}>
                 <Search />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/reviews"
+            fallback={Loading}
+            element={
+              <Suspense fallback={Loading}>
+                <Review />
               </Suspense>
             }
           />

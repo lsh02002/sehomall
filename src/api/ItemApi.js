@@ -159,7 +159,11 @@ const DeleteHeart = async (itemId) => {
   });
 };
 
-const GetReviews = async (itemId) => {
+const GetAllReviews = async () => {
+  return axios.get(`${BASE_URL}/review?sort=createAt,DESC`);
+};
+
+const GetItemReviews = async (itemId) => {
   return axios.get(`${BASE_URL}/review/items/${itemId}?sort=createAt,DESC`);
 };
 
@@ -189,6 +193,7 @@ export {
   IsHearted,
   InsertHeart,
   DeleteHeart,
-  GetReviews,
+  GetAllReviews,
+  GetItemReviews,
   EnrollReview,
 };

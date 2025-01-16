@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
-import { AddToCart, DetailItem, GetReviews } from "../api/ItemApi";
+import { AddToCart, DetailItem, GetItemReviews } from "../api/ItemApi";
 import Layout from "../components/Layout";
 import { CartContext } from "../api/cartContextApi";
 import { LoginContext } from "../api/loginContextApi";
@@ -29,7 +29,7 @@ const DetailPage = () => {
   }, [id]);
 
   useEffect(() => {
-    GetReviews(id).then((res) => {
+    GetItemReviews(id).then((res) => {
       console.log(res.data.content);
       setReviews(res.data.content);
     });

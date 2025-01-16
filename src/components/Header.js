@@ -25,6 +25,7 @@ const Header = () => {
   const OnLogout = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
       localStorage.removeItem("token");
+      localStorage.removeItem("nickname");
       setIsLogin(false);
     }
   };
@@ -33,6 +34,7 @@ const Header = () => {
     <Container>
       <Menu>
         <Link to="/search">SEARCH</Link>
+        <Link to="/reviews">REVIEWS</Link>
         {!isLogin ? (
           <Link to="/login">LOGIN</Link>
         ) : (

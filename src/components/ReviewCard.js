@@ -35,10 +35,12 @@ display: flex;
   width: 100%;
   overflow: hidden;
   box-sizing: border-box;
-  margin: 10px;
-  border: 1px solid lightgray;
+  margin: 25px;
+  // border: 1px solid lightgray;
+  box-shadow: 2px 1px 3px rgba(0, 0, 0, 0.7);
   padding: 5px;
-  position: relative;  
+  position: relative;
+  
   img {
     width: 100px;
     height: 100px;
