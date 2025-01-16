@@ -4,7 +4,7 @@ import { LoginContext } from "../api/loginContextApi";
 import { useNavigate } from "react-router-dom";
 import { EnrollReview } from "../api/ItemApi";
 
-const ReviewEnroll = ({ itemId, itemName, setIsReview }) => {
+const ReviewEnroll = ({ itemId, itemName, setIsReview, isReviewEdited, setIsReviewEdited }) => {
   const { isLogin } = useContext(LoginContext);
   const nickname = localStorage.getItem("nickname");
   const navigate = useNavigate();
@@ -41,6 +41,8 @@ const ReviewEnroll = ({ itemId, itemName, setIsReview }) => {
     EnrollReview(formDataToSend)
       .then((res) => {
         console.log(res);
+        setIsReviewEdited(!isReviewEdited);
+        setIsReview(false);
       })
       .catch((err) => {
         console.log(err);
@@ -78,10 +80,9 @@ const ReviewEnroll = ({ itemId, itemName, setIsReview }) => {
       </div>
       <textarea
         placeholder="내용을 입력하세요"
+        value={content}
         onChange={(e) => setContent(e.target.value)}
-      >
-        {content}
-      </textarea>
+      />
       <span>
         <em>평점 선택:</em>
         <select value={rating} onChange={(e) => setRating(e.target.value)}>

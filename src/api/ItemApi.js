@@ -160,7 +160,7 @@ const DeleteHeart = async (itemId) => {
 };
 
 const GetReviews = async (itemId) => {
-  return axios.get(`${BASE_URL}/review/items/${itemId}`);
+  return axios.get(`${BASE_URL}/review/items/${itemId}?sort=createAt,DESC`);
 };
 
 const EnrollReview = async (formDataToSend) => {

@@ -16,6 +16,7 @@ const DetailPage = () => {
   const { setCartCount } = useContext(CartContext);
   const [reviews, setReviews] = useState([]);
   const [isReview, setIsReview] = useState(false);
+  const [isReviewEdited, setIsReviewEdited] = useState(false);
 
   useEffect(() => {
     DetailItem(id)
@@ -25,11 +26,14 @@ const DetailPage = () => {
       .catch((err) => {
         console.log(err);
       });
+  }, [id]);
+
+  useEffect(() => {
     GetReviews(id).then((res) => {
       console.log(res.data.content);
       setReviews(res.data.content);
     });
-  }, [id]);
+  }, [id, isReviewEdited, setIsReviewEdited]);
 
   const OnAddToCartClick = () => {
     if (!isLogin) {
@@ -70,15 +74,21 @@ const DetailPage = () => {
       </Main>
       <ReviewTitle>
         <span>상품 구매 후기({item && item.reviewCount})</span>
-        <button onClick={()=>setIsReview(true)}>후기 등록</button>
+        <button onClick={() => setIsReview(true)}>후기 등록</button>
       </ReviewTitle>
       {isReview && (
         <Review>
-          <ReviewEnroll itemId={item && item.id} itemName={item && item.name} setIsReview={setIsReview} />
+          <ReviewEnroll
+            itemId={item && item.id}
+            itemName={item && item.name}
+            setIsReview={setIsReview}
+            isReviewEdited={isReviewEdited}
+            setIsReviewEdited={setIsReviewEdited}
+          />
         </Review>
       )}
       {reviews.length > 0 &&
-        reviews.map((review) => <ReviewCard review={review} />)}
+        reviews.map((review, index) => <ReviewCard key={index} review={review} />)}
     </Layout>
   );
 };
@@ -91,7 +101,7 @@ const Main = styled.div`
   align-items: center;
   width: calc(100% - 190px);
   margin: 40px 0 0 10px;
-  position: relative;  
+  position: relative;
 `;
 
 const Image = styled.div`
