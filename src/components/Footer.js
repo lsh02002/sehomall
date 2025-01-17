@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <Container className="footer">
       <div className="footer__sub-box">
-        <span className="footer__title">MADGOAT<em>(clone coding)</em></span>
+        <span className="footer__title">SEHOMALL<em>(clone coding)</em></span>
         <small className="footer__text">사업자등록번호: 000-0000-0000</small>
         <small className="footer__text">주소: 서울특별시 구로구</small>
         <small className="footer__text footer__copyright">

@@ -35,7 +35,7 @@ const AboutPage = () => {
             <div className="items">
               <div>
                 <p>
-                  안녕하세요? MADGOAT(clone coding)의 개발자입니다. <br />
+                  안녕하세요? SEHOMALL(clone coding)의 개발자입니다. <br />
                   제가 이번에 웹 개발자 포트폴리오 용으로 쇼핑몰을 제작하게
                   되었습니다.
                   <br />

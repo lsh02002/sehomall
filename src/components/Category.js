@@ -7,7 +7,7 @@ const Category = () => {
     <Container>
       <Title>
         <Link to="/">
-          MADGOAT <span>(clone coding)</span>
+          SEHOMALL <span>(clone coding)</span>
         </Link>
       </Title>
       <CatLink to={"/cat/new"}>NEW ARRIVAL</CatLink>
