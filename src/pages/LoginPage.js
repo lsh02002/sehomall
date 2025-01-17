@@ -26,7 +26,7 @@ const LoginPage = () => {
 
   const OnLogin = () => {
     UserLogin(email, password)
-      .then((res) => {        
+      .then((res) => {
         localStorage.setItem("token", res.headers.token);
         localStorage.setItem("nickname", res.data.data.nickname);
         setIsLogin(true);
@@ -68,6 +68,7 @@ const LoginPage = () => {
 export default LoginPage;
 
 const Main = styled.div`
+  margin-top: 100px;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -9,6 +9,7 @@ const ReviewEnroll = ({ itemId, itemName, setIsReview, isReviewEdited, setIsRevi
   const nickname = localStorage.getItem("nickname");
   const navigate = useNavigate();
 
+  const [imagePreview, setImagePreview] = useState("");
   const [image, setImage] = useState("");
   const [content, setContent] = useState("");
   const [rating, setRating] = useState(5);
@@ -50,11 +51,12 @@ const ReviewEnroll = ({ itemId, itemName, setIsReview, isReviewEdited, setIsRevi
   };
 
   const encodeFileToBase64 = (fileBlob) => {
+    setImage(fileBlob);
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
     return new Promise((resolve) => {
       reader.onload = () => {
-        setImage(reader.result);
+        setImagePreview(reader.result);
         resolve();
       };
     });
@@ -67,14 +69,14 @@ const ReviewEnroll = ({ itemId, itemName, setIsReview, isReviewEdited, setIsRevi
       <span>작성자: {nickname}</span>
       <input
         type="file"
-        id="review-file"
+        id="review-file"        
         onChange={(e) => encodeFileToBase64(e.target.files[0])}
       />
       <div className="btn">
         <span>
           <em>후기 사진</em>
           <label htmlFor="review-file">
-            {image ? <img width={40} height={40} src={image} alt="" /> : "+"}
+            {image ? <img width={40} height={40} src={imagePreview} alt="" /> : "+"}
           </label>
         </span>
       </div>

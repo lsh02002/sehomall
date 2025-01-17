@@ -33,23 +33,16 @@ const CategoryPage = () => {
 
   return (
     <Layout>
-      <Main>        
+      <Main>
         <ItemsInner>
-        <Title>
-          {cat && cat !== "new" && (
-            <div>
-              <span>카테고리</span> : {cat}
-            </div>
-          )}
-        </Title>
-          <Items>
-            {items &&
-              items.map((item) => (
-                <CardOne
-                  item={item}
-                />
-              ))}
-          </Items>
+          <Title>
+            {cat && cat !== "new" && (
+              <div>
+                <span>카테고리</span> : {cat}
+              </div>
+            )}
+          </Title>
+          <Items>{items && items.map((item) => <CardOne item={item} />)}</Items>
         </ItemsInner>
       </Main>
     </Layout>
@@ -58,13 +51,14 @@ const CategoryPage = () => {
 
 export default CategoryPage;
 
-const Main = styled.div`
+const Main = styled.div`  
   display: flex;
   justify-content: center;
   align-items: start;
   flex-direction: column;
   width: 100%;
   margin: 10px;
+  margin-top: 100px;
 `;
 
 const Title = styled.h1`

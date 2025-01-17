@@ -1,12 +1,17 @@
-import React from 'react';
-import Layout from '../components/Layout';
+import React from "react";
+import Layout from "../components/Layout";
+import styled from "styled-components";
 
 const InstagramPage = () => {
-    return (
-        <Layout>
-            Instagram 페이지입니다.
-        </Layout>
-    );
+  return (
+    <Layout>
+      <Container>Instagram 페이지입니다.</Container>
+    </Layout>
+  );
 };
 
 export default InstagramPage;
+
+const Container = styled.div`
+  margin-top: 100px;
+`;
