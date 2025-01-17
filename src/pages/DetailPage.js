@@ -185,6 +185,10 @@ const ReviewTitle = styled.div`
 `;
 
 const ReviewBody = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   & > div {
     border-bottom: 1px solid lightgray;
   }

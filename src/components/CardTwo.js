@@ -54,8 +54,7 @@ const Container = styled.article`
     object-fit: cover;
     transition: 0.1s;
   }
-  &:hover {
-    transform: scale(1.05);
+  &:hover {    
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
   }
   a {
