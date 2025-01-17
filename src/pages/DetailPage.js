@@ -87,8 +87,12 @@ const DetailPage = () => {
           />
         </Review>
       )}
-      {reviews.length > 0 &&
-        reviews.map((review, index) => <ReviewCard key={index} review={review} />)}
+      <ReviewBody>
+        {reviews.length > 0 &&
+          reviews.map((review, index) => (
+            <ReviewCard key={index} review={review} />
+          ))}
+      </ReviewBody>
     </Layout>
   );
 };
@@ -178,4 +182,14 @@ const ReviewTitle = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+`;
+
+const ReviewBody = styled.div`
+  & > div {
+    border-bottom: 1px solid lightgray;
+  }
+
+  & > div:last-child {
+    border-bottom: none;
+  }
 `;

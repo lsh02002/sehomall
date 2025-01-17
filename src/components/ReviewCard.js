@@ -35,9 +35,7 @@ display: flex;
   width: 100%;
   overflow: hidden;
   box-sizing: border-box;
-  margin: 25px;
-  // border: 1px solid lightgray;
-  box-shadow: 2px 1px 3px rgba(0, 0, 0, 0.7);
+  margin: 25px;  
   padding: 5px;
   position: relative;
   

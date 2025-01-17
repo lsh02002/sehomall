@@ -25,10 +25,12 @@ const ReviewPage = () => {
         <span>
           <button>리뷰 작성하기</button>
         </span>
-        {reviews.length > 0 &&
-          reviews.map((review, index) => (
-            <ReviewCard key={index} review={review} />
-          ))}
+        <ReviewBody>
+          {reviews.length > 0 &&
+            reviews.map((review, index) => (
+              <ReviewCard key={index} review={review} />
+            ))}
+        </ReviewBody>
       </Container>
     </Layout>
   );
@@ -54,5 +56,15 @@ const Container = styled.div`
 
   button {
     padding: 5px 10px;
+  }
+`;
+
+const ReviewBody = styled.div`
+  & > div {
+    border-bottom: 1px solid lightgray;
+  }
+
+  & > div:last-child {
+    border-bottom: none;
   }
 `;
