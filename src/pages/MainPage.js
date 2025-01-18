@@ -20,10 +20,7 @@ const MainPage = () => {
         setNewItems(res.data.content);
       })
       .catch((err) => {
-        console.log(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
+        console.log(err);        
       });
     PopularItems()
       .then((res) => {
@@ -31,20 +28,14 @@ const MainPage = () => {
         setPopularItems(res.data.content);
       })
       .catch((err) => {
-        console.log(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
+        console.log(err);        
       });
       CategoryItems(cate)
       .then((res) => {        
         setCateItems(res.data.content);
       })
       .catch((err) => {
-        console.log(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
+        console.log(err);        
       });
   }, [cate]);
 

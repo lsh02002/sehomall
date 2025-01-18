@@ -17,10 +17,7 @@ const Header = () => {
           setCartCount(res.data);
         })
         .catch((err) => {
-          console.log(err);
-          if(err.response){
-            alert(err.response.data.detailMessage);
-          }
+          console.log(err);          
         });
     }
   }, [isLogin, setCartCount, isDeleting]);

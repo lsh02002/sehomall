@@ -19,10 +19,7 @@ const HeartCount = ({ id, heartCount, isClicked }) => {
           setCountHeart(heartCount);
         })
         .catch((err) => {
-          console.error(err);
-          if(err.response){
-            alert(err.response.data.detailMessage);
-          }
+          console.error(err);          
         });
     } else {
       setIsHearted(false);

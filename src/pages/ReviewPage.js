@@ -14,10 +14,7 @@ const ReviewPage = () => {
         setReviews(res.data.content);
       })
       .catch((err) => {
-        console.log(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
+        console.log(err);        
       });
   }, []);
 
