@@ -9,39 +9,39 @@ const Intro = () => {
     <>
       <Introduction>
         <Link to="/about">
-          <div class="main__intro-container-img">
-            <img class="main__intro-image" src={Intro01} alt="" />
-            <div class="main__intro-text-container">
-              <h2 class="main__intro-title">ABOUT</h2>
-              <span class="main__intro-description">홈페이지 소개</span>
+          <div className="main__intro-container-img">
+            <img className="main__intro-image" src={Intro01} alt="" />
+            <div className="main__intro-text-container">
+              <h2 className="main__intro-title">ABOUT</h2>
+              <span className="main__intro-description">홈페이지 소개</span>
             </div>
           </div>
         </Link>
         <Link to="/notice">
-          <div class="main__intro-container-img">
-            <img class="main__intro-image" src={Intro02} alt="" />
-            <div class="main__intro-text-container">
-              <h2 class="main__intro-title">공지사항</h2>
-              <span class="main__intro-description">알려드릴 소식</span>
+          <div className="main__intro-container-img">
+            <img className="main__intro-image" src={Intro02} alt="" />
+            <div className="main__intro-text-container">
+              <h2 className="main__intro-title">공지사항</h2>
+              <span className="main__intro-description">알려드릴 소식</span>
             </div>
           </div>
         </Link>
         <Link to="https://github.com/lsh02002">
-          <div class="main__intro-container">
-            <h2 class="main__intro-title main__intro-title--black">
+          <div className="main__intro-container">
+            <h2 className="main__intro-title main__intro-title--black">
               개발자 깃허브
             </h2>
-            <span class="main__intro-description main__intro-description--black">
+            <span className="main__intro-description main__intro-description--black">
               개발자의 웹 관련 소스들
             </span>
           </div>
         </Link>
         <Link to="/contact">
-          <div class="main__intro-container-img">
-            <img class="main__intro-image" src={Intro03} alt="" />
-            <div class="main__intro-text-container">
-              <h2 class="main__intro-title">연락처</h2>
-              <span class="main__intro-description">연락처를 구하는 곳</span>
+          <div className="main__intro-container-img">
+            <img className="main__intro-image" src={Intro03} alt="" />
+            <div className="main__intro-text-container">
+              <h2 className="main__intro-title">연락처</h2>
+              <span className="main__intro-description">연락처를 구하는 곳</span>
             </div>
           </div>
         </Link>

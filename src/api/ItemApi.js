@@ -176,6 +176,24 @@ const EnrollReview = async (formDataToSend) => {
   });
 };
 
+const GetUserInfo = async () => {
+  const Token = localStorage.getItem("token");
+  return axios.get(`${BASE_URL}/user/info`, {
+    headers: {
+      Token,
+    },
+  });
+};
+
+const EnrollPayment = async (payment) => {
+  const Token = localStorage.getItem("token");
+  return axios.post(`${BASE_URL}/api/payments`, payment, {
+    headers: {
+      Token,
+    },
+  });
+};
+
 export {
   NewItems,
   CategoryItems,
@@ -196,4 +214,6 @@ export {
   GetAllReviews,
   GetItemReviews,
   EnrollReview,
+  GetUserInfo,
+  EnrollPayment,
 };

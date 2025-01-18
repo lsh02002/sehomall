@@ -21,6 +21,9 @@ const MainPage = () => {
       })
       .catch((err) => {
         console.log(err);
+        if (err.response) {
+          alert(err.response.data.detailMessage);
+        }
       });
     PopularItems()
       .then((res) => {
@@ -29,6 +32,9 @@ const MainPage = () => {
       })
       .catch((err) => {
         console.log(err);
+        if (err.response) {
+          alert(err.response.data.detailMessage);
+        }
       });
       CategoryItems(cate)
       .then((res) => {        
@@ -36,6 +42,9 @@ const MainPage = () => {
       })
       .catch((err) => {
         console.log(err);
+        if (err.response) {
+          alert(err.response.data.detailMessage);
+        }
       });
   }, [cate]);
 

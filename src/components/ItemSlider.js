@@ -28,9 +28,9 @@ function ItemSlider({ items }) {
         }}
       >
         {items.length > 0 &&
-          items.map((item) => (
-            <SwiperSlide>
-              <CardOne key={item.id} item={item} />
+          items.map((item, index) => (
+            <SwiperSlide key={index}>
+              <CardOne item={item} />
             </SwiperSlide>
           ))}
       </Swiper>

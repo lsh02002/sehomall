@@ -21,6 +21,7 @@ const Contact = lazy(() => import("./pages/ContactPage"));
 const Instagram = lazy(() => import("./pages/InstagramPage"));
 const Search = lazy(() => import("./pages/SearchPage"));
 const Review = lazy(() => import("./pages/ReviewPage"));
+const Payment = lazy(() => import("./pages/PaymentPage"));
 
 function App() {
   const { setIsLogin } = useContext(LoginContext);
@@ -143,6 +144,15 @@ function App() {
             element={
               <Suspense fallback={Loading}>
                 <Review />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/pay"
+            fallback={Loading}
+            element={
+              <Suspense fallback={Loading}>
+                <Payment />
               </Suspense>
             }
           />

@@ -15,6 +15,9 @@ const ReviewPage = () => {
       })
       .catch((err) => {
         console.log(err);
+        if (err.response) {
+          alert(err.response.data.detailMessage);
+        }
       });
   }, []);
 

@@ -45,7 +45,7 @@ const CategoryTab = ({ cate, setCate, cateItems }) => {
           <div id="tab1">
             <Items>
               {cateItems.length > 0 ? (
-                cateItems.map((item) => <CardTwo item={item} />)
+                cateItems.map((item, index) => <CardTwo key={index} item={item} />)
               ) : (
                 <em>상품이 없습니다.</em>
               )}
@@ -56,7 +56,7 @@ const CategoryTab = ({ cate, setCate, cateItems }) => {
           <div id="tab2">
             <Items>
               {cateItems.length > 0 ? (
-                cateItems.map((item) => <CardTwo item={item} />)
+                cateItems.map((item, index) => <CardTwo key={index} item={item} />)
               ) : (
                 <em>상품이 없습니다.</em>
               )}
@@ -67,7 +67,7 @@ const CategoryTab = ({ cate, setCate, cateItems }) => {
           <div id="tab3">
             <Items>
               {cateItems.length > 0 ? (
-                cateItems.map((item) => <CardTwo item={item} />)
+                cateItems.map((item, index) => <CardTwo key={index} item={item} />)
               ) : (
                 <em>상품이 없습니다.</em>
               )}
@@ -78,7 +78,7 @@ const CategoryTab = ({ cate, setCate, cateItems }) => {
           <div id="tab4">
             <Items>
               {cateItems.length > 0 ? (
-                cateItems.map((item) => <CardTwo item={item} />)
+                cateItems.map((item, index) => <CardTwo key={index} item={item} />)
               ) : (
                 <em>상품이 없습니다.</em>
               )}
@@ -89,7 +89,7 @@ const CategoryTab = ({ cate, setCate, cateItems }) => {
           <div id="tab5">
             <Items>
               {cateItems.length > 0 ? (
-                cateItems.map((item) => <CardTwo item={item} />)
+                cateItems.map((item, index) => <CardTwo key={index} item={item} />)
               ) : (
                 <em>상품이 없습니다.</em>
               )}

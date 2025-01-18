@@ -4,39 +4,51 @@ import { FindCartItems } from "../api/ItemApi";
 import CartCard from "../components/CartCard";
 import styled from "styled-components";
 import { CartContext } from "../api/cartContextApi";
+import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
-  const { totalPrice, setTotalPrice, items, setItems, isDeleting, isEditing } =
-    useContext(CartContext);
+  const {
+    totalPrice,
+    setTotalPrice,
+    cartItems,
+    setCartItems,
+    isDeleting,
+    isEditing,
+  } = useContext(CartContext);
+  
+  const navigate = useNavigate();
 
-  useEffect(() => {    
+  useEffect(() => {
     FindCartItems()
       .then((res) => {
         console.log(res);
-        setItems(res.data.cartAllSearchResponses);
+        setCartItems(res.data.cartAllSearchResponses);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [setItems, isDeleting, isEditing]);
+  }, [setCartItems, isDeleting, isEditing]);
 
   useEffect(() => {
     let total = 0;
-    items.map((item) => item.checked && (total += item.price * item.count));
+    cartItems.map((item) => item.checked && (total += item.price * item.count));
     setTotalPrice(total);
-  }, [items, items.length, setTotalPrice, isEditing]);
+  }, [cartItems, cartItems.length, setTotalPrice, isEditing]);
 
   return (
     <Layout>
       <Main>
-        {items.length > 0 ? (
-          items.map((item) => <CartCard item={item} />)
+        {cartItems.length > 0 ? (
+          cartItems.map((item, index) => <CartCard key={index} item={item} />)
         ) : (
           <NoItems>카트에 상품이 없습니다.</NoItems>
         )}
         <TotalSum>
           총 합계 : <span>{totalPrice.toLocaleString()}원</span>
-        </TotalSum>        
+        </TotalSum>
+        <Order>
+          <button onClick={()=>navigate("/pay?isFromCart=true")}>선택한 상품 주문</button>
+        </Order>
       </Main>
     </Layout>
   );
@@ -45,7 +57,7 @@ const CartPage = () => {
 export default CartPage;
 
 const Main = styled.div`
-margin-top: 100px;
+  margin-top: 100px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -64,5 +76,25 @@ const TotalSum = styled.div`
   max-width: 500px;
   span {
     color: crimson;
+  }
+`;
+
+const Order = styled.div`
+  width: 100%;
+  max-width: 600px;
+  text-align: right;  
+  margin-top: 40px;
+  button {
+    text-align: right;
+    border: none;
+    padding: 8px;
+    color: white;
+    background-color: gray;
+    font-size: 1.2em;
+    transition: 0.3s;
+    cursor: pointer;
+    &:hover {
+      background-color: lightgray;
+    }
   }
 `;

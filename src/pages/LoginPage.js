@@ -34,7 +34,9 @@ const LoginPage = () => {
       })
       .catch((err) => {
         console.log(err);
-        setErrMessage(err.response.data.detailMessage);
+        if (err.response) {
+          setErrMessage(err.response.data.detailMessage);
+        }
       });
   };
 

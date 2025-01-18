@@ -6,7 +6,7 @@ const CartContext = createContext(cartDefault);
 const CartProvider = ({ children }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [cartCount, setCartCount] = useState(0);
-  const [items, setItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -17,8 +17,8 @@ const CartProvider = ({ children }) => {
         setTotalPrice,
         cartCount,
         setCartCount,
-        items,
-        setItems,
+        cartItems,
+        setCartItems,
         isDeleting,
         setIsDeleting,
         isEditing,

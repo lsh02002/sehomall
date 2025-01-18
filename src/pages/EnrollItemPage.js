@@ -44,6 +44,9 @@ const EnrollItemPage = () => {
       })
       .catch((err) => {
         console.log(err);
+        if (err.response) {
+          alert(err.response.data.detailMessage);
+        }
       });
   };
 
@@ -131,7 +134,7 @@ const EnrollItemPage = () => {
           <Register onClick={OnRegister}>상품 등록</Register>
         </EnrollInner>
       </Main>
-      </Layout>
+    </Layout>
   );
 };
 

@@ -27,6 +27,9 @@ const CategoryPage = () => {
         })
         .catch((err) => {
           console.log(err);
+          if (err.response) {
+            alert(err.response.data.detailMessage);
+          }
         });
     }
   }, [cat]);
@@ -42,7 +45,7 @@ const CategoryPage = () => {
               </div>
             )}
           </Title>
-          <Items>{items && items.map((item) => <CardOne item={item} />)}</Items>
+          <Items>{items && items.map((item, index) => <CardOne key={index} item={item} />)}</Items>
         </ItemsInner>
       </Main>
     </Layout>

@@ -25,6 +25,9 @@ const DetailPage = () => {
       })
       .catch((err) => {
         console.log(err);
+        if (err.response) {
+          alert(err.response.data.detailMessage);
+        }
       });
   }, [id]);
 
@@ -32,6 +35,11 @@ const DetailPage = () => {
     GetItemReviews(id).then((res) => {
       console.log(res.data.content);
       setReviews(res.data.content);
+    }).catch(err=>{
+      console.log(err);
+      if (err.response) {
+        alert(err.response.data.detailMessage);
+      }
     });
   }, [id, isReviewEdited, setIsReviewEdited]);
 
