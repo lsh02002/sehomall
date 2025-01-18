@@ -7,7 +7,7 @@ const PayCard = ({ item }) => {
       <img src={item.fileUrl} alt="" />
       <Info>
         <div>상품명: {item.itemName}</div>
-        <div>가격: {item.price.toLocaleString()}원</div>
+        <div>가격: {item.price?.toLocaleString()}원</div>
         <div>수량: {item.count}</div>
       </Info>
     </Container>

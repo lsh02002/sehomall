@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AddToCart, DetailItem, GetItemReviews } from "../api/ItemApi";
 import Layout from "../components/Layout";
 import { CartContext } from "../api/cartContextApi";
@@ -17,6 +17,9 @@ const DetailPage = () => {
   const [reviews, setReviews] = useState([]);
   const [isReview, setIsReview] = useState(false);
   const [isReviewEdited, setIsReviewEdited] = useState(false);
+  const [ itemCount, setItemCount ] = useState(1);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     DetailItem(id)
@@ -32,15 +35,17 @@ const DetailPage = () => {
   }, [id]);
 
   useEffect(() => {
-    GetItemReviews(id).then((res) => {
-      console.log(res.data.content);
-      setReviews(res.data.content);
-    }).catch(err=>{
-      console.log(err);
-      if (err.response) {
-        alert(err.response.data.detailMessage);
-      }
-    });
+    GetItemReviews(id)
+      .then((res) => {
+        console.log(res.data.content);
+        setReviews(res.data.content);
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response) {
+          alert(err.response.data.detailMessage);
+        }
+      });
   }, [id, isReviewEdited, setIsReviewEdited]);
 
   const OnAddToCartClick = () => {
@@ -50,6 +55,20 @@ const DetailPage = () => {
     }
 
     AddToCart(id, setCartCount);
+  };
+
+  const OnOrderClick = () => {
+    if(!isLogin){
+      alert("지금 구매하기 기능은 로그인 하셔야 합니다.");
+      return;
+    }
+    navigate(
+      `/pay?isFromCart=false&itemId=${id}&itemName=${item.name}&price=${
+        item.price
+      }&fileUrl=${item.files[0].fileUrl}&heartCount=${
+        item.heartCount
+      }&itemCount=${itemCount}&isCheckedItem=${true}`
+    );
   };
 
   return (
@@ -72,9 +91,14 @@ const DetailPage = () => {
                   isClicked
                 />
               </span>
+              <CountButton>
+                <button onClick={() => setItemCount(itemCount + 1)}>+</button>
+                수량: {itemCount}
+                <button onClick={() => setItemCount(itemCount > 1 ? itemCount - 1 : 1)}>-</button>
+              </CountButton>
             </>
           )}
-          <BuyNow>Buy Now</BuyNow>
+          <BuyNow onClick={OnOrderClick}>지금 구매하기기</BuyNow>
           <AddToCartButton onClick={OnAddToCartClick}>
             Add To Cart
           </AddToCartButton>
@@ -149,6 +173,14 @@ const Info = styled.div`
   }
   span:last-of-type {
     width: 100px;
+  }
+`;
+
+const CountButton = styled.div`
+  button {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 10px;
   }
 `;
 

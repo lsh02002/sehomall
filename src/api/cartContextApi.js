@@ -9,7 +9,7 @@ const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-
+  
   return (
     <CartContext.Provider
       value={{
@@ -22,7 +22,7 @@ const CartProvider = ({ children }) => {
         isDeleting,
         setIsDeleting,
         isEditing,
-        setIsEditing,
+        setIsEditing,        
       }}
     >
       {children}

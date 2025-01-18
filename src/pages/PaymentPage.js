@@ -24,7 +24,15 @@ const PaymentPage = () => {
   const [payItems, setPayItems] = useState([]);
   const [totalPayPrice, setTotalPayPrice] = useState(0);
 
-  const [isFromCart] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const isFromCart = searchParams.get("isFromCart");
+  const itemId = searchParams.get("itemId");
+  const itemName = searchParams.get("itemName");
+  const price = searchParams.get("price");
+  const fileUrl = searchParams.get("fileUrl");
+  const heartCount = searchParams.get("heartCount");
+  const itemCount = searchParams.get("itemCount");
+  const isCheckedItem = searchParams.get("isCheckedItem");
 
   useEffect(() => {
     GetUserInfo()
@@ -38,7 +46,7 @@ const PaymentPage = () => {
   }, []);
 
   useEffect(() => {
-    if (isFromCart) {
+    if (isFromCart === "true") {
       FindCartItems()
         .then((res) => {
           console.log(res);
@@ -51,11 +59,34 @@ const PaymentPage = () => {
         .catch((err) => {
           console.error(err);
         });
+    } else {
+      const detail = {
+        itemId,
+        count: itemCount,
+        itemName,
+        price,
+        fileUrl,
+        checked: isCheckedItem,
+        heartCount,
+      };
+      setPayItems([]);
+      setPayItems([...payItems, detail]);
     }
-
-    let total = 0;
-    payItems.map((item) => item.checked && (total += item.price * item.count));
-    setTotalPayPrice(total);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
+    
+  useEffect(()=>{
+    if (isFromCart === "true") {
+      let total = 0;
+      payItems.map(
+        (item) => item.checked && (total += item.price * item.count)
+      );
+      setTotalPayPrice(total);
+    } else {
+      let total = 0;
+      total += price * itemCount;
+      setTotalPayPrice(total);
+    }    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [payItems.length]);
 
@@ -76,7 +107,7 @@ const PaymentPage = () => {
   };
 
   const OnOrderClick = () => {
-    let items = payItems.filter((item) => {
+    const items = payItems.filter((item) => {
       return { itemId: item.id, count: item.count };
     });
 
@@ -185,7 +216,7 @@ const PaymentPage = () => {
           ) : (
             <div>주문하실 상품이 없습니다.</div>
           )}
-          <h3>최종 결제 금액: {totalPayPrice.toLocaleString()}원</h3>
+          <h3>최종 결제 금액: {totalPayPrice?.toLocaleString()}원</h3>
           <Order>
             <button onClick={OnOrderClick}>결제하기</button>
           </Order>
