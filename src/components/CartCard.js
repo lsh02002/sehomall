@@ -19,6 +19,9 @@ const CartCard = ({ item }) => {
       })
       .catch((err) => {
         console.log(err);
+        if(err.response){
+          alert(err.response.data.detailMessage);
+        }
       });
   };
 
@@ -37,6 +40,9 @@ const CartCard = ({ item }) => {
       })
       .catch((err) => {
         console.log(err);
+        if(err.response){
+          alert(err.response.data.detailMessage);
+        }
       });
   };
 
@@ -48,6 +54,9 @@ const CartCard = ({ item }) => {
       })
       .catch((err) => {
         console.log(err);
+        if(err.response){
+          alert(err.response.data.detailMessage);
+        }
       });
   };
 

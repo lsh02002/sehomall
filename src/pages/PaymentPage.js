@@ -58,6 +58,9 @@ const PaymentPage = () => {
         })
         .catch((err) => {
           console.error(err);
+          if (err.response) {
+            alert(err.response.data.detailMessage);
+          }
         });
     } else {
       const detail = {
@@ -72,10 +75,10 @@ const PaymentPage = () => {
       setPayItems([]);
       setPayItems([...payItems, detail]);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
-    
-  useEffect(()=>{
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     if (isFromCart === "true") {
       let total = 0;
       payItems.map(
@@ -86,7 +89,7 @@ const PaymentPage = () => {
       let total = 0;
       total += price * itemCount;
       setTotalPayPrice(total);
-    }    
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [payItems.length]);
 

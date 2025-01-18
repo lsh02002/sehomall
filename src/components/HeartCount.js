@@ -20,6 +20,9 @@ const HeartCount = ({ id, heartCount, isClicked }) => {
         })
         .catch((err) => {
           console.error(err);
+          if(err.response){
+            alert(err.response.data.detailMessage);
+          }
         });
     } else {
       setIsHearted(false);
@@ -41,6 +44,9 @@ const HeartCount = ({ id, heartCount, isClicked }) => {
         })
         .catch((err) => {
           console.error(err);
+          if(err.response){
+            alert(err.response.data.detailMessage);
+          }
         });
     } else {
       DeleteHeart(id)
@@ -51,6 +57,9 @@ const HeartCount = ({ id, heartCount, isClicked }) => {
         })
         .catch((err) => {
           console.error(err);
+          if(err.response){
+            alert(err.response.data.detailMessage);
+          }
         });
     }
   };

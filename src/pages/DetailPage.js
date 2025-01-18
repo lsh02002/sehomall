@@ -17,7 +17,7 @@ const DetailPage = () => {
   const [reviews, setReviews] = useState([]);
   const [isReview, setIsReview] = useState(false);
   const [isReviewEdited, setIsReviewEdited] = useState(false);
-  const [ itemCount, setItemCount ] = useState(1);
+  const [itemCount, setItemCount] = useState(1);
 
   const navigate = useNavigate();
 
@@ -54,11 +54,11 @@ const DetailPage = () => {
       return;
     }
 
-    AddToCart(id, setCartCount);
+    AddToCart(id, setCartCount);      
   };
 
   const OnOrderClick = () => {
-    if(!isLogin){
+    if (!isLogin) {
       alert("지금 구매하기 기능은 로그인 하셔야 합니다.");
       return;
     }
@@ -94,7 +94,13 @@ const DetailPage = () => {
               <CountButton>
                 <button onClick={() => setItemCount(itemCount + 1)}>+</button>
                 수량: {itemCount}
-                <button onClick={() => setItemCount(itemCount > 1 ? itemCount - 1 : 1)}>-</button>
+                <button
+                  onClick={() =>
+                    setItemCount(itemCount > 1 ? itemCount - 1 : 1)
+                  }
+                >
+                  -
+                </button>
               </CountButton>
             </>
           )}

@@ -26,6 +26,9 @@ const CartPage = () => {
       })
       .catch((err) => {
         console.log(err);
+        if(err.response){
+          alert(err.response.data.detailMessage);
+        }
       });
   }, [setCartItems, isDeleting, isEditing]);
 
