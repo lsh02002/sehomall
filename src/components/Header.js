@@ -41,7 +41,7 @@ const Header = () => {
           <>
             <Link to="/enroll">ENROLL</Link>
             <Link onClick={OnLogout}>LOGOUT</Link>
-            <Link to="/mypage">MYPAGE</Link>
+            <Link to="/mypage?cate=REVIEWS">MYPAGE</Link>
             <Link to="/cart">
               CART<span>{cartCount}</span>
             </Link>

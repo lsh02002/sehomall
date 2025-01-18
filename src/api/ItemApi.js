@@ -86,14 +86,14 @@ const AddToCart = (id, setCartCount) => {
         })
         .catch((err) => {
           console.log(err);
-          if(err.response){
+          if (err.response) {
             alert(err.response.data.detailMessage);
           }
         });
     })
     .catch((err) => {
       console.log(err);
-      if(err.response){
+      if (err.response) {
         alert(err.response.data.detailMessage);
       }
     });
@@ -200,6 +200,28 @@ const EnrollPayment = async (payment) => {
   });
 };
 
+const GetMyReviews = async () => {
+  const Token = localStorage.getItem("token");
+  return axios.get(`${BASE_URL}/review/user`, {
+    headers: {
+      Token,
+    },
+  });
+};
+
+const GetMyHeartedItems = async () => {
+  const Token = localStorage.getItem("token");
+  return axios.get(`${BASE_URL}/heart/user`, {
+    headers: {
+      Token,
+    },
+  });
+};
+
+// const GetMyOrderedItems = async () => {
+//   const Token = localStorage.getItem("token");
+// }
+
 export {
   NewItems,
   CategoryItems,
@@ -222,4 +244,6 @@ export {
   EnrollReview,
   GetUserInfo,
   EnrollPayment,
+  GetMyReviews,
+  GetMyHeartedItems,
 };
