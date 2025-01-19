@@ -15,7 +15,7 @@ const CartPage = () => {
     isDeleting,
     isEditing,
   } = useContext(CartContext);
-  
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const CartPage = () => {
       })
       .catch((err) => {
         console.log(err);
-        if(err.response){
+        if (err.response) {
           alert(err.response.data.detailMessage);
         }
       });
@@ -37,6 +37,14 @@ const CartPage = () => {
     cartItems.map((item) => item.checked && (total += item.price * item.count));
     setTotalPrice(total);
   }, [cartItems, cartItems.length, setTotalPrice, isEditing]);
+
+  const OnOrderClick = async () => {
+    if (cartItems.length <= 0) {
+      alert("카트가 비어있습니다.");
+      return;
+    }
+    navigate("/pay?isFromCart=true");
+  };
 
   return (
     <Layout>
@@ -50,7 +58,7 @@ const CartPage = () => {
           총 합계 : <span>{totalPrice.toLocaleString()}원</span>
         </TotalSum>
         <Order>
-          <button onClick={()=>navigate("/pay?isFromCart=true")}>선택한 상품 주문</button>
+          <button onClick={OnOrderClick}>선택한 상품 주문</button>
         </Order>
       </Main>
     </Layout>
@@ -85,7 +93,7 @@ const TotalSum = styled.div`
 const Order = styled.div`
   width: 100%;
   max-width: 600px;
-  text-align: right;  
+  text-align: right;
   margin-top: 40px;
   button {
     text-align: right;

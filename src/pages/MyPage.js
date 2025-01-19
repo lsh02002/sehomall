@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import styled from "styled-components";
 import MyPageTab from "../components/MyPageTab";
-import { GetMyHeartedItems, GetMyReviews } from "../api/ItemApi";
+import { GetMyHeartedItems, GetMyPayments, GetMyReviews } from "../api/ItemApi";
 import { useSearchParams } from "react-router-dom";
 
 const MyPage = () => {
   const [myReviews, setMyReviews] = useState([]);
   const [myHearts, setMyHearts] = useState([]);
+  const [myOrders, setMyOrders] = useState([]);
   //   const [myOrderItems, setMyOrderItems] = useState([]);
   const [searchParams]  = useSearchParams();
   const cate = searchParams.get("cate");
@@ -34,13 +35,23 @@ const MyPage = () => {
         console.error(err);
       });
       console.log(cate);
+
+    GetMyPayments()
+      .then((res) => {
+        console.log(res);
+        setMyOrders(res.data.content);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+      console.log(cate);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Layout>
       <Container>
-        <MyPageTab cate={cate} myReviews={myReviews} myHearts={myHearts} />
+        <MyPageTab cate={cate} myReviews={myReviews} myHearts={myHearts} myOrders={myOrders} />
       </Container>
     </Layout>
   );

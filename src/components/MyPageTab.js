@@ -4,8 +4,9 @@ import ReviewCard from "./ReviewCard";
 import CardOne from "./CardOne";
 import MyInfo from "./MyInfo";
 import { useNavigate } from "react-router-dom";
+import OrderCard from "./OrderCard";
 
-const MyPageTab = ({ cate, myReviews, myHearts, myOrderItems }) => {
+const MyPageTab = ({ cate, myReviews, myHearts, myOrders }) => {
     const navigate = useNavigate();
   
 
@@ -59,7 +60,10 @@ const MyPageTab = ({ cate, myReviews, myHearts, myOrderItems }) => {
         )}
         {cate === "ORDERS" && (
           <div id="mytab3">
-            <Content>주문내역 탭 페이지입니다.</Content>
+            <Content>
+            {myOrders?.length > 0 ?
+                myOrders.map((order, index) => <OrderCard key={index} order={order} />) : <div>주문내역이 없습니다.</div>}
+            </Content>
           </div>
         )}
         {cate === "MYINFO" && (

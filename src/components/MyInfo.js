@@ -86,8 +86,7 @@ const ItemInfo = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
-  flex-direction: column;
-  border: 1px solid lightgray;
+  flex-direction: column;  
   padding-bottom: 20px;
   & > span {
     box-sizing: border-box;

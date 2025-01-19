@@ -222,6 +222,15 @@ const GetMyHeartedItems = async () => {
 //   const Token = localStorage.getItem("token");
 // }
 
+const GetMyPayments = async () => {
+  const Token = localStorage.getItem("token");
+  return axios.get(`${BASE_URL}/api/payments/user`, {
+    headers: {
+      Token,
+    },
+  });
+};
+
 export {
   NewItems,
   CategoryItems,
@@ -246,4 +255,5 @@ export {
   EnrollPayment,
   GetMyReviews,
   GetMyHeartedItems,
+  GetMyPayments,
 };
