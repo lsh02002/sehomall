@@ -1,25 +1,14 @@
-import React, { useContext, useLayoutEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { LoginContext } from "../api/loginContextApi";
-import { useNavigate } from "react-router-dom";
 import { EnrollReview } from "../api/ItemApi";
 
 const ReviewEnroll = ({ itemId, itemName, setIsReview, isReviewEdited, setIsReviewEdited }) => {
-  const { isLogin } = useContext(LoginContext);
   const nickname = localStorage.getItem("nickname");
-  const navigate = useNavigate();
 
   const [imagePreview, setImagePreview] = useState("");
   const [image, setImage] = useState("");
   const [content, setContent] = useState("");
   const [rating, setRating] = useState(5);
-
-  useLayoutEffect(() => {
-    if (!isLogin) {
-      setIsReview(false);
-      alert("로그인 하지 않으셨습니다.");
-    }
-  }, [isLogin, navigate, setIsReview]);
 
   const OnReviewRegister = () => {
     const data = {
