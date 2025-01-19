@@ -32,7 +32,7 @@ const MyPageTab = ({ cate, myReviews, myHearts, myOrders }) => {
           className={`${cate === "ORDERS" ? "active" : ""}`}
           onClick={() => OnTabClick("ORDERS")}
         >
-          주문 내역
+          주문 내역 ({myOrders.length})
         </li>
         <li
           className={`${cate === "MYINFO" ? "active" : ""}`}
