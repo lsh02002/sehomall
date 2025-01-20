@@ -1,12 +1,12 @@
 import React from "react";
-import Category from "./Category";
+import MainMenu from "./MainMenu";
 import styled from "styled-components";
 
 const Layout = ({ children }) => {
   return (
     <Container>
       <Main>
-        <Category />
+        <MainMenu />
         {children}
       </Main>
     </Container>

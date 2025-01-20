@@ -72,13 +72,13 @@ const Container = styled.div`
 
 const OrderInfo = styled.div`
   padding: 5px;
-  width: 40%;  
+  width: 40%;
   position: relative;
 
   button {
     border: none;
     background-color: #fff;
-  }
+  }  
 `;
 
 const CreatedDate = styled.div`

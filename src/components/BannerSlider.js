@@ -28,7 +28,8 @@ function BannerSlider() {
           clickable: true,
         }}
         style={{
-          width: "calc(100% - 190px)",
+          width: "85%",          
+          maxWidth: "1600px",
           height: "500px",
           padding: "20px",
         }}

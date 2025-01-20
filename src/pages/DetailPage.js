@@ -54,7 +54,7 @@ const DetailPage = () => {
       return;
     }
 
-    AddToCart(id, setCartCount);      
+    AddToCart(id, setCartCount);
   };
 
   const OnOrderClick = () => {
@@ -104,7 +104,7 @@ const DetailPage = () => {
               </CountButton>
             </>
           )}
-          <BuyNow onClick={OnOrderClick}>지금 구매하기기</BuyNow>
+          <BuyNow onClick={OnOrderClick}>지금 구매하기</BuyNow>
           <AddToCartButton onClick={OnAddToCartClick}>
             Add To Cart
           </AddToCartButton>
@@ -191,12 +191,17 @@ const CountButton = styled.div`
 `;
 
 const BuyNow = styled.button`
-  margin-top: 30px;
-  width: 100%;
+  margin-top: 30px;  
   border: none;
   padding: 10px;
-  background-color: pink;
+  color: white;
+  background-color: gray;
+  transition: 0.2s;
   cursor: pointer;
+  width: 100%;
+  &:hover {
+    background-color: lightgray;
+  }
 `;
 
 const AddToCartButton = styled.button`
@@ -207,6 +212,10 @@ const AddToCartButton = styled.button`
   background-color: #fff;
   cursor: pointer;
   border: 1px solid black;
+  transition: 0.3s;
+  &:hover {
+    color: gray;
+  }
 `;
 
 const Review = styled.div`
@@ -228,6 +237,19 @@ const ReviewTitle = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+
+  button {
+    text-align: right;
+    border: none;
+    padding: 5px;
+    color: white;
+    background-color: gray;
+    transition: 0.2s;
+    cursor: pointer;
+    &:hover {
+      background-color: lightgray;
+    }
+  }
 `;
 
 const ReviewBody = styled.div`

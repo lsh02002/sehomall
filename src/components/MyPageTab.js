@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ReviewCard from "./ReviewCard";
 import CardOne from "./CardOne";
@@ -7,12 +7,13 @@ import { useNavigate } from "react-router-dom";
 import OrderCard from "./OrderCard";
 
 const MyPageTab = ({ cate, myReviews, myHearts, myOrders }) => {
-    const navigate = useNavigate();
-  
+  const [nickname] = useState(localStorage.getItem("nickname"));
+  const navigate = useNavigate();
 
   const OnTabClick = (cat) => {
     navigate(`/mypage?cate=${cat}`);
   };
+
   return (
     <TabInner>
       <ul className="mybtn">
@@ -38,38 +39,53 @@ const MyPageTab = ({ cate, myReviews, myHearts, myOrders }) => {
           className={`${cate === "MYINFO" ? "active" : ""}`}
           onClick={() => OnTabClick("MYINFO")}
         >
-          프로필
+          프로필 ({nickname})
         </li>
       </ul>
       <div className="mytabs">
         {cate === "REVIEWS" && (
           <div id="mytab1">
             <Content>
-              {myReviews?.length > 0 &&
-                myReviews.map((review, index) => <ReviewCard key={index} review={review} />)}
+              {myReviews?.length > 0 ? (
+                myReviews.map((review, index) => (
+                  <ReviewCard key={index} review={review} />
+                ))
+              ) : (
+                <div>내가 작성한 후기가 없습니다.</div>
+              )}
             </Content>
           </div>
         )}
         {cate === "HEARTS" && (
           <div id="mytab2">
             <Content>
-              {myHearts?.length > 0 &&
-                myHearts.map((item, index) => <CardOne key={index} item={item} />)}
+              {myHearts?.length > 0 ? (
+                myHearts.map((item, index) => (
+                  <CardOne key={index} item={item} />
+                ))
+              ) : (
+                <div>찜한 상품이 없습니다.</div>
+              )}
             </Content>
           </div>
         )}
         {cate === "ORDERS" && (
           <div id="mytab3">
             <Content>
-            {myOrders?.length > 0 ?
-                myOrders.map((order, index) => <OrderCard key={index} order={order} />) : <div>주문내역이 없습니다.</div>}
+              {myOrders?.length > 0 ? (
+                myOrders.map((order, index) => (
+                  <OrderCard key={index} order={order} />
+                ))
+              ) : (
+                <div>주문내역이 없습니다.</div>
+              )}
             </Content>
           </div>
         )}
         {cate === "MYINFO" && (
           <div id="mytab4">
             <Content>
-                <MyInfo />
+              <MyInfo />
             </Content>
           </div>
         )}
@@ -83,7 +99,7 @@ export default MyPageTab;
 const TabInner = styled.div`
   margin-top: 30px;
   width: 100%;
-  max-width: 1400px;  
+  max-width: 1400px;
 
   .mybtn {
     list-style: none;

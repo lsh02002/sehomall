@@ -191,7 +191,7 @@ const Container = styled.div`
     box-sizing: border-box;
     text-align: center;
     padding: 50px;
-    position: relative;    
+    position: relative;
   }
 
   .btn {

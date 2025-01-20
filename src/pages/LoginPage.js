@@ -118,8 +118,13 @@ const Login = styled.button`
   width: 100%;
   border: none;
   padding: 10px;
-  background-color: pink;
+  background-color: gray;
   cursor: pointer;
+  color: white;
+  transition: 0.2s;
+  &:hover {
+    background-color: lightgray;
+  }
 `;
 
 const Error = styled.span`

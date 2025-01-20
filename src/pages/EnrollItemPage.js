@@ -200,11 +200,19 @@ const Text = styled.div`
 `;
 
 const Register = styled.button`
-  margin: 0 auto;
-  width: 300px;
-  border: none;
-  padding: 10px;
-  background-color: pink;
-  cursor: pointer;
-  margin-bottom: 20px;
+    border: none;
+    margin: 10px;
+    background-color: gray;    
+    transition: 0.3s;
+    cursor: pointer;
+    width: 90%;
+    box-sizing: border-box;
+    padding: 10px;    
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: white;
+    transition: 0.2s;
+    &:hover {
+      background-color: lightgray;
+    }
 `;

@@ -122,6 +122,6 @@ const TextInput = styled.div`
   input[type="text"] {
     width: 100%;
     box-sizing: border-box;
-    padding: 3px;
+    padding: 5px;
   }
 `;

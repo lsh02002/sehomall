@@ -14,7 +14,7 @@ const ReviewPage = () => {
         setReviews(res.data.content);
       })
       .catch((err) => {
-        console.log(err);        
+        console.log(err);
       });
   }, []);
 
@@ -54,8 +54,17 @@ const Container = styled.div`
     text-align: right;
   }
 
-  button {
-    padding: 5px 10px;
+ button {
+    text-align: right;
+    border: none;
+    padding: 5px;
+    color: white;
+    background-color: gray;
+    transition: 0.2s;
+    cursor: pointer;
+    &:hover {
+      background-color: lightgray;
+    }
   }
 `;
 
