@@ -101,11 +101,12 @@ const Enroll = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 800px;
+  width: 500px;  
   transform: translate(-50%, -50%);
   background-color: #fff;
   padding: 30px;
-
+  z-index: 10;
+    
   & > span {
     display: inline-block;
     width: 100%;

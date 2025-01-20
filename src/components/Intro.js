@@ -35,7 +35,7 @@ const Intro = () => {
               </span>
             </div>
           </div>
-        </Link>        
+        </Link>
         <Link to="/contact">
           <div className="main__intro-container-img">
             <img className="main__intro-image" src={Intro02} alt="" />
@@ -46,7 +46,7 @@ const Intro = () => {
               </span>
             </div>
           </div>
-        </Link>        
+        </Link>
       </Introduction>
     </>
   );
@@ -60,13 +60,14 @@ const Introduction = styled.section`
   align-items: center;
   width: 100vw;
   max-width: 1600px;
-  height: 50vh;
+  height: 100%;
+  flex-wrap: wrap;
 
   .main__intro-container-img {
-    max-width: 350px;
-    max-height: 350px;
+    width: 320px;
+    height: 320px;
     overflow: hidden;
-    margin: 0 20px;
+    margin: 20px 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;

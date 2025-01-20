@@ -37,7 +37,7 @@ const Container = styled.div`
   // border: 1px solid lightgray;
   left: 0;
   top: 0;
-  z-index: 10;
+  z-index: 5;
   background-color: rgba(255, 255, 255, 0.65);
   a {
     text-decoration: none;

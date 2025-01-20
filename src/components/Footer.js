@@ -62,7 +62,7 @@ const Container = styled.footer`
 
   .footer__title {
     font-size: 40px;
-    font-weight: 600;
+    font-weight: 400;
     margin-bottom: 10px;
     em{
       font-size: 0.6em;

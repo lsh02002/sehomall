@@ -54,8 +54,7 @@ const Header = () => {
 
 export default Header;
 
-const Container = styled.header`
-  position: fixed;
+const Container = styled.header`  
   display: flex;
   justify-content: end;
   align-items: center;
@@ -64,10 +63,11 @@ const Container = styled.header`
   box-sizing: border-box;
   padding-right: 10px;
   opacity: 1;
-  z-index: 10;
+  z-index: 5;   
 `;
 
 const Menu = styled.div`
+  position: fixed;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
