@@ -79,30 +79,29 @@ const HeartCount = ({ id, heartCount, isClicked }) => {
 export default HeartCount;
 
 const Container = styled.div`
-  width: 160px;
+  width: 170px;
   height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;    
+  justify-content: space-between;
+  align-items: center;
   span {
     color: red;
-    padding-left: 15px;
-    margin-right: 10px;
+    padding-left: 5px;
+    margin-right: 5px;
   }
-  button {
+  button {    
     border: none;
-    width: 130px;  
+    width: 80px;    
     background-color: red;
     color: white;
     cursor: pointer;
-    padding: 2px 5px;
+    padding: 2px 0;
     &:hover {
       background-color: rgba(255, 0, 0, 0.8);
     }
 `;
 
-const HeartImage = styled.div`
-  right: 10px;
+const HeartImage = styled.div`  
   width: 24px;
   height: 24px;
   text-align: left;

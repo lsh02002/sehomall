@@ -45,7 +45,13 @@ const CategoryPage = () => {
               </div>
             )}
           </Title>
-          <Items>{items && items.map((item, index) => <CardOne key={index} item={item} />)}</Items>
+          <Items>
+            {items.length > 0 ? (
+              items.map((item, index) => <CardOne key={index} item={item} />)
+            ) : (
+              <div>상품이 없습니다.</div>
+            )}
+          </Items>
         </ItemsInner>
       </Main>
     </Layout>
@@ -54,7 +60,7 @@ const CategoryPage = () => {
 
 export default CategoryPage;
 
-const Main = styled.div`  
+const Main = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
@@ -86,4 +92,9 @@ const Items = styled.div`
   align-items: center;
   width: 100%;
   flex-wrap: wrap;
+  & > div {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;  
+  }
 `;

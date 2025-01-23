@@ -1,14 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ReviewCard from "./ReviewCard";
 import CardOne from "./CardOne";
 import MyInfo from "./MyInfo";
 import { useNavigate } from "react-router-dom";
 import OrderCard from "./OrderCard";
+import { GetMyHeartedItems, GetMyPayments, GetMyReviews } from "../api/ItemApi";
 
-const MyPageTab = ({ cate, myReviews, myHearts, myOrders }) => {
+const MyPageTab = ({ cate }) => {
+  const [myReviews, setMyReviews] = useState([]);
+  const [myHearts, setMyHearts] = useState([]);
+  const [myOrders, setMyOrders] = useState([]);
+  const [isOrderStatusUpdated, setIsOrderStatusUpdated] = useState(false);
+
   const [nickname] = useState(localStorage.getItem("nickname"));
   const navigate = useNavigate();
+
+  useEffect(() => {
+    GetMyReviews()
+      .then((res) => {
+        console.log(res);
+        setMyReviews(res.data.content);
+      })
+      .catch((err) => {
+        console.error(err);
+        if (err.response) {
+          alert(err.response.data.detailMessage);
+        }
+      });
+
+    GetMyHeartedItems()
+      .then((res) => {
+        console.log(res);
+        setMyHearts(res.data.content);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+
+  useEffect(() => {
+    GetMyPayments()
+      .then((res) => {
+        console.log(res);
+        setMyOrders(res.data.content);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [isOrderStatusUpdated, setIsOrderStatusUpdated]);
 
   const OnTabClick = (cat) => {
     navigate(`/mypage?cate=${cat}`);
@@ -74,7 +114,12 @@ const MyPageTab = ({ cate, myReviews, myHearts, myOrders }) => {
             <Content>
               {myOrders?.length > 0 ? (
                 myOrders.map((order, index) => (
-                  <OrderCard key={index} order={order} />
+                  <OrderCard
+                    key={index}
+                    order={order}
+                    isOrderStatusUpdated={isOrderStatusUpdated}
+                    setIsOrderStatusUpdated={setIsOrderStatusUpdated}
+                  />
                 ))
               ) : (
                 <div>주문내역이 없습니다.</div>

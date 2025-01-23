@@ -1,9 +1,26 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import SimpleItemCard from "./SimpleItemCard";
+import { ChangePaymentStatus } from "../api/ItemApi";
 
-const OrderCard = ({ order }) => {
+const OrderCard = ({
+  order,
+  isOrderStatusUpdated,
+  setIsOrderStatusUpdated,
+}) => {
   const [isModal, setIsModal] = useState(false);
+
+  const OnStatusUpdated = (status) => {
+    ChangePaymentStatus(order.id, status)
+      .then((res) => {
+        console.log(res);
+        setIsOrderStatusUpdated(!isOrderStatusUpdated);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <Container>
@@ -39,6 +56,20 @@ const OrderCard = ({ order }) => {
             주문배송상태: <span>{order.orderStatus}</span>
           </div>
         </OrderStatusInfo>
+        <CancelOrComplete>
+          <button
+            onClick={() => OnStatusUpdated("CANCELED")}
+            disabled={order.orderStatus === "COMPLETED" || order.orderStatus === "CANCELED"}
+          >
+            주문 취소
+          </button>
+          <button
+            onClick={() => OnStatusUpdated("COMPLETED")}
+            disabled={order.orderStatus === "COMPLETED" || order.orderStatus === "CANCELED"}
+          >
+            구입 확정
+          </button>
+        </CancelOrComplete>
       </Container>
     </>
   );
@@ -78,7 +109,7 @@ const OrderInfo = styled.div`
   button {
     border: none;
     background-color: #fff;
-  }  
+  }
 `;
 
 const CreatedDate = styled.div`
@@ -86,11 +117,45 @@ const CreatedDate = styled.div`
 `;
 
 const OrderStatusInfo = styled.div`
-  width: 60%;
+  width: 40%;
   margin-left: 20px 0 0 20px;
 
   span {
     color: red;
+  }
+`;
+
+const CancelOrComplete = styled.div`
+  width: 20%;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  button {
+    border: none;
+    margin: 10px;
+    padding: 5px;
+    transition: 0.2s;
+    cursor: pointer;
+    width: 70%;
+
+    // &:nth-child(1) {
+    //   color: white;
+    //   background-color: red;
+    // }
+
+    // &:nth-child(2) {
+    //   color: white;
+    //   background-color: gray;
+    // }
+
+    // &:hover:nth-child(1) {
+    //   background-color: salmon;
+    // }
+
+    // &:hover:nth-child(2) {
+    //   background-color: lightgray;
+    // }
   }
 `;
 

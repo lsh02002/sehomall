@@ -4,39 +4,53 @@ import { EnrollItem } from "../api/ItemApi";
 import Layout from "../components/Layout";
 
 const EnrollItemPage = () => {
-  const [icat, setIcat] = useState("BAGS");
-  const [iname, setIname] = useState("");
-  const [iprice, setIprice] = useState(0);
-  const [isize, setIsize] = useState("");
-  const [imaterial, setImaterial] = useState("");
-  const [careGuide, setCareGuide] = useState("");
-  const [icount, setIcount] = useState(0);
-  const [idesc, setIdesc] = useState("");
-  const [ideliveryFee, setIdeliveryFee] = useState(0);
-  const [images, setImages] = useState(null);
+  const [state, setState] = useState({
+    icat: "BAGS",
+    iname: "",
+    iprice: 0,
+    isize: "",
+    imaterial: "",
+    careGuide: "",
+    icount: 0,
+    idesc: "",
+    ideliveryFee: 0,
+    images: null,
+  });
+  const [errMessage, setErrMessage] = useState("");
+
+  const OnFieldChange = (e) => {
+    setErrMessage("");
+    setState({ ...state, [e.target.name]: e.target.value });
+  };
+
+  const OnFieldImagesChange = (e) => {
+    setErrMessage("");
+    setState({ ...state, [e.target.name]: e.target.files[0] });
+  };
 
   const OnRegister = () => {
     const data = {
-      count: icount,
-      price: iprice,
-      size: isize,
-      careGuide: careGuide,
-      name: iname,
-      description: idesc,
-      category: icat,
-      deliveryFee: ideliveryFee,
+      count: state.icount,
+      price: state.iprice,
+      size: state.isize,
+      careGuide: state.careGuide,
+      name: state.iname,
+      description: state.idesc,
+      category: state.icat,
+      deliveryFee: state.ideliveryFee,
     };
+
+    console.log(data);
+
     const formDataToSend = new FormData();
     formDataToSend.append(
       "itemRequest",
       new Blob([JSON.stringify(data)], { type: "application/json" })
     );
 
-    if (images) {
-      formDataToSend.append("files", images);
+    if (state.images) {
+      formDataToSend.append("files", state.images);
     }
-
-    console.log(data);
 
     EnrollItem(formDataToSend)
       .then((res) => {
@@ -45,7 +59,7 @@ const EnrollItemPage = () => {
       .catch((err) => {
         console.log(err);
         if (err.response) {
-          alert(err.response.data.detailMessage);
+          setErrMessage(err.response.data.detailMessage);
         }
       });
   };
@@ -57,7 +71,7 @@ const EnrollItemPage = () => {
           <Title>상품 등록</Title>
           <CategorySelect>
             <div>카테고리</div>
-            <select value={icat} onChange={(e) => setIcat(e.target.value)}>
+            <select value={state.icat} name="icat" onChange={OnFieldChange}>
               <option>BAGS</option>
               <option>WALLETS</option>
               <option>ACCESSORIES</option>
@@ -68,69 +82,78 @@ const EnrollItemPage = () => {
             <div>제품 이름</div>
             <input
               type="text"
-              value={iname}
-              onChange={(e) => setIname(e.target.value)}
+              value={state.iname}
+              name="iname"
+              onChange={OnFieldChange}
             />
           </Text>
           <Text>
             <div>제품 사진</div>
-            <input type="file" onChange={(e) => setImages(e.target.files[0])} />
+            <input name="images" type="file" onChange={OnFieldImagesChange} />
           </Text>
           <Text>
             <div>제품 가격</div>
             <input
               type="number"
-              value={iprice}
-              onChange={(e) => setIprice(e.target.value)}
+              value={state.iprice}
+              name="iprice"
+              onChange={OnFieldChange}
             />
           </Text>
           <Text>
             <div>제품 크기</div>
             <input
               type="text"
-              value={isize}
-              onChange={(e) => setIsize(e.target.value)}
+              value={state.isize}
+              name="isize"
+              onChange={OnFieldChange}
             />
           </Text>
           <Text>
             <div>제품 재질</div>
             <input
               type="text"
-              value={imaterial}
-              onChange={(e) => setImaterial(e.target.value)}
+              value={state.imaterial}
+              name="imaterial"
+              onChange={OnFieldChange}
             />
           </Text>
           <Text>
             <div>제품 재고량</div>
             <input
               type="number"
-              value={icount}
-              onChange={(e) => setIcount(e.target.value)}
+              value={state.icount}
+              name="icount"
+              onChange={OnFieldChange}
             />
           </Text>
           <Text>
             <div>제품 설명</div>
             <input
               type="text"
-              value={idesc}
-              onChange={(e) => setIdesc(e.target.value)}
+              value={state.idesc}
+              name="idesc"
+              onChange={OnFieldChange}
             />
           </Text>
           <Text>
             <div>배송비</div>
             <input
               type="number"
-              value={ideliveryFee}
-              onChange={(e) => setIdeliveryFee(e.target.value)}
+              value={state.ideliveryFee}
+              name="ideliveryFee"
+              onChange={OnFieldChange}
             />
           </Text>
           <Text>
             <div>제품취급 주의사항</div>
             <textarea
-              value={careGuide}
-              onChange={(e) => setCareGuide(e.target.value)}
+              value={state.careGuide}
+              name="careGuide"
+              onChange={OnFieldChange}
             />
           </Text>
+          <TextMessage>{errMessage}</TextMessage>
           <Register onClick={OnRegister}>상품 등록</Register>
         </EnrollInner>
       </Main>
@@ -199,20 +222,24 @@ const Text = styled.div`
   }
 `;
 
+const TextMessage = styled.div`  
+  color: red;
+`;
+
 const Register = styled.button`
-    border: none;
-    margin: 10px;
-    background-color: gray;    
-    transition: 0.3s;
-    cursor: pointer;
-    width: 90%;
-    box-sizing: border-box;
-    padding: 10px;    
-    font-size: 1.2em;
-    margin-bottom: 30px;
-    color: white;
-    transition: 0.2s;
-    &:hover {
-      background-color: lightgray;
-    }
+  border: none;
+  margin: 10px;
+  background-color: gray;
+  transition: 0.3s;
+  cursor: pointer;
+  width: 90%;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  color: white;
+  transition: 0.2s;
+  &:hover {
+    background-color: lightgray;
+  }
 `;

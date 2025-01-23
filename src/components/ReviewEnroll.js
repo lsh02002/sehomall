@@ -1,19 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { EnrollReview } from "../api/ItemApi";
+import { EnrollReview, GetUnReviewedItemNames } from "../api/ItemApi";
 
-const ReviewEnroll = ({ itemId, itemName, setIsReview, isReviewEdited, setIsReviewEdited }) => {
+const ReviewEnroll = ({
+  item,
+  setIsReview,
+  isReviewEdited,
+  setIsReviewEdited,
+}) => {
   const nickname = localStorage.getItem("nickname");
 
   const [imagePreview, setImagePreview] = useState("");
   const [image, setImage] = useState("");
-  const [content, setContent] = useState("");
-  const [rating, setRating] = useState(5);
+  const [state, setState] = useState({
+    content: "",
+    rating: 5,
+    unReviewedItemId: -1,
+  });
+
+  const [unReviewedItems, setUnReviewedItems] = useState([]);
+
+  const [errMessage, setErrMessage] = useState("");
+
+  useEffect(() => {
+    GetUnReviewedItemNames()
+      .then((res) => {
+        console.log(res);
+        setUnReviewedItems(res.data);
+        /* 매우 중요!!! */
+        setState({ ...state, unReviewedItemId: res.data[0].id });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const OnChangeField = (e) => {
+    setErrMessage("");
+    setState({ ...state, [e.target.name]: e.target.value });
+  };
 
   const OnReviewRegister = () => {
+    const itemId = item !== null ? item?.id : state.unReviewedItemId;
     const data = {
-      content,
-      rating,
+      content: state.content,
+      rating: state.rating,
       itemId,
     };
     const formDataToSend = new FormData();
@@ -21,6 +53,8 @@ const ReviewEnroll = ({ itemId, itemName, setIsReview, isReviewEdited, setIsRevi
       "reviewRequest",
       new Blob([JSON.stringify(data)], { type: "application/json" })
     );
+
+    console.log(state.image);
 
     if (image) {
       formDataToSend.append("files", image);
@@ -36,50 +70,81 @@ const ReviewEnroll = ({ itemId, itemName, setIsReview, isReviewEdited, setIsRevi
       })
       .catch((err) => {
         console.log(err);
-        if(err.response){
-          alert(err.response.data.detailMessage);
+        if (err.response) {
+          setErrMessage(err.response.data.detailMessage);
         }
       });
   };
 
   const encodeFileToBase64 = (fileBlob) => {
-    setImage(fileBlob);
-    const reader = new FileReader();
-    reader.readAsDataURL(fileBlob);
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        setImagePreview(reader.result);
-        resolve();
-      };
-    });
+    setErrMessage("");    
+      setImage(fileBlob);
+      const reader = new FileReader();
+      reader.readAsDataURL(fileBlob);
+      return new Promise((resolve) => {
+        reader.onload = () => {
+          setImagePreview(reader.result);
+          resolve();
+        };
+      });    
   };
 
   return (
     <Enroll>
       <h3>후기 등록</h3>
-      <span>상품명: {itemName}</span>
-      <span>작성자: {nickname}</span>
+      {item ? (
+        <>
+          <span>상품명: {item.name}</span>
+          <span>작성자: {nickname}</span>
+        </>
+      ) : (
+        <span>
+          구매완료 상품명:
+          <select
+            style={{ marginLeft: "20px", width: "70%", height: "40px" }}
+            value={state.unReviewedItemId}
+            onChange={OnChangeField}
+          >
+            {unReviewedItems.length > 0 ? (
+              unReviewedItems.map((item, index) => (
+                <option key={index} value={item.id}>
+                  {item.name}
+                </option>
+              ))
+            ) : (
+              <option value={-1} disabled>
+                구매완료하신 상품이 없습니다.
+              </option>
+            )}
+          </select>
+        </span>
+      )}
       <input
         type="file"
-        id="review-file"        
+        id="review-file"
         onChange={(e) => encodeFileToBase64(e.target.files[0])}
       />
       <div className="btn">
         <span>
           <em>후기 사진</em>
           <label htmlFor="review-file">
-            {image ? <img width={40} height={40} src={imagePreview} alt="" /> : "+"}
+            {image ? (
+              <img width={40} height={40} src={imagePreview} alt="" />
+            ) : (
+              "+"
+            )}
           </label>
         </span>
       </div>
       <textarea
         placeholder="내용을 입력하세요"
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
+        name="content"
+        value={state.content}
+        onChange={OnChangeField}
       />
       <span>
         <em>평점 선택:</em>
-        <select value={rating} onChange={(e) => setRating(e.target.value)}>
+        <select name="rating" value={state.rating} onChange={OnChangeField}>
           <option>1</option>
           <option>2</option>
           <option>3</option>
@@ -87,8 +152,18 @@ const ReviewEnroll = ({ itemId, itemName, setIsReview, isReviewEdited, setIsRevi
           <option>5</option>
         </select>
       </span>
+      <TextMessage>{errMessage}</TextMessage>
       <div className="add-button">
-        <button onClick={OnReviewRegister}>리뷰 등록</button>
+        {item === null ? (
+          <button
+            onClick={OnReviewRegister}
+            disabled={state.unReviewedItemId === -1}
+          >
+            리뷰 등록
+          </button>
+        ) : (
+          <button onClick={OnReviewRegister}>리뷰 등록</button>
+        )}
         <button onClick={() => setIsReview(false)}>등록창 닫기기</button>
       </div>
     </Enroll>
@@ -101,12 +176,12 @@ const Enroll = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 500px;  
+  width: 500px;
   transform: translate(-50%, -50%);
   background-color: #fff;
   padding: 30px;
   z-index: 10;
-    
+
   & > span {
     display: inline-block;
     width: 100%;
@@ -160,4 +235,8 @@ const Enroll = styled.div`
     align-item: center;
     padding-top: 20px;
   }
+`;
+
+const TextMessage = styled.div`
+  color: red;
 `;

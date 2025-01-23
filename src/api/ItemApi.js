@@ -231,6 +231,24 @@ const GetMyPayments = async () => {
   });
 };
 
+const ChangePaymentStatus = async (paymentId, status) => {
+  const Token = localStorage.getItem("token");
+  return axios.get(`${BASE_URL}/api/payments/status/${paymentId}/${status}`, {
+    headers: {
+      Token,
+    },
+  });
+};
+
+const GetUnReviewedItemNames = async () => {
+  const Token = localStorage.getItem("token");
+  return axios.get(`${BASE_URL}/review/unreviewed-items`, {
+    headers: {
+      Token,
+    },
+  });
+};
+
 export {
   NewItems,
   CategoryItems,
@@ -256,4 +274,6 @@ export {
   GetMyReviews,
   GetMyHeartedItems,
   GetMyPayments,
+  ChangePaymentStatus,
+  GetUnReviewedItemNames,
 };

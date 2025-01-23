@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import styled from "styled-components";
 import { EnrollPayment, FindCartItems, GetUserInfo } from "../api/ItemApi";
 import PayCard from "../components/PayCard";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const PaymentPage = () => {
   const [ordererInfo, setOrdererInfo] = useState({
@@ -13,6 +13,8 @@ const PaymentPage = () => {
     address: "",
     gender: "",
   });
+
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -114,6 +116,11 @@ const PaymentPage = () => {
       return { itemId: item.id, count: item.count };
     });
 
+    if(items.length<=0){
+      alert("상품을 1개이상 선택해 주세요");
+      return;
+    }
+
     const payment = {
       productSum: totalPayPrice,
       email,
@@ -127,6 +134,7 @@ const PaymentPage = () => {
     EnrollPayment(payment)
       .then((res) => {
         console.log(res);
+        navigate("/mypage?cate=ORDERS");
       })
       .catch((err) => {
         console.error(err);

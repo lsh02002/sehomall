@@ -48,6 +48,8 @@ const DetailPage = () => {
       });
   }, [id, isReviewEdited, setIsReviewEdited]);
 
+
+
   const OnAddToCartClick = () => {
     if (!isLogin) {
       alert("장바구니 기능은 로그인 하셔야 합니다.");
@@ -84,13 +86,7 @@ const DetailPage = () => {
               <span>{item.description}</span>
               <span>Size {item.size}</span>
               <span>Care Guide {item.careGuide}</span>
-              <span>
-                <HeartCount
-                  id={item.id}
-                  heartCount={item.heartCount}
-                  isClicked
-                />
-              </span>
+              <HeartCount id={item.id} heartCount={item.heartCount} isClicked />
               <CountButton>
                 <button onClick={() => setItemCount(itemCount + 1)}>+</button>
                 수량: {itemCount}
@@ -117,8 +113,7 @@ const DetailPage = () => {
       {isReview && (
         <Review>
           <ReviewEnroll
-            itemId={item && item.id}
-            itemName={item && item.name}
+            item={item}
             setIsReview={setIsReview}
             isReviewEdited={isReviewEdited}
             setIsReviewEdited={setIsReviewEdited}
@@ -139,9 +134,10 @@ export default DetailPage;
 
 const Main = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  width: calc(100% - 190px);
+  width: 100%;
+  max-width: 870px;
   margin: 40px 0 0 10px;
   position: relative;
 `;
@@ -158,31 +154,33 @@ const Image = styled.div`
 `;
 
 const Info = styled.div`
-  min-width: 400px;
+  width: 100%;
+  max-width: 435px;
   margin-left: 70px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   flex-direction: column;
   text-align: left;
   h3 {
     width: 100%;
     margin: 0;
-    padding: 10px;
+    padding: 10px 0;
     box-sizing: border-box;
   }
-  span {
-    width: 200px;
+  & > span {
+    width: 100%;
     padding: 0px 0px;
     box-sizing: border-box;
-    font-size: 20px;
+    font-size: 1em;
   }
-  span:last-of-type {
-    width: 100px;
+  & > div {
+    width: 150px;
   }
 `;
 
-const CountButton = styled.div`
+const CountButton = styled.span`
+  width: 100%;
   button {
     display: inline-block;
     padding: 5px 10px;
@@ -191,7 +189,7 @@ const CountButton = styled.div`
 `;
 
 const BuyNow = styled.button`
-  margin-top: 30px;  
+  margin-top: 30px;
   border: none;
   padding: 10px;
   color: white;
@@ -257,6 +255,8 @@ const ReviewBody = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
+  max-width: 870px;
   & > div {
     border-bottom: 1px solid lightgray;
   }

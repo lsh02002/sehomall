@@ -3,9 +3,13 @@ import Layout from "../components/Layout";
 import styled from "styled-components";
 import ReviewCard from "../components/ReviewCard";
 import { GetAllReviews } from "../api/ItemApi";
+import ReviewEnroll from "../components/ReviewEnroll";
 
 const ReviewPage = () => {
   const [reviews, setReviews] = useState([]);
+
+  const [isReview, setIsReview] = useState(false);
+  const [isReviewEdited, setIsReviewEdited] = useState(false);
 
   useEffect(() => {
     GetAllReviews()
@@ -16,14 +20,14 @@ const ReviewPage = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [isReviewEdited, setIsReviewEdited]);
 
   return (
     <Layout>
       <Container>
         <h1>리뷰 전체 ({reviews.length})</h1>
         <span>
-          <button>리뷰 작성하기</button>
+          <button onClick={() => setIsReview(true)}>리뷰 작성하기</button>
         </span>
         <ReviewBody>
           {reviews.length > 0 &&
@@ -32,6 +36,16 @@ const ReviewPage = () => {
             ))}
         </ReviewBody>
       </Container>
+      {isReview && (
+        <Review>
+          <ReviewEnroll
+            item={null}
+            setIsReview={setIsReview}
+            isReviewEdited={isReviewEdited}
+            setIsReviewEdited={setIsReviewEdited}
+          />
+        </Review>
+      )}
     </Layout>
   );
 };
@@ -54,7 +68,7 @@ const Container = styled.div`
     text-align: right;
   }
 
- button {
+  button {
     text-align: right;
     border: none;
     padding: 5px;
@@ -76,4 +90,15 @@ const ReviewBody = styled.div`
   & > div:last-child {
     border-bottom: none;
   }
+`;
+
+const Review = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 5;
 `;
