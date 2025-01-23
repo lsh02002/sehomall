@@ -42,8 +42,13 @@ const ReviewEnroll = ({
   };
 
   const OnReviewRegister = () => {
-    if(item !== null && !unReviewedItems.find(reviewed=>reviewed.id === item?.id)){
-      setErrMessage("해당 상품을 구매하신적이 없으십니다.");
+    if (
+      item !== null &&
+      !unReviewedItems.find((reviewed) => reviewed.id === item?.id)
+    ) {
+      setErrMessage(
+        "해당 상품을 구매하신적이 없으시거나 이미 후기를 남기셨습니다."
+      );
       return;
     }
 
@@ -81,17 +86,19 @@ const ReviewEnroll = ({
       });
   };
 
-  const encodeFileToBase64 = (fileBlob) => {
-    setErrMessage("");    
-      setImage(fileBlob);
-      const reader = new FileReader();
-      reader.readAsDataURL(fileBlob);
-      return new Promise((resolve) => {
-        reader.onload = () => {
-          setImagePreview(reader.result);
-          resolve();
-        };
-      });    
+  const encodeFileToBase64 = (e) => {
+    setErrMessage("");
+    setImage(e.target.files[0]);
+    const reader = new FileReader();
+    if (e.target.files[0]) {
+      reader.readAsDataURL(e.target.files[0]);
+    }
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setImagePreview(reader.result);
+        resolve();
+      };
+    });
   };
 
   return (
@@ -127,7 +134,7 @@ const ReviewEnroll = ({
       <input
         type="file"
         id="review-file"
-        onChange={(e) => encodeFileToBase64(e.target.files[0])}
+        onChange={(e) => encodeFileToBase64(e)}
       />
       <div className="btn">
         <span>
