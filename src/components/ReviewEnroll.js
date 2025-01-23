@@ -42,7 +42,7 @@ const ReviewEnroll = ({
   };
 
   const OnReviewRegister = () => {
-    if(!unReviewedItems.find(reviewed=>reviewed.id === item?.id)){
+    if(item !== null && !unReviewedItems.find(reviewed=>reviewed.id === item?.id)){
       setErrMessage("해당 상품을 구매하신적이 없으십니다.");
       return;
     }
