@@ -13,5 +13,5 @@ const NoticePage = () => {
 export default NoticePage;
 
 const Container = styled.div`
-  margin-top: 100px;
+  margin-top: 50px;
 `;

@@ -182,8 +182,8 @@ const EnrollInner = styled.div`
   flex-direction: column;
   width: 500px;
   margin: 0 150px;
-  border: 1px solid lightgray;
-  margin-top: 100px;
+  border: 1px solid lightgray;  
+  margin-top: 50px;
 `;
 
 const Title = styled.h2`

@@ -53,7 +53,7 @@ const ReviewPage = () => {
 export default ReviewPage;
 
 const Container = styled.div`
-  margin-top: 100px;
+  margin-top: 50px;
   width: 100%;
   max-width: 870px;
   h1 {

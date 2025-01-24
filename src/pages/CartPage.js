@@ -68,7 +68,7 @@ const CartPage = () => {
 export default CartPage;
 
 const Main = styled.div`
-  margin-top: 100px;
+  margin-top: 50px;
   width: 100%;
   display: flex;
   justify-content: center;

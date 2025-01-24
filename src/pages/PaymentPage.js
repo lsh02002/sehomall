@@ -240,7 +240,7 @@ const PaymentPage = () => {
 export default PaymentPage;
 
 const Container = styled.div`
-  margin-top: 100px;
+  margin-top: 50px;
   width: 100%;
   max-width: 870px;
   display: flex;

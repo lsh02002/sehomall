@@ -13,5 +13,5 @@ const SearchPage = () => {
 export default SearchPage;
 
 const Container = styled.div`
-  margin-top: 100px;
+  margin-top: 50px;
 `;

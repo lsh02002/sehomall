@@ -70,7 +70,7 @@ const LoginPage = () => {
 export default LoginPage;
 
 const Main = styled.div`
-  margin-top: 100px;
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -152,7 +152,7 @@ const AboutPage = () => {
 export default AboutPage;
 
 const Container = styled.div`
-  margin-top: 100px;
+  margin-top: 50px;
 
   .tab-inner {
     height: 700px;

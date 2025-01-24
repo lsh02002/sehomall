@@ -13,5 +13,5 @@ const InstagramPage = () => {
 export default InstagramPage;
 
 const Container = styled.div`
-  margin-top: 100px;
+  margin-top: 50px;
 `;

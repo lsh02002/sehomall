@@ -18,6 +18,7 @@ const SignupPage = () => {
   });
 
   const [errMessage, setErrMessage] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const navigate = useNavigate();
 
   const OnFieldChange = (e) => {
@@ -133,7 +134,7 @@ const SignupPage = () => {
         <Password>
           <div>패스워드 (입력형식: 간단히 영문 대소문자와 숫자 조합)</div>
           <input
-            type="password"
+            type={isPasswordVisible ? "text" : "password"}
             name="password"
             value={state.password}
             onChange={OnFieldChange}
@@ -142,12 +143,22 @@ const SignupPage = () => {
         <Password>
           <div>패스워드 확인</div>
           <input
-            type="password"
+            type={isPasswordVisible ? "text" : "password"}
             name="passwordConfirm"
             value={state.passwordConfirm}
             onChange={OnFieldChange}
           />
         </Password>
+        <Check>
+          <label>
+            비밀번호 보이기
+            <input
+              type="checkbox"
+              value={isPasswordVisible}
+              onChange={() => setIsPasswordVisible(!isPasswordVisible)}
+            />
+          </label>
+        </Check>
         {errMessage && <Error>{errMessage}</Error>}
         <SignUp onClick={OnSignup}>회원가입</SignUp>
       </Main>
@@ -158,7 +169,7 @@ const SignupPage = () => {
 export default SignupPage;
 
 const Main = styled.div`
-  margin-top: 100px;
+  margin-top: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -228,8 +239,30 @@ const Password = styled.div`
   div {
     font-size: 14px;
   }
+  input[type="text"] {
+    width: 95%;
+    padding: 5px;
+    outline: none;
+  }
   input[type="password"] {
     width: 95%;
+    padding: 5px;
+    outline: none;
+  }
+`;
+
+const Check = styled.div`
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 10px;
+  text-align: right;
+  label {
+    display: inline-block;
+    width: 40%;
+    font-size: 14px;    
+  }
+  input[type="checkbox"] {
+    width: 10%;
     padding: 5px;
     outline: none;
   }

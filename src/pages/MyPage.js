@@ -21,5 +21,5 @@ const MyPage = () => {
 export default MyPage;
 
 const Container = styled.div`
-  margin-top: 150px;
+  margin-top: 50px;
 `;
