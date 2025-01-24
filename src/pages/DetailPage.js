@@ -16,7 +16,7 @@ const DetailPage = () => {
   const { setCartCount } = useContext(CartContext);
   const [reviews, setReviews] = useState([]);
   const [isReview, setIsReview] = useState(false);
-  const [isReviewEdited, setIsReviewEdited] = useState(false);
+  const [isReviewUpdated, setIsReviewUpdated] = useState(false);
   const [itemCount, setItemCount] = useState(1);
 
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ const DetailPage = () => {
           alert(err.response.data.detailMessage);
         }
       });
-  }, [id, isReviewEdited, setIsReviewEdited]);
+  }, [id, isReviewUpdated, setIsReviewUpdated]);
 
 
 
@@ -115,8 +115,8 @@ const DetailPage = () => {
           <ReviewEnroll
             item={item}
             setIsReview={setIsReview}
-            isReviewEdited={isReviewEdited}
-            setIsReviewEdited={setIsReviewEdited}
+            isReviewUpdated={isReviewUpdated}
+            setIsReviewUpdated={setIsReviewUpdated}
           />
         </Review>
       )}

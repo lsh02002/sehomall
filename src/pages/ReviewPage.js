@@ -9,7 +9,7 @@ const ReviewPage = () => {
   const [reviews, setReviews] = useState([]);
 
   const [isReview, setIsReview] = useState(false);
-  const [isReviewEdited, setIsReviewEdited] = useState(false);
+  const [isReviewUpdated, setIsReviewUpdated] = useState(false);
 
   useEffect(() => {
     GetAllReviews()
@@ -20,7 +20,7 @@ const ReviewPage = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [isReviewEdited, setIsReviewEdited]);
+  }, [isReviewUpdated, setIsReviewUpdated]);
 
   return (
     <Layout>
@@ -41,8 +41,8 @@ const ReviewPage = () => {
           <ReviewEnroll
             item={null}
             setIsReview={setIsReview}
-            isReviewEdited={isReviewEdited}
-            setIsReviewEdited={setIsReviewEdited}
+            isReviewUpdated={isReviewUpdated}
+            setIsReviewUpdated={setIsReviewUpdated}
           />
         </Review>
       )}

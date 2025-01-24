@@ -86,6 +86,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
   span {
     color: red;
     padding-left: 5px;

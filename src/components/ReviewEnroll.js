@@ -5,8 +5,8 @@ import { EnrollReview, GetUnReviewedItems } from "../api/ItemApi";
 const ReviewEnroll = ({
   item,
   setIsReview,
-  isReviewEdited,
-  setIsReviewEdited,
+  isReviewUpdated,
+  setIsReviewUpdated,
 }) => {
   const nickname = localStorage.getItem("nickname");
 
@@ -61,7 +61,7 @@ const ReviewEnroll = ({
     EnrollReview(formDataToSend)
       .then((res) => {
         // console.log(res);
-        setIsReviewEdited(!isReviewEdited);
+        setIsReviewUpdated(!isReviewUpdated);
         setIsReview(false);
       })
       .catch((err) => {
