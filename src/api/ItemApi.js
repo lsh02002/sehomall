@@ -26,6 +26,10 @@ const UserLogin = async (email, password) => {
   });
 };
 
+const UserSignup = async (userInfo) => {
+  return axios.post(`${BASE_URL}/user/sign-up`, userInfo);
+}
+
 const EnrollItem = async (formDataToSend) => {
   const Token = localStorage.getItem("token");
   return axios.post(`${BASE_URL}/api/items`, formDataToSend, {
@@ -254,6 +258,7 @@ export {
   CategoryItems,
   PopularItems,
   UserLogin,
+  UserSignup,
   EnrollItem,
   DetailItem,
   AddCart,

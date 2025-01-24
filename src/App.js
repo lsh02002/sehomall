@@ -12,6 +12,7 @@ const About = lazy(() => import("./pages/AboutPage"));
 const Main = lazy(() => import("./pages/MainPage"));
 const Category = lazy(() => import("./pages/CategoryPage"));
 const Login = lazy(() => import("./pages/LoginPage"));
+const SignUp = lazy(() => import("./pages/SignupPage"));
 const Enroll = lazy(() => import("./pages/EnrollItemPage"));
 const Detail = lazy(() => import("./pages/DetailPage"));
 const Cart = lazy(() => import("./pages/CartPage"));
@@ -70,6 +71,14 @@ function App() {
             element={
               <Suspense fallback={Loading}>
                 <Login />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <Suspense fallback={Loading}>
+                <SignUp />
               </Suspense>
             }
           />

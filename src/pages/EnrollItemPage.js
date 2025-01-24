@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { EnrollItem } from "../api/ItemApi";
 import Layout from "../components/Layout";
+import { useNavigate } from "react-router-dom";
 
 const EnrollItemPage = () => {
   const [state, setState] = useState({
@@ -17,6 +18,7 @@ const EnrollItemPage = () => {
     images: null,
   });
   const [errMessage, setErrMessage] = useState("");
+  const navigate = useNavigate();
 
   const OnFieldChange = (e) => {
     setErrMessage("");
@@ -55,6 +57,7 @@ const EnrollItemPage = () => {
     EnrollItem(formDataToSend)
       .then((res) => {
         console.log(res);
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);

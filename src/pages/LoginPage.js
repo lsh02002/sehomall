@@ -93,7 +93,7 @@ const Email = styled.div`
     font-size: 14px;
   }
   input[type="email"] {
-    width: 100%;
+    width: 95%;
     padding: 5px;
     outline: none;
   }
@@ -107,7 +107,7 @@ const Password = styled.div`
     font-size: 14px;
   }
   input[type="password"] {
-    width: 100%;
+    width: 95%;
     padding: 5px;
     outline: none;
   }
