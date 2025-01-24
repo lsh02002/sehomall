@@ -5,81 +5,43 @@ import { UserSignup } from "../api/ItemApi";
 import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [address, setAddress] = useState("");
-  const [gender, setGender] = useState("남성");
-  const [birthDate, setBirthDate] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
-  const [errMessage, setErrMessage] = useState("");
+  const [state, setState] = useState({
+    email: "",
+    name: "",
+    nickname: "",
+    phoneNumber: "",
+    address: "",
+    gender: "남성",
+    birthDate: "",
+    password: "",
+    passwordConfirm: "",
+  });
 
+  const [errMessage, setErrMessage] = useState("");
   const navigate = useNavigate();
 
-  const OnEmailChange = (e) => {
+  const OnFieldChange = (e) => {
     setErrMessage("");
-    setEmail(e.target.value);
-  };
-
-  const OnNameChange = (e) => {
-    setErrMessage("");
-    setName(e.target.value);
-  };
-
-  const OnNicknameChange = (e) => {
-    setErrMessage("");
-    setNickname(e.target.value);
-  };
-
-  const OnPhoneChange = (e) => {
-    setErrMessage("");
-    setPhoneNumber(e.target.value);
-  };
-
-  const OnAddressChange = (e) => {
-    setErrMessage("");
-    setAddress(e.target.value);
-  };
-
-  const OnGenderChange = (e) => {    
-    setErrMessage("");
-    setGender(e.target.value);
-  };
-
-  const OnBirthDateChange = (e) => {
-    setErrMessage("");
-    setBirthDate(e.target.value);
-  };
-
-  const OnPasswordChange = (e) => {
-    setErrMessage("");
-    setPassword(e.target.value);
-  };
-
-  const OnPasswordConfirmChange = (e) => {
-    setErrMessage("");
-    setPasswordConfirm(e.target.value);
+    setState({ ...state, [e.target.name]: e.target.value });
   };
 
   const OnSignup = () => {
     const data = {
-      email,
-      name,
-      password,
-      passwordConfirm,
-      nickname,
-      phoneNumber,
-      address,
-      gender,
-      birthDate,
+      email: state.email,
+      name: state.name,
+      password: state.password,
+      passwordConfirm: state.passwordConfirm,
+      nickname: state.nickname,
+      phoneNumber: state.phoneNumber,
+      address: state.address,
+      gender: state.gender,
+      birthDate: state.birthDate,
     };
 
     UserSignup(data)
       .then((res) => {
         console.log(res);
-        navigate("/");
+        navigate("/login");
       })
       .catch((err) => {
         console.log(err);
@@ -91,36 +53,50 @@ const SignupPage = () => {
     <Layout>
       <Main>
         <Title>SIGNUP</Title>
+        <Warning>연습사이트이니 중요정보(실제 정보) 넣지 마십시오</Warning>
         <Email>
           <div>이메일</div>
           <input
             type="email"
-            value={email}
-            onChange={(e) => OnEmailChange(e)}
+            name="email"
+            value={state.email}
+            onChange={OnFieldChange}
           />
         </Email>
         <Text>
           <div>이름</div>
-          <input type="text" value={name} onChange={(e) => OnNameChange(e)} />
+          <input
+            type="text"
+            name="name"
+            value={state.name}
+            onChange={OnFieldChange}
+          />
         </Text>
         <Text>
           <div>닉네임</div>
           <input
             type="text"
-            value={nickname}
-            onChange={(e) => OnNicknameChange(e)}
+            name="nickname"
+            value={state.nickname}
+            onChange={OnFieldChange}
           />
         </Text>
         <Text>
-          <div>휴대폰 번호</div>
-          <input type="text" value={phoneNumber} onChange={(e) => OnPhoneChange(e)} />
+          <div>휴대폰 번호 (입력형식: 010XXXXXXXX)</div>
+          <input
+            type="text"
+            name="phoneNumber"
+            value={state.phoneNumber}
+            onChange={OnFieldChange}
+          />
         </Text>
         <Text>
           <div>주소</div>
           <input
             type="text"
-            value={address}
-            onChange={(e) => OnAddressChange(e)}
+            name="address"
+            value={state.address}
+            onChange={OnFieldChange}
           />
         </Text>
         <Radio>
@@ -132,41 +108,44 @@ const SignupPage = () => {
               name="gender"
               defaultChecked
               value={"남성"}
-              onChange={(e) => OnGenderChange(e)}
+              onChange={OnFieldChange}
             />
           </label>
-          <label htmlFor="gender">
+          <label>
             여성
             <input
               type="radio"
               name="gender"
               value={"여성"}
-              onChange={(e) => OnGenderChange(e)}
+              onChange={OnFieldChange}
             />
           </label>
         </Radio>
         <Text>
-          <div>생년월일 (입력형식: yyyy-MM-dd, 예시: 2000-01-30 )</div>
+          <div>생년월일 (입력형식: yyyy-MM-dd, 예시: 2000-01-30)</div>
           <input
             type="text"
-            value={birthDate}
-            onChange={(e) => OnBirthDateChange(e)}
+            name="birthDate"
+            value={state.birthDate}
+            onChange={OnFieldChange}
           />
         </Text>
         <Password>
-          <div>패스워드</div>
+          <div>패스워드 (입력형식: 간단히 영문 대소문자와 숫자 조합)</div>
           <input
             type="password"
-            value={password}
-            onChange={(e) => OnPasswordChange(e)}
+            name="password"
+            value={state.password}
+            onChange={OnFieldChange}
           />
         </Password>
         <Password>
           <div>패스워드 확인</div>
           <input
             type="password"
-            value={passwordConfirm}
-            onChange={(e) => OnPasswordConfirmChange(e)}
+            name="passwordConfirm"
+            value={state.passwordConfirm}
+            onChange={OnFieldChange}
           />
         </Password>
         {errMessage && <Error>{errMessage}</Error>}
@@ -231,7 +210,7 @@ const Radio = styled.div`
     font-size: 14px;
   }
   label {
-    display: inline-block;    
+    display: inline-block;
     width: 25%;
     padding: 0 20px;
   }
@@ -268,6 +247,16 @@ const SignUp = styled.button`
   &:hover {
     background-color: lightgray;
   }
+`;
+
+const Warning = styled.span`
+  width: 100%;
+  color: white;
+  background-color: red;
+  margin: 15px 0;
+  font-size: 0.9em;
+  padding: 5px;
+  box-sizing: border-box;
 `;
 
 const Error = styled.span`

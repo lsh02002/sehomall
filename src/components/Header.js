@@ -17,7 +17,7 @@ const Header = () => {
           setCartCount(res.data);
         })
         .catch((err) => {
-          console.log(err);          
+          console.log(err);
         });
     }
   }, [isLogin, setCartCount, isDeleting]);
@@ -36,7 +36,10 @@ const Header = () => {
         <Link to="/search">SEARCH</Link>
         <Link to="/reviews">REVIEWS</Link>
         {!isLogin ? (
-          <Link to="/login">LOGIN</Link>
+          <>
+            <Link to="/signup">SIGNUP</Link>
+            <Link to="/login">LOGIN</Link>
+          </>
         ) : (
           <>
             <Link to="/enroll">ENROLL</Link>
@@ -54,7 +57,7 @@ const Header = () => {
 
 export default Header;
 
-const Container = styled.header`  
+const Container = styled.header`
   display: flex;
   justify-content: end;
   align-items: center;
@@ -63,7 +66,7 @@ const Container = styled.header`
   box-sizing: border-box;
   padding-right: 10px;
   opacity: 1;
-  z-index: 5;   
+  z-index: 5;
 `;
 
 const Menu = styled.div`
