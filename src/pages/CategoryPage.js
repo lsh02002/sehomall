@@ -13,7 +13,7 @@ const CategoryPage = () => {
     if (cat === "new") {
       NewItems(cat)
         .then((res) => {
-          // console.log(res.data.content);
+          console.log(res.data.content);
           setItems(res.data.content);
         })
         .catch((err) => {
@@ -25,7 +25,7 @@ const CategoryPage = () => {
     } else {
       CategoryItems(cat)
         .then((res) => {
-          // console.log(res.data.content);
+          console.log(res.data.content);
           setItems(res.data.content);
         })
         .catch((err) => {

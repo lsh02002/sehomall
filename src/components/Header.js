@@ -13,7 +13,7 @@ const Header = () => {
     if (isLogin) {
       CountCartItems()
         .then((res) => {
-          // console.log(res);
+          console.log(res);
           setCartCount(res.data);
         })
         .catch((err) => {

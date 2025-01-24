@@ -21,7 +21,7 @@ const CartPage = () => {
   useEffect(() => {
     FindCartItems()
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setCartItems(res.data.cartAllSearchResponses);
       })
       .catch((err) => {

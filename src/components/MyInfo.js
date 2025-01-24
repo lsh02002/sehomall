@@ -18,7 +18,7 @@ const MyInfo = () => {
   useEffect(() => {
     GetUserInfo()
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setMyInfo(res.data);
       })
       .catch((err) => {

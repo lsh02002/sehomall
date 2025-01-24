@@ -19,7 +19,7 @@ const MyPageTab = ({ cate }) => {
   useEffect(() => {
     GetMyReviews()
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setMyReviews(res.data.content);
       })
       .catch((err) => {
@@ -31,7 +31,7 @@ const MyPageTab = ({ cate }) => {
 
     GetMyHeartedItems()
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setMyHearts(res.data.content);
       })
       .catch((err) => {
@@ -42,7 +42,7 @@ const MyPageTab = ({ cate }) => {
   useEffect(() => {
     GetMyPayments()
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setMyOrders(res.data.content);
       })
       .catch((err) => {

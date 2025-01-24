@@ -25,7 +25,7 @@ const ReviewEnroll = ({
   useEffect(() => {
     GetUnReviewedItems()
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setUnReviewedItems(res.data);
         /* 매우 중요!!! */
         setState({ ...state, unReviewedItemId: res.data[0].id });

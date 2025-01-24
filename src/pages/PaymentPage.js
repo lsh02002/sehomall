@@ -39,7 +39,7 @@ const PaymentPage = () => {
   useEffect(() => {
     GetUserInfo()
       .then((res) => {
-        // console.log(res);
+        console.log(res);
         setOrdererInfo(res.data);
       })
       .catch((err) => {
@@ -51,7 +51,7 @@ const PaymentPage = () => {
     if (isFromCart === "true") {
       FindCartItems()
         .then((res) => {
-          // console.log(res);
+          console.log(res);
           setPayItems(
             res.data.cartAllSearchResponses.filter(
               (item) => item.checked === true
