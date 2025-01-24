@@ -86,7 +86,7 @@ const DetailPage = () => {
               <span>{item.description}</span>
               <span>Size {item.size}</span>
               <span>Care Guide {item.careGuide}</span>
-              <HeartCount id={item.id} heartCount={item.heartCount} isClicked />
+              <HeartCount id={item.id} heartCount={item.heartCount} />
               <CountButton>
                 <button onClick={() => setItemCount(itemCount + 1)}>+</button>
                 수량: {itemCount}
@@ -175,7 +175,7 @@ const Info = styled.div`
     font-size: 1em;
   }
   & > div {
-    width: 150px;
+    width: 50px;
   }
 `;
 

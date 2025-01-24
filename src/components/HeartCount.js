@@ -5,8 +5,9 @@ import { DeleteHeart, InsertHeart, IsHearted } from "../api/ItemApi";
 import Like from "../assets/heart.svg";
 import LikeSolid from "../assets/heart-solid.svg";
 
-const HeartCount = ({ id, heartCount, isClicked }) => {
-  const { isLogin } = useContext(LoginContext);
+const HeartCount = ({ id, heartCount }) => {
+  const { isLogin, isHeartUpdated, setIsHeartUpdated } =
+    useContext(LoginContext);
   const [isHearted, setIsHearted] = useState(false);
   const [countHeart, setCountHeart] = useState(0);
 
@@ -19,7 +20,7 @@ const HeartCount = ({ id, heartCount, isClicked }) => {
           setCountHeart(heartCount);
         })
         .catch((err) => {
-          console.error(err);          
+          console.error(err);
         });
     } else {
       setIsHearted(false);
@@ -38,10 +39,11 @@ const HeartCount = ({ id, heartCount, isClicked }) => {
           // console.log(res);
           setIsHearted(true);
           setCountHeart(countHeart + 1);
+          setIsHeartUpdated(!isHeartUpdated);
         })
         .catch((err) => {
           console.error(err);
-          if(err.response){
+          if (err.response) {
             alert(err.response.data.detailMessage);
           }
         });
@@ -51,10 +53,11 @@ const HeartCount = ({ id, heartCount, isClicked }) => {
           // console.log(res);
           setIsHearted(false);
           setCountHeart(countHeart - 1);
+          setIsHeartUpdated(!isHeartUpdated);
         })
         .catch((err) => {
           console.error(err);
-          if(err.response){
+          if (err.response) {
             alert(err.response.data.detailMessage);
           }
         });
@@ -62,7 +65,7 @@ const HeartCount = ({ id, heartCount, isClicked }) => {
   };
 
   return (
-    <Container>
+    <Container onClick={OnLikeClick}>
       <HeartImage>
         {!isHearted ? (
           <img src={Like} alt="" />
@@ -70,8 +73,7 @@ const HeartCount = ({ id, heartCount, isClicked }) => {
           <img src={LikeSolid} alt="" />
         )}
       </HeartImage>
-      <span>{countHeart}</span>
-      {isClicked && <button onClick={OnLikeClick}>찜 누르기</button>}
+      <span>{countHeart}</span>      
     </Container>
   );
 };
@@ -89,19 +91,9 @@ const Container = styled.div`
     padding-left: 5px;
     margin-right: 5px;
   }
-  button {    
-    border: none;
-    width: 80px;    
-    background-color: red;
-    color: white;
-    cursor: pointer;
-    padding: 2px 0;
-    &:hover {
-      background-color: rgba(255, 0, 0, 0.8);
-    }
 `;
 
-const HeartImage = styled.div`  
+const HeartImage = styled.div`
   width: 24px;
   height: 24px;
   text-align: left;

@@ -19,7 +19,7 @@ const CartCard = ({ item }) => {
       })
       .catch((err) => {
         console.log(err);
-        if(err.response){
+        if (err.response) {
           alert(err.response.data.detailMessage);
         }
       });
@@ -40,7 +40,7 @@ const CartCard = ({ item }) => {
       })
       .catch((err) => {
         console.log(err);
-        if(err.response){
+        if (err.response) {
           alert(err.response.data.detailMessage);
         }
       });
@@ -54,7 +54,7 @@ const CartCard = ({ item }) => {
       })
       .catch((err) => {
         console.log(err);
-        if(err.response){
+        if (err.response) {
           alert(err.response.data.detailMessage);
         }
       });
@@ -100,7 +100,7 @@ const CartCard = ({ item }) => {
         <DeleteItem>
           <button onClick={() => onDel(item.itemId)}>아이템 삭제</button>
         </DeleteItem>
-        <HeartCount id={item.itemId} heartCount={item.heartCount} isClicked />
+        <HeartCount id={item.itemId} heartCount={item.heartCount} />
       </TwoButton>
     </Container>
   );
@@ -145,12 +145,15 @@ const TwoButton = styled.div`
   img {
     width: 24px;
     height: 24px;
-  }   
+  }
+  div:last-child {
+    width: 50px;
+  }
 `;
 
 const Count = styled.div`
   padding-left: 25px;
-  text-align: center;  
+  text-align: center;
 `;
 
 const DeleteItem = styled.div`

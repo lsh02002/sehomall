@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import ReviewCard from "./ReviewCard";
 import CardOne from "./CardOne";
@@ -6,8 +6,11 @@ import MyInfo from "./MyInfo";
 import { useNavigate } from "react-router-dom";
 import OrderCard from "./OrderCard";
 import { GetMyHeartedItems, GetMyPayments, GetMyReviews } from "../api/ItemApi";
+import { LoginContext } from "../api/loginContextApi";
 
 const MyPageTab = ({ cate }) => {
+  const { isHeartUpdated } = useContext(LoginContext);
+
   const [myReviews, setMyReviews] = useState([]);
   const [myHearts, setMyHearts] = useState([]);
   const [myOrders, setMyOrders] = useState([]);
@@ -28,7 +31,9 @@ const MyPageTab = ({ cate }) => {
           alert(err.response.data.detailMessage);
         }
       });
+  }, []);
 
+  useEffect(() => {
     GetMyHeartedItems()
       .then((res) => {
         console.log(res);
@@ -37,7 +42,7 @@ const MyPageTab = ({ cate }) => {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [isHeartUpdated]);
 
   useEffect(() => {
     GetMyPayments()

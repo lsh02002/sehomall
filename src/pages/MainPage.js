@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { CategoryItems, NewItems, PopularItems } from "../api/ItemApi";
 import Layout from "../components/Layout";
@@ -6,21 +6,24 @@ import Banner from "../components/BannerSlider";
 import ItemSlider from "../components/ItemSlider";
 import CategoryTab from "../components/CategoryTab";
 import Intro from "../components/Intro";
+import { LoginContext } from "../api/loginContextApi";
 
 const MainPage = () => {
+  const { isHeartUpdated } = useContext(LoginContext);
+
   const [newItems, setNewItems] = useState([]);
   const [popularItems, setPopularItems] = useState([]);
   const [cateItems, setCateItems] = useState([]);
   const [cate, setCate] = useState("ALL");
 
-  useEffect(() => {    
+  useEffect(() => {
     NewItems()
       .then((res) => {
         console.log(res);
         setNewItems(res.data.content);
       })
       .catch((err) => {
-        console.log(err);        
+        console.log(err);
       });
     PopularItems()
       .then((res) => {
@@ -28,25 +31,25 @@ const MainPage = () => {
         setPopularItems(res.data.content);
       })
       .catch((err) => {
-        console.log(err);        
+        console.log(err);
       });
-      CategoryItems(cate)
-      .then((res) => {        
+    CategoryItems(cate)
+      .then((res) => {
         console.log(res);
         setCateItems(res.data.content);
       })
       .catch((err) => {
-        console.log(err);        
+        console.log(err);
       });
-  }, [cate]);
+  }, [cate, isHeartUpdated]);
 
   return (
     <Layout>
-      <Banner />      
+      <Banner />
       <Title>인기있는 아이템</Title>
       <Main>
         <ItemSlider items={popularItems} />
-      </Main>      
+      </Main>
       <Title>새로운 아이템</Title>
       <Main>
         <ItemSlider items={newItems} />
@@ -68,7 +71,7 @@ const Main = styled.div`
   align-items: center;
   width: 100vw;
   // flex-wrap: wrap;
-  box-sizing: border-box;  
+  box-sizing: border-box;
 `;
 
 const Title = styled.div`

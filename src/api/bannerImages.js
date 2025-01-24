@@ -4,18 +4,15 @@ import banner03 from "../assets/travel-agency-hand-drawn-flat-sale-banner_23-214
 
 const bannerImages = [
   {
-    id: 0,
-    content: "배너 1번 설명 공간입니다.",
+    id: 0,    
     image: banner01,
   },
   {
-    id: 1,
-    content: "배너 2번 설명 공간입니다.",
+    id: 1,    
     image: banner02,
   },
   {
-    id: 2,
-    content: "배너 3번 설명 공간입니다.",
+    id: 2,    
     image: banner03,
   },
 ];

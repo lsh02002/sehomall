@@ -28,7 +28,7 @@ function BannerSlider() {
           clickable: true,
         }}
         style={{
-          width: "85%",          
+          width: "85%",
           maxWidth: "1600px",
           height: "500px",
           padding: "20px",
@@ -39,9 +39,6 @@ function BannerSlider() {
             <SwiperSlide key={item.id}>
               <Slide>
                 <img src={item.image} alt="" />
-                <div>
-                  <h3>{item.content}</h3>
-                </div>
               </Slide>
             </SwiperSlide>
           ))}
@@ -57,24 +54,13 @@ const Slide = styled.div`
   height: 100%;
   line-height: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   box-sizing: border-box;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.05);
   img {
-    object-fit: cover;
-  }
-  div {
-    width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;    
-    box-sizing: border-box;
-    h3 {
-      font-size: 1.1em;
-      font-weight: normal;
-    }
+    object-fit: cover;
   }
 `;
