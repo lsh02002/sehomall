@@ -42,7 +42,7 @@ const EnrollItemPage = () => {
       deliveryFee: state.ideliveryFee,
     };
 
-    console.log(data);
+    // console.log(data);
 
     const formDataToSend = new FormData();
     formDataToSend.append(
@@ -56,7 +56,7 @@ const EnrollItemPage = () => {
 
     EnrollItem(formDataToSend)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         navigate("/");
       })
       .catch((err) => {

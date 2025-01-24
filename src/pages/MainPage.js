@@ -16,7 +16,7 @@ const MainPage = () => {
   useEffect(() => {    
     NewItems()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setNewItems(res.data.content);
       })
       .catch((err) => {
@@ -24,7 +24,7 @@ const MainPage = () => {
       });
     PopularItems()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setPopularItems(res.data.content);
       })
       .catch((err) => {
@@ -32,6 +32,7 @@ const MainPage = () => {
       });
       CategoryItems(cate)
       .then((res) => {        
+        // console.log(res);
         setCateItems(res.data.content);
       })
       .catch((err) => {

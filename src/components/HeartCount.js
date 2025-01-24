@@ -14,7 +14,7 @@ const HeartCount = ({ id, heartCount, isClicked }) => {
     if (isLogin) {
       IsHearted(id)
         .then((res) => {
-          console.log("heart:" + heartCount);
+          // console.log("heart:" + heartCount);
           setIsHearted(res.data);
           setCountHeart(heartCount);
         })
@@ -35,7 +35,7 @@ const HeartCount = ({ id, heartCount, isClicked }) => {
     if (!isHearted) {
       InsertHeart(id)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setIsHearted(true);
           setCountHeart(countHeart + 1);
         })
@@ -48,7 +48,7 @@ const HeartCount = ({ id, heartCount, isClicked }) => {
     } else {
       DeleteHeart(id)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setIsHearted(false);
           setCountHeart(countHeart - 1);
         })

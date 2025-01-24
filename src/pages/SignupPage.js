@@ -40,7 +40,7 @@ const SignupPage = () => {
 
     UserSignup(data)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         navigate("/login");
       })
       .catch((err) => {
@@ -73,7 +73,7 @@ const SignupPage = () => {
           />
         </Text>
         <Text>
-          <div>닉네임</div>
+          <div>닉네임 (영문자로 시작하고 영문자 숫자 조합)</div>
           <input
             type="text"
             name="nickname"

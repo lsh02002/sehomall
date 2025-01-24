@@ -81,11 +81,11 @@ const CountCartItems = async () => {
 const AddToCart = (id, setCartCount) => {
   AddCart(id, 1, true)
     .then((res) => {
-      console.log(res);
+      // console.log(res);
 
       CountCartItems()
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setCartCount(res.data);
         })
         .catch((err) => {

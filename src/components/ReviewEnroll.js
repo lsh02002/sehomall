@@ -25,7 +25,7 @@ const ReviewEnroll = ({
   useEffect(() => {
     GetUnReviewedItems()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setUnReviewedItems(res.data);
         /* 매우 중요!!! */
         setState({ ...state, unReviewedItemId: res.data[0].id });
@@ -54,17 +54,13 @@ const ReviewEnroll = ({
       new Blob([JSON.stringify(data)], { type: "application/json" })
     );
 
-    console.log(state.image);
-
     if (image) {
       formDataToSend.append("files", image);
     }
 
-    console.log(data);
-
     EnrollReview(formDataToSend)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setIsReviewEdited(!isReviewEdited);
         setIsReview(false);
       })

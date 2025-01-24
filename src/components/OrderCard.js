@@ -13,7 +13,7 @@ const OrderCard = ({
   const OnStatusUpdated = (status) => {
     ChangePaymentStatus(order.id, status)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setIsOrderStatusUpdated(!isOrderStatusUpdated);
       })
       .catch((err) => {

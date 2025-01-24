@@ -14,7 +14,7 @@ const CartCard = ({ item }) => {
 
     UpdateCartItem(item.itemId, item.count, item.checked)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setIsEditing(!isEditing);
       })
       .catch((err) => {
@@ -35,7 +35,7 @@ const CartCard = ({ item }) => {
 
     UpdateCartItem(item.itemId, item.count, item.checked)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setIsEditing(!isEditing);
       })
       .catch((err) => {
@@ -49,7 +49,7 @@ const CartCard = ({ item }) => {
   const onDel = (id) => {
     DelCartItem(id)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setIsDeleting(!isDeleting);
       })
       .catch((err) => {
@@ -63,7 +63,7 @@ const CartCard = ({ item }) => {
   const onChecked = ({ target }) => {
     UpdateCartItem(item.itemId, item.count, target.checked)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setIsEditing(!isEditing);
       })
       .catch((err) => {

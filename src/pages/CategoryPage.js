@@ -13,16 +13,19 @@ const CategoryPage = () => {
     if (cat === "new") {
       NewItems(cat)
         .then((res) => {
-          console.log(res.data.content);
+          // console.log(res.data.content);
           setItems(res.data.content);
         })
         .catch((err) => {
           console.log(err);
+          if (err.response) {
+            alert(err.response.data.detailMessage);
+          }
         });
     } else {
       CategoryItems(cat)
         .then((res) => {
-          console.log(res.data.content);
+          // console.log(res.data.content);
           setItems(res.data.content);
         })
         .catch((err) => {
