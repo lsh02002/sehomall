@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { EnrollReview, GetUnReviewedItemNames } from "../api/ItemApi";
+import { EnrollReview, GetUnReviewedItems } from "../api/ItemApi";
 
 const ReviewEnroll = ({
   item,
@@ -23,7 +23,7 @@ const ReviewEnroll = ({
   const [errMessage, setErrMessage] = useState("");
 
   useEffect(() => {
-    GetUnReviewedItemNames()
+    GetUnReviewedItems()
       .then((res) => {
         console.log(res);
         setUnReviewedItems(res.data);
@@ -42,16 +42,6 @@ const ReviewEnroll = ({
   };
 
   const OnReviewRegister = () => {
-    if (
-      item !== null &&
-      !unReviewedItems.find((reviewed) => reviewed.id === item?.id)
-    ) {
-      setErrMessage(
-        "해당 상품을 구매하신적이 없으시거나 이미 후기를 남기셨습니다."
-      );
-      return;
-    }
-
     const itemId = item !== null ? item?.id : state.unReviewedItemId;
     const data = {
       content: state.content,
@@ -115,6 +105,7 @@ const ReviewEnroll = ({
           <select
             style={{ marginLeft: "20px", width: "70%", height: "40px" }}
             value={state.unReviewedItemId}
+            name="unReviewedItemId"
             onChange={OnChangeField}
           >
             {unReviewedItems.length > 0 ? (

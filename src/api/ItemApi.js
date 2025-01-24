@@ -240,7 +240,7 @@ const ChangePaymentStatus = async (paymentId, status) => {
   });
 };
 
-const GetUnReviewedItemNames = async () => {
+const GetUnReviewedItems = async () => {
   const Token = localStorage.getItem("token");
   return axios.get(`${BASE_URL}/review/unreviewed-items`, {
     headers: {
@@ -275,5 +275,5 @@ export {
   GetMyHeartedItems,
   GetMyPayments,
   ChangePaymentStatus,
-  GetUnReviewedItemNames,
+  GetUnReviewedItems,
 };
