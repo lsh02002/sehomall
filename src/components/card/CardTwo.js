@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import ShoppingCart from "../assets/shopping-cart.svg";
-import { AddToCart } from "../api/ItemApi";
-import { CartContext } from "../api/cartContextApi";
-import { LoginContext } from "../api/loginContextApi";
-import HeartCount from "./HeartCount";
+import ShoppingCart from "../../assets/shopping-cart.svg";
+import { AddToCart } from "../../api/ItemApi";
+import { CartContext } from "../../api/cartContextApi";
+import { LoginContext } from "../../api/loginContextApi";
+import HeartCount from "../HeartCount";
 
 const CardTwo = ({ item }) => {
   const { setCartCount } = useContext(CartContext);
@@ -45,7 +45,7 @@ export default CardTwo;
 const Container = styled.article`
   width: 240px;
   height: 330px;
-  box-sizing: border-box;  
+  box-sizing: border-box;
   margin: 20px;
   position: relative;
   transition: 0.4s;
@@ -54,7 +54,7 @@ const Container = styled.article`
     object-fit: cover;
     transition: 0.1s;
   }
-  &:hover {    
+  &:hover {
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
   }
   a {

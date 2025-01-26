@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import SimpleItemCard from "./SimpleItemCard";
-import { ChangePaymentStatus } from "../api/ItemApi";
+import { ChangePaymentStatus } from "../../api/ItemApi";
 
 const OrderCard = ({
   order,

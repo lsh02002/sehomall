@@ -1,12 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import ReviewCard from "./ReviewCard";
-import CardOne from "./CardOne";
-import MyInfo from "./MyInfo";
+import ReviewCard from "../card/ReviewCard";
+import CardOne from "../card/CardOne";
+import MyInfo from "../MyInfo";
 import { useNavigate } from "react-router-dom";
-import OrderCard from "./OrderCard";
-import { GetMyHeartedItems, GetMyPayments, GetMyReviews } from "../api/ItemApi";
-import { LoginContext } from "../api/loginContextApi";
+import OrderCard from "../card/OrderCard";
+import {
+  GetMyHeartedItems,
+  GetMyPayments,
+  GetMyReviews,
+} from "../../api/ItemApi";
+import { LoginContext } from "../../api/loginContextApi";
 
 const MyPageTab = ({ cate }) => {
   const { isHeartUpdated } = useContext(LoginContext);

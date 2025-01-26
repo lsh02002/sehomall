@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import styled from "styled-components";
 import { EnrollPayment, FindCartItems, GetUserInfo } from "../api/ItemApi";
-import PayCard from "../components/PayCard";
+import PayCard from "../components/card/PayCard";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const PaymentPage = () => {

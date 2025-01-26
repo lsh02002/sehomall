@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { CategoryItems, NewItems, PopularItems } from "../api/ItemApi";
-import Layout from "../components/Layout";
-import Banner from "../components/BannerSlider";
-import ItemSlider from "../components/ItemSlider";
-import CategoryTab from "../components/CategoryTab";
+import Layout from "../components/layout/Layout";
+import Banner from "../components/slider/BannerSlider";
+import ItemSlider from "../components/slider/ItemSlider";
+import CategoryTab from "../components/tab/CategoryTab";
 import Intro from "../components/Intro";
 import { LoginContext } from "../api/loginContextApi";
 

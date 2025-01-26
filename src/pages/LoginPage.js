@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { UserLogin } from "../api/ItemApi";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../api/loginContextApi";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 
 const LoginPage = () => {
   const { setIsLogin } = useContext(LoginContext);

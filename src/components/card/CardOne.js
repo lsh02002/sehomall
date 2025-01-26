@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import ShoppingCart from "../assets/shopping-cart.svg";
-import { AddToCart } from "../api/ItemApi";
-import { CartContext } from "../api/cartContextApi";
-import { LoginContext } from "../api/loginContextApi";
-import HeartCount from "./HeartCount";
+import ShoppingCart from "../../assets/shopping-cart.svg";
+import { AddToCart } from "../../api/ItemApi";
+import { CartContext } from "../../api/cartContextApi";
+import { LoginContext } from "../../api/loginContextApi";
+import HeartCount from "../HeartCount";
 
 const CardOne = ({ item }) => {
   const { setCartCount } = useContext(CartContext);

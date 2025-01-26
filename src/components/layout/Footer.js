@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Twitter from "../assets/icons8-twitter-50.png";
-import Facebook from "../assets/icons8-facebook-50.png";
-import Instagram from "../assets/icons8-instagram-50.png";
+import Twitter from "../../assets/icons8-twitter-50.png";
+import Facebook from "../../assets/icons8-facebook-50.png";
+import Instagram from "../../assets/icons8-instagram-50.png";
 import { Link } from "react-router-dom";
 
 const Footer = () => {

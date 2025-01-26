@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import { FindCartItems } from "../api/ItemApi";
-import CartCard from "../components/CartCard";
+import CartCard from "../components/card/CartCard";
 import styled from "styled-components";
 import { CartContext } from "../api/cartContextApi";
 import { useNavigate } from "react-router-dom";

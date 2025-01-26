@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { EnrollItem } from "../api/ItemApi";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import { useNavigate } from "react-router-dom";
 
 const EnrollItemPage = () => {

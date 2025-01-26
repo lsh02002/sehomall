@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { CategoryItems, NewItems } from "../api/ItemApi";
 import { useParams } from "react-router-dom";
-import Layout from "../components/Layout";
-import CardOne from "../components/CardOne";
+import Layout from "../components/layout/Layout";
+import CardOne from "../components/card/CardOne";
 
 const CategoryPage = () => {
   const [items, setItems] = useState([]);

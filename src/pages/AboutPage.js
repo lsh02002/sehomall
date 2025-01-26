@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import styled from "styled-components";
 import SkillPicture from "../assets/success-2081167_640.webp";
 

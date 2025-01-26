@@ -9,7 +9,7 @@ import "swiper/css/scrollbar";
 // import required modules
 import { Autoplay, Navigation } from "swiper/modules";
 import styled from "styled-components";
-import bannerImages from "../api/bannerImages";
+import bannerImages from "../../api/bannerImages";
 
 function BannerSlider() {
   return (

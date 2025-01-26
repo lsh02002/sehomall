@@ -1,11 +1,11 @@
 import "./app.css";
 import styled from "styled-components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
 import { lazy, Suspense, useContext, useEffect } from "react";
 import { LoginContext } from "./api/loginContextApi";
-import PageLoading from "./components/PageLoading";
+import PageLoading from "./components/layout/PageLoading";
 
 const Loading = <PageLoading />;
 const About = lazy(() => import("./pages/AboutPage"));

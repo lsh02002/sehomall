@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import styled from "styled-components";
-import MyPageTab from "../components/MyPageTab";
+import MyPageTab from "../components/tab/MyPageTab";
 import { useSearchParams } from "react-router-dom";
 
 const MyPage = () => {

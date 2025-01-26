@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import styled from "styled-components";
-import CardOne from "../components/CardOne";
+import CardOne from "../components/card/CardOne";
 import { SearchItemsByKeyword } from "../api/ItemApi";
 
 const SearchPage = () => {

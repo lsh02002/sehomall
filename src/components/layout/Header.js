@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { LoginContext } from "../api/loginContextApi";
-import { CartContext } from "../api/cartContextApi";
-import { CountCartItems } from "../api/ItemApi";
+import { LoginContext } from "../../api/loginContextApi";
+import { CartContext } from "../../api/cartContextApi";
+import { CountCartItems } from "../../api/ItemApi";
 
 const Header = () => {
   const { isLogin, setIsLogin } = useContext(LoginContext);

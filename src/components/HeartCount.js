@@ -15,7 +15,7 @@ const HeartCount = ({ id, heartCount }) => {
     if (isLogin) {
       IsHearted(id)
         .then((res) => {
-          // console.log("heart:" + heartCount);
+          // console.log(res);
           setIsHearted(res.data);
           setCountHeart(heartCount);
         })

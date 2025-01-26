@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { DelCartItem, UpdateCartItem } from "../api/ItemApi";
-import { CartContext } from "../api/cartContextApi";
-import HeartCount from "./HeartCount";
+import { DelCartItem, UpdateCartItem } from "../../api/ItemApi";
+import { CartContext } from "../../api/cartContextApi";
+import HeartCount from "../HeartCount";
 import { Link } from "react-router-dom";
 
 const CartCard = ({ item }) => {

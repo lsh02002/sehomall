@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import styled from "styled-components";
-import ReviewCard from "../components/ReviewCard";
+import ReviewCard from "../components/card/ReviewCard";
 import { GetAllReviews } from "../api/ItemApi";
-import ReviewEnroll from "../components/ReviewEnroll";
+import ReviewEnroll from "../components/modal/ReviewEnroll";
 
 const ReviewPage = () => {
   const [reviews, setReviews] = useState([]);
@@ -27,7 +27,7 @@ const ReviewPage = () => {
       <Container>
         <h1>리뷰 전체 ({reviews.length})</h1>
         <span>
-          <button onClick={() => setIsReview(true)}>리뷰 작성하기</button>
+          <button onClick={() => setIsReview(true)}>후기 등록</button>
         </span>
         <ReviewBody>
           {reviews.length > 0 &&

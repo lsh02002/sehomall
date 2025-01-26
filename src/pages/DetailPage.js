@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { AddToCart, DetailItem, GetItemReviews } from "../api/ItemApi";
-import Layout from "../components/Layout";
+import Layout from "../components/layout/Layout";
 import { CartContext } from "../api/cartContextApi";
 import { LoginContext } from "../api/loginContextApi";
 import HeartCount from "../components/HeartCount";
-import ReviewCard from "../components/ReviewCard";
-import ReviewEnroll from "../components/ReviewEnroll";
+import ReviewCard from "../components/card/ReviewCard";
+import ReviewEnroll from "../components/modal/ReviewEnroll";
 
 const DetailPage = () => {
   const { isLogin } = useContext(LoginContext);

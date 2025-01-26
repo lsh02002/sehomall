@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 // import required modules
 import { Navigation } from "swiper/modules";
-import CardOne from "./CardOne";
+import CardOne from "../card/CardOne";
 
 function ItemSlider({ items }) {
   return (
@@ -17,7 +17,7 @@ function ItemSlider({ items }) {
         modules={[Navigation]}
         spaceBetween={20}
         slidesPerView={5}
-        breakpoints={{          
+        breakpoints={{
           320: {
             slidesPerView: 1,
             spaceBetween: 20,
@@ -29,7 +29,7 @@ function ItemSlider({ items }) {
           640: {
             slidesPerView: 3,
             spaceBetween: 20,
-          },          
+          },
           1024: {
             slidesPerView: 4,
             spaceBetween: 20,
