@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { CategoryItems, NewItems, PopularItems } from "../api/ItemApi";
 import Layout from "../components/layout/Layout";
@@ -16,7 +16,7 @@ const MainPage = () => {
   const [cateItems, setCateItems] = useState([]);
   const [cate, setCate] = useState("ALL");
 
-  useEffect(() => {
+  const getNewDatas = useCallback(() => {
     NewItems()
       .then((res) => {
         console.log(res);
@@ -25,6 +25,9 @@ const MainPage = () => {
       .catch((err) => {
         console.error(err);
       });
+  }, []);
+
+  const getPopularDatas = useCallback(() => {
     PopularItems()
       .then((res) => {
         console.log(res);
@@ -33,6 +36,9 @@ const MainPage = () => {
       .catch((err) => {
         console.error(err);
       });
+  }, []);
+
+  const getCategoryDatas = useCallback(() => {
     CategoryItems(cate)
       .then((res) => {
         console.log(res);
@@ -41,7 +47,19 @@ const MainPage = () => {
       .catch((err) => {
         console.error(err);
       });
-  }, [cate, isHeartUpdated]);
+  }, [cate]);
+
+  useEffect(() => {
+    getNewDatas();
+  }, [getNewDatas, isHeartUpdated]);
+
+  useEffect(() => {
+    getPopularDatas();
+  }, [getPopularDatas, isHeartUpdated]);
+
+  useEffect(() => {
+    getCategoryDatas();
+  }, [getCategoryDatas, isHeartUpdated]);
 
   return (
     <Layout>

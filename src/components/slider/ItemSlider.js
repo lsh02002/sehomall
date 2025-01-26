@@ -18,6 +18,10 @@ function ItemSlider({ items }) {
         spaceBetween={20}
         slidesPerView={5}
         breakpoints={{
+          0: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
           320: {
             slidesPerView: 1,
             spaceBetween: 20,

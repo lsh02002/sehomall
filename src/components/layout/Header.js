@@ -1,26 +1,47 @@
-import React, { useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { LoginContext } from "../../api/loginContextApi";
 import { CartContext } from "../../api/cartContextApi";
-import { CountCartItems } from "../../api/ItemApi";
+import { FindCartItems } from "../../api/ItemApi";
+import SimpleCartCard from "../card/SimpleCartCard";
 
 const Header = () => {
   const { isLogin, setIsLogin } = useContext(LoginContext);
-  const { cartCount, setCartCount, isDeleting } = useContext(CartContext);
+  const {
+    cartCount,
+    setCartCount,
+    cartItems,
+    setCartItems,
+    isDeleting,
+    isEditing,
+  } = useContext(CartContext);
+
+  const [isModal, setIsModal] = useState(false);
+  const navigate = useNavigate();
+
+  const findCartItemsData = useCallback(() => {
+    FindCartItems()
+      .then((res) => {
+        console.log(res);
+        setCartItems(res.data.cartAllSearchResponses);
+        setCartCount(res.data.cartAllSearchResponses.length);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [setCartCount, setCartItems]);
 
   useEffect(() => {
-    if (isLogin) {
-      CountCartItems()
-        .then((res) => {
-          console.log(res);
-          setCartCount(res.data);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-  }, [isLogin, setCartCount, isDeleting]);
+    findCartItemsData();
+  }, [
+    findCartItemsData,
+    cartCount,
+    setCartCount,
+    setCartItems,
+    isDeleting,
+    isEditing,
+  ]);
 
   const OnLogout = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
@@ -28,6 +49,10 @@ const Header = () => {
       localStorage.removeItem("nickname");
       setIsLogin(false);
     }
+  };
+
+  const OnMoveToCart = () => {
+    navigate("/cart");
   };
 
   return (
@@ -45,9 +70,28 @@ const Header = () => {
             <Link to="/enroll">ENROLL</Link>
             <Link onClick={OnLogout}>LOGOUT</Link>
             <Link to="/mypage?cate=REVIEWS">MYPAGE</Link>
-            <Link to="/cart">
+            <Link
+              to="/cart"
+              onMouseEnter={() => setIsModal(true)}
+              onMouseLeave={() => setIsModal(false)}
+            >
               CART<span>{cartCount}</span>
             </Link>
+            {isModal && (
+              <Modal
+                onMouseEnter={() => setIsModal(true)}
+                onMouseLeave={() => setIsModal(false)}
+              >
+                {cartItems.length > 0 ? (
+                  cartItems.map((item, index) => (
+                    <SimpleCartCard key={index} item={item} />
+                  ))
+                ) : (
+                  <div>카트가 비어있습니다.</div>
+                )}
+                <button onClick={OnMoveToCart}>카트로 이동</button>
+              </Modal>
+            )}
           </>
         )}
       </Menu>
@@ -91,5 +135,39 @@ const Menu = styled.div`
     text-align: center;
     line-height: 14px;
     padding-left: 2px;
+  }
+`;
+
+const Modal = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fff;
+  position: absolute;
+  width: 250px;
+  height: 500px;
+  right: 10px;
+  bottom: -500px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  z-index: 5;
+  border: 1px solid lightgray;
+  overflow-y: auto;
+  box-sizing: border-box;
+
+  button {
+    border: none;
+    padding: 5px 10px;
+    color: white;
+    background-color: gray;
+    transition: 0.2s;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 20px;
+    margin-left: 95px;
+    &:hover {
+      background-color: lightgray;
+    }
   }
 `;

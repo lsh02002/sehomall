@@ -1,36 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import Layout from "../components/layout/Layout";
-import { FindCartItems } from "../api/ItemApi";
 import CartCard from "../components/card/CartCard";
 import styled from "styled-components";
 import { CartContext } from "../api/cartContextApi";
 import { useNavigate } from "react-router-dom";
 
 const CartPage = () => {
-  const {
-    totalPrice,
-    setTotalPrice,
-    cartItems,
-    setCartItems,
-    isDeleting,
-    isEditing,
-  } = useContext(CartContext);
-
+  const { totalPrice, setTotalPrice, cartItems, isEditing } =
+    useContext(CartContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    FindCartItems()
-      .then((res) => {
-        console.log(res);
-        setCartItems(res.data.cartAllSearchResponses);
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
-      });
-  }, [setCartItems, isDeleting, isEditing]);
 
   useEffect(() => {
     let total = 0;
