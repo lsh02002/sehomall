@@ -43,6 +43,10 @@ const DetailItem = async (id) => {
   return axios.get(`${BASE_URL}/api/items/${id}`);
 };
 
+const SearchItemsByKeyword = async (keyword) => {
+  return axios.get(`${BASE_URL}/api/items/search/${keyword}`);
+}
+
 const AddCart = async (itemId, count, checked) => {
   const Token = localStorage.getItem("token");
   return axios.post(
@@ -261,6 +265,7 @@ export {
   UserSignup,
   EnrollItem,
   DetailItem,
+  SearchItemsByKeyword,
   AddCart,
   FindCartItems,
   CountCartItems,

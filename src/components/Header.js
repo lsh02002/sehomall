@@ -33,7 +33,7 @@ const Header = () => {
   return (
     <Container>
       <Menu>
-        <Link to="/search">SEARCH</Link>
+        <Link to="/search">ITEMS-SEARCH</Link>
         <Link to="/reviews">REVIEWS</Link>
         {!isLogin ? (
           <>
@@ -74,7 +74,7 @@ const Menu = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 400px;
+  width: 500px;
   font-size: 14px;
   background-color: rgba(255, 255, 255, 0.65);
   a {

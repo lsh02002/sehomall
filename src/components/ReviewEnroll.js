@@ -96,6 +96,7 @@ const ReviewEnroll = ({
           <span>작성자: {nickname}</span>
         </>
       ) : (
+        <>
         <span>
           구매완료 상품명:
           <select
@@ -117,6 +118,8 @@ const ReviewEnroll = ({
             )}
           </select>
         </span>
+        <span>작성자: {nickname}</span>
+        </>
       )}
       <input
         type="file"

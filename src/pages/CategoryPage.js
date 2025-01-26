@@ -39,7 +39,7 @@ const CategoryPage = () => {
 
   return (
     <Layout>
-      <Main>
+      <Container>
         <ItemsInner>
           <Title>
             {cat && cat !== "new" && (
@@ -56,14 +56,14 @@ const CategoryPage = () => {
             )}
           </Items>
         </ItemsInner>
-      </Main>
+      </Container>
     </Layout>
   );
 };
 
 export default CategoryPage;
 
-const Main = styled.div`
+const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
