@@ -182,7 +182,7 @@ const CountButton = styled.span`
   button {
     display: inline-block;
     padding: 5px 10px;
-    margin: 10px;
+    margin: 10px;    
   }
 `;
 
@@ -237,11 +237,12 @@ const ReviewTitle = styled.div`
   button {
     text-align: right;
     border: none;
-    padding: 5px;
+    padding: 5px 10px;
     color: white;
     background-color: gray;
     transition: 0.2s;
     cursor: pointer;
+    font-size: 1em;
     &:hover {
       background-color: lightgray;
     }

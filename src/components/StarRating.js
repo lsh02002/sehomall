@@ -7,10 +7,10 @@ const StarRating = ({ totalStars }) => {
 
   return (
     <Container>
-      {createArray(totalStars).map((i) => (
+      {createArray(totalStars).map((star, i) => (
         <FaStar key={i} color="gold" />
       ))}
-      {createArray(5 - totalStars).map((i) => (
+      {createArray(5 - totalStars).map((star, i) => (
         <FaStar key={i} color="rgb(216, 216, 216)" />
       ))}
     </Container>

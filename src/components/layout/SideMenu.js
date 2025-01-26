@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const MainMenu = () => {
+const SideMenu = () => {
   return (
     <Container>
       <Title>
@@ -23,7 +23,7 @@ const MainMenu = () => {
   );
 };
 
-export default MainMenu;
+export default SideMenu;
 
 const Container = styled.div`
   position: fixed;

@@ -70,7 +70,7 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   margin: 10px;
-  margin-top: 100px;
+  margin-top: 50px;
 `;
 
 const Title = styled.h1`

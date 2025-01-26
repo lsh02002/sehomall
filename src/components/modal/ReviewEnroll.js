@@ -92,7 +92,9 @@ const ReviewEnroll = ({
 
   return (
     <Enroll>
-      <h3>후기 등록</h3>
+      <div>
+        후기 등록<button onClick={() => setIsReview(false)}>X</button>
+      </div>
       {item ? (
         <>
           <span>상품명: {item.name}</span>
@@ -159,17 +161,7 @@ const ReviewEnroll = ({
       </span>
       <TextMessage>{errMessage}</TextMessage>
       <div className="add-button">
-        {item === null ? (
-          <button
-            onClick={OnReviewRegister}
-            disabled={state.unReviewedItemId === -1}
-          >
-            리뷰 등록
-          </button>
-        ) : (
-          <button onClick={OnReviewRegister}>리뷰 등록</button>
-        )}
-        <button onClick={() => setIsReview(false)}>등록창 닫기기</button>
+        <button onClick={OnReviewRegister}>리뷰 등록</button>
       </div>
     </Enroll>
   );
@@ -187,6 +179,23 @@ const Enroll = styled.div`
   padding: 30px;
   z-index: 10;
 
+  div:nth-child(1) {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+      border: none;
+      background-color: transparent;
+      font-size: 1.2em;
+      cursor: pointer;
+      &:hover {
+        transform: scale(0.9);
+      }
+    }
+  }
+
   & > span {
     display: inline-block;
     width: 100%;
@@ -202,6 +211,7 @@ const Enroll = styled.div`
   .btn {
     padding: 10px 0;
     width: 100%;
+    margin-bottom: 5px;    
   }
 
   .btn span {
@@ -231,6 +241,8 @@ const Enroll = styled.div`
   textarea {
     width: 100%;
     height: 170px;
+    box-sizing: border-box;
+    border: 1px solid gray;
   }
 
   .add-button {
@@ -238,7 +250,19 @@ const Enroll = styled.div`
     display: flex;
     justify-content: space-between;
     align-item: center;
-    padding-top: 20px;
+    padding-top: 20px;    
+
+    button {
+      border: none;
+      padding: 5px 10px;
+      color: white;
+      background-color: gray;
+      cursor: pointer;
+      font-size: 1em;      
+      &:hover {
+        background-color: lightgray;
+      }
+    }
   }
 `;
 

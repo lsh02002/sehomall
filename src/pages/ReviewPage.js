@@ -71,11 +71,12 @@ const Container = styled.div`
   button {
     text-align: right;
     border: none;
-    padding: 5px;
+    padding: 5px 10px;
     color: white;
     background-color: gray;
     transition: 0.2s;
     cursor: pointer;
+    font-size: 1em;
     &:hover {
       background-color: lightgray;
     }
