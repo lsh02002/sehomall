@@ -45,7 +45,7 @@ const SignupPage = () => {
         navigate("/login");
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         setErrMessage(err.response.data.detailMessage);
       });
   };
@@ -259,7 +259,7 @@ const Check = styled.div`
   label {
     display: inline-block;
     width: 40%;
-    font-size: 14px;    
+    font-size: 14px;
   }
   input[type="checkbox"] {
     width: 10%;

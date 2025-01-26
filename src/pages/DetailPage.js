@@ -27,7 +27,7 @@ const DetailPage = () => {
         setItem(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         if (err.response) {
           alert(err.response.data.detailMessage);
         }
@@ -41,14 +41,12 @@ const DetailPage = () => {
         setReviews(res.data.content);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         if (err.response) {
           alert(err.response.data.detailMessage);
         }
       });
   }, [id, isReviewUpdated, setIsReviewUpdated]);
-
-
 
   const OnAddToCartClick = () => {
     if (!isLogin) {

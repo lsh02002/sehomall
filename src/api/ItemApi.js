@@ -28,7 +28,7 @@ const UserLogin = async (email, password) => {
 
 const UserSignup = async (userInfo) => {
   return axios.post(`${BASE_URL}/user/sign-up`, userInfo);
-}
+};
 
 const EnrollItem = async (formDataToSend) => {
   const Token = localStorage.getItem("token");
@@ -45,7 +45,7 @@ const DetailItem = async (id) => {
 
 const SearchItemsByKeyword = async (keyword) => {
   return axios.get(`${BASE_URL}/api/items/search/${keyword}`);
-}
+};
 
 const AddCart = async (itemId, count, checked) => {
   const Token = localStorage.getItem("token");
@@ -93,14 +93,14 @@ const AddToCart = (id, setCartCount) => {
           setCartCount(res.data);
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
           if (err.response) {
             alert(err.response.data.detailMessage);
           }
         });
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       if (err.response) {
         alert(err.response.data.detailMessage);
       }

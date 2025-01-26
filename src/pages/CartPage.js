@@ -25,7 +25,7 @@ const CartPage = () => {
         setCartItems(res.data.cartAllSearchResponses);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         if (err.response) {
           alert(err.response.data.detailMessage);
         }

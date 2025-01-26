@@ -17,7 +17,7 @@ const Header = () => {
           setCartCount(res.data);
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
     }
   }, [isLogin, setCartCount, isDeleting]);

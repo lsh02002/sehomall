@@ -60,7 +60,7 @@ const EnrollItemPage = () => {
         navigate("/");
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         if (err.response) {
           setErrMessage(err.response.data.detailMessage);
         }
@@ -182,7 +182,7 @@ const EnrollInner = styled.div`
   flex-direction: column;
   width: 500px;
   margin: 0 150px;
-  border: 1px solid lightgray;  
+  border: 1px solid lightgray;
   margin-top: 50px;
 `;
 
@@ -225,7 +225,7 @@ const Text = styled.div`
   }
 `;
 
-const TextMessage = styled.div`  
+const TextMessage = styled.div`
   color: red;
 `;
 

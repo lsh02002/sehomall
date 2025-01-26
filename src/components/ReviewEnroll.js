@@ -31,7 +31,10 @@ const ReviewEnroll = ({
         setState({ ...state, unReviewedItemId: res.data[0].id });
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
+        if (err.response) {
+          setErrMessage(err.response.data.detailMessage);
+        }
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -65,7 +68,7 @@ const ReviewEnroll = ({
         setIsReview(false);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         if (err.response) {
           setErrMessage(err.response.data.detailMessage);
         }
@@ -97,28 +100,28 @@ const ReviewEnroll = ({
         </>
       ) : (
         <>
-        <span>
-          구매완료 상품명:
-          <select
-            style={{ marginLeft: "20px", width: "70%", height: "40px" }}
-            value={state.unReviewedItemId}
-            name="unReviewedItemId"
-            onChange={OnChangeField}
-          >
-            {unReviewedItems.length > 0 ? (
-              unReviewedItems.map((item, index) => (
-                <option key={index} value={item.id}>
-                  {item.name}
+          <span>
+            구매완료 상품명:
+            <select
+              style={{ marginLeft: "20px", width: "70%", height: "40px" }}
+              value={state.unReviewedItemId}
+              name="unReviewedItemId"
+              onChange={OnChangeField}
+            >
+              {unReviewedItems.length > 0 ? (
+                unReviewedItems.map((item, index) => (
+                  <option key={index} value={item.id}>
+                    {item.name}
+                  </option>
+                ))
+              ) : (
+                <option value={-1} disabled>
+                  구매완료하신 상품이 없습니다.
                 </option>
-              ))
-            ) : (
-              <option value={-1} disabled>
-                구매완료하신 상품이 없습니다.
-              </option>
-            )}
-          </select>
-        </span>
-        <span>작성자: {nickname}</span>
+              )}
+            </select>
+          </span>
+          <span>작성자: {nickname}</span>
         </>
       )}
       <input

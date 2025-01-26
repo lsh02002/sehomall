@@ -17,7 +17,7 @@ const CategoryPage = () => {
           setItems(res.data.content);
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
           if (err.response) {
             alert(err.response.data.detailMessage);
           }
@@ -29,7 +29,7 @@ const CategoryPage = () => {
           setItems(res.data.content);
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
           if (err.response) {
             alert(err.response.data.detailMessage);
           }
@@ -96,8 +96,8 @@ const Items = styled.div`
   width: 100%;
   flex-wrap: wrap;
   & > div {
-  width: 100%;
-  text-align: center;
-  margin-top: 50px;  
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
   }
 `;

@@ -18,7 +18,7 @@ const CartCard = ({ item }) => {
         setIsEditing(!isEditing);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         if (err.response) {
           alert(err.response.data.detailMessage);
         }
@@ -39,7 +39,7 @@ const CartCard = ({ item }) => {
         setIsEditing(!isEditing);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         if (err.response) {
           alert(err.response.data.detailMessage);
         }
@@ -53,7 +53,7 @@ const CartCard = ({ item }) => {
         setIsDeleting(!isDeleting);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         if (err.response) {
           alert(err.response.data.detailMessage);
         }
@@ -67,7 +67,7 @@ const CartCard = ({ item }) => {
         setIsEditing(!isEditing);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         if (err.response) {
           alert(err.response.data.detailMessage);
         }

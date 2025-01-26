@@ -23,7 +23,7 @@ const MainPage = () => {
         setNewItems(res.data.content);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
     PopularItems()
       .then((res) => {
@@ -31,7 +31,7 @@ const MainPage = () => {
         setPopularItems(res.data.content);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
     CategoryItems(cate)
       .then((res) => {
@@ -39,7 +39,7 @@ const MainPage = () => {
         setCateItems(res.data.content);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }, [cate, isHeartUpdated]);
 

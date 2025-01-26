@@ -18,7 +18,7 @@ const ReviewPage = () => {
         setReviews(res.data.content);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }, [isReviewUpdated, setIsReviewUpdated]);
 

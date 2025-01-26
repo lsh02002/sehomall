@@ -33,7 +33,7 @@ const LoginPage = () => {
         navigate("/");
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
         if (err.response) {
           setErrMessage(err.response.data.detailMessage);
         }

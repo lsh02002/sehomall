@@ -17,7 +17,7 @@ const OrderCard = ({
         setIsOrderStatusUpdated(!isOrderStatusUpdated);
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   };
 
@@ -59,13 +59,19 @@ const OrderCard = ({
         <CancelOrComplete>
           <button
             onClick={() => OnStatusUpdated("CANCELED")}
-            disabled={order.orderStatus === "COMPLETED" || order.orderStatus === "CANCELED"}
+            disabled={
+              order.orderStatus === "COMPLETED" ||
+              order.orderStatus === "CANCELED"
+            }
           >
             주문 취소
           </button>
           <button
             onClick={() => OnStatusUpdated("COMPLETED")}
-            disabled={order.orderStatus === "COMPLETED" || order.orderStatus === "CANCELED"}
+            disabled={
+              order.orderStatus === "COMPLETED" ||
+              order.orderStatus === "CANCELED"
+            }
           >
             구입 확정
           </button>
