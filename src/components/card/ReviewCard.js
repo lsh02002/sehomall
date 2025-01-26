@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import NoImage from "../../assets/no-image.jpg";
+import StarRating from "../StarRating";
 
 const ReviewCard = ({ review }) => {
   return (
@@ -19,7 +20,9 @@ const ReviewCard = ({ review }) => {
       <Content>
         <div>내용: {review.content}</div>
       </Content>
-      <RatingCount>{review.rating}</RatingCount>
+      <RatingCount>
+        <StarRating totalStars={review.rating} />
+      </RatingCount>
       <CreatedDate>{review.createAt}</CreatedDate>
     </Container>
   );
