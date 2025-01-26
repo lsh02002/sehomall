@@ -44,6 +44,9 @@ const PaymentPage = () => {
       })
       .catch((err) => {
         console.error(err);
+        if (err.response) {
+          alert(err.response.data.detailMessage);
+        }
       });
   }, []);
 
@@ -74,8 +77,11 @@ const PaymentPage = () => {
         checked: isCheckedItem,
         heartCount,
       };
-      setPayItems([]);
-      setPayItems([...payItems, detail]);
+
+      if (itemId !== null && itemCount !==null && price !== null && itemName !== null) {
+        setPayItems([]);
+        setPayItems([...payItems, detail]);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -116,7 +122,7 @@ const PaymentPage = () => {
       return { itemId: item.id, count: item.count };
     });
 
-    if(items.length<=0){
+    if (items.length <= 0) {
       alert("상품을 1개이상 선택해 주세요");
       return;
     }

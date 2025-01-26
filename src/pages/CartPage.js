@@ -4,11 +4,21 @@ import CartCard from "../components/card/CartCard";
 import styled from "styled-components";
 import { CartContext } from "../api/cartContextApi";
 import { useNavigate } from "react-router-dom";
+import { CountCartItems } from "../api/ItemApi";
 
 const CartPage = () => {
   const { totalPrice, setTotalPrice, cartItems, isEditing } =
     useContext(CartContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    CountCartItems().catch((err) => {
+      console.error(err);
+      if (err.response) {
+        alert(err.response.data.detailMessage);
+      }
+    });
+  }, []);
 
   useEffect(() => {
     let total = 0;
