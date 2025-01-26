@@ -8,6 +8,11 @@ const SearchPage = () => {
   const [searchItems, setSearchItems] = useState([]);
   
   const OnSearchKeyDown = (e) => {
+    if(e.target.value.trim() === ""){
+      setSearchItems([]);
+      return;
+    }
+    
     SearchItemsByKeyword(e.target.value)
     .then(res=>{
       console.log(res);
