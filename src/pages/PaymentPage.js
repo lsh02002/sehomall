@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/layout/Layout";
 import styled from "styled-components";
-import { EnrollPayment, FindCartItems, GetUserInfo } from "../api/ItemApi";
+import {
+  CountCartItems,
+  EnrollPayment,
+  FindCartItems,
+  GetUserInfo,
+} from "../api/ItemApi";
 import PayCard from "../components/card/PayCard";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -44,9 +49,6 @@ const PaymentPage = () => {
       })
       .catch((err) => {
         console.error(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
       });
   }, []);
 
@@ -68,6 +70,14 @@ const PaymentPage = () => {
           }
         });
     } else {
+      // 단지 로그인 했는지 체크하기 위해서서
+      CountCartItems().catch((err) => {
+        console.error(err);
+        if (err.response) {
+          alert(err.response.data.detailMessage);
+        }
+      });
+      
       const detail = {
         itemId,
         count: itemCount,
@@ -78,7 +88,12 @@ const PaymentPage = () => {
         heartCount,
       };
 
-      if (itemId !== null && itemCount !==null && price !== null && itemName !== null) {
+      if (
+        itemId !== null &&
+        itemCount !== null &&
+        price !== null &&
+        itemName !== null
+      ) {
         setPayItems([]);
         setPayItems([...payItems, detail]);
       }

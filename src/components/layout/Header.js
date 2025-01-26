@@ -33,9 +33,12 @@ const Header = () => {
   }, [setCartCount, setCartItems]);
 
   useEffect(() => {
-    findCartItemsData();
+    if (isLogin) {
+      findCartItemsData();
+    }
   }, [
     findCartItemsData,
+    isLogin,
     cartCount,
     setCartCount,
     setCartItems,
