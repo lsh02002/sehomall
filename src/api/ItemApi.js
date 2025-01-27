@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "./baseUrl";
+import { getCookie } from "./cookies";
 
 const NewItems = async () => {
   return axios.get(`${BASE_URL}/api/items?sort=createAt,DESC&size=10`);
@@ -20,22 +21,43 @@ const PopularItems = async () => {
 };
 
 const UserLogin = async (email, password) => {
-  return axios.post(`${BASE_URL}/user/login`, {
-    email,
-    password,
-  });
+  return axios.post(
+    `${BASE_URL}/user/login`,
+    {
+      email,
+      password,
+    },
+    {
+      withCredentials: true,
+    }
+  );
 };
 
 const UserSignup = async (userInfo) => {
   return axios.post(`${BASE_URL}/user/sign-up`, userInfo);
 };
 
+const UserLogout = async () => {
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
+  return axios.delete(`${BASE_URL}/user/logout`, {
+    headers: {
+      accessToken,
+      refreshToken,
+    },
+    withCredentials: "true",
+  })
+}
+
 const EnrollItem = async (formDataToSend) => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.post(`${BASE_URL}/api/items`, formDataToSend, {
     headers: {
-      Token,
+      accessToken,
+      refreshToken,
     },
+    withCredentials: "true",
   });
 };
 
@@ -48,7 +70,8 @@ const SearchItemsByKeyword = async (keyword) => {
 };
 
 const AddCart = async (itemId, count, checked) => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.post(
     `${BASE_URL}/cart`,
     {
@@ -58,27 +81,35 @@ const AddCart = async (itemId, count, checked) => {
     },
     {
       headers: {
-        Token,
+        accessToken,
+        refreshToken,
       },
+      withCredentials: "true",
     }
   );
 };
 
 const FindCartItems = async () => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.get(`${BASE_URL}/cart`, {
     headers: {
-      Token,
+      accessToken,
+      refreshToken,
     },
+    withCredentials: "true",
   });
 };
 
 const CountCartItems = async () => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.get(`${BASE_URL}/cart/count`, {
     headers: {
-      Token,
+      accessToken,
+      refreshToken,
     },
+    withCredentials: "true",
   });
 };
 
@@ -108,16 +139,20 @@ const AddToCart = (id, setCartCount) => {
 };
 
 const DelCartItem = async (id) => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.delete(`${BASE_URL}/cart/${id}`, {
     headers: {
-      Token,
+      accessToken,
+      refreshToken,
     },
+    withCredentials: "true",
   });
 };
 
 const UpdateCartItem = async (itemId, count, checked) => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.patch(
     `${BASE_URL}/cart`,
     {
@@ -127,49 +162,59 @@ const UpdateCartItem = async (itemId, count, checked) => {
     },
     {
       headers: {
-        Token,
+        accessToken,
+        refreshToken,
       },
+      withCredentials: "true",
     }
   );
 };
 
 const CountHeart = async (itemId) => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.get(`${BASE_URL}/heart/count/${itemId}`, {
     headers: {
-      Token,
+      accessToken,
+      refreshToken,
     },
+    withCredentials: "true",
   });
 };
 
 const IsHearted = async (itemId) => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.get(`${BASE_URL}/heart/is-hearted/${itemId}`, {
     headers: {
-      Token,
+      accessToken,
+      refreshToken,
     },
+    withCredentials: "true",
   });
 };
 
-const InsertHeart = async (itemId) => {
-  const Token = localStorage.getItem("token");
-  return axios.post(
-    `${BASE_URL}/heart/${itemId}`,
-    {},
-    {
-      headers: {
-        Token,
-      },
-    }
-  );
+const InsertHeart = async (itemId) => {  
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
+  return axios.post(`${BASE_URL}/heart/${itemId}`, null, {
+    headers: {
+      accessToken,
+      refreshToken,
+    },
+    withCredentials: "true",
+  });
 };
 
 const DeleteHeart = async (itemId) => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.delete(`${BASE_URL}/heart/${itemId}`, {
     headers: {
-      Token,
+      accessToken,
+      refreshToken,
     },
+    withCredentials: "true",
   });
 };
 
@@ -182,47 +227,62 @@ const GetItemReviews = async (itemId) => {
 };
 
 const EnrollReview = async (formDataToSend) => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.post(`${BASE_URL}/review`, formDataToSend, {
     headers: {
-      Token,
+      accessToken,
+      refreshToken,
     },
+    withCredentials: "true",
   });
 };
 
 const GetUserInfo = async () => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.get(`${BASE_URL}/user/info`, {
     headers: {
-      Token,
+      accessToken,
+      refreshToken,
     },
+    withCredentials: "true",
   });
 };
 
 const EnrollPayment = async (payment) => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.post(`${BASE_URL}/api/payments`, payment, {
     headers: {
-      Token,
+      accessToken,
+      refreshToken,
     },
+    withCredentials: "true",
   });
 };
 
 const GetMyReviews = async () => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.get(`${BASE_URL}/review/user`, {
     headers: {
-      Token,
+      accessToken,
+      refreshToken,
     },
+    withCredentials: "true",
   });
 };
 
 const GetMyHeartedItems = async () => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.get(`${BASE_URL}/heart/user`, {
     headers: {
-      Token,
+      accessToken,
+      refreshToken,
     },
+    withCredentials: "true",
   });
 };
 
@@ -231,29 +291,38 @@ const GetMyHeartedItems = async () => {
 // }
 
 const GetMyPayments = async () => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.get(`${BASE_URL}/api/payments/user`, {
     headers: {
-      Token,
+      accessToken,
+      refreshToken,
     },
+    withCredentials: "true",
   });
 };
 
 const ChangePaymentStatus = async (paymentId, status) => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.get(`${BASE_URL}/api/payments/status/${paymentId}/${status}`, {
     headers: {
-      Token,
+      accessToken,
+      refreshToken,
     },
+    withCredentials: "true",
   });
 };
 
 const GetUnReviewedItems = async () => {
-  const Token = localStorage.getItem("token");
+  const accessToken = getCookie("accessToken");
+  const refreshToken = getCookie("refreshToken");
   return axios.get(`${BASE_URL}/review/unreviewed-items`, {
     headers: {
-      Token,
+      accessToken,
+      refreshToken,
     },
+    withCredentials: "true",
   });
 };
 
@@ -262,6 +331,7 @@ export {
   CategoryItems,
   PopularItems,
   UserLogin,
+  UserLogout,
   UserSignup,
   EnrollItem,
   DetailItem,

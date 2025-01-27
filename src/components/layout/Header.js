@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { LoginContext } from "../../api/loginContextApi";
 import { CartContext } from "../../api/cartContextApi";
-import { FindCartItems } from "../../api/ItemApi";
+import { FindCartItems, UserLogout } from "../../api/ItemApi";
 import SimpleCartCard from "../card/SimpleCartCard";
 
 const Header = () => {
@@ -48,8 +48,10 @@ const Header = () => {
 
   const OnLogout = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("nickname");
+      UserLogout()
+      .catch(err=>{
+        console.error("logout ", err);
+      });      
       setIsLogin(false);
     }
   };

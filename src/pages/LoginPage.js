@@ -26,11 +26,9 @@ const LoginPage = () => {
 
   const OnLogin = () => {
     UserLogin(email, password)
-      .then((res) => {
-        localStorage.setItem("token", res.headers.token);
-        localStorage.setItem("nickname", res.data.data.nickname);
+      .then((res) => {        
         setIsLogin(true);
-        navigate("/");
+        navigate("/");        
       })
       .catch((err) => {
         console.error(err);

@@ -28,11 +28,7 @@ const HeartCount = ({ id, heartCount }) => {
     }
   }, [heartCount, id, isLogin]);
 
-  const OnLikeClick = () => {
-    if (!isLogin) {
-      alert("좋아요 기능은 로그인을 하셔야 합니다.");
-      return;
-    }
+  const OnLikeClick = () => {    
     if (!isHearted) {
       InsertHeart(id)
         .then((res) => {
