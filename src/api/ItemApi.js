@@ -1,6 +1,5 @@
 import axios from "axios";
 import { BASE_URL } from "./baseUrl";
-import { getCookie } from "./cookies";
 
 const NewItems = async () => {
   return axios.get(`${BASE_URL}/api/items?sort=createAt,DESC&size=10`);
@@ -38,21 +37,13 @@ const UserSignup = async (userInfo) => {
 };
 
 const UserLogout = async () => {
-  const accessToken = getCookie("accessToken");
   return axios.delete(`${BASE_URL}/user/logout`, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };
 
 const EnrollItem = async (formDataToSend) => {
-  const accessToken = getCookie("accessToken");
   return axios.post(`${BASE_URL}/api/items`, formDataToSend, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };
@@ -66,7 +57,6 @@ const SearchItemsByKeyword = async (keyword) => {
 };
 
 const AddCart = async (itemId, count, checked) => {
-  const accessToken = getCookie("accessToken");
   return axios.post(
     `${BASE_URL}/cart`,
     {
@@ -75,30 +65,19 @@ const AddCart = async (itemId, count, checked) => {
       checked,
     },
     {
-      headers: {
-        accessToken,
-      },
       withCredentials: "true",
     }
   );
 };
 
 const FindCartItems = async () => {
-  const accessToken = getCookie("accessToken");
   return axios.get(`${BASE_URL}/cart`, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };
 
 const CountCartItems = async () => {
-  const accessToken = getCookie("accessToken");
   return axios.get(`${BASE_URL}/cart/count`, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };
@@ -129,17 +108,12 @@ const AddToCart = (id, setCartCount) => {
 };
 
 const DelCartItem = async (id) => {
-  const accessToken = getCookie("accessToken");
   return axios.delete(`${BASE_URL}/cart/${id}`, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };
 
 const UpdateCartItem = async (itemId, count, checked) => {
-  const accessToken = getCookie("accessToken");
   return axios.patch(
     `${BASE_URL}/cart`,
     {
@@ -148,50 +122,31 @@ const UpdateCartItem = async (itemId, count, checked) => {
       checked,
     },
     {
-      headers: {
-        accessToken,
-      },
       withCredentials: "true",
     }
   );
 };
 
 const CountHeart = async (itemId) => {
-  const accessToken = getCookie("accessToken");
   return axios.get(`${BASE_URL}/heart/count/${itemId}`, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };
 
 const IsHearted = async (itemId) => {
-  const accessToken = getCookie("accessToken");
   return axios.get(`${BASE_URL}/heart/is-hearted/${itemId}`, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };
 
 const InsertHeart = async (itemId) => {
-  const accessToken = getCookie("accessToken");
   return axios.post(`${BASE_URL}/heart/${itemId}`, null, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };
 
 const DeleteHeart = async (itemId) => {
-  const accessToken = getCookie("accessToken");
   return axios.delete(`${BASE_URL}/heart/${itemId}`, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };
@@ -205,51 +160,31 @@ const GetItemReviews = async (itemId) => {
 };
 
 const EnrollReview = async (formDataToSend) => {
-  const accessToken = getCookie("accessToken");
   return axios.post(`${BASE_URL}/review`, formDataToSend, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };
 
 const GetUserInfo = async () => {
-  const accessToken = getCookie("accessToken");
   return axios.get(`${BASE_URL}/user/info`, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };
 
 const EnrollPayment = async (payment) => {
-  const accessToken = getCookie("accessToken");
   return axios.post(`${BASE_URL}/api/payments`, payment, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };
 
 const GetMyReviews = async () => {
-  const accessToken = getCookie("accessToken");
   return axios.get(`${BASE_URL}/review/user`, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };
 
 const GetMyHeartedItems = async () => {
-  const accessToken = getCookie("accessToken");
   return axios.get(`${BASE_URL}/heart/user`, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };
@@ -259,31 +194,19 @@ const GetMyHeartedItems = async () => {
 // }
 
 const GetMyPayments = async () => {
-  const accessToken = getCookie("accessToken");
   return axios.get(`${BASE_URL}/api/payments/user`, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };
 
 const ChangePaymentStatus = async (paymentId, status) => {
-  const accessToken = getCookie("accessToken");
   return axios.get(`${BASE_URL}/api/payments/status/${paymentId}/${status}`, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };
 
 const GetUnReviewedItems = async () => {
-  const accessToken = getCookie("accessToken");
   return axios.get(`${BASE_URL}/review/unreviewed-items`, {
-    headers: {
-      accessToken,
-    },
     withCredentials: "true",
   });
 };

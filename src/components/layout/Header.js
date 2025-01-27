@@ -50,8 +50,9 @@ const Header = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
       UserLogout()
       .catch(err=>{
-        console.error("logout ", err);
-      });      
+        console.error("logout ", err);        
+      });
+      localStorage.removeItem("nickname");
       setIsLogin(false);
     }
   };

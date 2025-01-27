@@ -6,7 +6,6 @@ import Footer from "./components/layout/Footer";
 import { lazy, Suspense, useContext, useEffect } from "react";
 import { LoginContext } from "./api/loginContextApi";
 import PageLoading from "./components/layout/PageLoading";
-import { getCookie } from "./api/cookies";
 
 const Loading = <PageLoading />;
 const About = lazy(() => import("./pages/AboutPage"));
@@ -29,9 +28,9 @@ function App() {
   const { setIsLogin } = useContext(LoginContext);
 
   useEffect(() => {
-    const accessToken = getCookie("accessToken");
+    const nickname = localStorage.getItem("nickname");
     
-    if (accessToken) {
+    if (nickname) {
       setIsLogin(true);
     } else {
       setIsLogin(false);
