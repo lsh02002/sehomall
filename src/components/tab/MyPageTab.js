@@ -19,8 +19,7 @@ const MyPageTab = ({ cate }) => {
   const [myHearts, setMyHearts] = useState([]);
   const [myOrders, setMyOrders] = useState([]);
   const [isOrderStatusUpdated, setIsOrderStatusUpdated] = useState(false);
-
-  const [nickname] = useState(localStorage.getItem("nickname"));
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -88,7 +87,7 @@ const MyPageTab = ({ cate }) => {
           className={`${cate === "MYINFO" ? "active" : ""}`}
           onClick={() => OnTabClick("MYINFO")}
         >
-          프로필 ({nickname})
+          프로필
         </li>
       </ul>
       <div className="mytabs">
