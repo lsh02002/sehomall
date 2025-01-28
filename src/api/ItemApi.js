@@ -27,7 +27,7 @@ const UserLogin = async (email, password) => {
       password,
     },
     {
-      withCredentials: true,
+      withCredentials: "true",
     }
   );
 };
@@ -211,6 +211,10 @@ const GetUnReviewedItems = async () => {
   });
 };
 
+const GetAllNotices = async () => {
+  return axios.get(`${BASE_URL}/api/notices?sort=createAt,DESC`);
+}
+
 export {
   NewItems,
   CategoryItems,
@@ -241,4 +245,5 @@ export {
   GetMyPayments,
   ChangePaymentStatus,
   GetUnReviewedItems,
+  GetAllNotices,
 };
