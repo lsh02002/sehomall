@@ -26,6 +26,9 @@ const Header = () => {
         console.log(res);
         setCartItems(res.data.cartAllSearchResponses);
         setCartCount(res.data.cartAllSearchResponses.length);
+        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+          localStorage.setItem("accessToken", res.headers?.accesstoken);
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -48,9 +51,8 @@ const Header = () => {
 
   const OnLogout = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
-      UserLogout()
-      .catch(err=>{
-        console.error("logout ", err);        
+      UserLogout().catch((err) => {
+        console.error("logout ", err);
       });
       localStorage.removeItem("nickname");
       setIsLogin(false);

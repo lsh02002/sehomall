@@ -29,8 +29,11 @@ const LoginPage = () => {
       .then((res) => {
         console.log("login ", res);
         localStorage.setItem("nickname", res.data.data.nickname);
+        localStorage.setItem("accessToken", res.headers.accesstoken);
+        localStorage.setItem("refreshToken", res.headers.refreshtoken);
+
         setIsLogin(true);
-        navigate("/");        
+        navigate("/");
       })
       .catch((err) => {
         console.error(err);

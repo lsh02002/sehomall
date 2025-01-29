@@ -12,12 +12,18 @@ const CartPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    CountCartItems().catch((err) => {
-      console.error(err);
-      if (err.response) {
-        alert(err.response.data.detailMessage);
-      }
-    });
+    CountCartItems()
+      .then((res) => {
+        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+          localStorage.setItem("accessToken", res.headers?.accesstoken);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        if (err.response) {
+          alert(err.response.data.detailMessage);
+        }
+      });
   }, []);
 
   useEffect(() => {

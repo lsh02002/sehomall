@@ -20,7 +20,7 @@ const MainPage = () => {
     NewItems()
       .then((res) => {
         console.log(res);
-        setNewItems(res.data.content);
+        setNewItems(res.data.content);        
       })
       .catch((err) => {
         console.error(err);

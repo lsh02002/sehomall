@@ -54,7 +54,7 @@ const DetailPage = () => {
       return;
     }
 
-    AddToCart(id, setCartCount);
+    AddToCart(id, setCartCount);    
   };
 
   const OnOrderClick = () => {
@@ -182,7 +182,7 @@ const CountButton = styled.span`
   button {
     display: inline-block;
     padding: 5px 10px;
-    margin: 10px;    
+    margin: 10px;
   }
 `;
 

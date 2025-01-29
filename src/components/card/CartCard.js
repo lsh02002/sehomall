@@ -16,6 +16,9 @@ const CartCard = ({ item }) => {
       .then((res) => {
         // console.log(res);
         setIsEditing(!isEditing);
+        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+          localStorage.setItem("accessToken", res.headers?.accesstoken);
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -37,6 +40,9 @@ const CartCard = ({ item }) => {
       .then((res) => {
         // console.log(res);
         setIsEditing(!isEditing);
+        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+          localStorage.setItem("accessToken", res.headers?.accesstoken);
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -51,6 +57,9 @@ const CartCard = ({ item }) => {
       .then((res) => {
         // console.log(res);
         setIsDeleting(!isDeleting);
+        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+          localStorage.setItem("accessToken", res.headers?.accesstoken);
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -65,6 +74,9 @@ const CartCard = ({ item }) => {
       .then((res) => {
         // console.log(res);
         setIsEditing(!isEditing);
+        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+          localStorage.setItem("accessToken", res.headers?.accesstoken);
+        }
       })
       .catch((err) => {
         console.error(err);

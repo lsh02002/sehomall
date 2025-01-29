@@ -46,6 +46,10 @@ const PaymentPage = () => {
       .then((res) => {
         console.log(res);
         setOrdererInfo(res.data);
+
+        if (res.headers?.accesstoken && res.headers?.accesstoken &&res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+          localStorage.setItem("accessToken", res.headers?.accesstoken);
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -62,6 +66,12 @@ const PaymentPage = () => {
               (item) => item.checked === true
             )
           );
+
+          if (
+            res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")
+          ) {
+            localStorage.setItem("accessToken", res.headers?.accesstoken);
+          }
         })
         .catch((err) => {
           console.error(err);
@@ -71,13 +81,21 @@ const PaymentPage = () => {
         });
     } else {
       // 단지 로그인 했는지 체크하기 위해서서
-      CountCartItems().catch((err) => {
-        console.error(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
-      });
-      
+      CountCartItems()
+        .then((res) => {
+          if (
+            res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")
+          ) {
+            localStorage.setItem("accessToken", res.headers?.accesstoken);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+          if (err.response) {
+            alert(err.response.data.detailMessage);
+          }
+        });
+
       const detail = {
         itemId,
         count: itemCount,
@@ -155,6 +173,10 @@ const PaymentPage = () => {
     EnrollPayment(payment)
       .then((res) => {
         console.log(res);
+
+        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+          localStorage.setItem("accessToken", res.headers?.accesstoken);
+        }
         navigate("/mypage?cate=ORDERS");
       })
       .catch((err) => {

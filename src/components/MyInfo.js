@@ -20,6 +20,10 @@ const MyInfo = () => {
       .then((res) => {
         console.log(res);
         setMyInfo(res.data);
+
+        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+          localStorage.setItem("accessToken", res.headers?.accesstoken);
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -86,7 +90,7 @@ const ItemInfo = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
-  flex-direction: column;  
+  flex-direction: column;
   padding-bottom: 20px;
   & > span {
     box-sizing: border-box;

@@ -17,7 +17,12 @@ const CardOne = ({ item }) => {
       return;
     }
 
-    AddToCart(item.id, setCartCount);
+    AddToCart(item.id, setCartCount)
+    .then((res) => {
+      if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+        localStorage.setItem("accessToken", res.headers?.accesstoken);
+      }
+    });
   };
 
   return (

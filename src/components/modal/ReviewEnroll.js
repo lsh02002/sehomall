@@ -29,6 +29,10 @@ const ReviewEnroll = ({
         setUnReviewedItems(res.data);
         /* 매우 중요!!! */
         setState({ ...state, unReviewedItemId: res.data[0].id });
+
+        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+          localStorage.setItem("accessToken", res.headers?.accesstoken);
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -64,6 +68,10 @@ const ReviewEnroll = ({
     EnrollReview(formDataToSend)
       .then((res) => {
         // console.log(res);
+
+        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+          localStorage.setItem("accessToken", res.headers?.accesstoken);
+        }
         setIsReviewUpdated(!isReviewUpdated);
         setIsReview(false);
       })
@@ -211,7 +219,7 @@ const Enroll = styled.div`
   .btn {
     padding: 10px 0;
     width: 100%;
-    margin-bottom: 5px;    
+    margin-bottom: 5px;
   }
 
   .btn span {
@@ -250,7 +258,7 @@ const Enroll = styled.div`
     display: flex;
     justify-content: space-between;
     align-item: center;
-    padding-top: 20px;    
+    padding-top: 20px;
 
     button {
       border: none;
@@ -258,7 +266,7 @@ const Enroll = styled.div`
       color: white;
       background-color: gray;
       cursor: pointer;
-      font-size: 1em;      
+      font-size: 1em;
       &:hover {
         background-color: lightgray;
       }

@@ -19,7 +19,7 @@ const MyPageTab = ({ cate }) => {
   const [myHearts, setMyHearts] = useState([]);
   const [myOrders, setMyOrders] = useState([]);
   const [isOrderStatusUpdated, setIsOrderStatusUpdated] = useState(false);
-  
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,6 +27,10 @@ const MyPageTab = ({ cate }) => {
       .then((res) => {
         console.log(res);
         setMyReviews(res.data.content);
+
+        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+          localStorage.setItem("accessToken", res.headers?.accesstoken);
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -41,6 +45,10 @@ const MyPageTab = ({ cate }) => {
       .then((res) => {
         console.log(res);
         setMyHearts(res.data.content);
+
+        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+          localStorage.setItem("accessToken", res.headers?.accesstoken);
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -52,6 +60,10 @@ const MyPageTab = ({ cate }) => {
       .then((res) => {
         console.log(res);
         setMyOrders(res.data.content);
+
+        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+          localStorage.setItem("accessToken", res.headers?.accesstoken);
+        }
       })
       .catch((err) => {
         console.error(err);

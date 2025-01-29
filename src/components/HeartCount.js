@@ -18,6 +18,12 @@ const HeartCount = ({ id, heartCount }) => {
           // console.log(res);
           setIsHearted(res.data);
           setCountHeart(heartCount);
+
+          if (
+            res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")
+          ) {
+            localStorage.setItem("accessToken", res.headers?.accesstoken);
+          }
         })
         .catch((err) => {
           console.error(err);
@@ -28,7 +34,7 @@ const HeartCount = ({ id, heartCount }) => {
     }
   }, [heartCount, id, isLogin]);
 
-  const OnLikeClick = () => {    
+  const OnLikeClick = () => {
     if (!isHearted) {
       InsertHeart(id)
         .then((res) => {
@@ -36,6 +42,12 @@ const HeartCount = ({ id, heartCount }) => {
           setIsHearted(true);
           setCountHeart(countHeart + 1);
           setIsHeartUpdated(!isHeartUpdated);
+
+          if (
+            res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")
+          ) {
+            localStorage.setItem("accessToken", res.headers?.accesstoken);
+          }
         })
         .catch((err) => {
           console.error(err);
@@ -50,6 +62,12 @@ const HeartCount = ({ id, heartCount }) => {
           setIsHearted(false);
           setCountHeart(countHeart - 1);
           setIsHeartUpdated(!isHeartUpdated);
+
+          if (
+            res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")
+          ) {
+            localStorage.setItem("accessToken", res.headers?.accesstoken);
+          }
         })
         .catch((err) => {
           console.error(err);
@@ -69,7 +87,7 @@ const HeartCount = ({ id, heartCount }) => {
           <img src={LikeSolid} alt="" />
         )}
       </HeartImage>
-      <span>{countHeart}</span>      
+      <span>{countHeart}</span>
     </Container>
   );
 };
