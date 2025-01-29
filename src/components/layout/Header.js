@@ -26,7 +26,10 @@ const Header = () => {
         console.log(res);
         setCartItems(res.data.cartAllSearchResponses);
         setCartCount(res.data.cartAllSearchResponses.length);
-        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+        if (
+          res.headers?.accesstoken &&
+          res.headers?.accesstoken !== localStorage.getItem("accessToken")
+        ) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);
         }
       })
@@ -55,6 +58,8 @@ const Header = () => {
         console.error("logout ", err);
       });
       localStorage.removeItem("nickname");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
       setIsLogin(false);
     }
   };

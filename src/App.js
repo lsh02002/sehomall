@@ -28,9 +28,9 @@ function App() {
   const { setIsLogin } = useContext(LoginContext);
 
   useEffect(() => {
-    const nickname = localStorage.getItem("nickname");
+    const accessToken = localStorage.getItem("accessToken");
     
-    if (nickname) {
+    if (accessToken) {
       setIsLogin(true);
     } else {
       setIsLogin(false);
