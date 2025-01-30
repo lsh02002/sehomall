@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-function Paging({to, total, size, page }) {
+function Paging({ to, total, size, page }) {
   const numPages = Math.ceil(total / size);
   const navigate = useNavigate();
 
@@ -42,22 +42,23 @@ const Nav = styled.nav`
   justify-content: center;
   align-items: center;
   gap: 4px;
-  margin: 16px;  
+  margin: 16px;
 `;
 
 const Button = styled.button`
-  border: none;  
+  border: none;
   padding: 8px;
-  margin: 0;  
+  margin: 0;
   color: white;
   font-size: 1rem;
+  background: gray;
 
   &:hover {
-    background: tomato;
-    cursor: pointer;    
+    background: lightgray;
+    cursor: pointer;
   }
 
-  &[disabled] {    
+  &[disabled] {
     cursor: revert;
     // transform: revert;
   }
@@ -67,5 +68,9 @@ const Button = styled.button`
     font-weight: bold;
     cursor: revert;
     // transform: revert;
+  }
+  
+  &[aria-current]:hover {
+    background: lightgray;
   }
 `;

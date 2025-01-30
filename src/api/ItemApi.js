@@ -204,7 +204,9 @@ const DeleteHeart = async (itemId) => {
 };
 
 const GetAllReviews = async (page, size) => {
-  return axios.get(`${BASE_URL}/review?sort=createAt,DESC&page=${page-1}&size=${size}`);
+  return axios.get(
+    `${BASE_URL}/review?sort=createAt,DESC&page=${page - 1}&size=${size}`
+  );
 };
 
 const GetItemReviews = async (itemId) => {
@@ -303,8 +305,10 @@ const GetUnReviewedItems = async () => {
   });
 };
 
-const GetAllNotices = async () => {
-  return axios.get(`${BASE_URL}/api/notices?sort=createAt,DESC`);
+const GetAllNotices = async (page, size) => {
+  return axios.get(
+    `${BASE_URL}/api/notices?sort=createAt,DESC&page=${page - 1}&size=${size}`
+  );
 };
 
 export {

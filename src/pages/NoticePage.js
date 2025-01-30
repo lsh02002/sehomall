@@ -2,22 +2,33 @@ import React, { useEffect, useMemo, useState } from "react";
 import Layout from "../components/layout/Layout";
 import styled from "styled-components";
 import NoticeTable from "../components/NoticeTable";
-import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { GetAllNotices } from "../api/ItemApi";
+import Paging from "../components/pagination/Paging";
 
 const NoticePage = () => {
   const [notices, setNotices] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  const [searchParams] = useSearchParams();
+  const page = searchParams.get("page")
+    ? parseInt(searchParams.get("page"))
+    : 1;
+  const size = searchParams.get("size")
+    ? parseInt(searchParams.get("size"))
+    : 5;
 
   useEffect(() => {
-    GetAllNotices()
+    GetAllNotices(page, size)
       .then((res) => {
         console.log(res);
         setNotices(res.data.content);
+        setTotal(res.data.totalElements);
       })
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }, [page, size]);
 
   const columns = useMemo(
     () => [
@@ -49,7 +60,7 @@ const NoticePage = () => {
     () =>
       notices.map((notice) => ({
         no: notice.id,
-        title: <Link>{notice.title}</Link>,
+        title: notice.title,
         content: notice.content,
         nickname: notice.nickname,
         date: notice.modifyAt,
@@ -62,6 +73,7 @@ const NoticePage = () => {
       <Container>
         <h1>공지사항</h1>
         <NoticeTable columns={columns} data={data} />
+        <Paging to={"/notice"} total={total} size={size} page={page} />
       </Container>
     </Layout>
   );
@@ -71,5 +83,5 @@ export default NoticePage;
 
 const Container = styled.div`
   margin-top: 50px;
-  text-align: center;  
+  text-align: center;
 `;

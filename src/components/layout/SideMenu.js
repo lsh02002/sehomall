@@ -16,7 +16,7 @@ const SideMenu = () => {
       <CatLink to={"/cat/ACCESSORIES"}>ACCESSORIES</CatLink>
       <CatLink to={"/cat/SCARVES"}>SCARVES</CatLink>
       <CatLink to={"/about"}>ABOUT</CatLink>
-      <CatLink to={"/notice"}>NOTICE</CatLink>
+      <CatLink to={"/notice?page=1&size=5"}>NOTICE</CatLink>
       <CatLink to={"/contact"}>CONTACT</CatLink>      
       <CatLink to={"/instagram"}>INSTAGRAM</CatLink>
     </Container>
