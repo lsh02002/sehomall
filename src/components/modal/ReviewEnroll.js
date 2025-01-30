@@ -30,7 +30,7 @@ const ReviewEnroll = ({
         /* 매우 중요!!! */
         setState({ ...state, unReviewedItemId: res.data[0].id });
 
-        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+        if (res.headers?.accesstoken) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);
         }
       })
@@ -69,7 +69,7 @@ const ReviewEnroll = ({
       .then((res) => {
         // console.log(res);
 
-        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+        if (res.headers?.accesstoken) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);
         }
         setIsReviewUpdated(!isReviewUpdated);

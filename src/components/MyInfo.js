@@ -21,7 +21,7 @@ const MyInfo = () => {
         console.log(res);
         setMyInfo(res.data);
 
-        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+        if (res.headers?.accesstoken) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);
         }
       })

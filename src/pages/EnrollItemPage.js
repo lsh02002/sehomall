@@ -57,7 +57,7 @@ const EnrollItemPage = () => {
     EnrollItem(formDataToSend)
       .then((res) => {
         // console.log(res);
-        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+        if (res.headers?.accesstoken) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);
         }
         navigate("/");

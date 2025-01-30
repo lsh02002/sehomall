@@ -47,7 +47,7 @@ const PaymentPage = () => {
         console.log(res);
         setOrdererInfo(res.data);
 
-        if (res.headers?.accesstoken && res.headers?.accesstoken &&res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+        if (res.headers?.accesstoken) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);
         }
       })
@@ -67,9 +67,7 @@ const PaymentPage = () => {
             )
           );
 
-          if (
-            res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")
-          ) {
+          if (res.headers?.accesstoken) {
             localStorage.setItem("accessToken", res.headers?.accesstoken);
           }
         })
@@ -83,9 +81,7 @@ const PaymentPage = () => {
       // 단지 로그인 했는지 체크하기 위해서서
       CountCartItems()
         .then((res) => {
-          if (
-            res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")
-          ) {
+          if (res.headers?.accesstoken) {
             localStorage.setItem("accessToken", res.headers?.accesstoken);
           }
         })
@@ -174,7 +170,7 @@ const PaymentPage = () => {
       .then((res) => {
         console.log(res);
 
-        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+        if (res.headers?.accesstoken) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);
         }
         navigate("/mypage?cate=ORDERS");

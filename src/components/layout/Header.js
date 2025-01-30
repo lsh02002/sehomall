@@ -26,10 +26,8 @@ const Header = () => {
         console.log(res);
         setCartItems(res.data.cartAllSearchResponses);
         setCartCount(res.data.cartAllSearchResponses.length);
-        if (
-          res.headers?.accesstoken &&
-          res.headers?.accesstoken !== localStorage.getItem("accessToken")
-        ) {
+        
+        if (res.headers?.accesstoken) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);
         }
       })

@@ -28,7 +28,7 @@ const MyPageTab = ({ cate }) => {
         console.log(res);
         setMyReviews(res.data.content);
 
-        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+        if (res.headers?.accesstoken) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);
         }
       })
@@ -46,7 +46,7 @@ const MyPageTab = ({ cate }) => {
         console.log(res);
         setMyHearts(res.data.content);
 
-        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+        if (res.headers?.accesstoken) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);
         }
       })
@@ -61,7 +61,7 @@ const MyPageTab = ({ cate }) => {
         console.log(res);
         setMyOrders(res.data.content);
 
-        if (res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")) {
+        if (res.headers?.accesstoken) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);
         }
       })

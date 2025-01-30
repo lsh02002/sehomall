@@ -19,9 +19,7 @@ const HeartCount = ({ id, heartCount }) => {
           setIsHearted(res.data);
           setCountHeart(heartCount);
 
-          if (
-            res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")
-          ) {
+          if (res.headers?.accesstoken) {
             localStorage.setItem("accessToken", res.headers?.accesstoken);
           }
         })
@@ -43,9 +41,7 @@ const HeartCount = ({ id, heartCount }) => {
           setCountHeart(countHeart + 1);
           setIsHeartUpdated(!isHeartUpdated);
 
-          if (
-            res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")
-          ) {
+          if (res.headers?.accesstoken) {
             localStorage.setItem("accessToken", res.headers?.accesstoken);
           }
         })
@@ -63,9 +59,7 @@ const HeartCount = ({ id, heartCount }) => {
           setCountHeart(countHeart - 1);
           setIsHeartUpdated(!isHeartUpdated);
 
-          if (
-            res.headers?.accesstoken && res.headers?.accesstoken !== localStorage.getItem("accessToken")
-          ) {
+          if (res.headers?.accesstoken) {
             localStorage.setItem("accessToken", res.headers?.accesstoken);
           }
         })
