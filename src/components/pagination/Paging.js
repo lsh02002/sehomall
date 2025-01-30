@@ -46,8 +46,7 @@ const Nav = styled.nav`
 `;
 
 const Button = styled.button`
-  border: none;
-  border-radius: 8px;  
+  border: none;  
   padding: 8px;
   margin: 0;  
   color: white;
