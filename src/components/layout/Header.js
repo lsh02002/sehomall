@@ -80,7 +80,7 @@ const Header = () => {
           <>
             <Link to="/enroll">ENROLL</Link>
             <Link onClick={OnLogout}>LOGOUT</Link>
-            <Link to="/mypage?cate=REVIEWS">MYPAGE</Link>
+            <Link to="/mypage/REVIEWS?page=1&size=5">MYPAGE</Link>
             <Link
               to="/cart"
               onMouseEnter={() => setIsModal(true)}

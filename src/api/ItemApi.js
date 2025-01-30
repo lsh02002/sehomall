@@ -246,10 +246,10 @@ const EnrollPayment = async (payment) => {
   });
 };
 
-const GetMyReviews = async () => {
+const GetMyReviews = async (page, size) => {
   const accessToken = localStorage.getItem("accessToken");
   const refreshToken = localStorage.getItem("refreshToken");
-  return axios.get(`${BASE_URL}/review/user`, {
+  return axios.get(`${BASE_URL}/review/user?sort=createAt,DESC&page=${page - 1}&size=${size}`, {
     headers: {
       accessToken,
       refreshToken,
@@ -257,10 +257,10 @@ const GetMyReviews = async () => {
   });
 };
 
-const GetMyHeartedItems = async () => {
+const GetMyHeartedItems = async (page, size) => {
   const accessToken = localStorage.getItem("accessToken");
   const refreshToken = localStorage.getItem("refreshToken");
-  return axios.get(`${BASE_URL}/heart/user`, {
+  return axios.get(`${BASE_URL}/heart/user?page=${page - 1}&size=${size}`, {
     headers: {
       accessToken,
       refreshToken,
@@ -272,10 +272,10 @@ const GetMyHeartedItems = async () => {
 //   const Token = localStorage.getItem("token");
 // }
 
-const GetMyPayments = async () => {
+const GetMyPayments = async (page, size) => {
   const accessToken = localStorage.getItem("accessToken");
   const refreshToken = localStorage.getItem("refreshToken");
-  return axios.get(`${BASE_URL}/api/payments/user`, {
+  return axios.get(`${BASE_URL}/api/payments/user?sort=createAt,DESC&page=${page - 1}&size=${size}`, {
     headers: {
       accessToken,
       refreshToken,

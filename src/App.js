@@ -107,7 +107,7 @@ function App() {
             }
           />
           <Route
-            path="/mypage"
+            path="/mypage/:cate"
             element={
               <Suspense fallback={Loading}>
                 <MyPage />

@@ -2,16 +2,15 @@ import React from "react";
 import Layout from "../components/layout/Layout";
 import styled from "styled-components";
 import MyPageTab from "../components/tab/MyPageTab";
-import { useSearchParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const MyPage = () => {
   //   const [myOrderItems, setMyOrderItems] = useState([]);
-  const [searchParams] = useSearchParams();
-  const cate = searchParams.get("cate");
-
+  const { cate } = useParams();
+  
   return (
     <Layout>
-      <Container>
+      <Container>        
         <MyPageTab cate={cate} />
       </Container>
     </Layout>

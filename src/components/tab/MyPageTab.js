@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ReviewCard from "../card/ReviewCard";
 import CardOne from "../card/CardOne";
 import MyInfo from "../MyInfo";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import OrderCard from "../card/OrderCard";
 import {
   GetMyHeartedItems,
@@ -11,9 +11,21 @@ import {
   GetMyReviews,
 } from "../../api/ItemApi";
 import { LoginContext } from "../../api/loginContextApi";
+import Paging from "../pagination/Paging";
 
 const MyPageTab = ({ cate }) => {
   const { isHeartUpdated } = useContext(LoginContext);
+
+  const [searchParams] = useSearchParams();
+  const page = searchParams.get("page")
+    ? parseInt(searchParams.get("page"))
+    : 1;
+  const size = searchParams.get("size")
+    ? parseInt(searchParams.get("size"))
+    : 5;
+  const [reviewTotal, setReviewTotal] = useState(0);
+  const [heartTotal, setHeartTotal] = useState(0);
+  const [orderTotal, setOrderTotal] = useState(0);
 
   const [myReviews, setMyReviews] = useState([]);
   const [myHearts, setMyHearts] = useState([]);
@@ -23,10 +35,11 @@ const MyPageTab = ({ cate }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    GetMyReviews()
+    GetMyReviews(page, size)
       .then((res) => {
         console.log(res);
         setMyReviews(res.data.content);
+        setReviewTotal(res.data.totalElements);
 
         if (res.headers?.accesstoken) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);
@@ -38,13 +51,14 @@ const MyPageTab = ({ cate }) => {
           alert(err.response.data.detailMessage);
         }
       });
-  }, []);
+  }, [page, size]);
 
   useEffect(() => {
-    GetMyHeartedItems()
+    GetMyHeartedItems(page, size)
       .then((res) => {
         console.log(res);
         setMyHearts(res.data.content);
+        setHeartTotal(res.data.totalElements);
 
         if (res.headers?.accesstoken) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);
@@ -53,13 +67,14 @@ const MyPageTab = ({ cate }) => {
       .catch((err) => {
         console.error(err);
       });
-  }, [isHeartUpdated]);
+  }, [isHeartUpdated, page, size]);
 
   useEffect(() => {
-    GetMyPayments()
+    GetMyPayments(page, size)
       .then((res) => {
         console.log(res);
         setMyOrders(res.data.content);
+        setOrderTotal(res.data.totalElements);
 
         if (res.headers?.accesstoken) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);
@@ -68,11 +83,15 @@ const MyPageTab = ({ cate }) => {
       .catch((err) => {
         console.error(err);
       });
-  }, [isOrderStatusUpdated, setIsOrderStatusUpdated]);
+  }, [isOrderStatusUpdated, setIsOrderStatusUpdated, size, page]);
 
   const OnTabClick = (cat) => {
-    navigate(`/mypage?cate=${cat}`);
+    navigate(`/mypage/${cat}?page=${page}&size=${size}`);
   };
+
+  const OnMyInfoTabClick = (cat) => {
+    navigate(`/mypage/${cat}`);
+  }
 
   return (
     <TabInner>
@@ -81,23 +100,23 @@ const MyPageTab = ({ cate }) => {
           className={`${cate === "REVIEWS" ? "active" : ""}`}
           onClick={() => OnTabClick("REVIEWS")}
         >
-          나의 리뷰 ({myReviews?.length})
+          나의 리뷰 ({reviewTotal})
         </li>
         <li
           className={`${cate === "HEARTS" ? "active" : ""}`}
           onClick={() => OnTabClick("HEARTS")}
         >
-          내가 찜한 상품 ({myHearts?.length})
+          내가 찜한 상품 ({heartTotal})
         </li>
         <li
           className={`${cate === "ORDERS" ? "active" : ""}`}
           onClick={() => OnTabClick("ORDERS")}
         >
-          주문 내역 ({myOrders.length})
+          주문 내역 ({orderTotal})
         </li>
         <li
           className={`${cate === "MYINFO" ? "active" : ""}`}
-          onClick={() => OnTabClick("MYINFO")}
+          onClick={() => OnMyInfoTabClick("MYINFO")}
         >
           프로필
         </li>
@@ -113,6 +132,12 @@ const MyPageTab = ({ cate }) => {
               ) : (
                 <div>내가 작성한 후기가 없습니다.</div>
               )}
+              <Paging
+                to={`/mypage/REVIEWS`}
+                total={reviewTotal}
+                size={size}
+                page={page}
+              />
             </Content>
           </div>
         )}
@@ -126,6 +151,12 @@ const MyPageTab = ({ cate }) => {
               ) : (
                 <div>찜한 상품이 없습니다.</div>
               )}
+              <Paging
+                to={`/mypage/HEARTS`}
+                total={heartTotal}
+                size={size}
+                page={page}
+              />
             </Content>
           </div>
         )}
@@ -144,6 +175,12 @@ const MyPageTab = ({ cate }) => {
               ) : (
                 <div>주문내역이 없습니다.</div>
               )}
+              <Paging
+                to={`/mypage/ORDERS`}
+                total={orderTotal}
+                size={size}
+                page={page}
+              />
             </Content>
           </div>
         )}
