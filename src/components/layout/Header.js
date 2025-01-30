@@ -70,7 +70,7 @@ const Header = () => {
     <Container>
       <Menu>
         <Link to="/search">ITEMS-SEARCH</Link>
-        <Link to="/reviews">REVIEWS</Link>
+        <Link to="/reviews?page=1&size=5">REVIEWS</Link>
         {!isLogin ? (
           <>
             <Link to="/signup">SIGNUP</Link>

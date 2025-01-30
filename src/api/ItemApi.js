@@ -203,8 +203,8 @@ const DeleteHeart = async (itemId) => {
   });
 };
 
-const GetAllReviews = async () => {
-  return axios.get(`${BASE_URL}/review?sort=createAt,DESC`);
+const GetAllReviews = async (page, size) => {
+  return axios.get(`${BASE_URL}/review?sort=createAt,DESC&page=${page-1}&size=${size}`);
 };
 
 const GetItemReviews = async (itemId) => {
