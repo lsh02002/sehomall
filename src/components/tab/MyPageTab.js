@@ -93,8 +93,8 @@ export default MyPageTab;
 
 const TabInner = styled.div`
   margin-top: 30px;
-  width: 100%;
-  max-width: 1400px;
+  width: 100vw;
+  max-width: 870px;
   height: 900px;  
 
   .mybtn {
