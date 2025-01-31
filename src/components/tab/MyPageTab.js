@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import MyInfo from "../MyInfo";
+import MyInfo from "./MyInfo";
 import { useNavigate } from "react-router-dom";
 import MyReview from "./MyReview";
 import MyHeart from "./MyHeart";
@@ -12,7 +12,7 @@ const MyPageTab = ({ cate }) => {
   const navigate = useNavigate();
 
   const OnReviewTabClick = (cat, page) => {
-    navigate(`/mypage/${cat}?page=${page}&size=5`);
+    navigate(`/mypage/${cat}?page=${page}&size=4`);
   };
 
   const OnHeartTabClick = (cat, page) => {

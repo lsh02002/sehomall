@@ -75,6 +75,7 @@ const EnrollItemPage = () => {
       <Main>
         <EnrollInner>
           <Title>상품 등록</Title>
+          <span>(포트폴리오 참고용으로 노출함, 관리자 등급만 등록 가능)</span>
           <CategorySelect>
             <div>카테고리</div>
             <select value={state.icat} name="icat" onChange={OnFieldChange}>
@@ -187,11 +188,18 @@ const EnrollInner = styled.div`
   margin: 0 150px;
   border: 1px solid lightgray;
   margin-top: 50px;
+  span {
+    font-size: 16px;
+    display: inline-block;
+    width: 100%;
+    margin: 20px;
+    margin-left: 70px;
+  }
 `;
 
 const Title = styled.h2`
   font-weight: normal;
-  margin: 5px;
+  margin: 5px;  
 `;
 
 const CategorySelect = styled.div`

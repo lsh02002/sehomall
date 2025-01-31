@@ -71,16 +71,16 @@ const Header = () => {
       <Menu>
         <Link to="/search">ITEMS-SEARCH</Link>
         <Link to="/reviews?page=1&size=5">REVIEWS</Link>
+        <Link to="/enroll">ENROLL</Link>
         {!isLogin ? (
           <>
             <Link to="/signup">SIGNUP</Link>
             <Link to="/login">LOGIN</Link>
           </>
         ) : (
-          <>
-            <Link to="/enroll">ENROLL</Link>
+          <>            
             <Link onClick={OnLogout}>LOGOUT</Link>
-            <Link to="/mypage/REVIEWS?page=1&size=5">MYPAGE</Link>
+            <Link to="/mypage/REVIEWS?page=1&size=4">MYPAGE</Link>
             <Link
               to="/cart"
               onMouseEnter={() => setIsModal(true)}

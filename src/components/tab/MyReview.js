@@ -16,7 +16,7 @@ const MyReview = () => {
     : 1;
   const size = searchParams.get("size")
     ? parseInt(searchParams.get("size"))
-    : 5;
+    : 4;
 
   useEffect(() => {
     setReviewPage(page);
