@@ -54,7 +54,7 @@ const SignupPage = () => {
     <Layout>
       <Main>
         <Title>SIGNUP</Title>
-        <Warning>연습사이트이니 중요정보(실제 정보) 넣지 마십시오</Warning>
+        <Warning>https로 바꿔서 정보가 전부 암호화되기 때문에 다소 안전해졌습니다 그래도 중요정보는 넣지 말아주세요</Warning>
         <Email>
           <div>이메일</div>
           <input
@@ -283,9 +283,8 @@ const SignUp = styled.button`
 `;
 
 const Warning = styled.span`
-  width: 100%;
-  color: white;
-  background-color: red;
+  width: 100%;  
+  background-color: lightgray;
   margin: 15px 0;
   font-size: 0.9em;
   padding: 5px;
