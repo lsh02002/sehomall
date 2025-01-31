@@ -206,8 +206,7 @@ const CategorySelect = styled.div`
   width: 90%;
   overflow: hidden;
   div {
-    font-size: 14px;
-    padding-left: 10px;
+    font-size: 14px;    
   }
   select {
     width: 100%;
@@ -222,8 +221,7 @@ const Text = styled.div`
   width: 90%;
   overflow: hidden;
   div {
-    font-size: 14px;
-    padding-left: 10px;
+    font-size: 14px;    
   }
   input[type="text"],
   input[type="number"],
