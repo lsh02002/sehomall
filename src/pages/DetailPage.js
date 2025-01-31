@@ -255,12 +255,5 @@ const ReviewBody = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  max-width: 870px;
-  & > div {
-    border-bottom: 1px solid lightgray;
-  }
-
-  & > div:last-child {
-    border-bottom: none;
-  }
+  max-width: 870px;  
 `;

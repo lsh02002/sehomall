@@ -12,8 +12,12 @@ const ReviewPage = () => {
   const [total, setTotal] = useState(0);
 
   const [searchParams] = useSearchParams();
-  const page = searchParams.get("page") ? parseInt(searchParams.get("page")) : 1;
-  const size = searchParams.get("size") ? parseInt(searchParams.get("size")) : 5;
+  const page = searchParams.get("page")
+    ? parseInt(searchParams.get("page"))
+    : 1;
+  const size = searchParams.get("size")
+    ? parseInt(searchParams.get("size"))
+    : 5;
 
   const [isReview, setIsReview] = useState(false);
   const [isReviewUpdated, setIsReviewUpdated] = useState(false);
@@ -92,14 +96,7 @@ const Container = styled.div`
   }
 `;
 
-const ReviewBody = styled.div`
-  & > div {
-    border-bottom: 1px solid lightgray;
-  }
-
-  & > div:last-child {
-    border-bottom: none;
-  }
+const ReviewBody = styled.div`  
 `;
 
 const Review = styled.div`

@@ -18,7 +18,7 @@ const MyHeart = () => {
     : 1;
   const size = searchParams.get("size")
     ? parseInt(searchParams.get("size"))
-    : 5;
+    : 6;
 
     useEffect(()=>{
         setHeartPage(page);

@@ -17,7 +17,7 @@ const MyOrder = () => {
     : 1;
   const size = searchParams.get("size")
     ? parseInt(searchParams.get("size"))
-    : 5;
+    : 3;
 
   useEffect(() => {
     setOrderPage(page);

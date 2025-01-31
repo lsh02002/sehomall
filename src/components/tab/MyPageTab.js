@@ -11,8 +11,20 @@ const MyPageTab = ({ cate }) => {
   const { reviewPage, heartPage, orderPage } = useContext(MyPageTabContext);
   const navigate = useNavigate();
 
-  const OnTabClick = (cat, page) => {
+  const OnReviewTabClick = (cat, page) => {
     navigate(`/mypage/${cat}?page=${page}&size=5`);
+  };
+
+  const OnHeartTabClick = (cat, page) => {
+    navigate(`/mypage/${cat}?page=${page}&size=6`);
+  };
+
+  const OnOrderTabClick = (cat, page) => {
+    navigate(`/mypage/${cat}?page=${page}&size=3`);
+  };
+
+  const OnInfoTabClick = (cat) => {
+    navigate(`/mypage/${cat}`);
   };
 
   return (
@@ -20,25 +32,25 @@ const MyPageTab = ({ cate }) => {
       <ul className="mybtn">
         <li
           className={`${cate === "REVIEWS" ? "active" : ""}`}
-          onClick={() => OnTabClick("REVIEWS", reviewPage)}
+          onClick={() => OnReviewTabClick("REVIEWS", reviewPage)}
         >
           나의 리뷰
         </li>
         <li
           className={`${cate === "HEARTS" ? "active" : ""}`}
-          onClick={() => OnTabClick("HEARTS", heartPage)}
+          onClick={() => OnHeartTabClick("HEARTS", heartPage)}
         >
           내가 찜한 상품
         </li>
         <li
           className={`${cate === "ORDERS" ? "active" : ""}`}
-          onClick={() => OnTabClick("ORDERS", orderPage)}
+          onClick={() => OnOrderTabClick("ORDERS", orderPage)}
         >
           주문 내역
         </li>
         <li
           className={`${cate === "MYINFO" ? "active" : ""}`}
-          onClick={() => OnTabClick("MYINFO")}
+          onClick={() => OnInfoTabClick("MYINFO")}
         >
           프로필
         </li>
@@ -83,6 +95,7 @@ const TabInner = styled.div`
   margin-top: 30px;
   width: 100%;
   max-width: 1400px;
+  height: 900px;  
 
   .mybtn {
     list-style: none;
