@@ -26,7 +26,7 @@ const Header = () => {
         console.log(res);
         setCartItems(res.data.cartAllSearchResponses);
         setCartCount(res.data.cartAllSearchResponses.length);
-        
+
         if (res.headers?.accesstoken) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);
         }
@@ -58,6 +58,8 @@ const Header = () => {
       localStorage.removeItem("nickname");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
+      setCartCount(0);
+      setCartItems([]);
       setIsLogin(false);
     }
   };
@@ -72,39 +74,42 @@ const Header = () => {
         <Link to="/search">ITEMS-SEARCH</Link>
         <Link to="/reviews?page=1&size=5">REVIEWS</Link>
         <Link to="/enroll">ENROLL</Link>
-        <Link to="/mypage/REVIEWS?page=1&size=4">MYPAGE</Link>
         {!isLogin ? (
           <>
             <Link to="/signup">SIGNUP</Link>
             <Link to="/login">LOGIN</Link>
           </>
         ) : (
-          <>            
-            <Link onClick={OnLogout}>LOGOUT</Link>            
-            <Link
-              to="/cart"
+          <>
+            <Link onClick={OnLogout}>LOGOUT</Link>
+          </>
+        )}
+        <>
+          <Link to="/mypage/REVIEWS?page=1&size=4">MYPAGE</Link>
+          <Link to="/pay">PAY</Link>
+          <Link
+            to="/cart"
+            onMouseEnter={() => setIsModal(true)}
+            onMouseLeave={() => setIsModal(false)}
+          >
+            CART<span>{cartCount}</span>
+          </Link>
+          {isModal && (
+            <Modal
               onMouseEnter={() => setIsModal(true)}
               onMouseLeave={() => setIsModal(false)}
             >
-              CART<span>{cartCount}</span>
-            </Link>
-            {isModal && (
-              <Modal
-                onMouseEnter={() => setIsModal(true)}
-                onMouseLeave={() => setIsModal(false)}
-              >
-                {cartItems.length > 0 ? (
-                  cartItems.map((item, index) => (
-                    <SimpleCartCard key={index} item={item} />
-                  ))
-                ) : (
-                  <div>카트가 비어있습니다.</div>
-                )}
-                <button onClick={OnMoveToCart}>카트로 이동</button>
-              </Modal>
-            )}
-          </>
-        )}
+              {cartItems.length > 0 ? (
+                cartItems.map((item, index) => (
+                  <SimpleCartCard key={index} item={item} />
+                ))
+              ) : (
+                <div>카트가 비어있습니다.</div>
+              )}
+              <button onClick={OnMoveToCart}>카트로 이동</button>
+            </Modal>
+          )}
+        </>
       </Menu>
     </Container>
   );
@@ -129,7 +134,7 @@ const Menu = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 500px;
+  width: 600px;
   font-size: 14px;
   background-color: rgba(255, 255, 255, 0.65);
   a {
