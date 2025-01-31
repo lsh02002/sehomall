@@ -72,6 +72,7 @@ const Header = () => {
         <Link to="/search">ITEMS-SEARCH</Link>
         <Link to="/reviews?page=1&size=5">REVIEWS</Link>
         <Link to="/enroll">ENROLL</Link>
+        <Link to="/mypage/REVIEWS?page=1&size=4">MYPAGE</Link>
         {!isLogin ? (
           <>
             <Link to="/signup">SIGNUP</Link>
@@ -79,8 +80,7 @@ const Header = () => {
           </>
         ) : (
           <>            
-            <Link onClick={OnLogout}>LOGOUT</Link>
-            <Link to="/mypage/REVIEWS?page=1&size=4">MYPAGE</Link>
+            <Link onClick={OnLogout}>LOGOUT</Link>            
             <Link
               to="/cart"
               onMouseEnter={() => setIsModal(true)}
