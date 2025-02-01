@@ -3,10 +3,12 @@ import styled from "styled-components";
 import { UserLogin } from "../api/ItemApi";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../api/loginContextApi";
+import { MyPageTabContext } from "../api/myPageTabContextApi";
 import Layout from "../components/layout/Layout";
 
 const LoginPage = () => {
   const { setIsLogin } = useContext(LoginContext);
+  const { setReviewPage, setHeartPage, setOrderPage } = useContext(MyPageTabContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,6 +33,10 @@ const LoginPage = () => {
         localStorage.setItem("nickname", res.data.data.nickname);
         localStorage.setItem("accessToken", res.headers.accesstoken);
         localStorage.setItem("refreshToken", res.headers.refreshtoken);
+
+        setReviewPage(1);
+        setHeartPage(1);
+        setOrderPage(1);
 
         setIsLogin(true);
         navigate("/");
