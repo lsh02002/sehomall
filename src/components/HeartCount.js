@@ -24,7 +24,7 @@ const HeartCount = ({ id, heartCount }) => {
           }
         })
         .catch((err) => {
-          console.error(err);
+          // console.error(err);
         });
     } else {
       setIsHearted(false);
