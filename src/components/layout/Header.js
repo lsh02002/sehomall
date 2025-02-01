@@ -86,7 +86,7 @@ const Header = () => {
         )}
         <>
           <Link to="/mypage/REVIEWS?page=1&size=4">MYPAGE</Link>
-          <Link to="/pay">PAY</Link>
+          {/* <Link to="/pay">PAY</Link> */}
           <Link
             to="/cart"
             onMouseEnter={() => setIsModal(true)}
