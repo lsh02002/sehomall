@@ -139,8 +139,7 @@ function App() {
             }
           />
           <Route
-            path="/search"
-            fallback={Loading}
+            path="/search"            
             element={
               <Suspense fallback={Loading}>
                 <Search />
@@ -148,8 +147,7 @@ function App() {
             }
           />
           <Route
-            path="/reviews"
-            fallback={Loading}
+            path="/reviews"            
             element={
               <Suspense fallback={Loading}>
                 <Review />
@@ -157,8 +155,7 @@ function App() {
             }
           />
           <Route
-            path="/pay"
-            fallback={Loading}
+            path="/pay"            
             element={
               <Suspense fallback={Loading}>
                 <Payment />
