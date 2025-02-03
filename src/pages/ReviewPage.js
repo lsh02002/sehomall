@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/layout/Layout";
 import styled from "styled-components";
 import ReviewCard from "../components/card/ReviewCard";
-import { GetAllReviews } from "../api/ItemApi";
+import { GetAllReviews } from "../api/sehomallApi";
 import ReviewEnroll from "../components/modal/ReviewEnroll";
 import Paging from "../components/pagination/Paging";
 import { useSearchParams } from "react-router-dom";
@@ -96,8 +96,7 @@ const Container = styled.div`
   }
 `;
 
-const ReviewBody = styled.div`  
-`;
+const ReviewBody = styled.div``;
 
 const Review = styled.div`
   width: 100%;

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { LoginContext } from "../../api/loginContextApi";
-import { GetMyHeartedItems } from "../../api/ItemApi";
+import { GetMyHeartedItems } from "../../api/sehomallApi";
 import Paging from "../pagination/Paging";
 import CardOne from "../card/CardOne";
 import { MyPageTabContext } from "../../api/myPageTabContextApi";
@@ -20,16 +20,16 @@ const MyHeart = () => {
     ? parseInt(searchParams.get("size"))
     : 6;
 
-    useEffect(()=>{
-        setHeartPage(page);
-    }, [page, setHeartPage])
+  useEffect(() => {
+    setHeartPage(page);
+  }, [page, setHeartPage]);
 
   useEffect(() => {
     GetMyHeartedItems(page, size)
       .then((res) => {
         console.log(res);
         setMyHearts(res.data.content);
-        setHeartTotal(res.data.totalElements);        
+        setHeartTotal(res.data.totalElements);
 
         if (res.headers?.accesstoken) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);

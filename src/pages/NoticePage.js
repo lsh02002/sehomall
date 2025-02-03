@@ -3,7 +3,7 @@ import Layout from "../components/layout/Layout";
 import styled from "styled-components";
 import NoticeTable from "../components/NoticeTable";
 import { useSearchParams } from "react-router-dom";
-import { GetAllNotices } from "../api/ItemApi";
+import { GetAllNotices } from "../api/sehomallApi";
 import Paging from "../components/pagination/Paging";
 
 const NoticePage = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { EnrollItem } from "../api/ItemApi";
+import { EnrollItem } from "../api/sehomallApi";
 import Layout from "../components/layout/Layout";
 import { useNavigate } from "react-router-dom";
 
@@ -199,14 +199,14 @@ const EnrollInner = styled.div`
 
 const Title = styled.h2`
   font-weight: normal;
-  margin: 5px;  
+  margin: 5px;
 `;
 
 const CategorySelect = styled.div`
   width: 90%;
   overflow: hidden;
   div {
-    font-size: 14px;    
+    font-size: 14px;
   }
   select {
     width: 100%;
@@ -221,7 +221,7 @@ const Text = styled.div`
   width: 90%;
   overflow: hidden;
   div {
-    font-size: 14px;    
+    font-size: 14px;
   }
   input[type="text"],
   input[type="number"],

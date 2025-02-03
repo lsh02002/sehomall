@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { CategoryItems, NewItems, PopularItems } from "../api/ItemApi";
+import { CategoryItems, NewItems, PopularItems } from "../api/sehomallApi";
 import Layout from "../components/layout/Layout";
 import Banner from "../components/slider/BannerSlider";
 import ItemSlider from "../components/slider/ItemSlider";
@@ -20,7 +20,7 @@ const MainPage = () => {
     NewItems()
       .then((res) => {
         console.log(res);
-        setNewItems(res.data.content);        
+        setNewItems(res.data.content);
       })
       .catch((err) => {
         console.error(err);

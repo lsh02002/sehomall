@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { GetMyReviews } from "../../api/ItemApi";
+import { GetMyReviews } from "../../api/sehomallApi";
 import { useSearchParams } from "react-router-dom";
 import ReviewCard from "../card/ReviewCard";
 import Paging from "../pagination/Paging";

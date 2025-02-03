@@ -268,10 +268,6 @@ const GetMyHeartedItems = async (page, size) => {
   });
 };
 
-// const GetMyOrderedItems = async () => {
-//   const Token = localStorage.getItem("token");
-// }
-
 const GetMyPayments = async (page, size) => {
   const accessToken = localStorage.getItem("accessToken");
   const refreshToken = localStorage.getItem("refreshToken");

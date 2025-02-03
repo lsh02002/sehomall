@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 import styled from "styled-components";
-import { GetUserInfo } from "../../api/ItemApi";
+import { GetUserInfo } from "../../api/sehomallApi";
 
 const MyInfo = () => {
   const [myInfo, setMyInfo] = useState({

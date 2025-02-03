@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../components/layout/Layout";
 import styled from "styled-components";
-import { UserSignup } from "../api/ItemApi";
+import { UserSignup } from "../api/sehomallApi";
 import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
@@ -54,7 +54,10 @@ const SignupPage = () => {
     <Layout>
       <Main>
         <Title>SIGNUP</Title>
-        <Warning>https로 바꿔서 정보가 전부 암호화되기 때문에 다소 안전해졌습니다 그래도 중요정보는 넣지 말아주세요</Warning>
+        <Warning>
+          https로 바꿔서 정보가 전부 암호화되기 때문에 다소 안전해졌습니다
+          그래도 중요정보는 넣지 말아주세요
+        </Warning>
         <Email>
           <div>이메일</div>
           <input
@@ -283,7 +286,7 @@ const SignUp = styled.button`
 `;
 
 const Warning = styled.span`
-  width: 100%;  
+  width: 100%;
   background-color: lightgray;
   margin: 15px 0;
   font-size: 0.9em;

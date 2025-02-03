@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { GetMyPayments } from "../../api/ItemApi";
+import { GetMyPayments } from "../../api/sehomallApi";
 import { useSearchParams } from "react-router-dom";
 import OrderCard from "../card/OrderCard";
 import Paging from "../pagination/Paging";

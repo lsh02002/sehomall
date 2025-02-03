@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ShoppingCart from "../../assets/shopping-cart.svg";
-import { AddToCart } from "../../api/ItemApi";
+import { AddToCart } from "../../api/sehomallApi";
 import { CartContext } from "../../api/cartContextApi";
 import { LoginContext } from "../../api/loginContextApi";
 import HeartCount from "../HeartCount";
@@ -17,7 +17,7 @@ const CardTwo = ({ item }) => {
       return;
     }
 
-    AddToCart(item.id, setCartCount);    
+    AddToCart(item.id, setCartCount);
   };
 
   return (

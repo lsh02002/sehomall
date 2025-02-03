@@ -2,37 +2,42 @@ import React, { useState } from "react";
 import Layout from "../components/layout/Layout";
 import styled from "styled-components";
 import CardOne from "../components/card/CardOne";
-import { SearchItemsByKeyword } from "../api/ItemApi";
+import { SearchItemsByKeyword } from "../api/sehomallApi";
 
 const SearchPage = () => {
   const [searchItems, setSearchItems] = useState([]);
-  
+
   const OnSearchKeyDown = (e) => {
-    if(e.target.value.trim() === ""){
+    if (e.target.value.trim() === "") {
       setSearchItems([]);
       return;
     }
-    
+
     SearchItemsByKeyword(e.target.value)
-    .then(res=>{
-      console.log(res);
-      setSearchItems(res.data.content);
-    }).catch(err=>{
-      console.error(err);
-    })
-  }
+      .then((res) => {
+        console.log(res);
+        setSearchItems(res.data.content);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   return (
     <Layout>
       <Container>
         <ItemsInner>
-          <Title>
-            상품 검색
-          </Title>
-          <input type="text" placeholder="키워드를 입력하시면 자동으로 조회됩니다." onChange={OnSearchKeyDown} />
-          <Items>            
+          <Title>상품 검색</Title>
+          <input
+            type="text"
+            placeholder="키워드를 입력하시면 자동으로 조회됩니다."
+            onChange={OnSearchKeyDown}
+          />
+          <Items>
             {searchItems.length > 0 ? (
-              searchItems.map((item, index) => <CardOne key={index} item={item} />)
+              searchItems.map((item, index) => (
+                <CardOne key={index} item={item} />
+              ))
             ) : (
               <div>상품이 없습니다.</div>
             )}
@@ -72,7 +77,7 @@ const ItemsInner = styled.div`
   input[type="text"] {
     width: 300px;
     padding: 5px;
-    margin: 20px;    
+    margin: 20px;
   }
 `;
 
@@ -84,8 +89,8 @@ const Items = styled.div`
   width: 100%;
   flex-wrap: wrap;
   & > div {
-  width: 100%;
-  text-align: center;
-  margin-top: 50px;  
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
   }
 `;

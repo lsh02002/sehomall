@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { LoginContext } from "../../api/loginContextApi";
 import { CartContext } from "../../api/cartContextApi";
-import { FindCartItems, UserLogout } from "../../api/ItemApi";
+import { FindCartItems, UserLogout } from "../../api/sehomallApi";
 import SimpleCartCard from "../card/SimpleCartCard";
 
 const Header = () => {

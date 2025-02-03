@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { DelCartItem, UpdateCartItem } from "../../api/ItemApi";
+import { DelCartItem, UpdateCartItem } from "../../api/sehomallApi";
 import { CartContext } from "../../api/cartContextApi";
 import HeartCount from "../HeartCount";
 import { Link } from "react-router-dom";

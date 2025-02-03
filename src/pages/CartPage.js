@@ -4,7 +4,7 @@ import CartCard from "../components/card/CartCard";
 import styled from "styled-components";
 import { CartContext } from "../api/cartContextApi";
 import { useNavigate } from "react-router-dom";
-import { CountCartItems } from "../api/ItemApi";
+import { CountCartItems } from "../api/sehomallApi";
 
 const CartPage = () => {
   const { totalPrice, setTotalPrice, cartItems, isEditing } =

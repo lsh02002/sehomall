@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
-import { AddToCart, DetailItem, GetItemReviews } from "../api/ItemApi";
+import { AddToCart, DetailItem, GetItemReviews } from "../api/sehomallApi";
 import Layout from "../components/layout/Layout";
 import { CartContext } from "../api/cartContextApi";
 import { LoginContext } from "../api/loginContextApi";
@@ -54,7 +54,7 @@ const DetailPage = () => {
       return;
     }
 
-    AddToCart(id, setCartCount);    
+    AddToCart(id, setCartCount);
   };
 
   const OnOrderClick = () => {
@@ -255,5 +255,5 @@ const ReviewBody = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
-  max-width: 870px;  
+  max-width: 870px;
 `;

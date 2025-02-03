@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import { UserLogin } from "../api/ItemApi";
+import { UserLogin } from "../api/sehomallApi";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../api/loginContextApi";
 import { MyPageTabContext } from "../api/myPageTabContextApi";
@@ -8,7 +8,8 @@ import Layout from "../components/layout/Layout";
 
 const LoginPage = () => {
   const { setIsLogin } = useContext(LoginContext);
-  const { setReviewPage, setHeartPage, setOrderPage } = useContext(MyPageTabContext);
+  const { setReviewPage, setHeartPage, setOrderPage } =
+    useContext(MyPageTabContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { LoginContext } from "../api/loginContextApi";
-import { DeleteHeart, InsertHeart, IsHearted } from "../api/ItemApi";
+import { DeleteHeart, InsertHeart, IsHearted } from "../api/sehomallApi";
 import Like from "../assets/heart.svg";
 import LikeSolid from "../assets/heart-solid.svg";
 
