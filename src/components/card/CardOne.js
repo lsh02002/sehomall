@@ -37,14 +37,19 @@ const CardOne = ({ item }) => {
         />
       </CartImage>
       <Link to={`/detail/${item.id}`}>
-        <SelectedItem>
+        <ItemInfo>
           <div>{item.name}</div>
           <span>{item.price.toLocaleString()}원</span>
           <div>조회수: {item.views}</div>
           <div>등록날짜: {item.createAt}</div>
           <div>등록자: {item.userNickname}</div>
           <div>Review 수: {item.reviewCount}</div>
-        </SelectedItem>
+          {item.quantity < 1 ? (
+            <span>품절됨</span>
+          ) : (
+            <div>재고 수량: {item.quantity}</div>
+          )}
+        </ItemInfo>
       </Link>
     </Container>
   );
@@ -102,7 +107,7 @@ const CartImage = styled.div`
   }
 `;
 
-const SelectedItem = styled.div`
+const ItemInfo = styled.div`
   position: absolute;
   width: calc(100% + 20px);
   height: calc(100% + 20px);

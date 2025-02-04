@@ -56,6 +56,9 @@ const OrderCard = ({
         <OrderStatusInfo>
           <div>결제상태: {"완료 (가상)"}</div>
           <div>
+            총 가격: <span>{order.productSum.toLocaleString()}원</span>
+          </div>
+          <div>
             주문배송상태: <span>{order.orderStatus}</span>
           </div>
         </OrderStatusInfo>
@@ -127,7 +130,11 @@ const CreatedDate = styled.div`
 
 const OrderStatusInfo = styled.div`
   width: 40%;
-  margin-left: 20px 0 0 20px;
+  margin-left: 20px;
+
+  div {    
+    padding-bottom: 5px;
+  }
 
   span {
     color: red;
