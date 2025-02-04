@@ -173,7 +173,7 @@ const PaymentPage = () => {
         if (res.headers?.accesstoken) {
           localStorage.setItem("accessToken", res.headers?.accesstoken);
         }
-        navigate("/mypage/ORDERS?page=1&size=5");
+        navigate("/mypage/ORDERS?page=1&size=3");
       })
       .catch((err) => {
         console.error(err);
