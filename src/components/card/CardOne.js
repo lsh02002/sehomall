@@ -45,7 +45,7 @@ const CardOne = ({ item }) => {
           <div>등록자: {item.userNickname}</div>
           <div>Review 수: {item.reviewCount}</div>
           {item.quantity < 1 ? (
-            <span>품절됨</span>
+            <div>재고 수량: <span>품절됨</span></div>
           ) : (
             <div>재고 수량: {item.quantity}</div>
           )}
