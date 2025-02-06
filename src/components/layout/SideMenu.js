@@ -48,7 +48,7 @@ const Container = styled.div`
 const Title = styled.div`
   width: 100%;
   font-size: 40px;
-  color: crimson;
+  color: red;
   span {
     font-size: 18px;
   }

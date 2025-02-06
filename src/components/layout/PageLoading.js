@@ -25,7 +25,7 @@ const Loading = styled.div`
 
   span:nth-child(1) {
     animation-delay: 0s;
-    background-color: crimson;
+    background-color: red;
   }
 
   span:nth-child(2) {

@@ -80,7 +80,7 @@ const TotalSum = styled.div`
   width: 100%;
   max-width: 500px;
   span {
-    color: crimson;
+    color: red;
   }
 `;
 

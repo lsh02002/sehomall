@@ -145,7 +145,7 @@ const TabInner = styled.div`
   .btn li:hover,
   .btn li.active {
     background-color: #fff;
-    border-top: 2px solid crimson;
+    border-top: 2px solid red;
   }
 
   .tabs > div {

@@ -124,7 +124,7 @@ const TabInner = styled.div`
   .mybtn li:hover,
   .mybtn li.active {
     background-color: #fff;
-    border-top: 2px solid crimson;
+    border-top: 2px solid red;
   }
 
   .mytabs > div {

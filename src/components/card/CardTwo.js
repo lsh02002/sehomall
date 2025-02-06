@@ -71,7 +71,7 @@ const Title = styled.span`
 `;
 
 const Price = styled.span`
-  color: crimson;
+  color: red;
   display: block;
   background-color: #fff;
   padding: 0px 5px 0px 5px;

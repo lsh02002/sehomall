@@ -240,7 +240,7 @@ const Container = styled.div`
   .tab-inner input[id="about-tab1"]:checked ~ .btn label[for="about-tab1"],
   .tab-inner input[id="about-tab2"]:checked ~ .btn label[for="about-tab2"],
   .tab-inner input[id="about-tab3"]:checked ~ .btn label[for="about-tab3"] {
-    background-color: crimson;
+    background-color: red;
     border-radius: 50%;
   }
 `;
