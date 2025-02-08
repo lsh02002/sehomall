@@ -74,7 +74,7 @@ const Header = () => {
     <Container>
       <Menu>
         <Link to="/search">ITEMS-SEARCH</Link>
-        <Link to={`/reviews?page=${reviewPage}&size=5`}>REVIEWS</Link>
+        <Link to={`/reviews?page=1&size=5`}>REVIEWS</Link>
         <Link to="/enroll">ENROLL</Link>
         {!isLogin ? (
           <>
@@ -87,7 +87,7 @@ const Header = () => {
           </>
         )}
         <>
-          <Link to="/mypage/REVIEWS?page=1&size=4">MYPAGE</Link>
+          <Link to={`/mypage/REVIEWS?page=${reviewPage}&size=4`}>MYPAGE</Link>
           {/* <Link to="/pay">PAY</Link> */}
           <Link
             to="/cart"
