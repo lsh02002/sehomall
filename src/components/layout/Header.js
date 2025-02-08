@@ -5,9 +5,11 @@ import { LoginContext } from "../../api/loginContextApi";
 import { CartContext } from "../../api/cartContextApi";
 import { FindCartItems, UserLogout } from "../../api/sehomallApi";
 import SimpleCartCard from "../card/SimpleCartCard";
+import { MyPageTabContext } from "../../api/myPageTabContextApi";
 
 const Header = () => {
   const { isLogin, setIsLogin } = useContext(LoginContext);
+  const { reviewPage } = useContext(MyPageTabContext);
   const {
     cartCount,
     setCartCount,
@@ -72,7 +74,7 @@ const Header = () => {
     <Container>
       <Menu>
         <Link to="/search">ITEMS-SEARCH</Link>
-        <Link to="/reviews?page=1&size=5">REVIEWS</Link>
+        <Link to={`/reviews?page=${reviewPage}&size=5`}>REVIEWS</Link>
         <Link to="/enroll">ENROLL</Link>
         {!isLogin ? (
           <>
