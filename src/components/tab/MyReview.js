@@ -4,9 +4,15 @@ import { useSearchParams } from "react-router-dom";
 import ReviewCard from "../card/ReviewCard";
 import Paging from "../pagination/Paging";
 import { MyPageTabContext } from "../../api/myPageTabContextApi";
+import ReviewEnroll from "../modal/ReviewEnroll";
+import styled from "styled-components";
 
 const MyReview = () => {
   const { setReviewPage } = useContext(MyPageTabContext);
+  
+  const [isReview, setIsReview] = useState(false);
+  const [isReviewUpdated, setIsReviewUpdated] = useState(false);
+  
   const [myReviews, setMyReviews] = useState([]);
   const [reviewTotal, setReviewTotal] = useState(0);
 
@@ -39,10 +45,13 @@ const MyReview = () => {
           alert(err.response.data.detailMessage);
         }
       });
-  }, [page, size]);
+  }, [page, size, isReviewUpdated, setIsReviewUpdated]);
 
   return (
     <>
+      <ReviewButtonWrapper>
+        <button onClick={() => setIsReview(true)}>후기 등록</button>
+      </ReviewButtonWrapper>
       {myReviews?.length > 0 ? (
         myReviews.map((review, index) => (
           <ReviewCard key={index} review={review} />
@@ -56,8 +65,48 @@ const MyReview = () => {
         size={size}
         page={page}
       />
+      {isReview && (
+        <Review>
+          <ReviewEnroll
+            item={null}
+            setIsReview={setIsReview}
+            isReviewUpdated={isReviewUpdated}
+            setIsReviewUpdated={setIsReviewUpdated}
+          />
+        </Review>
+      )}
     </>
   );
 };
 
 export default MyReview;
+
+const ReviewButtonWrapper = styled.span`
+  width: 100%;
+  text-align: right;
+  margin: 0 35px;
+    
+  button {
+    text-align: right;
+    border: none;
+    padding: 5px 10px;
+    color: white;
+    background-color: gray;
+    transition: 0.2s;
+    cursor: pointer;
+    font-size: 1em;
+    &:hover {
+      background-color: lightgray;
+    }
+`;
+
+const Review = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 5;
+`;

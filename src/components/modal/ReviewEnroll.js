@@ -141,7 +141,7 @@ const ReviewEnroll = ({
       />
       <div className="btn">
         <span>
-          <em>후기 사진</em>
+          후기 사진:
           <label htmlFor="review-file">
             {image ? (
               <img width={40} height={40} src={imagePreview} alt="" />
@@ -158,7 +158,7 @@ const ReviewEnroll = ({
         onChange={OnChangeField}
       />
       <span>
-        <em>평점 선택:</em>
+        평점 선택:
         <select name="rating" value={state.rating} onChange={OnChangeField}>
           <option>1</option>
           <option>2</option>
@@ -231,10 +231,6 @@ const Enroll = styled.div`
     box-sizing: border-box;
   }
 
-  .btn span em {
-    padding-right: 20px;
-  }
-
   .btn label {
     display: inline-block;
     width: 40px;
@@ -244,6 +240,7 @@ const Enroll = styled.div`
     cursor: pointer;
     text-align: center;
     line-height: 40px;
+    margin-left: 10px;
   }
 
   textarea {
