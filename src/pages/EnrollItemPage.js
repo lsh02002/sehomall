@@ -32,18 +32,15 @@ const EnrollItemPage = () => {
 
   const OnRegister = () => {
     const data = {
-      count: state.icount,
+      quantity: state.icount,
       price: state.iprice,
       size: state.isize,
       careGuide: state.careGuide,
-      icount: state.icount,
       name: state.iname,
       description: state.idesc,
       category: state.icat,
       deliveryFee: state.ideliveryFee,
     };
-
-    console.log("data", data);
 
     const formDataToSend = new FormData();
     formDataToSend.append(
