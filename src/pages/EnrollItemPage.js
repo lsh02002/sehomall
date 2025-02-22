@@ -32,7 +32,7 @@ const EnrollItemPage = () => {
 
   const OnRegister = () => {
     const data = {
-      quantity: state.icount,
+      count: state.icount,
       price: state.iprice,
       size: state.isize,
       careGuide: state.careGuide,

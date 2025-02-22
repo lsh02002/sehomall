@@ -44,10 +44,10 @@ const CardOne = ({ item }) => {
           <div>등록날짜: {item.createAt}</div>
           <div>등록자: {item.userNickname}</div>
           <div>Review 수: {item.reviewCount}</div>
-          {item.quantity < 1 ? (
+          {item.count < 1 ? (
             <div>재고 수량: <span>품절됨</span></div>
           ) : (
-            <div>재고 수량: {item.quantity}</div>
+            <div>재고 수량: {item.count}</div>
           )}
         </ItemInfo>
       </Link>
