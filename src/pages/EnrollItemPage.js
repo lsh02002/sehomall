@@ -36,6 +36,7 @@ const EnrollItemPage = () => {
       price: state.iprice,
       size: state.isize,
       careGuide: state.careGuide,
+      icount: state.icount,
       name: state.iname,
       description: state.idesc,
       category: state.icat,
