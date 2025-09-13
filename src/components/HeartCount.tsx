@@ -55,26 +55,27 @@ const HeartCount = ({ id, heartCount }: HeartCountPropsType) => {
 export default HeartCount;
 
 const Container = styled.div`
-  width: 170px;
+  width: 30px;
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
   span {
+    font-size: 0.9rem;
     color: red;
-    padding-left: 5px;
+    padding-left: 1px;
     margin-right: 5px;
   }
 `;
 
 const HeartImage = styled.div`
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   text-align: left;
   img {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     object-fit: cover;
   }
 `;

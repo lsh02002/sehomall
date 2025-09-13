@@ -5,8 +5,7 @@ import styled from "styled-components";
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Container>
-      <Main>
-        <SideMenu />
+      <Main>        
         {children}
       </Main>
     </Container>
@@ -18,8 +17,7 @@ export default Layout;
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  align-items: start;
-  width: 100vw;
+  align-items: start;  
   box-sizing: border-box;
 `;
 

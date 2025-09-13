@@ -31,7 +31,7 @@ function BannerSlider() {
           width: "85%",
           maxWidth: "1600px",
           height: "500px",
-          padding: "20px",
+          padding: "20px",          
         }}
       >
         {bannerImages.length > 0 &&

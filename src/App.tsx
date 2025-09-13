@@ -1,7 +1,7 @@
 import "./app.css";
 import styled from "styled-components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/layout/Header";
+import Nav from "./components/layout/Nav";
 import Footer from "./components/layout/Footer";
 import { lazy, Suspense, useEffect } from "react";
 import { useLogin } from "./api/loginContextApi";
@@ -39,8 +39,7 @@ function App() {
 
   return (
     <Container>
-      <Router>
-        <Header />
+      <Router>        
         <Routes>
           <Route
             path="/"
@@ -59,13 +58,21 @@ function App() {
             }
           />
           <Route
-            path="/cat/:cat"
+            path="/category"
             element={
               <Suspense fallback={Loading}>
                 <Category />
               </Suspense>
             }
           />
+          <Route
+            path="/cate/:cat"
+            element={
+              <Suspense fallback={Loading}>
+                <div>카테고리 중비중!</div>
+              </Suspense>
+            }
+            />
           <Route
             path="/login"
             element={
@@ -163,7 +170,8 @@ function App() {
             }
           />
         </Routes>
-        <Footer />
+        <Nav />
+        {/* <Footer /> */}
       </Router>
     </Container>
   );
@@ -176,6 +184,6 @@ const Container = styled.div`
   justify-content: start;
   align-items: center;
   flex-direction: column;
-  width: 100vw;
+  width: 96vw;
   position: relative;
 `;

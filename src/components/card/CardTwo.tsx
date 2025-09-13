@@ -53,13 +53,15 @@ const CardTwo = ({ item }: { item: itemType }) => {
 export default CardTwo;
 
 const Container = styled.article`
-  width: 240px;
-  height: 330px;
+  width: 140px;
+  height: 200px;
   box-sizing: border-box;
   margin: 20px;
   position: relative;
   transition: 0.4s;
   img {
+    width: 132px;
+    height: 140px;
     margin: 2px;
     object-fit: cover;
     transition: 0.1s;
@@ -74,13 +76,14 @@ const Container = styled.article`
 `;
 
 const Title = styled.span`
-  font-size: 16px;
+  font-size: 0.8rem;
   display: block;
   padding: 5px 5px;
   background-color: #fff;
 `;
 
 const Price = styled.span`
+  font-size: 0.8rem;
   color: red;
   display: block;
   background-color: #fff;
@@ -92,14 +95,14 @@ const CartImage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 75px;
-  height: 24px;
+  width: 45px;
+  height: 20px;
   right: 10px;
-  bottom: 35px;
+  bottom: 25px;
   z-index: 10;
   img {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     object-fit: cover;
   }
   span {

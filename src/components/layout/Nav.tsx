@@ -8,36 +8,30 @@ import { useMyPage } from "../../api/myPageTabContextApi";
 import { itemCartType } from "../../types/type";
 import { cartData } from "../data/cartData";
 
-const Header = () => {
-  const { isLogin } = useLogin();
+import Category from "../../assets/category.svg";
+import Review from "../../assets/review.svg";
+import MyPage from "../../assets/my-page.svg";
+import Cart from "../../assets/cart.svg";
+
+const Nav = () => {
+  const { isLogin, setIsLogin } = useLogin();
   const { reviewPage } = useMyPage();
-  const {
-    cartCount,
-    setCartCount,
-    cartItems,
-    setCartItems,
-  } = useCart();
+  const { cartCount, setCartCount, cartItems, setCartItems } = useCart();
 
   const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
     setCartItems(cartData?.content);
-    setCartCount(cartData?.content.length)
+    setCartCount(cartData?.content.length);
   }, [setCartCount, setCartItems]);
 
   const OnLogout = () => {
-    // if (window.confirm("로그아웃 하시겠습니까?")) {
-    //   UserLogout().catch((err) => {
-    //     console.error("logout ", err);
-    //   });
-    //   localStorage.removeItem("nickname");
-    //   localStorage.removeItem("accessToken");
-    //   localStorage.removeItem("refreshToken");
-    //   setCartCount(0);
-    //   setCartItems([]);
-    //   setIsLogin(false);
-    // }
+    if (window.confirm("로그아웃 하시겠습니까?")) {
+      setCartCount(0);
+      setCartItems([]);
+      setIsLogin(false);
+    }
   };
 
   const OnMoveToCart = () => {
@@ -47,29 +41,58 @@ const Header = () => {
   return (
     <Container>
       <Menu>
-        <Link to="/search">ITEMS-SEARCH</Link>
-        <Link to={`/reviews?page=1&size=5`}>REVIEWS</Link>
-        <Link to="/enroll">ENROLL</Link>
-        {!isLogin ? (
-          <>
-            <Link to="/signup">SIGNUP</Link>
-            <Link to="/login">LOGIN</Link>
+        <IconLink to="/category">
+          <div>
+            <img src={Category} alt="" />
+          </div>
+          <div>CATEGORIES</div>
+        </IconLink>
+        <IconLink to={`/reviews?page=1&size=5`}>
+          <div>
+            <img src={Review} alt="" />
+          </div>
+          <div>REVIEWS</div>
+        </IconLink>
+        <IconLink to={`/mypage/REVIEWS?page=${reviewPage}&size=4`}>
+            <div>
+              <img src={MyPage} alt="" />
+            </div>
+            <div>MYPAGE</div>
+          </IconLink>
+        {/* {!isLogin ? (
+          <>            
+            <IconLink to="/login">
+              <div>
+                <img src={Login} alt="" />
+              </div>
+              <div>LOGIN</div>
+            </IconLink>
           </>
         ) : (
           <>
-            <Link onClick={OnLogout} to={""}>LOGOUT</Link>
+            <IconLink onClick={OnLogout} to={""}>
+              <div>
+                <img src={Logout} alt="" />
+              </div>
+              <div>LOGOUT</div>
+            </IconLink>
           </>
-        )}
-        <>
-          <Link to={`/mypage/REVIEWS?page=${reviewPage}&size=4`}>MYPAGE</Link>
+        )} */}
+        <>          
           {/* <Link to="/pay">PAY</Link> */}
-          <Link
+          <IconLink
             to="/cart"
             onMouseEnter={() => setIsModal(true)}
             onMouseLeave={() => setIsModal(false)}
           >
-            CART<span>{cartCount}</span>
-          </Link>
+            <div>
+              <img src={Cart} alt="" />
+              <span>{cartCount}</span>
+            </div>
+            <div>
+              CART
+            </div>
+          </IconLink>
           {isModal && (
             <Modal
               onMouseEnter={() => setIsModal(true)}
@@ -91,28 +114,30 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Nav;
 
-const Container = styled.header`
+const Container = styled.nav`
+  position: fixed;
+  bottom: 0;
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
   height: 70px;
-  width: 100%;
-  box-sizing: border-box;
-  padding-right: 10px;
+  width: 100vw;
+  box-sizing: border-box;  
   opacity: 1;
-  z-index: 5;
+  z-index: 20;
+  border-top: 1px solid lightgray;
 `;
 
 const Menu = styled.div`
-  position: fixed;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 600px;
+  width: 100vw;
+  height: 100%;
   font-size: 14px;
-  background-color: rgba(255, 255, 255, 0.65);
+  background-color: rgba(255, 255, 255, 1);
   a {
     text-decoration: none;
     color: black;
@@ -127,6 +152,16 @@ const Menu = styled.div`
     text-align: center;
     line-height: 14px;
     padding-left: 2px;
+    position: absolute;    
+  }
+`;
+
+const IconLink = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    width: 2rem;
   }
 `;
 
@@ -140,7 +175,7 @@ const Modal = styled.div`
   width: 250px;
   height: 500px;
   right: 10px;
-  bottom: -500px;
+  bottom: 50px;
   padding: 0 20px;
   box-sizing: border-box;
   z-index: 5;
