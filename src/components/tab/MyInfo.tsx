@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 import styled from "styled-components";
-import { GetUserInfo } from "../../api/sehomallApi";
+import { userInfoData } from "../data/userInfoData";
 
 const MyInfo = () => {
   const [myInfo, setMyInfo] = useState({
@@ -16,18 +16,7 @@ const MyInfo = () => {
   });
 
   useEffect(() => {
-    GetUserInfo()
-      .then((res) => {
-        console.log(res);
-        setMyInfo(res.data);
-
-        if (res.headers?.accesstoken) {
-          localStorage.setItem("accessToken", res.headers?.accesstoken);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    setMyInfo(userInfoData);
   }, []);
 
   return (
@@ -67,6 +56,9 @@ const MyInfo = () => {
             <span>계정 생성일: </span>
             <input type="text" value={myInfo.createAt} disabled />
           </TextInput>
+          <ButtonInput>
+            <button>정보 수정하기</button>
+          </ButtonInput>
         </ItemInfo>
       </Container>
     </Layout>
@@ -82,6 +74,19 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  button {
+    text-align: right;
+    border: none;
+    padding: 5px 10px;
+    color: white;
+    background-color: gray;
+    transition: 0.2s;
+    cursor: pointer;
+    font-size: 1em;
+    &:hover {
+      background-color: lightgray;
+    }
+  }
 `;
 
 const ItemInfo = styled.div`
@@ -128,4 +133,10 @@ const TextInput = styled.div`
     box-sizing: border-box;
     padding: 5px;
   }
+`;
+
+const ButtonInput = styled.div`
+  width: 100%;
+  text-align: right;
+  margin-top: 20px;
 `;

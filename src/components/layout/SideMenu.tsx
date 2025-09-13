@@ -17,8 +17,12 @@ const SideMenu = () => {
       <CatLink to={"/cat/SCARVES"}>SCARVES</CatLink>
       <CatLink to={"/about"}>ABOUT</CatLink>
       <CatLink to={"/notice?page=1&size=5"}>NOTICE</CatLink>
-      <CatLink to={"/contact"}>CONTACT</CatLink>      
+      <CatLink to={"/contact"}>CONTACT</CatLink>
       <CatLink to={"/instagram"}>INSTAGRAM</CatLink>
+      <Message>
+        백엔드 비용이 발생하여 프론트엔드에서 가짜(더미)데이터를 사용하기로
+        했습니다. 작업을 놓고 있었는데 디자인도 업데이트 노력하겠습니다.
+      </Message>
     </Container>
   );
 };
@@ -52,6 +56,14 @@ const Title = styled.div`
   span {
     font-size: 18px;
   }
+`;
+
+const Message = styled.div`
+  font-size: 14px;
+  width: 100%;
+  margin-top: 20px;
+  background-color: gray;
+  color: white;
 `;
 
 const CatLink = styled(Link)`

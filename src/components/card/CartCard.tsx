@@ -1,30 +1,15 @@
 import styled from "styled-components";
-import { DelCartItem, UpdateCartItem } from "../../api/sehomallApi";
 import { useCart } from "../../api/cartContextApi";
 import HeartCount from "../HeartCount";
 import { Link } from "react-router-dom";
 import { itemCartType } from "../../types/type";
 
 const CartCard = ({ item }: { item: itemCartType }) => {  
-  const { isDeleting, setIsDeleting, isEditing, setIsEditing } = useCart();
+  const { cartItems, setCartItems, isDeleting, setIsDeleting, isEditing, setIsEditing } = useCart();
 
   const onAdd = () => {
     item.count = item.count + 1;
-
-    UpdateCartItem(item.itemId, item.count, item.checked)
-      .then((res) => {
-        // console.log(res);
-        setIsEditing(!isEditing);
-        if (res.headers?.accesstoken) {
-          localStorage.setItem("accessToken", res.headers?.accesstoken);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
-      });
+    setCartItems(cartItems.map(it =>it.itemId === item.itemId ? {...it, count: item?.count} : it));
   };
 
   const onSub = () => {
@@ -34,55 +19,16 @@ const CartCard = ({ item }: { item: itemCartType }) => {
       item.count = 1;
       return;
     }
-
-    UpdateCartItem(item.itemId, item.count, item.checked)
-      .then((res) => {
-        // console.log(res);
-        setIsEditing(!isEditing);
-        if (res.headers?.accesstoken) {
-          localStorage.setItem("accessToken", res.headers?.accesstoken);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
-      });
+    
+    setCartItems(cartItems.map(it =>it.itemId === item.itemId ? {...it, count: item?.count} : it));
   };
 
   const onDel = (id: number) => {
-    DelCartItem(id)
-      .then((res) => {
-        // console.log(res);
-        setIsDeleting(!isDeleting);
-        if (res.headers?.accesstoken) {
-          localStorage.setItem("accessToken", res.headers?.accesstoken);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
-      });
+    setCartItems(cartItems.filter(it =>it.itemId !== item.itemId));
   };
 
   const onChecked = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    UpdateCartItem(item.itemId, item.count, target.checked)
-      .then((res) => {
-        // console.log(res);
-        setIsEditing(!isEditing);
-        if (res.headers?.accesstoken) {
-          localStorage.setItem("accessToken", res.headers?.accesstoken);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
-      });
+    setCartItems(cartItems.map(it=>it.itemId === item.itemId ? {...it, checked: target?.checked} : it));
   };
 
   return (

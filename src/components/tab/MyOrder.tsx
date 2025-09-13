@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { GetMyPayments } from "../../api/sehomallApi";
 import { useSearchParams } from "react-router-dom";
 import OrderCard from "../card/OrderCard";
 import Paging from "../pagination/Paging";
 import { useMyPage } from "../../api/myPageTabContextApi";
+import { useItem } from "../../api/itemContextApi";
+import { orderData } from "../data/orderData";
 
 const MyOrder = () => {
-  const { setOrderPage } = useMyPage();
-  const [myOrders, setMyOrders] = useState([]);
+  const { myOrders, setMyOrders } = useItem();
+  const { setOrderPage } = useMyPage(); 
   const [orderTotal, setOrderTotal] = useState(0);
   const [isOrderStatusUpdated, setIsOrderStatusUpdated] = useState(false);
 
@@ -20,20 +21,9 @@ const MyOrder = () => {
   }, [page, setOrderPage]);
 
   useEffect(() => {
-    GetMyPayments(page, size)
-      .then((res) => {
-        console.log(res);
-        setMyOrders(res.data.content);
-        setOrderTotal(res.data.totalElements);
-
-        if (res.headers?.accesstoken) {
-          localStorage.setItem("accessToken", res.headers?.accesstoken);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [isOrderStatusUpdated, setIsOrderStatusUpdated, size, page]);
+    setMyOrders(orderData?.content);
+    setOrderTotal(orderData?.totalElements);
+  }, [isOrderStatusUpdated, setIsOrderStatusUpdated, size, page, setMyOrders]);
 
   return (
     <>

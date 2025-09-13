@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/layout/Layout";
 import styled from "styled-components";
 import ReviewCard from "../components/card/ReviewCard";
-import { GetAllReviews } from "../api/sehomallApi";
 import ReviewEnroll from "../components/modal/ReviewEnroll";
 import Paging from "../components/pagination/Paging";
 import { useSearchParams } from "react-router-dom";
+import { reviewData } from "../components/data/reviewData";
+import { reviewType } from "../types/type";
 
 const ReviewPage = () => {
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState<reviewType[]>([]);
   const [total, setTotal] = useState(0);
 
   const [searchParams] = useSearchParams();
@@ -19,15 +20,8 @@ const ReviewPage = () => {
   const [isReviewUpdated, setIsReviewUpdated] = useState(false);
 
   useEffect(() => {
-    GetAllReviews(page, size)
-      .then((res) => {
-        console.log(res.data);
-        setReviews(res.data.content);
-        setTotal(res.data.totalElements);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    setReviews(reviewData?.content);
+    setTotal(reviewData?.totalElements);
   }, [page, size, isReviewUpdated, setIsReviewUpdated]);
 
   return (

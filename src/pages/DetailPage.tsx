@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
-import { AddCart, DetailItem, GetItemReviews } from "../api/sehomallApi";
 import Layout from "../components/layout/Layout";
 import { useLogin } from "../api/loginContextApi";
 import HeartCount from "../components/HeartCount";
 import ReviewCard from "../components/card/ReviewCard";
 import ReviewEnroll from "../components/modal/ReviewEnroll";
-import { itemType } from "../types/type";
+import { itemCartType, itemType, reviewType } from "../types/type";
 import { useCart } from "../api/cartContextApi";
+import { itemData } from "../components/data/itemData";
+import { reviewData } from "../components/data/reviewData";
 
 const DetailPage = () => {
   const { isLogin } = useLogin();
-  const { isEditing, setIsEditing } = useCart();
+  const { cartItems, setCartItems, isEditing, setIsEditing } = useCart();
   const [item, setItem] = useState<itemType | null>(null);
   const { id } = useParams();
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState<reviewType[]>([]);
   const [isReview, setIsReview] = useState(false);
   const [isReviewUpdated, setIsReviewUpdated] = useState(false);
   const [itemCount, setItemCount] = useState(1);
@@ -25,31 +26,14 @@ const DetailPage = () => {
   const itemId = parseInt(id ? id : "0");
 
   useEffect(() => {
-    DetailItem(itemId)
-      .then((res) => {
-        setItem(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
-      });
+    setItem(itemData?.content?.find((i: itemType) => i.id === itemId) ?? null);
   }, [itemId]);
 
   useEffect(() => {
-    GetItemReviews(itemId)
-      .then((res) => {
-        console.log(res.data.content);
-        setReviews(res.data.content);
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
-      });
-  }, [itemId, isReviewUpdated, setIsReviewUpdated]);
+    setReviews(
+      reviewData?.content?.filter((i: reviewType) => i?.itemId === itemId)
+    );
+  }, [itemId]);
 
   const OnAddToCartClick = () => {
     if (!isLogin) {
@@ -57,17 +41,18 @@ const DetailPage = () => {
       return;
     }
 
-    AddCart(itemId)
-      .then((res) => {
-        console.log(res);
-        setIsEditing(!isEditing);
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
-      });
+    const tempItem: itemCartType = {
+      itemId: item?.id ?? 0,
+      count: item?.count ?? 0,
+      itemName: item?.name ?? "",
+      price: item?.price ?? 0,
+      fileUrl: item?.files[0].fileUrl ?? "",
+      checked: true,
+      heartCount: item?.heartCount ?? 0,
+    };
+
+    setCartItems([...cartItems, tempItem]);
+    setIsEditing(!isEditing);
   };
 
   const OnOrderClick = () => {

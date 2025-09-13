@@ -1,0 +1,35 @@
+export const noticeData = {
+  content: [
+    {
+      id: 1,
+      title: "게시글 수정 테스트입니다.",
+      content: "테스트 테스트",
+      nickname: "lsh02002",
+      reviews: 1,
+      createAt: "2025-01-28T12:08:48.529273",
+      modifyAt: "2025-01-28T12:17:43.403954",
+    },
+    {
+      id: 2,
+      title: "두번째 게시글 테스트입니다.",
+      content: "테스트 테스트",
+      nickname: "lsh02002",
+      reviews: 0,
+      createAt: "2025-01-28T12:15:35.734242",
+      modifyAt: "2025-01-28T12:15:35.734242",
+    },
+  ],
+  number: 0,
+  size: 20,
+  totalElements: 2,
+  totalPages: 1,
+  last: true,
+  sort: {
+    empty: true,
+    sorted: false,
+    unsorted: true,
+  },
+  first: true,
+  numberOfElements: 2,
+  empty: false,
+};

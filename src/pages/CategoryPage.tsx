@@ -1,39 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { CategoryItems, NewItems } from "../api/sehomallApi";
 import { useParams } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import CardOne from "../components/card/CardOne";
+import { itemType } from "../types/type";
+import { itemData } from "../components/data/itemData";
 
 const CategoryPage = () => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<itemType[]>([]);
   const { cat } = useParams();
 
   useEffect(() => {
     if (cat === "new") {
-      NewItems()
-        .then((res) => {
-          console.log(res.data.content);
-          setItems(res.data.content);
-        })
-        .catch((err) => {
-          console.error(err);
-          if (err.response) {
-            alert(err.response.data.detailMessage);
-          }
-        });
+      setItems(itemData?.content);
     } else {
-      CategoryItems(cat)
-        .then((res) => {
-          console.log(res.data.content);
-          setItems(res.data.content);
-        })
-        .catch((err) => {
-          console.error(err);
-          if (err.response) {
-            alert(err.response.data.detailMessage);
-          }
-        });
+      setItems(itemData?.content);
     }
   }, [cat]);
 

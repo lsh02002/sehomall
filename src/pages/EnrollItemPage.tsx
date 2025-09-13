@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { EnrollItem } from "../api/sehomallApi";
 import Layout from "../components/layout/Layout";
 import { useNavigate } from "react-router-dom";
+import { itemType } from "../types/type";
+import { useItem } from "../api/itemContextApi";
 
 const EnrollItemPage = () => {
+  const { items, setItems } = useItem();
   const [state, setState] = useState({
+    id: 0,
     icat: "BAGS",
     iname: "",
     iprice: 0,
@@ -15,6 +18,7 @@ const EnrollItemPage = () => {
     icount: 0,
     idesc: "",
     ideliveryFee: 0,
+    userNickname: "lsh02002",
     images: null,
   });
   const [errMessage, setErrMessage] = useState("");
@@ -45,7 +49,8 @@ const EnrollItemPage = () => {
   };
 
   const OnRegister = () => {
-    const data = {
+    const data: itemType = {
+      id: items.length + 1,
       count: state.icount,
       price: state.iprice,
       size: state.isize,
@@ -54,32 +59,16 @@ const EnrollItemPage = () => {
       description: state.idesc,
       category: state.icat,
       deliveryFee: state.ideliveryFee,
+      userNickname: state.userNickname,
+      views: 0,
+      heartCount: 0,
+      createAt: new Date().toString(),
+      files: [],
+      reviewCount: 0,
     };
 
-    const formDataToSend = new FormData();
-    formDataToSend.append(
-      "itemRequest",
-      new Blob([JSON.stringify(data)], { type: "application/json" })
-    );
-
-    if (state.images) {
-      formDataToSend.append("files", state.images);
-    }
-
-    EnrollItem(formDataToSend)
-      .then((res) => {
-        // console.log(res);
-        if (res.headers?.accesstoken) {
-          localStorage.setItem("accessToken", res.headers?.accesstoken);
-        }
-        navigate("/");
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response) {
-          setErrMessage(err.response.data.detailMessage);
-        }
-      });
+    // setItems([...items, data]);
+    // navigate("/");
   };
 
   return (

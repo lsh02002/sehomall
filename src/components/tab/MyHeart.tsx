@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useLogin } from "../../api/loginContextApi";
-import { GetMyHeartedItems } from "../../api/sehomallApi";
 import Paging from "../pagination/Paging";
 import CardOne from "../card/CardOne";
 import { useMyPage } from "../../api/myPageTabContextApi";
 import { useItem } from "../../api/itemContextApi";
+import { heartData } from "../data/heartData";
 
 const MyHeart = () => {
-  const { isHeartUpdated } = useItem();
-  const { setHeartPage } = useMyPage();
-  const [myHearts, setMyHearts] = useState([]);
+  const { isLogin } = useLogin();
+  const { myHearts, setMyHearts, isHeartUpdated } = useItem();
+  const { setHeartPage } = useMyPage();  
   const [heartTotal, setHeartTotal] = useState(0);
 
   const [searchParams] = useSearchParams();
@@ -22,20 +22,9 @@ const MyHeart = () => {
   }, [page, setHeartPage]);
 
   useEffect(() => {
-    GetMyHeartedItems(page, size)
-      .then((res) => {
-        console.log(res);
-        setMyHearts(res.data.content);
-        setHeartTotal(res.data.totalElements);
-
-        if (res.headers?.accesstoken) {
-          localStorage.setItem("accessToken", res.headers?.accesstoken);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [isHeartUpdated, size, page]);
+    setMyHearts(heartData?.content);
+    setHeartTotal(heartData?.content?.length);
+  }, [isHeartUpdated, size, page, setMyHearts]);
 
   return (
     <>

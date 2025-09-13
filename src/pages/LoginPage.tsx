@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { UserLogin } from "../api/sehomallApi";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../api/loginContextApi";
 import { useMyPage } from "../api/myPageTabContextApi";
 import Layout from "../components/layout/Layout";
+import { userInfoData } from "../components/data/userInfoData";
 
 const LoginPage = () => {
   const { setIsLogin } = useLogin();
-  const { setReviewPage, setHeartPage, setOrderPage } = useMyPage()
+  const { setReviewPage, setHeartPage, setOrderPage } = useMyPage();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,26 +27,15 @@ const LoginPage = () => {
   };
 
   const OnLogin = () => {
-    UserLogin(email, password)
-      .then((res) => {
-        console.log("login ", res);
-        localStorage.setItem("nickname", res.data.data.nickname);
-        localStorage.setItem("accessToken", res.headers.accesstoken);
-        localStorage.setItem("refreshToken", res.headers.refreshtoken);
+    console.log("login ", userInfoData);
+    localStorage.setItem("nickname", userInfoData.nickname);
 
-        setReviewPage(1);
-        setHeartPage(1);
-        setOrderPage(1);
+    setReviewPage(1);
+    setHeartPage(1);
+    setOrderPage(1);
 
-        setIsLogin(true);
-        navigate("/");
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response) {
-          setErrMessage(err.response.data.detailMessage);
-        }
-      });
+    setIsLogin(true);
+    navigate("/");
   };
 
   return (

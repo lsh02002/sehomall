@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ShoppingCart from "../../assets/shopping-cart.svg";
-import { AddCart } from "../../api/sehomallApi";
 import { useLogin } from "../../api/loginContextApi";
 import HeartCount from "../HeartCount";
-import { itemType } from "../../types/type";
+import { itemCartType, itemType } from "../../types/type";
 import { useCart } from "../../api/cartContextApi";
 
 const CardTwo = ({ item }: { item: itemType }) => {
   const { isLogin } = useLogin();
-  const { isEditing, setIsEditing } = useCart();
+  const { cartItems, setCartItems, isEditing, setIsEditing } = useCart();
 
   const OnAddToCartClick = () => {
     if (!isLogin) {
@@ -17,17 +16,18 @@ const CardTwo = ({ item }: { item: itemType }) => {
       return;
     }
 
-    AddCart(item.id)
-      .then((res) => {
-        console.log(res);
-        setIsEditing(!isEditing);
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
-      });    
+    const tempItem: itemCartType = {
+      itemId: item?.id,
+      count: item?.count,
+      itemName: item?.name,
+      price: item?.price,
+      fileUrl: item?.files[0].fileUrl,
+      checked: true,
+      heartCount: item?.heartCount,
+    };
+
+    setCartItems([...cartItems, tempItem]);
+    setIsEditing(!isEditing);  
   };
 
   return (

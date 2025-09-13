@@ -19,7 +19,7 @@ export type fileType = {
 };
 
 export type itemType = {
-  id: 5;
+  id: number;
   count: number;
   price: number;
   size: string;
@@ -54,7 +54,7 @@ export type itemCartTypeWithAllString = {
   fileUrl: string | null;
   checked: string | null;
   heartCount: string | null;
-}
+};
 
 export type itemOrderType = {
   id: number;
@@ -69,7 +69,7 @@ export type orderRequestType = {
   deliveryAddress: string;
   deliveryPhone: string;
   deliveryMessage: string;
-  items: itemCartTypeWithAllString[];
+  items: itemCartType[];
 };
 
 export type orderResponseType = {

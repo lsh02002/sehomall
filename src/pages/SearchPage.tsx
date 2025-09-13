@@ -1,26 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../components/layout/Layout";
 import styled from "styled-components";
 import CardOne from "../components/card/CardOne";
-import { SearchItemsByKeyword } from "../api/sehomallApi";
+import { itemData } from "../components/data/itemData";
+import { itemType } from "../types/type";
 
 const SearchPage = () => {
-  const [searchItems, setSearchItems] = useState([]);
+  const [searchItems, setSearchItems] = useState<itemType[]>([]);
+  const [searchResult, setSearchResult] = useState<itemType[]>([]);
+
+  useEffect(()=>{
+    setSearchItems(itemData?.content);
+  }, [searchItems]);
 
   const OnSearchKeyDown = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.trim() === "") {
-      setSearchItems([]);
+    if (e.target.value.trim() === "") {      
       return;
     }
-
-    SearchItemsByKeyword(e.target.value)
-      .then((res) => {
-        console.log(res);
-        setSearchItems(res.data.content);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    
+    setSearchResult(searchItems?.filter((item: itemType) =>item?.name?.includes(e.target.value)));
   };
 
   return (
@@ -34,8 +32,8 @@ const SearchPage = () => {
             onChange={OnSearchKeyDown}
           />
           <Items>
-            {searchItems.length > 0 ? (
-              searchItems.map((item, index) => (
+            {searchResult.length > 0 ? (
+              searchResult.map((item, index) => (
                 <CardOne key={index} item={item} />
               ))
             ) : (

@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../components/layout/Layout";
 import styled from "styled-components";
-import {
-  CountCartItems,
-  EnrollPayment,
-  FindCartItems,
-  GetUserInfo,
-} from "../api/sehomallApi";
 import PayCard from "../components/card/PayCard";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { itemCartType, itemCartTypeWithAllString, orderRequestType } from "../types/type";
+import { itemCartType, orderResponseType } from "../types/type";
+import { userInfoData } from "../components/data/userInfoData";
+import { cartData } from "../components/data/cartData";
+import { useItem } from "../api/itemContextApi";
 
 const PaymentPage = () => {
   const [ordererInfo, setOrdererInfo] = useState({
@@ -29,7 +26,8 @@ const PaymentPage = () => {
   const [deliveryMessage, setDeliveryMessage] = useState("");
   const [infoCheck, setInfoCheck] = useState(false);
 
-  const [payItems, setPayItems] = useState<itemCartTypeWithAllString[]>([]);
+  const [payItems, setPayItems] = useState<itemCartType[]>([]);
+  const { myOrders, setMyOrders} = useItem();
   const [totalPayPrice, setTotalPayPrice] = useState(0);
 
   const [searchParams] = useSearchParams();
@@ -43,64 +41,25 @@ const PaymentPage = () => {
   const isCheckedItem = searchParams.get("isCheckedItem");
 
   useEffect(() => {
-    GetUserInfo()
-      .then((res) => {
-        console.log(res);
-        setOrdererInfo(res.data);
-
-        if (res.headers?.accesstoken) {
-          localStorage.setItem("accessToken", res.headers?.accesstoken);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    setOrdererInfo(userInfoData);
   }, []);
 
   useEffect(() => {
     if (isFromCart === "true") {
-      FindCartItems()
-        .then((res) => {
-          console.log(res);
           setPayItems(
-            res.data.cartAllSearchResponses.filter(
+            cartData?.content?.filter(
               (item: itemCartType) => item.checked === true
             )
           );
-
-          if (res.headers?.accesstoken) {
-            localStorage.setItem("accessToken", res.headers?.accesstoken);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          if (err.response) {
-            alert(err.response.data.detailMessage);
-          }
-        });
-    } else {
-      // 단지 로그인 했는지 체크하기 위해서서
-      CountCartItems()
-        .then((res) => {
-          if (res.headers?.accesstoken) {
-            localStorage.setItem("accessToken", res.headers?.accesstoken);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          if (err.response) {
-            alert(err.response.data.detailMessage);
-          }
-        });
-
-      const detail: itemCartTypeWithAllString = {
-        itemId,
-        count: itemCount,
-        itemName,
-        price,
-        fileUrl,
-        checked: isCheckedItem,
-        heartCount,
+    } else {      
+      const detail: itemCartType = {
+        itemId: parseInt(itemId ?? "0"),
+        count: parseInt(itemCount ?? "0"),
+        itemName: itemName ?? "",
+        price: parseInt(price ?? "0"),
+        fileUrl: fileUrl ?? "",
+        checked: Boolean(isCheckedItem),
+        heartCount: parseInt(heartCount ?? "0"),
       };
 
       if (
@@ -120,8 +79,8 @@ const PaymentPage = () => {
     if (isFromCart === "true") {
       let total = 0;
       payItems.map(
-        (item) => item.checked && (total += parseInt(item.price ?? "0") * parseInt(item.count ?? "0"))
-      );
+        (item) => item.checked && (total += item.price) * item.count);
+      
       setTotalPayPrice(total);
     } else {
       let total = 0;
@@ -159,31 +118,22 @@ const PaymentPage = () => {
       return;
     }
 
-    const payment: orderRequestType = {
+    const paymentResponse: orderResponseType = {
+      id: 0,
       productSum: totalPayPrice,
       email,
       deliveryName: name,
       deliveryAddress: address,
       deliveryPhone: phoneNumber,
       deliveryMessage,
-      items,
-    };
-
-    EnrollPayment(payment)
-      .then((res) => {
-        console.log(res);
-
-        if (res.headers?.accesstoken) {
-          localStorage.setItem("accessToken", res.headers?.accesstoken);
-        }
-        navigate("/mypage/ORDERS?page=1&size=3");
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
-      });
+      orderStatus: "COMPLETED",
+      createAt: new Date().toString(),
+      items: [],
+    }
+    
+    setMyOrders([...myOrders, paymentResponse]);
+    
+    navigate("/mypage/ORDERS?page=1&size=3");
   };
 
   return (

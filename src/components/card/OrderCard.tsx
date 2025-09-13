@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import SimpleItemCard from "./SimpleItemCard";
-import { ChangePaymentStatus } from "../../api/sehomallApi";
 import { itemOrderType, orderResponseType } from "../../types/type";
 
 type orderCardPropsType = {
@@ -18,17 +17,17 @@ const OrderCard = ({
   const [isModal, setIsModal] = useState(false);
 
   const OnStatusUpdated = (status: string) => {
-    ChangePaymentStatus(order.id, status)
-      .then((res) => {
-        // console.log(res);
-        if (res.headers?.accesstoken) {
-          localStorage.setItem("accessToken", res.headers?.accesstoken);
-        }
-        setIsOrderStatusUpdated(!isOrderStatusUpdated);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    // ChangePaymentStatus(order.id, status)
+    //   .then((res) => {
+    //     // console.log(res);
+    //     if (res.headers?.accesstoken) {
+    //       localStorage.setItem("accessToken", res.headers?.accesstoken);
+    //     }
+    //     setIsOrderStatusUpdated(!isOrderStatusUpdated);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
   };
 
   return (

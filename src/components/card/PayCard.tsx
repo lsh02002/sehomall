@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { itemCartTypeWithAllString } from "../../types/type";
+import { itemCartType } from "../../types/type";
 
-const PayCard = ({ item }: { item: itemCartTypeWithAllString }) => {
+const PayCard = ({ item }: { item: itemCartType }) => {
   return (
     <Container>
       {item?.fileUrl && <img src={item?.fileUrl} alt="preview" />}

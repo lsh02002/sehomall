@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useLogin } from "../api/loginContextApi";
-import { DeleteHeart, InsertHeart, IsHearted } from "../api/sehomallApi";
 import Like from "../assets/heart.svg";
 import LikeSolid from "../assets/heart-solid.svg";
 import { useItem } from "../api/itemContextApi";
@@ -9,7 +8,7 @@ import { useItem } from "../api/itemContextApi";
 type HeartCountPropsType = {
   id: number;
   heartCount: number;
-}
+};
 
 const HeartCount = ({ id, heartCount }: HeartCountPropsType) => {
   const { isLogin } = useLogin();
@@ -19,19 +18,8 @@ const HeartCount = ({ id, heartCount }: HeartCountPropsType) => {
 
   useEffect(() => {
     if (isLogin) {
-      IsHearted(id)
-        .then((res) => {
-          // console.log(res);
-          setIsHearted(res.data);
-          setCountHeart(heartCount);
-
-          if (res.headers?.accesstoken) {
-            localStorage.setItem("accessToken", res.headers?.accesstoken);
-          }
-        })
-        .catch((err) => {
-          // console.error(err);
-        });
+      setIsHearted(false);
+      setCountHeart(heartCount);
     } else {
       setIsHearted(false);
       setCountHeart(heartCount);
@@ -40,41 +28,13 @@ const HeartCount = ({ id, heartCount }: HeartCountPropsType) => {
 
   const OnLikeClick = () => {
     if (!isHearted) {
-      InsertHeart(id)
-        .then((res) => {
-          // console.log(res);
-          setIsHearted(true);
-          setCountHeart(countHeart + 1);
-          setIsHeartUpdated(!isHeartUpdated);
-
-          if (res.headers?.accesstoken) {
-            localStorage.setItem("accessToken", res.headers?.accesstoken);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          if (err.response) {
-            alert(err.response.data.detailMessage);
-          }
-        });
+      setIsHearted(true);
+      setCountHeart(countHeart + 1);
+      setIsHeartUpdated(!isHeartUpdated);
     } else {
-      DeleteHeart(id)
-        .then((res) => {
-          // console.log(res);
-          setIsHearted(false);
-          setCountHeart(countHeart - 1);
-          setIsHeartUpdated(!isHeartUpdated);
-
-          if (res.headers?.accesstoken) {
-            localStorage.setItem("accessToken", res.headers?.accesstoken);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-          if (err.response) {
-            alert(err.response.data.detailMessage);
-          }
-        });
+      setIsHearted(false);
+      setCountHeart(countHeart - 1);
+      setIsHeartUpdated(!isHeartUpdated);
     }
   };
 

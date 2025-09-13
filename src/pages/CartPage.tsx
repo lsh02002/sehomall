@@ -4,26 +4,10 @@ import CartCard from "../components/card/CartCard";
 import styled from "styled-components";
 import { useCart } from "../api/cartContextApi";
 import { useNavigate } from "react-router-dom";
-import { CountCartItems } from "../api/sehomallApi";
 
 const CartPage = () => {
   const { totalPrice, setTotalPrice, cartItems, isEditing } = useCart()
   const navigate = useNavigate();
-
-  useEffect(() => {
-    CountCartItems()
-      .then((res) => {
-        if (res.headers?.accesstoken) {
-          localStorage.setItem("accessToken", res.headers?.accesstoken);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response) {
-          alert(err.response.data.detailMessage);
-        }
-      });
-  }, []);
 
   useEffect(() => {
     let total = 0;

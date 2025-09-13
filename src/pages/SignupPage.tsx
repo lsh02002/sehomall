@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Layout from "../components/layout/Layout";
 import styled from "styled-components";
-import { UserSignup } from "../api/sehomallApi";
 import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
@@ -39,15 +38,8 @@ const SignupPage = () => {
       birthDate: state.birthDate,
     };
 
-    UserSignup(data)
-      .then((res) => {
-        // console.log(res);
-        navigate("/login");
-      })
-      .catch((err) => {
-        console.error(err);
-        setErrMessage(err.response.data.detailMessage);
-      });
+    alert(data);
+    navigate("/login");
   };
 
   return (

@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { CategoryItems, IsHearted, NewItems, PopularItems } from "../api/sehomallApi";
 import Layout from "../components/layout/Layout";
 import Banner from "../components/slider/BannerSlider";
 import ItemSlider from "../components/slider/ItemSlider";
@@ -8,30 +7,27 @@ import CategoryTab from "../components/tab/CategoryTab";
 import Intro from "../components/Intro";
 import { useItem } from "../api/itemContextApi";
 import { itemType } from "../types/type";
+import { itemData } from "../components/data/itemData";
 
 const MainPage = () => {
   const { items, setItems, isHeartUpdated } = useItem();
   const [cate, setCate] = useState("ALL");
 
   useEffect(() => {
-    CategoryItems("ALL")
-      .then((res) => {
-        console.log(res);
-        setItems(res.data.content);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, [isHeartUpdated]);
+    setItems(itemData.content);    
+  }, [setItems, isHeartUpdated]);
 
-  const newItems: itemType[] =
-      items?.sort((a, b) => {
-        const aTime = a?.createAt ? new Date(a.createAt).getTime() : 0;
-        const bTime = b?.createAt ? new Date(b.createAt).getTime() : 0;
-        return bTime - aTime; // ascending
-      });
-  const popularItems: itemType[] = items?.sort((a: itemType, b: itemType) => a.count - b.count);
-  const cateItems: itemType[] = items?.filter((item: itemType) => item?.category !== cate);
+  const newItems: itemType[] = items?.sort((a, b) => {
+    const aTime = a?.createAt ? new Date(a.createAt).getTime() : 0;
+    const bTime = b?.createAt ? new Date(b.createAt).getTime() : 0;
+    return bTime - aTime; // ascending
+  });
+  const popularItems: itemType[] = items?.sort(
+    (a: itemType, b: itemType) => a.count - b.count
+  );
+  const cateItems: itemType[] = items?.filter(
+    (item: itemType) => item?.category !== cate
+  );
 
   return (
     <Layout>

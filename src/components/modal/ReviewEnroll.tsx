@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { EnrollReview, GetUnReviewedItems } from "../../api/sehomallApi";
-import { itemType, unReviewedItemType } from "../../types/type";
+import { useItem } from "../../api/itemContextApi";
+import {
+  fileType,
+  itemType,
+  reviewType,
+  unReviewedItemType,
+} from "../../types/type";
 
 type ReviewEnrollPropsType = {
   item: itemType | null;
@@ -16,6 +21,7 @@ const ReviewEnroll = ({
   isReviewUpdated,
   setIsReviewUpdated,
 }: ReviewEnrollPropsType) => {
+  const { reviews, setReviews, reviewId } = useItem();
   const nickname = localStorage.getItem("nickname");
 
   const [imagePreview, setImagePreview] = useState("");
@@ -30,26 +36,26 @@ const ReviewEnroll = ({
 
   const [errMessage, setErrMessage] = useState("");
 
-  useEffect(() => {
-    GetUnReviewedItems()
-      .then((res) => {
-        console.log(res);
-        setUnReviewedItems(res.data);
-        /* 매우 중요!!! */
-        setState({ ...state, unReviewedItemId: res.data[0].id });
+  // useEffect(() => {
+  //   GetUnReviewedItems()
+  //     .then((res) => {
+  //       console.log(res);
+  //       setUnReviewedItems(res.data);
+  //       /* 매우 중요!!! */
+  //       setState({ ...state, unReviewedItemId: res.data[0].id });
 
-        if (res.headers?.accesstoken) {
-          localStorage.setItem("accessToken", res.headers?.accesstoken);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response) {
-          setErrMessage(err.response.data.detailMessage);
-        }
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //       if (res.headers?.accesstoken) {
+  //         localStorage.setItem("accessToken", res.headers?.accesstoken);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       if (err.response) {
+  //         setErrMessage(err.response.data.detailMessage);
+  //       }
+  //     });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const OnSelectChangeField = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setErrMessage("");
@@ -63,44 +69,30 @@ const ReviewEnroll = ({
 
   const OnReviewRegister = () => {
     const itemId = item !== null ? item?.id : state.unReviewedItemId;
-    const data = {
-      content: state.content,
-      rating: state.rating,
+    const files: fileType[] = [];
+
+    const review: reviewType = {
+      id: reviewId,
       itemId,
+      itemName: item?.name ?? "",
+      nickname: nickname ?? "",
+      content: state?.content,
+      rating: state?.rating,
+      createAt: new Date().toLocaleString(),
+      files,
     };
-    const formDataToSend = new FormData();
-    formDataToSend.append(
-      "reviewRequest",
-      new Blob([JSON.stringify(data)], { type: "application/json" })
-    );
 
-    if (image) {
-      formDataToSend.append("files", image);
-    }
+    setReviews([...reviews, review]);
 
-    EnrollReview(formDataToSend)
-      .then((res) => {
-        // console.log(res);
-
-        if (res.headers?.accesstoken) {
-          localStorage.setItem("accessToken", res.headers?.accesstoken);
-        }
-        setIsReviewUpdated(!isReviewUpdated);
-        setIsReview(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        if (err.response) {
-          setErrMessage(err.response.data.detailMessage);
-        }
-      });
+    setIsReviewUpdated(!isReviewUpdated);
+    setIsReview(false);
   };
 
   const encodeFileToBase64 = (e: React.ChangeEvent<HTMLInputElement>) => {
     setErrMessage("");
     const file = e.target.files?.[0];
     if (!file) return;
-    
+
     setImage(file);
 
     const reader = new FileReader();

@@ -1,65 +1,43 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useLogin } from "../../api/loginContextApi";
 import { useCart } from "../../api/cartContextApi";
-import { FindCartItems, UserLogout } from "../../api/sehomallApi";
 import SimpleCartCard from "../card/SimpleCartCard";
 import { useMyPage } from "../../api/myPageTabContextApi";
 import { itemCartType } from "../../types/type";
+import { cartData } from "../data/cartData";
 
 const Header = () => {
-  const { isLogin, setIsLogin } = useLogin();
+  const { isLogin } = useLogin();
   const { reviewPage } = useMyPage();
   const {
     cartCount,
     setCartCount,
     cartItems,
     setCartItems,
-    isDeleting,
-    isEditing,
   } = useCart();
 
   const [isModal, setIsModal] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isLogin) {
-      FindCartItems()
-      .then((res) => {
-        console.log(res);
-        setCartItems(res.data.cartAllSearchResponses);
-        setCartCount(res.data.cartAllSearchResponses.length);
-
-        if (res.headers?.accesstoken) {
-          localStorage.setItem("accessToken", res.headers?.accesstoken);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-    }
-  }, [    
-    isLogin,
-    cartCount,
-    setCartCount,
-    setCartItems,
-    isDeleting,
-    isEditing,
-  ]);
+  useEffect(()=>{
+    setCartItems(cartData?.content);
+    setCartCount(cartData?.content.length)
+  }, [setCartCount, setCartItems]);
 
   const OnLogout = () => {
-    if (window.confirm("로그아웃 하시겠습니까?")) {
-      UserLogout().catch((err) => {
-        console.error("logout ", err);
-      });
-      localStorage.removeItem("nickname");
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      setCartCount(0);
-      setCartItems([]);
-      setIsLogin(false);
-    }
+    // if (window.confirm("로그아웃 하시겠습니까?")) {
+    //   UserLogout().catch((err) => {
+    //     console.error("logout ", err);
+    //   });
+    //   localStorage.removeItem("nickname");
+    //   localStorage.removeItem("accessToken");
+    //   localStorage.removeItem("refreshToken");
+    //   setCartCount(0);
+    //   setCartItems([]);
+    //   setIsLogin(false);
+    // }
   };
 
   const OnMoveToCart = () => {

@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { itemType } from "../../types/type";
 import CardTwo from "../card/CardTwo";
 
 type CategoryTabPropsType = {
   cate: string;
-  setCate: (s: string) => void;
+  setCate: Dispatch<SetStateAction<string>>;
   cateItems: itemType[]
 }
 
