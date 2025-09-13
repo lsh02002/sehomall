@@ -55,12 +55,13 @@ const Main = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;  
+  height: 100%;  
   box-sizing: border-box;
 `;
 
 const Title = styled.div`
-  width: 100vw;
+  width: 100%;
   max-width: 1400px;
   font-size: 1.4em;
   margin: 80px 0 0 20px;

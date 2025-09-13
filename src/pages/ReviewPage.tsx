@@ -73,6 +73,7 @@ const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
   padding: 0 20px;
+  //잃어 버리지 말자!!!
   box-sizing: border-box;
 
   h1 {
