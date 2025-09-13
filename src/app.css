@@ -1,8 +1,13 @@
+html {
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+}
+
 body {
-    margin: 0;
+  margin: 0;
 }
 
 a {
-    text-decoration: none;
-    margin: 0;
+  text-decoration: none;
+  margin: 0;
 }

@@ -19,6 +19,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: start;  
   box-sizing: border-box;
+  width: 100%;
 `;
 
 const Main = styled.div`
@@ -27,5 +28,5 @@ const Main = styled.div`
   justify-content: start;
   align-items: center;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
 `;

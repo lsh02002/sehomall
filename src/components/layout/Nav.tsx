@@ -54,11 +54,11 @@ const Nav = () => {
           <div>REVIEWS</div>
         </IconLink>
         <IconLink to={`/mypage/REVIEWS?page=${reviewPage}&size=4`}>
-            <div>
-              <img src={MyPage} alt="" />
-            </div>
-            <div>MYPAGE</div>
-          </IconLink>
+          <div>
+            <img src={MyPage} alt="" />
+          </div>
+          <div>MYPAGE</div>
+        </IconLink>
         {/* {!isLogin ? (
           <>            
             <IconLink to="/login">
@@ -78,7 +78,7 @@ const Nav = () => {
             </IconLink>
           </>
         )} */}
-        <>          
+        <>
           {/* <Link to="/pay">PAY</Link> */}
           <IconLink
             to="/cart"
@@ -89,9 +89,7 @@ const Nav = () => {
               <img src={Cart} alt="" />
               <span>{cartCount}</span>
             </div>
-            <div>
-              CART
-            </div>
+            <div>CART</div>
           </IconLink>
           {isModal && (
             <Modal
@@ -117,25 +115,27 @@ const Nav = () => {
 export default Nav;
 
 const Container = styled.nav`
-  position: fixed;
-  bottom: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 70px;
   width: 100vw;
-  box-sizing: border-box;  
+  box-sizing: border-box;
   opacity: 1;
-  z-index: 20;
+  z-index: 200;
   border-top: 1px solid lightgray;
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0;
+  right: 0;
 `;
 
 const Menu = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 100vw;
-  height: 100%;
+  width: 100%;
+  height: 70px;
   font-size: 14px;
   background-color: rgba(255, 255, 255, 1);
   a {
@@ -152,7 +152,7 @@ const Menu = styled.div`
     text-align: center;
     line-height: 14px;
     padding-left: 2px;
-    position: absolute;    
+    position: absolute;
   }
 `;
 
@@ -179,8 +179,7 @@ const Modal = styled.div`
   padding: 0 20px;
   box-sizing: border-box;
   z-index: 5;
-  border: 1px solid lightgray;
-  overflow-y: auto;
+  border: 1px solid lightgray;  
   box-sizing: border-box;
 
   button {

@@ -13,8 +13,8 @@ const ReviewPage = () => {
   const [total, setTotal] = useState(0);
 
   const [searchParams] = useSearchParams();
-  const page = parseInt(searchParams.get("page") ?? "1");    
-  const size = parseInt(searchParams.get("size") ?? "5");    
+  const page = parseInt(searchParams.get("page") ?? "1");
+  const size = parseInt(searchParams.get("size") ?? "5");
 
   const [isReview, setIsReview] = useState(false);
   const [isReviewUpdated, setIsReviewUpdated] = useState(false);
@@ -23,6 +23,16 @@ const ReviewPage = () => {
     setReviews(reviewData?.content);
     setTotal(reviewData?.totalElements);
   }, [page, size, isReviewUpdated, setIsReviewUpdated]);
+
+  useEffect(() => {
+    if (isReview) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [isReview]);
 
   return (
     <Layout>
@@ -59,6 +69,12 @@ const Container = styled.div`
   margin-top: 50px;
   width: 100%;
   max-width: 870px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+
   h1 {
     text-align: center;
     font-size: 36px;
@@ -88,13 +104,12 @@ const Container = styled.div`
 
 const ReviewBody = styled.div``;
 
-const Review = styled.div`
-  width: 100%;
-  box-sizing: border-box;
+const Review = styled.div`  
   position: fixed;
-  left: 0;
-  top: 0;
+  width: 100%;  
+  box-sizing: border-box;
+  inset: 0;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 5;
+  z-index: 50;
 `;

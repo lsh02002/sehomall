@@ -60,7 +60,7 @@ box-sizing: border-box;
 `;
 
 const ItemsInner = styled.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -70,6 +70,7 @@ const ItemsInner = styled.div`
 const Message = styled.div`
   font-size: 14px;
   width: 200px;
+  max-width: 40ch;
   padding: 0 0 0 20px;
   margin-top: 20px;
   background-color: gray;

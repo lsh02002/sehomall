@@ -56,13 +56,12 @@ const Main = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  // flex-wrap: wrap;
   box-sizing: border-box;
 `;
 
 const Title = styled.div`
-  width: 100%;
+  width: 100vw;
   max-width: 1400px;
   font-size: 1.4em;
-  margin: 80px 0 10px 0;
+  margin: 80px 0 0 20px;
 `;

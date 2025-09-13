@@ -23,6 +23,7 @@ function BannerSlider() {
           delay: 3000,
           disableOnInteraction: false,
         }}
+        loop="true"
         speed={1000}
         pagination={{
           clickable: true,
@@ -30,8 +31,9 @@ function BannerSlider() {
         style={{
           width: "85%",
           maxWidth: "1600px",
-          height: "500px",
-          padding: "20px",          
+          height: "300px",
+          padding: "20px",
+          boxSizing: "border-box",
         }}
       >
         {bannerImages.length > 0 &&
