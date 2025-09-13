@@ -21,8 +21,7 @@ const SideMenu = () => {
       <CatLink to={"/instagram"}>INSTAGRAM</CatLink>
       <Message>
         백엔드 비용이 발생하여 프론트엔드에서 가짜(더미)데이터를 사용하기로
-        했습니다. 작업을 놓고 있었는데 디자인도 업데이트 노력하겠습니다.
-        프론트엔드 위주로 공부하려합니다.
+        했습니다. 작업을 놓고 있었는데 디자인도 업데이트 노력하겠습니다.        
       </Message>
     </Container>
   );
