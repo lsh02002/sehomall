@@ -27,14 +27,8 @@ const Payment = lazy(() => import("./pages/PaymentPage"));
 function App() {
   const { setIsLogin } = useLogin();
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    
-    if (accessToken) {
-      setIsLogin(true);
-    } else {
-      setIsLogin(false);
-    }
+  useEffect(() => {          
+    setIsLogin(true);    
   }, [setIsLogin]);
 
   return (
