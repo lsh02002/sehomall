@@ -29,7 +29,7 @@ function BannerSlider() {
           clickable: true,
         }}
         style={{
-          width: "85%",
+          width: "100%",
           maxWidth: "1600px",
           height: "300px",
           padding: "20px",
@@ -51,8 +51,7 @@ function BannerSlider() {
 
 export default BannerSlider;
 
-const Slide = styled.div`
-  // border: 1px solid lightgray;
+const Slide = styled.div`  
   height: 100%;
   line-height: 100%;
   display: flex;

@@ -135,18 +135,18 @@ const TabInner = styled.div`
 
   .btn li {
     float: left;
-    width: 80px;
+    width: 150px;
     text-align: center;
     cursor: pointer;
     background-color: #eee;
     border-right: 1px solid #ddd;
     padding: 10px;
     border-top: 2px solid transparent;
-    font-size: 0.8rem;
+    font-size: var(--button-font-size);
   }
 
   .btn li:last-child {
-    width: 140px;
+    width: 180px;
     border-right: none;
   }
 

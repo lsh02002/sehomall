@@ -37,4 +37,5 @@ const Container = styled.article`
 
 const Info = styled.div`
   padding: 5px;
+  font-size: var(--main-font-size);
 `;

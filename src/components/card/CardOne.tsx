@@ -69,9 +69,9 @@ const CardOne = ({ item }: { item: itemType }) => {
 
 export default CardOne;
 
-const Container = styled.article`
+const Container = styled.article`  
   width: 140px;
-  height: 200px;  
+  height: 200px;
   img {
     width: 132px;
     height: 140px;
@@ -88,14 +88,14 @@ const Container = styled.article`
 `;
 
 const Title = styled.span`
-  font-size: 0.8rem;
+  font-size: var(--main-font-size);
   display: block;
   padding: 5px 5px;
   background-color: #fff;
 `;
 
 const Price = styled.span`
-  font-size: 0.8rem;
+  font-size: var(--main-font-size);
   color: red;
   display: block;
   background-color: #fff;
@@ -136,7 +136,8 @@ const ItemInfo = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-size: 0.8rem;
+  font-size: var(--main-font-size);
+  z-index: 200;
   &:hover {
     opacity: 1;
   }

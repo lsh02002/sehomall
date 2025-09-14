@@ -86,7 +86,7 @@ const ReviewButtonWrapper = styled.span`
     background-color: gray;
     transition: 0.2s;
     cursor: pointer;
-    font-size: 1em;
+    font-size: var(--button-font-size);
     &:hover {
       background-color: lightgray;
     }

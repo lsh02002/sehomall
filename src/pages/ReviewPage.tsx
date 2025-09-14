@@ -65,19 +65,16 @@ const ReviewPage = () => {
 
 export default ReviewPage;
 
-const Container = styled.div`
-  margin-top: 50px;
+const Container = styled.div`  
   width: 100%;
-  max-width: 870px;
-  margin-top: 50px;
+  max-width: 870px;  
   padding: 0 20px;
   //잃어 버리지 말자!!!
   box-sizing: border-box;
 
   h1 {
     text-align: center;
-    font-size: 36px;
-    font-weight: normal;
+    font-size: var(--main-h1-size);
   }
 
   span {
@@ -94,7 +91,7 @@ const Container = styled.div`
     background-color: gray;
     transition: 0.2s;
     cursor: pointer;
-    font-size: 1em;
+    font-size: var(--button-font-size);
     &:hover {
       background-color: lightgray;
     }
@@ -103,9 +100,9 @@ const Container = styled.div`
 
 const ReviewBody = styled.div``;
 
-const Review = styled.div`  
+const Review = styled.div`
   position: fixed;
-  width: 100%;  
+  width: 100%;
   box-sizing: border-box;
   inset: 0;
   height: 100vh;

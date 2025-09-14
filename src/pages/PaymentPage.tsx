@@ -295,7 +295,7 @@ const Order = styled.div`
     border: none;
     margin: 10px;
     padding: 5px 10px;
-    font-size: 1.2em;
+    font-size: var(--button-font-size);
     color: #fff;
     background-color: gray;
   }

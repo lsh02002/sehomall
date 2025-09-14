@@ -81,7 +81,7 @@ const Container = styled.div`
     background-color: gray;
     transition: 0.2s;
     cursor: pointer;
-    font-size: 1em;
+    font-size: var(--button-font-size);
     &:hover {
       background-color: lightgray;
     }
@@ -110,11 +110,6 @@ const ItemInfo = styled.div`
       padding-right: 20px;
       box-sizing: border-box;
     }
-  }
-
-  h3 {
-    padding-left: 20px;
-    color: red;
   }
 `;
 

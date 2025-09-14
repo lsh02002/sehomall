@@ -60,6 +60,7 @@ const Container = styled.div`
 
 const Title = styled.h1`
   margin: 10px 0 0 10px;
+  font-size: var(--main-h1-size);
   span {
     font-size: 0.8em;
   }

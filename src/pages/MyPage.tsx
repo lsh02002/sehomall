@@ -7,9 +7,10 @@ import { useParams } from "react-router-dom";
 const MyPage = () => {
   //   const [myOrderItems, setMyOrderItems] = useState([]);
   const { cate } = useParams();
-  
+
   return (
     <Layout>
+      <h1>마이 페이지</h1>
       <Container>        
         <MyPageTab cate={cate} />
       </Container>
@@ -19,5 +20,4 @@ const MyPage = () => {
 
 export default MyPage;
 
-const Container = styled.div`  
-`;
+const Container = styled.div``;

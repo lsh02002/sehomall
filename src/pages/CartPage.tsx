@@ -26,7 +26,7 @@ const CartPage = () => {
   return (
     <Layout>
       <Main>
-        <h2>장바구니</h2>
+        <h1>장바구니</h1>
         {cartItems.length > 0 ? (
           cartItems.map((item, index) => <CartCard key={index} item={item} />)
         ) : (
@@ -57,6 +57,7 @@ const Main = styled.div`
 
 const NoItems = styled.h3`
   font-weight: normal;
+  font-size: var(--main-h3-size);
 `;
 
 const TotalSum = styled.div`
@@ -80,7 +81,7 @@ const Order = styled.div`
     padding: 8px;
     color: white;
     background-color: gray;
-    font-size: 1.2em;
+    font-size: var(--button-font-size);
     transition: 0.3s;
     cursor: pointer;
     &:hover {

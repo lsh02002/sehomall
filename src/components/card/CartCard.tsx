@@ -121,6 +121,7 @@ const ItemGroup = styled.div`
 
 const Info = styled.div`
   padding: 5px;
+  font-size: var(--main-font-size);
 `;
 
 const ButtonGroup = styled.div`
@@ -160,7 +161,7 @@ const Count = styled.div`
     background-color: gray;
     transition: 0.2s;
     cursor: pointer;
-    font-size: 1em;
+    font-size: var(--button-font-size);
     &:hover {
       background-color: lightgray;
     }
@@ -179,7 +180,7 @@ const DeleteItem = styled.div`
     background-color: gray;
     transition: 0.2s;
     cursor: pointer;
-    font-size: 1em;
+    font-size: var(--button-font-size);
     &:hover {
       background-color: lightgray;
     }

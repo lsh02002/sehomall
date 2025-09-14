@@ -25,11 +25,7 @@ const CategoryPage = () => {
           <CatLink to={"/about"}>ABOUT</CatLink>
           <CatLink to={"/notice?page=1&size=5"}>NOTICE</CatLink>
           <CatLink to={"/contact"}>CONTACT</CatLink>
-          <CatLink to={"/instagram"}>INSTAGRAM</CatLink>
-          <Message>
-            백엔드 비용이 발생하여 프론트엔드에서 가짜(더미)데이터를 사용하기로
-            했습니다. 작업을 놓고 있었는데 디자인도 업데이트 노력하겠습니다.
-          </Message>
+          <CatLink to={"/instagram"}>INSTAGRAM</CatLink>          
         </ItemsInner>
       </Container>
     </Layout>
@@ -51,11 +47,11 @@ const Container = styled.div`
 
 const Title = styled.h1`
 width: 100%;
-text-align: left;
 padding: 0 20px;
 box-sizing: border-box;
-  span {
-    font-size: 0.8em;
+font-size: var(--main-h1-size);
+  span {    
+    font-size: 1em;
   }
 `;
 
@@ -65,17 +61,6 @@ const ItemsInner = styled.div`
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-`;
-
-const Message = styled.div`
-  font-size: 14px;
-  width: 200px;
-  max-width: 40ch;
-  padding: 0 0 0 20px;
-  margin-top: 20px;
-  background-color: gray;
-  color: white;
-  box-sizing: border-box;  
 `;
 
 const CatLink = styled(Link)`

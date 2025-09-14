@@ -76,14 +76,14 @@ const Container = styled.article`
 `;
 
 const Title = styled.span`
-  font-size: 0.8rem;
+  font-size: var(--main-font-size);
   display: block;
   padding: 5px 5px;
   background-color: #fff;
 `;
 
 const Price = styled.span`
-  font-size: 0.8rem;
+  font-size: var(--main-font-size);
   color: red;
   display: block;
   background-color: #fff;

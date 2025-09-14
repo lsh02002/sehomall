@@ -29,7 +29,10 @@ const Intro = () => {
           <div className="main__intro-container-img">
             <img className="main__intro-image" src={Intro01} alt="" />
             <div className="main__intro-text-container">
-              <h3 className="main__intro-title">개발자<br/> 깃허브</h3>
+              <h3 className="main__intro-title">
+                개발자
+                <br /> 깃허브
+              </h3>
               <span className="main__intro-description">
                 개발자의 웹 관련 소스들
               </span>
@@ -63,7 +66,8 @@ const Introduction = styled.section`
   height: 100%;
   flex-wrap: wrap;
   border: 1px solid lightgray;
-  
+  margin-top: 50px;
+
   .main__intro-container-img {
     width: 135px;
     height: 135px;
@@ -74,6 +78,10 @@ const Introduction = styled.section`
     justify-content: center;
     align-items: center;
     border-radius: 50%;
+    
+    &:hover .main__intro-image {      
+      transform: scale(1.1);
+    }
   }
 
   .main__intro-image {
@@ -81,6 +89,8 @@ const Introduction = styled.section`
     height: 100%;
     object-fit: cover;
     filter: brightness(0.8);
+
+    transition: transform 0.5s ease;
   }
 
   .main__intro-container-img {
@@ -90,7 +100,7 @@ const Introduction = styled.section`
   .main__intro-text-container {
     position: absolute;
     bottom: 20px;
-    left: 20px;    
+    left: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -98,9 +108,9 @@ const Introduction = styled.section`
 
   .main__intro-title {
     color: white;
-    /* font-size: 35px; */
+    font-size: var(--main-h3-size);
     font-weight: 600;
-    margin-bottom: 10px;    
+    margin-bottom: 10px;
   }
 
   .main__intro-description {

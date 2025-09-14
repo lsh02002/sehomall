@@ -198,8 +198,9 @@ const EnrollInner = styled.div`
   }
 `;
 
-const Title = styled.h2`
+const Title = styled.h1`
   font-weight: normal;
+  font-size: var(--main-h1-size);
   margin: 5px;
 `;
 
@@ -248,7 +249,7 @@ const Register = styled.button`
   width: 90%;
   box-sizing: border-box;
   padding: 10px;
-  font-size: 1.2em;
+  font-size: var(--button-font-size);
   margin-bottom: 30px;
   color: white;
   transition: 0.2s;

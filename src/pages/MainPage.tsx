@@ -57,12 +57,15 @@ const Main = styled.div`
   align-items: center;
   width: 100%;  
   height: 100%;  
-  box-sizing: border-box;
+  box-sizing: border-box;  
 `;
 
 const Title = styled.div`
   width: 100%;
   max-width: 1400px;
-  font-size: 1.4em;
-  margin: 80px 0 0 20px;
+  font-size: var(--main-h2-size);
+  margin: 80px 0 0 0;
+  padding: 0 80px;
+  text-align: left;
+  box-sizing: border-box;
 `;

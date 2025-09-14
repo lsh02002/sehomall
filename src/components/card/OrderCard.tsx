@@ -123,10 +123,12 @@ const OrderInfo = styled.div`
   padding: 5px;
   width: 40%;
   position: relative;
+  font-size: var(--main-font-size);
 
   button {
     border: none;
     background-color: #fff;
+    font-size: var(--button-font-size);
   }
 `;
 
@@ -137,6 +139,7 @@ const CreatedDate = styled.div`
 const OrderStatusInfo = styled.div`
   width: 40%;
   margin-left: 20px;
+  font-size: var(--main-font-size);
 
   div {    
     padding-bottom: 5px;
@@ -160,6 +163,7 @@ const CancelOrComplete = styled.div`
     transition: 0.2s;
     cursor: pointer;
     width: 70%;
+    font-size: var(--button-font-size);
 
     // &:nth-child(1) {
     //   color: white;

@@ -76,7 +76,7 @@ const DetailPage = () => {
         <Info>
           {item && (
             <>
-              <h3>{item.name}</h3>
+              <h1>{item.name}</h1>
               <div>
                 <span>Price</span>
                 <em style={{color: "red"}}>{item.price.toLocaleString()} 원</em>
@@ -173,11 +173,12 @@ const Info = styled.div`
   align-items: center;
   flex-direction: column;
   text-align: left;
-  h3 {
+  h1 {
     width: 100%;
     margin: 0;
     padding: 10px 0;
     box-sizing: border-box;
+    font-size: var(--main-h1-size);
   }
 
   div {
@@ -207,7 +208,7 @@ const CountButton = styled.span`
     background-color: gray;
     transition: 0.2s;
     cursor: pointer;
-    font-size: 1em;
+    font-size: var(--button-font-size);
     &:hover {
       background-color: lightgray;
     }
@@ -223,6 +224,7 @@ const BuyNow = styled.button`
   transition: 0.2s;
   cursor: pointer;
   width: 100%;
+  font-size: var(--button-font-size);
   &:hover {
     background-color: lightgray;
   }
@@ -237,6 +239,7 @@ const AddToCartButton = styled.button`
   cursor: pointer;
   border: 1px solid black;
   transition: 0.3s;
+  font-size: var(--button-font-size);
   &:hover {
     color: gray;
   }
@@ -270,7 +273,7 @@ const ReviewTitle = styled.div`
     background-color: gray;
     transition: 0.2s;
     cursor: pointer;
-    font-size: 1em;
+    font-size: var(--button-font-size);
     &:hover {
       background-color: lightgray;
     }

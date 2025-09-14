@@ -66,12 +66,13 @@ const Container = styled.div`
 const ItemInfo = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;  
+  width: 100%;
 `;
 
 const Info = styled.div`
   padding: 5px;
   width: 300px;
+  font-size: var(--main-font-size);
 `;
 
 const ContentGroup = styled.div`  
@@ -84,14 +85,17 @@ const Content = styled.div`
   padding-left: 40px;
   padding-right: 25px;
   text-align: left;
-  width: 100%;  
+  width: 100%;
+  font-size: var(--main-font-size);
 `;
 
 const RatingCount = styled.div`
   width: 200px;
-  text-align: right;  
+  text-align: right;
+  font-size: var(--main-font-size);
 `;
 
 const CreatedDate = styled.div`
   width: 100%;
+  font-size: var(--main-font-size);
 `;

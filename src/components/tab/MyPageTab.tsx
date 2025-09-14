@@ -114,6 +114,7 @@ const TabInner = styled.div`
     border-right: 1px solid #ddd;
     padding: 10px;
     border-top: 2px solid transparent;
+    font-size: var(--button-font-size);
   }
 
   .mybtn li:last-child {
@@ -142,6 +143,7 @@ const Content = styled.div`
   align-items: center;
   width: 100%;
   flex-wrap: wrap;
+  font-size: var(--main-font-size);
   em {
     display: inline-block;
     text-align: left;

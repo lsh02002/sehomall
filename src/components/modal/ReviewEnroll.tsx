@@ -211,7 +211,7 @@ const Enroll = styled.div`
     button {
       border: none;
       background-color: transparent;
-      font-size: 1.2em;
+      font-size: var(--button-font-size);
       cursor: pointer;
       &:hover {
         transform: scale(0.9);
@@ -275,6 +275,7 @@ const Enroll = styled.div`
     padding-top: 20px;
 
     button {
+      font-size: var(--button-font-size);
       border: none;
       padding: 5px 10px;
       color: white;

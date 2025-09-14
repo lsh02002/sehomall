@@ -79,7 +79,8 @@ const Main = styled.div`
   box-sizing: border-box;
 `;
 
-const Title = styled.h2`
+const Title = styled.h1`
+  font-size: var(--main-h1-size);
   font-weight: normal;
   margin: 5px;
 `;
@@ -120,6 +121,7 @@ const Login = styled.button`
   cursor: pointer;
   color: white;
   transition: 0.2s;
+  font-size: var(--button-font-size);
   &:hover {
     background-color: lightgray;
   }

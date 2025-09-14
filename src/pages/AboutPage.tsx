@@ -157,8 +157,8 @@ const Container = styled.div`
   }
 
   .tab-inner h1 {
-    text-align: center;
-    font-weight: normal;
+    text-align: center;    
+    font-size: var(--main-h1-size);
   }
 
   input[name="tabmenu"] {

@@ -175,8 +175,9 @@ const Main = styled.div`
   box-sizing: border-box;
 `;
 
-const Title = styled.h2`
+const Title = styled.h1`
   font-weight: normal;
+  font-size: var(--main-h1-size);
   margin: 5px;
 `;
 
@@ -272,6 +273,7 @@ const SignUp = styled.button`
   cursor: pointer;
   color: white;
   transition: 0.2s;
+  font-size: var(--button-font-size);
   &:hover {
     background-color: lightgray;
   }

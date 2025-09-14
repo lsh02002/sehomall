@@ -2,7 +2,6 @@ import "./app.css";
 import styled from "styled-components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Nav from "./components/layout/Nav";
-import Footer from "./components/layout/Footer";
 import { lazy, Suspense, useEffect } from "react";
 import { useLogin } from "./api/loginContextApi";
 import PageLoading from "./components/layout/PageLoading";

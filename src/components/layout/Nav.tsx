@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useLogin } from "../../api/loginContextApi";
+// import { useLogin } from "../../api/loginContextApi";
 import { useCart } from "../../api/cartContextApi";
 import SimpleCartCard from "../card/SimpleCartCard";
 import { useMyPage } from "../../api/myPageTabContextApi";
@@ -14,7 +14,7 @@ import MyPage from "../../assets/my-page.svg";
 import Cart from "../../assets/cart.svg";
 
 const Nav = () => {
-  const { isLogin, setIsLogin } = useLogin();
+  // const { isLogin, setIsLogin } = useLogin();
   const { reviewPage } = useMyPage();
   const { cartCount, setCartCount, cartItems, setCartItems } = useCart();
 
@@ -26,13 +26,13 @@ const Nav = () => {
     setCartCount(cartData?.content.length);
   }, [setCartCount, setCartItems]);
 
-  const OnLogout = () => {
-    if (window.confirm("로그아웃 하시겠습니까?")) {
-      setCartCount(0);
-      setCartItems([]);
-      setIsLogin(true);
-    }
-  };
+  // const OnLogout = () => {
+  //   if (window.confirm("로그아웃 하시겠습니까?")) {
+  //     setCartCount(0);
+  //     setCartItems([]);
+  //     setIsLogin(true);
+  //   }
+  // };
 
   const OnMoveToCart = () => {
     navigate("/cart");
@@ -45,19 +45,19 @@ const Nav = () => {
           <div>
             <img src={Category} alt="" />
           </div>
-          <div>CATEGORIES</div>
+          <div>카테고리</div>
         </IconLink>
         <IconLink to={`/reviews?page=1&size=5`}>
           <div>
             <img src={Review} alt="" />
           </div>
-          <div>REVIEWS</div>
+          <div>전체리뷰</div>
         </IconLink>
         <IconLink to={`/mypage/REVIEWS?page=${reviewPage}&size=4`}>
           <div>
             <img src={MyPage} alt="" />
           </div>
-          <div>MYPAGE</div>
+          <div>마이페이지</div>
         </IconLink>
         {/* {!isLogin ? (
           <>            
@@ -89,7 +89,7 @@ const Nav = () => {
               <img src={Cart} alt="" />
               <span>{cartCount}</span>
             </div>
-            <div>CART</div>
+            <div>장바구니</div>
           </IconLink>
           {isModal && (
             <Modal
@@ -189,7 +189,7 @@ const Modal = styled.div`
     background-color: gray;
     transition: 0.2s;
     cursor: pointer;
-    font-size: 1em;
+    font-size: var(--button-font-size);
     margin-top: 20px;
     margin-left: 95px;
     &:hover {
