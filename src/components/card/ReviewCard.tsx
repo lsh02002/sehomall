@@ -7,23 +7,30 @@ import StarRating from "../StarRating";
 const ReviewCard = ({ review }: { review: reviewType | null }) => {
   return (
     <Container>
-      <Link to={`/detail/${review?.itemId}`}>
-        <img src={review?.files[0] ? review.files[0].fileUrl : NoImage} alt="" />
-      </Link>
-      <Info>
+      <ItemInfo>
         <Link to={`/detail/${review?.itemId}`}>
-          <div>상품 아이디: {review?.itemId}</div>
-          <div>상품 명: {review?.itemName}</div>
-          <div>작성자: {review?.nickname}</div>
+          <img
+            src={review?.files[0] ? review.files[0].fileUrl : NoImage}
+            alt=""
+          />
         </Link>
-      </Info>
+        <Info>
+          <Link to={`/detail/${review?.itemId}`}>
+            <div>상품 아이디: {review?.itemId}</div>
+            <div>상품 명: {review?.itemName}</div>
+            <div>작성자: {review?.nickname}</div>
+          </Link>
+        </Info>
+      </ItemInfo>
+      <ContentGroup>
       <Content>
         <div>내용: {review?.content}</div>
       </Content>
       <RatingCount>
         <StarRating totalStars={review?.rating ?? null} />
       </RatingCount>
-      <CreatedDate>{review?.createAt}</CreatedDate>
+      </ContentGroup>
+      <CreatedDate>등록: {review?.createAt}</CreatedDate>
     </Container>
   );
 };
@@ -31,27 +38,35 @@ const ReviewCard = ({ review }: { review: reviewType | null }) => {
 export default ReviewCard;
 
 const Container = styled.div`
-display: flex;
-  justify-content: start;
-  align-items; center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   max-width: 870px;
   width: 100%;
   overflow: hidden;
   box-sizing: border-box;
-  margin: 25px;  
+  margin: 25px;
   padding: 5px;
   position: relative;
-  
+  border: 1px solid lightgray;
+
   img {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     padding: 0px 10px;
-    object-fit: cover;
+    object-fit: contain;
   }
-    a{
+  a {
     text-decoration: none;
     color: black;
-    }
+  }
+`;
+
+const ItemInfo = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;  
 `;
 
 const Info = styled.div`
@@ -59,17 +74,24 @@ const Info = styled.div`
   width: 300px;
 `;
 
-const Content = styled.div`
-  padding-left: 25px;
-  text-align: center;
+const ContentGroup = styled.div`  
+  display: flex;
+  justify-content: space-between;  
   width: 100%;
+`;
+
+const Content = styled.div`
+  padding-left: 40px;
+  padding-right: 25px;
+  text-align: left;
+  width: 100%;  
 `;
 
 const RatingCount = styled.div`
   width: 200px;
-  text-align: center;
+  text-align: right;  
 `;
 
 const CreatedDate = styled.div`
-  width: 290px;
+  width: 100%;
 `;

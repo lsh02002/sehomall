@@ -195,13 +195,14 @@ const Enroll = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 500px;
+  width: 280px;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  padding: 30px;
+  padding: 10px;
   z-index: 10;
+  box-sizing: border-box;
 
-  div:nth-child(1) {
+  div:nth-child(1) {    
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -218,13 +219,14 @@ const Enroll = styled.div`
     }
   }
 
-  & > span {
+  & > span {    
     display: inline-block;
     width: 100%;
-    margin: 20px 20px 0 0;
+    margin: 10px 10px 0 0;
     padding: 5px;
     border: 1px solid lightgray;
     box-sizing: border-box;
+    font-size: 0.9rem;
   }
 
   input[type="file"] {
@@ -233,7 +235,7 @@ const Enroll = styled.div`
   .btn {
     padding: 10px 0;
     width: 100%;
-    margin-bottom: 5px;
+    margin-bottom: 5px;    
   }
 
   .btn span {
@@ -243,6 +245,7 @@ const Enroll = styled.div`
     padding: 5px;
     border: 1px solid lightgray;
     box-sizing: border-box;
+    font-size: 0.9rem;
   }
 
   .btn label {
@@ -254,7 +257,7 @@ const Enroll = styled.div`
     cursor: pointer;
     text-align: center;
     line-height: 40px;
-    margin-left: 10px;
+    margin-left: 10px;    
   }
 
   textarea {

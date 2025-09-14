@@ -4,12 +4,23 @@ import HeartCount from "../HeartCount";
 import { Link } from "react-router-dom";
 import { itemCartType } from "../../types/type";
 
-const CartCard = ({ item }: { item: itemCartType }) => {  
-  const { cartItems, setCartItems, isDeleting, setIsDeleting, isEditing, setIsEditing } = useCart();
+const CartCard = ({ item }: { item: itemCartType }) => {
+  const {
+    cartItems,
+    setCartItems,
+    isDeleting,
+    setIsDeleting,
+    isEditing,
+    setIsEditing,
+  } = useCart();
 
   const onAdd = () => {
     item.count = item.count + 1;
-    setCartItems(cartItems.map(it =>it.itemId === item.itemId ? {...it, count: item?.count} : it));
+    setCartItems(
+      cartItems.map((it) =>
+        it.itemId === item.itemId ? { ...it, count: item?.count } : it
+      )
+    );
   };
 
   const onSub = () => {
@@ -19,46 +30,58 @@ const CartCard = ({ item }: { item: itemCartType }) => {
       item.count = 1;
       return;
     }
-    
-    setCartItems(cartItems.map(it =>it.itemId === item.itemId ? {...it, count: item?.count} : it));
+
+    setCartItems(
+      cartItems.map((it) =>
+        it.itemId === item.itemId ? { ...it, count: item?.count } : it
+      )
+    );
   };
 
   const onDel = (id: number) => {
-    setCartItems(cartItems.filter(it =>it.itemId !== item.itemId));
+    setCartItems(cartItems.filter((it) => it.itemId !== item.itemId));
   };
 
   const onChecked = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    setCartItems(cartItems.map(it=>it.itemId === item.itemId ? {...it, checked: target?.checked} : it));
+    setCartItems(
+      cartItems.map((it) =>
+        it.itemId === item.itemId ? { ...it, checked: target?.checked } : it
+      )
+    );
   };
 
   return (
     <Container>
-      <input
-        type="checkbox"
-        checked={item.checked}
-        onChange={(e) => onChecked(e)}
-      />
-      <Link to={`/detail/${item.itemId}`}>
-        <img src={item.fileUrl} alt="" />
-      </Link>
-      <Info>
+      <ItemGroup>
+        <input
+          type="checkbox"
+          checked={item.checked}
+          onChange={(e) => onChecked(e)}
+        />
         <Link to={`/detail/${item.itemId}`}>
-          <div>상품 아이디: {item.itemId}</div>
-          <div>상품명: {item.itemName}</div>
-          <div>가격: {item.price.toLocaleString()}원</div>
+          <img src={item.fileUrl} alt="" />
         </Link>
-      </Info>
-      <Count>
-        <button onClick={onAdd}>+</button>
-        <div>{item.count}</div>
-        <button onClick={onSub}>-</button>
-      </Count>
-      <TwoButton>
-        <DeleteItem>
-          <button onClick={() => onDel(item.itemId)}>아이템 삭제</button>
-        </DeleteItem>
-        <HeartCount id={item.itemId} heartCount={item.heartCount} />
-      </TwoButton>
+        <Info>
+          <Link to={`/detail/${item.itemId}`}>
+            <div>상품 아이디: {item.itemId}</div>
+            <div>상품명: {item.itemName}</div>
+            <div>가격: {item.price.toLocaleString()}원</div>
+          </Link>
+        </Info>
+      </ItemGroup>
+      <ButtonGroup>
+        <Count>
+          <button onClick={onAdd}>+</button>
+          <div>{item.count}</div>
+          <button onClick={onSub}>-</button>
+        </Count>
+        <TwoButton>
+          <DeleteItem>
+            <button onClick={() => onDel(item.itemId)}>아이템 삭제</button>
+          </DeleteItem>
+          <HeartCount id={item.itemId} heartCount={item.heartCount} />
+        </TwoButton>
+      </ButtonGroup>
     </Container>
   );
 };
@@ -69,6 +92,7 @@ const Container = styled.article`
   display: flex;
   justify-content: start;
   align-items: center;
+  flex-direction: column;
   max-width: 600px;
   width: 100%;
   overflow: hidden;
@@ -83,22 +107,33 @@ const Container = styled.article`
     padding: 0px 10px;
     object-fit: cover;
   }
-    a{
+  a {
     text-decoration: none;
     color: black;
-    }
+  }
+`;
+
+const ItemGroup = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
 `;
 
 const Info = styled.div`
   padding: 5px;
 `;
 
-const TwoButton = styled.div`
+const ButtonGroup = styled.div`
   display: flex;
-  justify-content: start;
+  width: 100%;
+`;
+
+const TwoButton = styled.div`  
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  flex-direction: column;
-  width: 200px;
+  width: 150px; 
+    
   img {
     width: 24px;
     height: 24px;
@@ -110,10 +145,43 @@ const TwoButton = styled.div`
 
 const Count = styled.div`
   padding-left: 25px;
+  padding-right: 50px;
   text-align: center;
+  width: 30%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  button {
+    text-align: right;
+    border: none;
+    padding: 5px 10px;
+    color: white;
+    background-color: gray;
+    transition: 0.2s;
+    cursor: pointer;
+    font-size: 1em;
+    &:hover {
+      background-color: lightgray;
+    }
+  }
 `;
 
 const DeleteItem = styled.div`
   width: 100%;
   text-align: center;
+
+  button {
+    text-align: right;
+    border: none;
+    padding: 5px 10px;
+    color: white;
+    background-color: gray;
+    transition: 0.2s;
+    cursor: pointer;
+    font-size: 1em;
+    &:hover {
+      background-color: lightgray;
+    }
+  }
 `;

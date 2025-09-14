@@ -5,6 +5,7 @@ import Paging from "../pagination/Paging";
 import { useMyPage } from "../../api/myPageTabContextApi";
 import { useItem } from "../../api/itemContextApi";
 import { orderData } from "../data/orderData";
+import { styled } from "styled-components";
 
 const MyOrder = () => {
   const { myOrders, setMyOrders } = useItem();
@@ -26,7 +27,7 @@ const MyOrder = () => {
   }, [isOrderStatusUpdated, setIsOrderStatusUpdated, size, page, setMyOrders]);
 
   return (
-    <>
+    <Container>
       {myOrders?.length > 0 ? (
         myOrders.map((order, index) => (
           <OrderCard
@@ -45,8 +46,17 @@ const MyOrder = () => {
         size={size}
         page={page}
       />
-    </>
+    </Container>
   );
 };
 
 export default MyOrder;
+
+const Container = styled.div`
+  width: 100vw;
+  max-width: 870px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;

@@ -70,8 +70,6 @@ const Container = styled.div`
   width: 100%;
   max-width: 870px;
   margin-top: 50px;
-  margin-left: auto;
-  margin-right: auto;
   padding: 0 20px;
   //잃어 버리지 말자!!!
   box-sizing: border-box;

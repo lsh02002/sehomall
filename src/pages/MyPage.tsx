@@ -19,6 +19,5 @@ const MyPage = () => {
 
 export default MyPage;
 
-const Container = styled.div`
-  margin-top: 50px;
+const Container = styled.div`  
 `;

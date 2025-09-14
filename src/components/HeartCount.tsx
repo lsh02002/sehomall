@@ -55,13 +55,15 @@ const HeartCount = ({ id, heartCount }: HeartCountPropsType) => {
 export default HeartCount;
 
 const Container = styled.div`
-  width: 30px;
+  width: 40px;
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  span {
+  text-align: left;
+
+  span {    
     font-size: 0.9rem;
     color: red;
     padding-left: 1px;

@@ -77,11 +77,26 @@ const DetailPage = () => {
           {item && (
             <>
               <h3>{item.name}</h3>
-              <span>Price {item.price.toLocaleString()} 원</span>
-              <span>적립금 {0} 원 </span>
-              <span>{item.description}</span>
-              <span>Size {item.size}</span>
-              <span>Care Guide {item.careGuide}</span>
+              <div>
+                <span>Price</span>
+                <em style={{color: "red"}}>{item.price.toLocaleString()} 원</em>
+              </div>
+              <div>
+                <span>적립금</span>
+                <em>{0} 원</em>
+              </div>
+              <div>
+                <span>설명</span>
+                <em>{item.description}</em>
+              </div>
+              <div>
+                <span>Size</span>
+                <em>{item.size}</em>
+              </div>
+              <div>
+                <span>Care Guide</span>
+                <em>{item.careGuide}</em>
+              </div>
               <HeartCount id={item.id} heartCount={item.heartCount} />
               <CountButton>
                 <button onClick={() => setItemCount(itemCount + 1)}>+</button>
@@ -155,7 +170,7 @@ const Info = styled.div`
   margin-left: 70px;
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   flex-direction: column;
   text-align: left;
   h3 {
@@ -164,23 +179,38 @@ const Info = styled.div`
     padding: 10px 0;
     box-sizing: border-box;
   }
-  & > span {
+
+  div {
     width: 100%;
-    padding: 0px 0px;
-    box-sizing: border-box;
     font-size: 1em;
+    display: flex;
+    justify-content: space-between;
+    
+    & > span {
+      width: 100%;
+    }
   }
-  & > div {
-    width: 50px;
+
+  em {
+    display: flex;
+    width: 100%;
   }
 `;
 
 const CountButton = styled.span`
   width: 100%;
   button {
-    display: inline-block;
+    text-align: right;
+    border: none;
     padding: 5px 10px;
-    margin: 10px;
+    color: white;
+    background-color: gray;
+    transition: 0.2s;
+    cursor: pointer;
+    font-size: 1em;
+    &:hover {
+      background-color: lightgray;
+    }
   }
 `;
 

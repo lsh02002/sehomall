@@ -31,7 +31,7 @@ const MyReview = () => {
   }, [page, size, isReviewUpdated, setIsReviewUpdated, setReviews]);
 
   return (
-    <>
+    <Container>
       <ReviewButtonWrapper>
         <button onClick={() => setIsReview(true)}>후기 등록</button>
       </ReviewButtonWrapper>
@@ -58,17 +58,26 @@ const MyReview = () => {
           />
         </Review>
       )}
-    </>
+    </Container>
   );
 };
 
 export default MyReview;
 
+const Container = styled.div`
+  width: 100vw;
+  max-width: 870px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
 const ReviewButtonWrapper = styled.span`
   width: 100%;
   text-align: right;
   margin: 0 35px;
-    
+      
   button {
     text-align: right;
     border: none;
@@ -90,7 +99,7 @@ const Review = styled.div`
   position: fixed;
   left: 0;
   top: 0;
-  height: 100vh;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 5;
 `;

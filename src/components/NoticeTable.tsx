@@ -56,9 +56,9 @@ export default NoticeTable;
 
 const Container = styled.div`
   table {
-    width: 100vw;
+    width: 100%;
     max-width: 870px;
-    border-collapse: collapse;
+    border-collapse: collapse;    
   }
   table th {
     background-color: lightgray;

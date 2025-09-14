@@ -93,7 +93,7 @@ export default MyPageTab;
 
 const TabInner = styled.div`
   margin-top: 30px;
-  width: 100vw;
+  width: 100%;
   max-width: 870px;
   height: 900px;  
 

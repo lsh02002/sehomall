@@ -20,7 +20,7 @@ const Intro = () => {
           <div className="main__intro-container-img">
             <img className="main__intro-image" src={Intro02} alt="" />
             <div className="main__intro-text-container">
-              <h5 className="main__intro-title">공지사항</h5>
+              <h3 className="main__intro-title">공지사항</h3>
               <span className="main__intro-description">알려드릴 소식</span>
             </div>
           </div>
@@ -91,11 +91,14 @@ const Introduction = styled.section`
     position: absolute;
     bottom: 20px;
     left: 20px;    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .main__intro-title {
     color: white;
-    font-size: 35px;
+    /* font-size: 35px; */
     font-weight: 600;
     margin-bottom: 10px;    
   }

@@ -22,8 +22,7 @@ const MyInfo = () => {
   return (
     <Layout>
       <Container>
-        <ItemInfo>
-          <span>프로필</span>
+        <ItemInfo>          
           <TextInput>
             <span>닉네임: </span>
             <input type="text" value={myInfo.nickname} disabled />
@@ -73,7 +72,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
+  
   button {
     text-align: right;
     border: none;
@@ -90,7 +89,7 @@ const Container = styled.div`
 `;
 
 const ItemInfo = styled.div`
-  width: 50%;
+  width: 100%;
   margin: 0 10px;
   display: flex;
   justify-content: center;

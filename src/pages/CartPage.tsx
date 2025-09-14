@@ -26,6 +26,7 @@ const CartPage = () => {
   return (
     <Layout>
       <Main>
+        <h2>장바구니</h2>
         {cartItems.length > 0 ? (
           cartItems.map((item, index) => <CartCard key={index} item={item} />)
         ) : (
@@ -45,12 +46,13 @@ const CartPage = () => {
 export default CartPage;
 
 const Main = styled.div`
-  margin-top: 50px;
-  width: 100%;
+  width: 100%;  
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 0 20px;
+  box-sizing: border-box;
 `;
 
 const NoItems = styled.h3`
