@@ -152,8 +152,8 @@ const AboutPage = () => {
 export default AboutPage;
 
 const Container = styled.div`  
-  .tab-inner {
-    height: 900px;
+  .tab-inner {    
+    height: 900px;    
   }
 
   .tab-inner h1 {
@@ -166,15 +166,15 @@ const Container = styled.div`
   }
 
   .tabs {
-    width: 400px;
-    height: 700px;
+    width: 380px;
+    height: 800px;
     position: relative;
     overflow: hidden;
   }
 
   .items {
-    width: 1200px;
-    height: 500px;
+    width: 1140px;
+    height: 700px;
     position: absolute;
     top: 0;
     left: 0;
@@ -182,12 +182,12 @@ const Container = styled.div`
   }
 
   .items div {
-    width: 400px;
+    width: 380px;
     height: 500px;
-    float: left;
-    box-sizing: border-box;
+    float: left;    
     text-align: center;
     padding: 50px;
+    box-sizing: border-box;
     position: relative;
   }
 
@@ -227,11 +227,11 @@ const Container = styled.div`
   }
 
   .tab-inner input[id="about-tab2"]:checked ~ .tabs .items {
-    left: -400px;
+    left: -380px;
   }
 
   .tab-inner input[id="about-tab3"]:checked ~ .tabs .items {
-    left: -800px;
+    left: -760px;
   }
 
   .tab-inner input[id="about-tab1"]:checked ~ .btn label[for="about-tab1"],
