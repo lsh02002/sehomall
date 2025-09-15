@@ -38,7 +38,7 @@ export type itemType = {
 
 export type itemCartType = {
   itemId: number;
-  count: number;
+  itemCount: number;
   itemName: string;
   price: number;
   fileUrl: string;

@@ -5,10 +5,11 @@ import PayCard from "../components/card/PayCard";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { itemCartType, orderResponseType } from "../types/type";
 import { userInfoData } from "../components/data/userInfoData";
-import { cartData } from "../components/data/cartData";
 import { useItem } from "../api/itemContextApi";
+import { useCart } from "../api/cartContextApi";
 
 const PaymentPage = () => {
+  const { cartItems } = useCart();
   const [ordererInfo, setOrdererInfo] = useState({
     name: "",
     phoneNumber: "",
@@ -47,12 +48,12 @@ const PaymentPage = () => {
   useEffect(() => {
     if (isFromCart === "true") {
       setPayItems(
-        cartData?.content?.filter((item: itemCartType) => item.checked === true)
+        cartItems?.filter((item: itemCartType) => item.checked === true)
       );
     } else {
       const detail: itemCartType = {
         itemId: parseInt(itemId ?? "0"),
-        count: parseInt(itemCount ?? "0"),
+        itemCount: parseInt(itemCount ?? "0"),
         itemName: itemName ?? "",
         price: parseInt(price ?? "0"),
         fileUrl: fileUrl ?? "",
@@ -77,8 +78,7 @@ const PaymentPage = () => {
     if (isFromCart === "true") {
       let total = 0;
       payItems.map(
-        (item) => item.checked && (total += item.price) * item.count
-      );
+        (item) => item.checked && (total += (item.price * item.itemCount)))
 
       setTotalPayPrice(total);
     } else {
@@ -119,7 +119,7 @@ const PaymentPage = () => {
       return;
     }
     const items = payItems.filter((item) => {
-      return { itemId, count: item.count };
+      return { itemId, count: item.itemCount };
     });
 
     if (items.length <= 0) {

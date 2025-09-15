@@ -7,33 +7,29 @@ import { itemCartType } from "../../types/type";
 const CartCard = ({ item }: { item: itemCartType }) => {
   const {
     cartItems,
-    setCartItems,
-    isDeleting,
-    setIsDeleting,
-    isEditing,
-    setIsEditing,
+    setCartItems,    
   } = useCart();
 
   const onAdd = () => {
-    item.count = item.count + 1;
+    item.itemCount = item.itemCount + 1;
     setCartItems(
       cartItems.map((it) =>
-        it.itemId === item.itemId ? { ...it, count: item?.count } : it
+        it.itemId === item.itemId ? { ...it, itemCount: item?.itemCount } : it
       )
     );
   };
 
   const onSub = () => {
-    item.count = item.count - 1;
+    item.itemCount = item.itemCount - 1;
 
-    if (item.count <= 0) {
-      item.count = 1;
+    if (item.itemCount <= 0) {
+      item.itemCount = 1;
       return;
     }
 
     setCartItems(
       cartItems.map((it) =>
-        it.itemId === item.itemId ? { ...it, count: item?.count } : it
+        it.itemId === item.itemId ? { ...it, count: item?.itemCount } : it
       )
     );
   };
@@ -72,7 +68,7 @@ const CartCard = ({ item }: { item: itemCartType }) => {
       <ButtonGroup>
         <Count>
           <button onClick={onAdd}>+</button>
-          <div>{item.count}</div>
+          <div>{item.itemCount}</div>
           <button onClick={onSub}>-</button>
         </Count>
         <TwoButton>

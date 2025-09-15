@@ -43,13 +43,15 @@ const DetailPage = () => {
 
     const tempItem: itemCartType = {
       itemId: item?.id ?? 0,
-      count: item?.count ?? 0,
+      itemCount,
       itemName: item?.name ?? "",
       price: item?.price ?? 0,
       fileUrl: item?.files[0].fileUrl ?? "",
       checked: true,
       heartCount: item?.heartCount ?? 0,
     };
+
+    console.log("카트 내용", tempItem);
 
     setCartItems([...cartItems, tempItem]);
     setIsEditing(!isEditing);

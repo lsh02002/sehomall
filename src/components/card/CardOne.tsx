@@ -18,7 +18,7 @@ const CardOne = ({ item }: { item: itemType }) => {
 
     const tempItem: itemCartType = {
       itemId: item?.id,
-      count: item?.count,
+      itemCount: 1,
       itemName: item?.name,
       price: item?.price,
       fileUrl: item?.files[0].fileUrl,

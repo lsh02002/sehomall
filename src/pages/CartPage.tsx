@@ -4,6 +4,7 @@ import CartCard from "../components/card/CartCard";
 import styled from "styled-components";
 import { useCart } from "../api/cartContextApi";
 import { useNavigate } from "react-router-dom";
+import { itemCartType } from "../types/type";
 
 const CartPage = () => {
   const { totalPrice, setTotalPrice, cartItems, isEditing } = useCart()
@@ -11,9 +12,9 @@ const CartPage = () => {
 
   useEffect(() => {
     let total = 0;
-    cartItems.map((item) => item.checked && (total += item.price * item.count));
+    cartItems.map((item: itemCartType) => item.checked && (total += item.price * item.itemCount));
     setTotalPrice(total);
-  }, [cartItems, cartItems.length, setTotalPrice, isEditing]);
+  }, [cartItems, setTotalPrice, isEditing]);
 
   const OnOrderClick = async () => {
     if (cartItems.length <= 0) {

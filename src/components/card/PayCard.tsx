@@ -9,7 +9,7 @@ const PayCard = ({ item }: { item: itemCartType }) => {
       <Info>
         <div>상품명: {item.itemName}</div>
         <div>가격: {item.price?.toLocaleString()}원</div>
-        <div>수량: {item.count}</div>
+        <div>수량: {item.itemCount}</div>
       </Info>
     </Container>
   );
