@@ -56,7 +56,7 @@ const Container = styled.article`
   width: 140px;
   height: 200px;
   box-sizing: border-box;
-  margin: 20px;
+  margin: 18px;
   position: relative;
   transition: 0.4s;
   img {
