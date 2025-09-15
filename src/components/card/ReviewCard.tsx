@@ -44,10 +44,10 @@ const Container = styled.div`
   flex-direction: column;
   max-width: 870px;
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
   box-sizing: border-box;
-  /* margin: 10px 0; */
   padding: 5px;
+  margin: 20px 0;
   position: relative;
   border: 1px solid lightgray;
 
@@ -90,7 +90,7 @@ const Content = styled.div`
 `;
 
 const RatingCount = styled.div`
-  width: 200px;
+  width: 100px;
   text-align: right;
   font-size: var(--main-font-size);
 `;

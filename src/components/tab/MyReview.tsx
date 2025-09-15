@@ -26,22 +26,26 @@ const MyReview = () => {
   }, [page, setReviewPage]);
 
   useEffect(() => {
-    setReviews(reviewData?.content?.filter(review=>review.nickname === "lsh02002"));
+    setReviews(
+      reviewData?.content?.filter((review) => review.nickname === "lsh02002")
+    );
     setReviewTotal(reviewData?.totalElements);
   }, [page, size, isReviewUpdated, setIsReviewUpdated, setReviews]);
 
   return (
     <Container>
-      <ReviewButtonWrapper>
-        <button onClick={() => setIsReview(true)}>후기 등록</button>
-      </ReviewButtonWrapper>
-      {reviews?.length > 0 ? (
-        reviews.map((review, index) => (
-          <ReviewCard key={index} review={review} />
-        ))
-      ) : (
-        <div>내가 작성한 후기가 없습니다.</div>
-      )}
+      <ReviewContainer>
+        <ReviewButtonWrapper>
+          <button onClick={() => setIsReview(true)}>후기 등록</button>
+        </ReviewButtonWrapper>
+        {reviews?.length > 0 ? (
+          reviews.map((review, index) => (
+            <ReviewCard key={index} review={review} />
+          ))
+        ) : (
+          <div>내가 작성한 후기가 없습니다.</div>
+        )}
+      </ReviewContainer>
       <Paging
         to={`/mypage/REVIEWS`}
         total={reviewTotal}
@@ -65,7 +69,7 @@ const MyReview = () => {
 export default MyReview;
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   max-width: 870px;
   display: flex;
   justify-content: center;
@@ -73,11 +77,10 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const ReviewButtonWrapper = styled.span`
+const ReviewButtonWrapper = styled.div`
   width: 100%;
   text-align: right;
-  margin: 0 35px;
-      
+
   button {
     text-align: right;
     border: none;
@@ -91,6 +94,12 @@ const ReviewButtonWrapper = styled.span`
       background-color: lightgray;
     }
   }
+`;
+
+const ReviewContainer = styled.div`
+  width: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
 `;
 
 const Review = styled.div`

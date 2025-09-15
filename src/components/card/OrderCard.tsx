@@ -100,10 +100,12 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   max-width: 870px;
-  width: 100vw;
+  width: 100%;
   box-sizing: border-box;
   position: relative;
-  border: 1px solid lightgray;    
+  border: 1px solid lightgray;
+  margin: 10px;
+  padding: 5px;
 
   img {
     width: 100px;
