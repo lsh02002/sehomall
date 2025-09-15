@@ -46,7 +46,7 @@ const Container = styled.div`
   width: 100%;
   overflow: hidden;
   box-sizing: border-box;
-  margin: 25px;
+  /* margin: 10px 0; */
   padding: 5px;
   position: relative;
   border: 1px solid lightgray;

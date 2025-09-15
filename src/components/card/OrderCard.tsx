@@ -97,13 +97,11 @@ export default OrderCard;
 
 const Container = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   max-width: 870px;
-  width: 100%;  
+  width: 100vw;
   box-sizing: border-box;
-  margin: 25px;  
-  padding: 5px;
   position: relative;
   border: 1px solid lightgray;    
 
@@ -121,7 +119,7 @@ const Container = styled.div`
 
 const OrderInfo = styled.div`
   padding: 5px;
-  width: 40%;
+  width: 35%;
   position: relative;
   font-size: var(--main-font-size);
 
@@ -137,7 +135,7 @@ const CreatedDate = styled.div`
 `;
 
 const OrderStatusInfo = styled.div`
-  width: 40%;
+  width: 35%;
   margin-left: 20px;
   font-size: var(--main-font-size);
 
@@ -151,7 +149,7 @@ const OrderStatusInfo = styled.div`
 `;
 
 const CancelOrComplete = styled.div`
-  width: 20%;
+  width: 15%;
   display: flex;
   justify-content: start;
   align-items: start;

@@ -53,7 +53,7 @@ const MyOrder = () => {
 export default MyOrder;
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   max-width: 870px;
   display: flex;
   justify-content: center;

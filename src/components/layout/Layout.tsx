@@ -18,7 +18,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: start;  
   box-sizing: border-box;
-  width: 100vw;
+  width: 100%;
 `;
 
 const Main = styled.div`  

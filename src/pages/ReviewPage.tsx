@@ -105,7 +105,7 @@ const Review = styled.div`
   width: 100%;
   box-sizing: border-box;
   inset: 0;
-  height: 100vh;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 50;
 `;

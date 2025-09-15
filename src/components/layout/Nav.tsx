@@ -119,7 +119,7 @@ const Container = styled.nav`
   justify-content: space-between;
   align-items: center;
   height: 70px;
-  width: 100vw;
+  width: 100%;
   box-sizing: border-box;
   opacity: 1;
   z-index: 200;

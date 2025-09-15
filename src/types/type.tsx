@@ -105,8 +105,6 @@ export type noticeType = {
   id: number;
   title: string;
   content: string;
-  nickname: string;
-  reviews: number;
-  createAt: string;
+  nickname: string;  
   modifyAt: string;
 };

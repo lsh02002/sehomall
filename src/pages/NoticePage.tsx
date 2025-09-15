@@ -36,8 +36,6 @@ const NoticePage = () => {
         title: notice?.title,
         content: notice?.content,
         nickname: notice?.nickname,
-        reviews: notice?.reviews,
-        createAt: notice?.createAt,
         modifyAt: notice?.modifyAt,
       })),
     [notices]
@@ -57,6 +55,5 @@ const NoticePage = () => {
 export default NoticePage;
 
 const Container = styled.div`
-  margin-top: 50px;
-  text-align: center;
+  overflow-y: hidden;
 `;

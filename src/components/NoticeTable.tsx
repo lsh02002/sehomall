@@ -55,6 +55,8 @@ function NoticeTable<TData extends object>({ columns, data }: TablePropsType<TDa
 export default NoticeTable;
 
 const Container = styled.div`
+max-width: 100%;
+overflow-x: auto;
   table {
     width: 100%;
     max-width: 870px;

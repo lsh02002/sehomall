@@ -176,7 +176,6 @@ const Container = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  flex-direction: column;
-  width: 96vw;
+  flex-direction: column;  
   position: relative;
 `;
