@@ -8,11 +8,17 @@ import { useCart } from "../../api/cartContextApi";
 
 const CardTwo = ({ item }: { item: itemType }) => {
   const { isLogin } = useLogin();
-  const { cartItems, setCartItems, isEditing, setIsEditing } = useCart();
+  const { setCartCount, cartItems, setCartItems, isEditing, setIsEditing } =
+    useCart();
 
   const OnAddToCartClick = () => {
     if (!isLogin) {
       alert("장바구니 기능은 로그인 하셔야 합니다.");
+      return;
+    }
+
+    if (cartItems?.find((it) => it.itemId === item?.id)) {
+      alert("이미 이 상품이 장바구니에 있습니다.");
       return;
     }
 
@@ -27,7 +33,8 @@ const CardTwo = ({ item }: { item: itemType }) => {
     };
 
     setCartItems([...cartItems, tempItem]);
-    setIsEditing(!isEditing);  
+    setCartCount(cartItems.length + 1);
+    setIsEditing(!isEditing);
   };
 
   return (

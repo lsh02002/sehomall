@@ -13,7 +13,8 @@ import { reviewData } from "../components/data/reviewData";
 
 const DetailPage = () => {
   const { isLogin } = useLogin();
-  const { cartItems, setCartItems, isEditing, setIsEditing } = useCart();
+  const { setCartCount, cartItems, setCartItems, isEditing, setIsEditing } =
+    useCart();
   const [item, setItem] = useState<itemType | null>(null);
   const { id } = useParams();
   const [reviews, setReviews] = useState<reviewType[]>([]);
@@ -41,6 +42,11 @@ const DetailPage = () => {
       return;
     }
 
+    if (cartItems?.find((it) => it.itemId === item?.id)) {
+      alert("이미 이 상품이 장바구니에 있습니다.");
+      return;
+    }
+
     const tempItem: itemCartType = {
       itemId: item?.id ?? 0,
       itemCount,
@@ -54,6 +60,7 @@ const DetailPage = () => {
     console.log("카트 내용", tempItem);
 
     setCartItems([...cartItems, tempItem]);
+    setCartCount(cartItems.length + 1);
     setIsEditing(!isEditing);
   };
 
@@ -81,7 +88,9 @@ const DetailPage = () => {
               <h1>{item.name}</h1>
               <div>
                 <span>Price</span>
-                <em style={{color: "red"}}>{item.price.toLocaleString()} 원</em>
+                <em style={{ color: "red" }}>
+                  {item.price.toLocaleString()} 원
+                </em>
               </div>
               <div>
                 <span>적립금</span>
@@ -188,7 +197,7 @@ const Info = styled.div`
     font-size: 1em;
     display: flex;
     justify-content: space-between;
-    
+
     & > span {
       width: 100%;
     }

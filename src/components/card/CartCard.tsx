@@ -6,6 +6,7 @@ import { itemCartType } from "../../types/type";
 
 const CartCard = ({ item }: { item: itemCartType }) => {
   const {
+    setCartCount,
     cartItems,
     setCartItems,    
   } = useCart();
@@ -16,7 +17,7 @@ const CartCard = ({ item }: { item: itemCartType }) => {
       cartItems.map((it) =>
         it.itemId === item.itemId ? { ...it, itemCount: item?.itemCount } : it
       )
-    );
+    );    
   };
 
   const onSub = () => {
@@ -31,11 +32,12 @@ const CartCard = ({ item }: { item: itemCartType }) => {
       cartItems.map((it) =>
         it.itemId === item.itemId ? { ...it, count: item?.itemCount } : it
       )
-    );
+    );    
   };
 
   const onDel = (id: number) => {
     setCartItems(cartItems.filter((it) => it.itemId !== item.itemId));
+    setCartCount(cartItems.length - 1);
   };
 
   const onChecked = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
