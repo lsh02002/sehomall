@@ -79,7 +79,7 @@ const Container = styled.article`
     object-fit: cover;
   }
   box-sizing: border-box;
-  margin: 18px;
+  margin: 20px;
   position: relative;
   a {
     text-decoration: none;
