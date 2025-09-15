@@ -27,7 +27,7 @@ const PaymentPage = () => {
   const [infoCheck, setInfoCheck] = useState(false);
 
   const [payItems, setPayItems] = useState<itemCartType[]>([]);
-  const { myOrders, setMyOrders} = useItem();
+  const { myOrders, setMyOrders } = useItem();
   const [totalPayPrice, setTotalPayPrice] = useState(0);
 
   const [searchParams] = useSearchParams();
@@ -46,12 +46,10 @@ const PaymentPage = () => {
 
   useEffect(() => {
     if (isFromCart === "true") {
-          setPayItems(
-            cartData?.content?.filter(
-              (item: itemCartType) => item.checked === true
-            )
-          );
-    } else {      
+      setPayItems(
+        cartData?.content?.filter((item: itemCartType) => item.checked === true)
+      );
+    } else {
       const detail: itemCartType = {
         itemId: parseInt(itemId ?? "0"),
         count: parseInt(itemCount ?? "0"),
@@ -79,13 +77,15 @@ const PaymentPage = () => {
     if (isFromCart === "true") {
       let total = 0;
       payItems.map(
-        (item) => item.checked && (total += item.price) * item.count);
-      
+        (item) => item.checked && (total += item.price) * item.count
+      );
+
       setTotalPayPrice(total);
     } else {
       let total = 0;
-      const price2 = typeof price === "string" ? parseFloat(price) : (price ?? 0);
-      const itemCount2 = typeof itemCount === "string" ? parseFloat(itemCount) : (itemCount ?? 0);
+      const price2 = typeof price === "string" ? parseFloat(price) : price ?? 0;
+      const itemCount2 =
+        typeof itemCount === "string" ? parseFloat(itemCount) : itemCount ?? 0;
       total += price2 * itemCount2;
       setTotalPayPrice(total);
     }
@@ -109,6 +109,15 @@ const PaymentPage = () => {
   };
 
   const OnOrderClick = () => {
+    if (
+      name.trim() === "" ||
+      email.trim() === "" ||
+      phoneNumber.trim() === "" ||
+      address.trim() === ""
+    ) {
+      alert("주문자란에 입력되지 않은 란이 있습니다");
+      return;
+    }
     const items = payItems.filter((item) => {
       return { itemId, count: item.count };
     });
@@ -129,15 +138,16 @@ const PaymentPage = () => {
       orderStatus: "COMPLETED",
       createAt: new Date().toString(),
       items: [],
-    }
-    
+    };
+
     setMyOrders([...myOrders, paymentResponse]);
-    
+
     navigate("/mypage/ORDERS?page=1&size=3");
   };
 
   return (
     <Layout>
+      <h1>주문</h1>
       <Container>
         <ItemInfo>
           <span>주문 정보</span>
@@ -231,8 +241,7 @@ const PaymentPage = () => {
 
 export default PaymentPage;
 
-const Container = styled.div`
-  margin-top: 50px;
+const Container = styled.div`  
   width: 100%;
   max-width: 870px;
   display: flex;
@@ -242,13 +251,12 @@ const Container = styled.div`
 `;
 
 const ItemInfo = styled.div`
-  width: 50%;
+  width: 100%;
   margin: 0 10px;
   display: flex;
   justify-content: center;
   align-items: start;
-  flex-direction: column;
-  border: 1px solid lightgray;
+  flex-direction: column;  
   & > span {
     box-sizing: border-box;
     margin: 25px 0 0 0;
