@@ -166,14 +166,14 @@ const Container = styled.div`
   }
 
   .tabs {
-    width: 380px;
+    width: 370px;
     height: 800px;
     position: relative;
     overflow: hidden;
   }
 
   .items {
-    width: 1140px;
+    width: 1110px;
     height: 700px;
     position: absolute;
     top: 0;
@@ -182,7 +182,7 @@ const Container = styled.div`
   }
 
   .items div {
-    width: 380px;
+    width: 370px;
     height: 500px;
     float: left;    
     text-align: center;
@@ -227,11 +227,11 @@ const Container = styled.div`
   }
 
   .tab-inner input[id="about-tab2"]:checked ~ .tabs .items {
-    left: -380px;
+    left: -370px;
   }
 
   .tab-inner input[id="about-tab3"]:checked ~ .tabs .items {
-    left: -760px;
+    left: -740px;
   }
 
   .tab-inner input[id="about-tab1"]:checked ~ .btn label[for="about-tab1"],
