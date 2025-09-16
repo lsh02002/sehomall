@@ -9,7 +9,7 @@ import ReviewEnroll from "../components/modal/ReviewEnroll";
 import { itemCartType, itemType, reviewType } from "../types/type";
 import { useCart } from "../api/cartContextApi";
 import { itemData } from "../components/data/itemData";
-import { reviewData } from "../components/data/reviewData";
+import { useReview } from "../api/reviewContextApi";
 
 const DetailPage = () => {
   const { isLogin } = useLogin();
@@ -17,9 +17,9 @@ const DetailPage = () => {
     useCart();
   const [item, setItem] = useState<itemType | null>(null);
   const { id } = useParams();
-  const [reviews, setReviews] = useState<reviewType[]>([]);
+  const { reviews, setReviews } = useReview();
   const [isReview, setIsReview] = useState(false);
-  const [isReviewUpdated, setIsReviewUpdated] = useState(false);
+  const { isReviewUpdated, setIsReviewUpdated } = useReview();
   const [itemCount, setItemCount] = useState(1);
 
   const navigate = useNavigate();
@@ -28,12 +28,6 @@ const DetailPage = () => {
 
   useEffect(() => {
     setItem(itemData?.content?.find((i: itemType) => i.id === itemId) ?? null);
-  }, [itemId]);
-
-  useEffect(() => {
-    setReviews(
-      reviewData?.content?.filter((i: reviewType) => i?.itemId === itemId)
-    );
   }, [itemId]);
 
   const OnAddToCartClick = () => {
@@ -143,8 +137,8 @@ const DetailPage = () => {
         </Review>
       )}
       <ReviewBody>
-        {reviews.length > 0 &&
-          reviews.map((review, index) => (
+        {reviews?.filter((i: reviewType) => i?.itemId === itemId).length > 0 &&
+          reviews?.filter((i: reviewType) => i?.itemId === itemId).map((review, index) => (
             <ReviewCard key={index} review={review} />
           ))}
       </ReviewBody>

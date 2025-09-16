@@ -5,6 +5,7 @@ import Nav from "./components/layout/Nav";
 import { lazy, Suspense, useEffect } from "react";
 import { useLogin } from "./api/loginContextApi";
 import PageLoading from "./components/layout/PageLoading";
+import { userInfoData } from "./components/data/userInfoData";
 
 const Loading = <PageLoading />;
 const About = lazy(() => import("./pages/AboutPage"));
@@ -26,13 +27,14 @@ const Payment = lazy(() => import("./pages/PaymentPage"));
 function App() {
   const { setIsLogin } = useLogin();
 
-  useEffect(() => {          
-    setIsLogin(true);    
+  useEffect(() => {
+    setIsLogin(true);
+    localStorage.setItem("nickname", userInfoData?.nickname);
   }, [setIsLogin]);
 
   return (
     <Container>
-      <Router>        
+      <Router>
         <Routes>
           <Route
             path="/"
@@ -65,7 +67,7 @@ function App() {
                 <div>카테고리 중비중!</div>
               </Suspense>
             }
-            />
+          />
           <Route
             path="/login"
             element={
@@ -139,7 +141,7 @@ function App() {
             }
           />
           <Route
-            path="/search"            
+            path="/search"
             element={
               <Suspense fallback={Loading}>
                 <Search />
@@ -147,7 +149,7 @@ function App() {
             }
           />
           <Route
-            path="/reviews"            
+            path="/reviews"
             element={
               <Suspense fallback={Loading}>
                 <Review />
@@ -155,7 +157,7 @@ function App() {
             }
           />
           <Route
-            path="/pay"            
+            path="/pay"
             element={
               <Suspense fallback={Loading}>
                 <Payment />
@@ -176,6 +178,6 @@ const Container = styled.div`
   display: flex;
   justify-content: start;
   align-items: center;
-  flex-direction: column;  
+  flex-direction: column;
   position: relative;
 `;

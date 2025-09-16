@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useItem } from "../../api/itemContextApi";
-import {
-  fileType,
-  itemType,
-  reviewType,
-  unReviewedItemType,
-} from "../../types/type";
+import { useReview } from "../../api/reviewContextApi";
+import { fileType, itemType, reviewType } from "../../types/type";
+import { itemData } from "../data/itemData";
 
 type ReviewEnrollPropsType = {
   item: itemType | null;
@@ -21,18 +17,19 @@ const ReviewEnroll = ({
   isReviewUpdated,
   setIsReviewUpdated,
 }: ReviewEnrollPropsType) => {
-  const { reviews, setReviews, reviewId } = useItem();
+  const { reviews, setReviews, reviewId } = useReview();  
+
   const nickname = localStorage.getItem("nickname");
 
   const [imagePreview, setImagePreview] = useState("");
   const [image, setImage] = useState<File | null>(null);
+  const [unReviewedItems] = useState(itemData?.content);
+
   const [state, setState] = useState({
     content: "",
     rating: 5,
-    unReviewedItemId: -1,
+    unReviewedItemId: unReviewedItems[0]?.id,
   });
-
-  const [unReviewedItems, setUnReviewedItems] = useState([]);
 
   const [errMessage, setErrMessage] = useState("");
 
@@ -59,7 +56,7 @@ const ReviewEnroll = ({
 
   const OnSelectChangeField = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setErrMessage("");
-    setState({ ...state, [e.target.name]: e.target.value });
+    setState({ ...state, [e.target.name]: parseInt(e.target.value) });
   };
 
   const OnTextAreaChangeField = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -69,12 +66,13 @@ const ReviewEnroll = ({
 
   const OnReviewRegister = () => {
     const itemId = item !== null ? item?.id : state.unReviewedItemId;
-    const files: fileType[] = [];
+    const re = unReviewedItems?.find((it) => it?.id === itemId);
 
+    const files: fileType[] = [];
     const review: reviewType = {
       id: reviewId,
       itemId,
-      itemName: item?.name ?? "",
+      itemName: item?.name ?? re?.name ?? "",
       nickname: nickname ?? "",
       content: state?.content,
       rating: state?.rating,
@@ -124,12 +122,12 @@ const ReviewEnroll = ({
             구매완료 상품명:
             <select
               style={{ marginLeft: "20px", width: "70%", height: "40px" }}
-              value={state.unReviewedItemId}
+              value={state.unReviewedItemId}              
               name="unReviewedItemId"
               onChange={(e) => OnSelectChangeField(e)}
             >
               {unReviewedItems.length > 0 ? (
-                unReviewedItems.map((item: unReviewedItemType, index) => (
+                unReviewedItems.map((item: itemType, index) => (
                   <option key={index} value={item.id}>
                     {item.name}
                   </option>
@@ -202,7 +200,7 @@ const Enroll = styled.div`
   z-index: 10;
   box-sizing: border-box;
 
-  div:nth-child(1) {    
+  div:nth-child(1) {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -219,7 +217,7 @@ const Enroll = styled.div`
     }
   }
 
-  & > span {    
+  & > span {
     display: inline-block;
     width: 100%;
     margin: 10px 10px 0 0;
@@ -235,7 +233,7 @@ const Enroll = styled.div`
   .btn {
     padding: 10px 0;
     width: 100%;
-    margin-bottom: 5px;    
+    margin-bottom: 5px;
   }
 
   .btn span {
@@ -257,7 +255,7 @@ const Enroll = styled.div`
     cursor: pointer;
     text-align: center;
     line-height: 40px;
-    margin-left: 10px;    
+    margin-left: 10px;
   }
 
   textarea {

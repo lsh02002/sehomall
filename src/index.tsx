@@ -5,6 +5,7 @@ import { LoginProvider } from "./api/loginContextApi";
 import { CartProvider } from "./api/cartContextApi";
 import { MyPageTabProvider } from "./api/myPageTabContextApi";
 import { ItemProvider } from "./api/itemContextApi";
+import { ReviewProvider } from "./api/reviewContextApi";
 
 const root = document.getElementById("root");
 if (!root) throw new Error("Root element with id 'root' not found");
@@ -14,7 +15,9 @@ ReactDOM.createRoot(root).render(
     <CartProvider>
       <MyPageTabProvider>
         <ItemProvider>
-          <App />
+          <ReviewProvider>
+            <App />
+          </ReviewProvider>
         </ItemProvider>
       </MyPageTabProvider>
     </CartProvider>

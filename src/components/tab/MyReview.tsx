@@ -5,16 +5,15 @@ import Paging from "../pagination/Paging";
 import { useMyPage } from "../../api/myPageTabContextApi";
 import ReviewEnroll from "../modal/ReviewEnroll";
 import styled from "styled-components";
-import { useItem } from "../../api/itemContextApi";
-import { reviewData } from "../data/reviewData";
+import { useReview } from "../../api/reviewContextApi";
 
 const MyReview = () => {
   const { setReviewPage } = useMyPage();
 
   const [isReview, setIsReview] = useState(false);
-  const [isReviewUpdated, setIsReviewUpdated] = useState(false);
+  const {isReviewUpdated, setIsReviewUpdated} = useReview();
 
-  const { reviews, setReviews } = useItem();
+  const { reviews, setReviews } = useReview();
   const [reviewTotal, setReviewTotal] = useState(0);
 
   const [searchParams] = useSearchParams();
@@ -27,9 +26,10 @@ const MyReview = () => {
 
   useEffect(() => {
     setReviews(
-      reviewData?.content?.filter((review) => review.nickname === "lsh02002")
+      reviews?.filter((review) => review.nickname === "lsh02002")
     );
-    setReviewTotal(reviewData?.totalElements);
+    setReviewTotal(reviews.length);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, size, isReviewUpdated, setIsReviewUpdated, setReviews]);
 
   return (

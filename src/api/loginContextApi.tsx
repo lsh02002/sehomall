@@ -16,7 +16,6 @@ const LoginContext = createContext<LoginContextValue | undefined>(undefined);
 
 const LoginProvider = ({ children }: { children: ReactNode }) => {
   const [isLogin, setIsLogin] = useState(false);
-  const [isHeartUpdated, setIsHeartUpdated] = useState(false);
 
   const value: LoginContextValue = {
     isLogin,

@@ -6,15 +6,13 @@ import React, {
   type ReactNode,
   useContext,
 } from "react";
-import { itemType, orderResponseType, reviewType } from "../types/type";
+import { heartData } from "../components/data/heartData";
+import { itemData } from "../components/data/itemData";
+import { itemType, orderResponseType } from "../types/type";
 
 export type ItemContextValue = {
   items: itemType[];
-  setItems: Dispatch<SetStateAction<itemType[]>>;
-  reviews: reviewType[];
-  setReviews: Dispatch<SetStateAction<reviewType[]>>;
-  reviewId: number;
-  setReviewId: Dispatch<SetStateAction<number>>;
+  setItems: Dispatch<SetStateAction<itemType[]>>;  
   myHearts: itemType[];
   setMyHearts: Dispatch<SetStateAction<itemType[]>>;
   myOrders: orderResponseType[];
@@ -26,20 +24,14 @@ export type ItemContextValue = {
 const ItemContext = createContext<ItemContextValue | undefined>(undefined);
 
 const ItemProvider = ({ children }: { children: ReactNode }) => {
-  const [items, setItems] = useState<itemType[]>([]);
-  const [reviews, setReviews] = useState<reviewType[]>([]);
-  const [reviewId, setReviewId] = useState(0);
-  const [myHearts, setMyHearts] = useState<itemType[]>([]);
+  const [items, setItems] = useState<itemType[]>(itemData?.content);
+  const [myHearts, setMyHearts] = useState<itemType[]>(heartData?.content);
   const [myOrders, setMyOrders] = useState<orderResponseType[]>([]);
   const [isHeartUpdated, setIsHeartUpdated] = useState(false);
 
   const value: ItemContextValue = {
     items,
     setItems,
-    reviews,
-    setReviews,
-    reviewId,
-    setReviewId,
     myHearts,
     setMyHearts,
     myOrders,

@@ -7,15 +7,10 @@ import CategoryTab from "../components/tab/CategoryTab";
 import Intro from "../components/Intro";
 import { useItem } from "../api/itemContextApi";
 import { itemType } from "../types/type";
-import { itemData } from "../components/data/itemData";
 
 const MainPage = () => {
-  const { items, setItems, isHeartUpdated } = useItem();
+  const { items } = useItem();
   const [cate, setCate] = useState("ALL");
-
-  useEffect(() => {
-    setItems(itemData.content);    
-  }, [setItems, isHeartUpdated]);
 
   const newItems: itemType[] = items?.sort((a, b) => {
     const aTime = a?.createAt ? new Date(a.createAt).getTime() : 0;

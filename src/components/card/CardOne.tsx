@@ -117,7 +117,7 @@ const CartImage = styled.div`
   bottom: 25px;
   width: 45px;
   height: 20px;
-  z-index: 10;
+  z-index: 300;
   img {
     width: 18px;
     height: 18px;

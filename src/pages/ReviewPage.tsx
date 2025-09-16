@@ -1,43 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Layout from "../components/layout/Layout";
 import styled from "styled-components";
 import ReviewCard from "../components/card/ReviewCard";
 import ReviewEnroll from "../components/modal/ReviewEnroll";
 import Paging from "../components/pagination/Paging";
 import { useSearchParams } from "react-router-dom";
-import { reviewData } from "../components/data/reviewData";
-import { reviewType } from "../types/type";
+import { useReview } from "../api/reviewContextApi";
 
 const ReviewPage = () => {
-  const [reviews, setReviews] = useState<reviewType[]>([]);
-  const [total, setTotal] = useState(0);
+  const {reviews} = useReview();  
 
   const [searchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") ?? "1");
   const size = parseInt(searchParams.get("size") ?? "5");
 
   const [isReview, setIsReview] = useState(false);
-  const [isReviewUpdated, setIsReviewUpdated] = useState(false);
+  const {isReviewUpdated, setIsReviewUpdated} = useReview();
 
-  useEffect(() => {
-    setReviews(reviewData?.content);
-    setTotal(reviewData?.totalElements);
-  }, [page, size, isReviewUpdated, setIsReviewUpdated]);
-
-  useEffect(() => {
-    if (isReview) {
-      const prev = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = prev;
-      };
-    }
-  }, [isReview]);
+  // useEffect(() => {
+  //   setReviews(reviewData?.content);
+  //   setTotal(reviewData?.totalElements);
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <Layout>
       <Container>
-        <h1>리뷰 전체 ({total})</h1>
+        <h1>리뷰 전체 ({reviews.length})</h1>
         <span>
           <button onClick={() => setIsReview(true)}>후기 등록</button>
         </span>
@@ -46,7 +35,7 @@ const ReviewPage = () => {
             reviews.map((review, index) => (
               <ReviewCard key={index} review={review} />
             ))}
-          <Paging to={"/reviews"} total={total} size={size} page={page} />
+          <Paging to={"/reviews"} total={reviews.length} size={size} page={page} />
         </ReviewBody>
       </Container>
       {isReview && (
