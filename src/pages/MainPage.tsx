@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import styled from "styled-components";
 import Layout from "../components/layout/Layout";
 import Banner from "../components/slider/BannerSlider";
@@ -12,17 +12,33 @@ const MainPage = () => {
   const { items } = useItem();
   const [cate, setCate] = useState("ALL");
 
-  const newItems: itemType[] = items?.sort((a, b) => {
-    const aTime = a?.createAt ? new Date(a.createAt).getTime() : 0;
-    const bTime = b?.createAt ? new Date(b.createAt).getTime() : 0;
-    return bTime - aTime; // ascending
+  const parseKoreanDate = (dateStr?: string): number => {
+    if (!dateStr) return 0;
+    const match = dateStr.match(/(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/);
+    if (!match) return 0;
+
+    const [_, year, month, day] = match;
+    return new Date(
+      Number(year),
+      Number(month) - 1, // JS Date에서 month는 0~11
+      Number(day)
+    ).getTime();
+  };
+
+  const newItems = [...items].sort((a, b) => {
+    const aTime = parseKoreanDate(a?.createAt);
+    const bTime = parseKoreanDate(b?.createAt);
+    return bTime - aTime; // 최신순
   });
-  const popularItems: itemType[] = items?.sort(
-    (a: itemType, b: itemType) => a.count - b.count
-  );
-  const cateItems: itemType[] = items?.filter(
-    (item: itemType) => item?.category !== cate
-  );
+
+  const popularItems = [...items].sort((a, b) => {    
+    return (b?.views ?? 0) - (a?.views ?? 0);
+  });
+
+  const cateItems: itemType[] = useMemo(() => {
+    if (cate === "ALL") return items;
+    return items.filter((item) => item?.category === cate);
+  }, [items, cate]);
 
   return (
     <Layout>
@@ -50,8 +66,8 @@ const Main = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;  
-  height: 100%;  
+  width: 100%;
+  height: 100%;
   box-sizing: border-box;
 `;
 
