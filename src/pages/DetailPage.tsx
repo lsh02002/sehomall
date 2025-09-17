@@ -17,7 +17,7 @@ const DetailPage = () => {
     useCart();
   const [item, setItem] = useState<itemType | null>(null);
   const { id } = useParams();
-  const { reviews, setReviews } = useReview();
+  const { reviews } = useReview();
   const [isReview, setIsReview] = useState(false);
   const { isReviewUpdated, setIsReviewUpdated } = useReview();
   const [itemCount, setItemCount] = useState(1);

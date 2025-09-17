@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Layout from "../components/layout/Layout";
 import Banner from "../components/slider/BannerSlider";

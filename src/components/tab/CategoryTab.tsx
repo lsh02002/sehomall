@@ -6,8 +6,8 @@ import CardTwo from "../card/CardTwo";
 type CategoryTabPropsType = {
   cate: string;
   setCate: Dispatch<SetStateAction<string>>;
-  cateItems: itemType[]
-}
+  cateItems: itemType[];
+};
 
 const CategoryTab = ({ cate, setCate, cateItems }: CategoryTabPropsType) => {
   const OnTabClick = (cat: string) => {
@@ -52,9 +52,7 @@ const CategoryTab = ({ cate, setCate, cateItems }: CategoryTabPropsType) => {
           <div id="tab1">
             <Items>
               {cateItems.length > 0 ? (
-                cateItems.map((item, index) => (
-                  <CardTwo key={index} item={item} />
-                ))
+                cateItems.map((item) => <CardTwo key={item.id} item={item} />)
               ) : (
                 <em>상품이 없습니다.</em>
               )}
@@ -65,9 +63,7 @@ const CategoryTab = ({ cate, setCate, cateItems }: CategoryTabPropsType) => {
           <div id="tab2">
             <Items>
               {cateItems.length > 0 ? (
-                cateItems.map((item, index) => (
-                  <CardTwo key={index} item={item} />
-                ))
+                cateItems.map((item) => <CardTwo key={item.id} item={item} />)
               ) : (
                 <em>상품이 없습니다.</em>
               )}
@@ -78,9 +74,7 @@ const CategoryTab = ({ cate, setCate, cateItems }: CategoryTabPropsType) => {
           <div id="tab3">
             <Items>
               {cateItems.length > 0 ? (
-                cateItems.map((item, index) => (
-                  <CardTwo key={index} item={item} />
-                ))
+                cateItems.map((item) => <CardTwo key={item.id} item={item} />)
               ) : (
                 <em>상품이 없습니다.</em>
               )}
@@ -91,9 +85,7 @@ const CategoryTab = ({ cate, setCate, cateItems }: CategoryTabPropsType) => {
           <div id="tab4">
             <Items>
               {cateItems.length > 0 ? (
-                cateItems.map((item, index) => (
-                  <CardTwo key={index} item={item} />
-                ))
+                cateItems.map((item) => <CardTwo key={item.id} item={item} />)
               ) : (
                 <em>상품이 없습니다.</em>
               )}
@@ -104,9 +96,7 @@ const CategoryTab = ({ cate, setCate, cateItems }: CategoryTabPropsType) => {
           <div id="tab5">
             <Items>
               {cateItems.length > 0 ? (
-                cateItems.map((item, index) => (
-                  <CardTwo key={index} item={item} />
-                ))
+                cateItems.map((item) => <CardTwo key={item.id} item={item} />)
               ) : (
                 <em>상품이 없습니다.</em>
               )}

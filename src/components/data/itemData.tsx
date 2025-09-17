@@ -142,7 +142,7 @@ export const itemData = {
       deliveryFee: 1000,
       userNickname: "lsh02002",
       views: 3,
-      heartCount: 0,
+      heartCount: 3,
       createAt: "2025년 01월 18일",
       files: [
         {
@@ -272,7 +272,7 @@ export const itemData = {
       deliveryFee: 4000,
       userNickname: "lsh02002",
       views: 1,
-      heartCount: 0,
+      heartCount: 2,
       createAt: "2025년 01월 25일",
       files: [
         {
