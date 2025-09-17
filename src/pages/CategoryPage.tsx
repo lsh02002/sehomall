@@ -1,32 +1,51 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import React, { useMemo } from "react";
+import { useParams } from "react-router-dom";
+import { styled } from "styled-components";
+import { useItem } from "../api/itemContextApi";
+import CardOne from "../components/card/CardOne";
 import Layout from "../components/layout/Layout";
+import { itemType } from "../types/type";
 
 const CategoryPage = () => {
+  const { cate } = useParams();
+  const { items } = useItem();
+
+  const parseKoreanDate = (dateStr?: string): number => {
+    if (!dateStr) return 0;
+    const match = dateStr.match(/(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/);
+    if (!match) return 0;
+
+    const [_, year, month, day] = match;
+    return new Date(
+      Number(year),
+      Number(month) - 1, // JS Date에서 month는 0~11
+      Number(day)
+    ).getTime();
+  };
+
+  const newItems = [...items].sort((a, b) => {
+    const aTime = parseKoreanDate(a?.createAt);
+    const bTime = parseKoreanDate(b?.createAt);
+    return bTime - aTime; // 최신순
+  }).slice(0, 5);
+
+  const cateItems: itemType[] = useMemo(() => {
+    if (cate === "ALL") return items;
+    if (cate === "new") return newItems;
+    return items.filter((item) => item?.category === cate);
+  }, [cate, items, newItems]);
+
   return (
     <Layout>
       <Container>
-        <ItemsInner>
-          <Title>
-            <div>
-              <span>카테고리</span>
-            </div>
-          </Title>
-          <Title>
-            <Link to="/">
-              SEHOMALL <span>(clone coding)</span>
-            </Link>
-          </Title>
-          <CatLink to={"/cat/new"}>NEW ARRIVAL</CatLink>
-          <CatLink to={"/cat/BAGS"}>BAGS</CatLink>
-          <CatLink to={"/cat/WALLETS"}>WALLETS</CatLink>
-          <CatLink to={"/cat/ACCESSORIES"}>ACCESSORIES</CatLink>
-          <CatLink to={"/cat/SCARVES"}>SCARVES</CatLink>
-          <CatLink to={"/about"}>ABOUT</CatLink>
-          <CatLink to={"/notice?page=1&size=5"}>NOTICE</CatLink>
-          <CatLink to={"/contact"}>CONTACT</CatLink>
-          <CatLink to={"/instagram"}>INSTAGRAM</CatLink>          
-        </ItemsInner>
+        <h1>카테고리: {cate}</h1>
+        <Main>
+          {cateItems.length > 0 ? (
+            cateItems.map((item) => <CardOne key={item?.id} item={item} />)
+          ) : (
+            <div>해당 상품이 없습니다.</div>
+          )}
+        </Main>
       </Container>
     </Layout>
   );
@@ -34,40 +53,22 @@ const CategoryPage = () => {
 
 export default CategoryPage;
 
-const Container = styled.div`
+const Container = styled.div`  
   display: flex;
   justify-content: center;
-  align-items: flex-start;
   flex-direction: column;
-  width: 96vw;
-  padding: 40px;
-  margin-top: 50px;  
-  box-sizing: border-box;
-`;
-
-const Title = styled.h1`
-width: 100%;
-padding: 0 20px;
-box-sizing: border-box;
-font-size: var(--main-h1-size);
-  span {    
-    font-size: 1em;
-  }
-`;
-
-const ItemsInner = styled.div`
+  align-items: center;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+  max-width: 870px;
+  padding: 0 20px;  
 `;
 
-const CatLink = styled(Link)`
-  width: 100%;
-  padding: 0 0 0 30px;
-  box-sizing: border-box;
-  &:hover {
-    background-color: rgba(82, 72, 72, 0.1);
-  }
+const Main = styled.div`
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;    
 `;
