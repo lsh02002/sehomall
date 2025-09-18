@@ -15,6 +15,7 @@ const CategoryPage = () => {
     const match = dateStr.match(/(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/);
     if (!match) return 0;
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_, year, month, day] = match;
     return new Date(
       Number(year),
