@@ -14,18 +14,18 @@ const CategoryMenuPage = () => {
           </Title>
           <Title>
             <Link to="/">
-              SEHOMALL <span>(clone coding)</span>
+              세호쇼핑몰 <span>(클론코딩)</span>
             </Link>
           </Title>
-          <CatLink to={"/cat/new"}>NEW ARRIVAL</CatLink>
-          <CatLink to={"/cat/BAGS"}>BAGS</CatLink>
-          <CatLink to={"/cat/WALLETS"}>WALLETS</CatLink>
-          <CatLink to={"/cat/ACCESSORIES"}>ACCESSORIES</CatLink>
-          <CatLink to={"/cat/SCARVES"}>SCARVES</CatLink>
-          <CatLink to={"/about"}>ABOUT</CatLink>
-          <CatLink to={"/notice?page=1&size=5"}>NOTICE</CatLink>
-          <CatLink to={"/contact"}>CONTACT</CatLink>
-          <CatLink to={"/instagram"}>INSTAGRAM</CatLink>          
+          <CatLink to={"/cat/new"}>새 상품</CatLink>
+          <CatLink to={"/cat/BAGS"}>가방</CatLink>
+          <CatLink to={"/cat/WALLETS"}>지갑</CatLink>
+          <CatLink to={"/cat/ACCESSORIES"}>악세서리</CatLink>
+          <CatLink to={"/cat/SCARVES"}>스카프</CatLink>
+          <CatLink to={"/about"}>쇼핑몰 소개</CatLink>
+          <CatLink to={"/notice?page=1&size=5"}>공지사항</CatLink>
+          <CatLink to={"/contact"}>연락처</CatLink>
+          <CatLink to={"/instagram"}>인스타그램</CatLink>          
         </ItemsInner>
       </Container>
     </Layout>
