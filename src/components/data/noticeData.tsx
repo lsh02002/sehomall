@@ -41,7 +41,7 @@ export const noticeData = {
   ],
   number: 0,
   size: 20,
-  totalElements: 2,
+  totalElements: 4,
   totalPages: 1,
   last: true,
   sort: {
@@ -50,6 +50,6 @@ export const noticeData = {
     unsorted: true,
   },
   first: true,
-  numberOfElements: 2,
+  numberOfElements: 4,
   empty: false,
 };
