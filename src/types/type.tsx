@@ -48,7 +48,7 @@ export type itemCartType = {
 
 export type itemCartTypeWithAllString = {
   itemId: string | null;
-  count: string | null;
+  itemCount: string | null;
   itemName: string | null;
   price: string | null;
   fileUrl: string | null;

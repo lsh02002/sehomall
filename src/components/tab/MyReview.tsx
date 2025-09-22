@@ -13,24 +13,17 @@ const MyReview = () => {
   const [isReview, setIsReview] = useState(false);
   const {isReviewUpdated, setIsReviewUpdated} = useReview();
 
-  const { reviews, setReviews } = useReview();
-  const [reviewTotal, setReviewTotal] = useState(0);
-
+  const { reviews } = useReview();
+ 
   const [searchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") ?? "1");
   const size = parseInt(searchParams.get("size") ?? "4");
 
+  const myReviews = reviews?.filter(review=>review.nickname === "lsh02002");
+
   useEffect(() => {
     setReviewPage(page);
   }, [page, setReviewPage]);
-
-  useEffect(() => {
-    setReviews(
-      reviews?.filter((review) => review.nickname === "lsh02002")
-    );
-    setReviewTotal(reviews.length);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, size, isReviewUpdated, setIsReviewUpdated, setReviews]);
 
   return (
     <Container>
@@ -38,8 +31,8 @@ const MyReview = () => {
         <ReviewButtonWrapper>
           <button onClick={() => setIsReview(true)}>후기 등록</button>
         </ReviewButtonWrapper>
-        {reviews?.length > 0 ? (
-          reviews.map((review, index) => (
+        {myReviews?.length > 0 ? (
+          myReviews?.map((review, index) => (
             <ReviewCard key={index} review={review} />
           ))
         ) : (
@@ -48,7 +41,7 @@ const MyReview = () => {
       </ReviewContainer>
       <Paging
         to={`/mypage/REVIEWS`}
-        total={reviewTotal}
+        total={myReviews.length}
         size={size}
         page={page}
       />
