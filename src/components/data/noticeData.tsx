@@ -38,10 +38,20 @@ export const noticeData = {
       createAt: "2025-09-17T02:27:35.734242",
       modifyAt: "2025-09-17T02:27:35.734242",
     },
+    {
+      id: 5,
+      title: "상품상세 페이지에 없는 상품 아이디로 접근할때 에러메시지",
+      content:
+        "주소창에서 존재하지 않은 상품 아이디로 접근할때 해당 메시지를 출력하게 했습니다.",
+      nickname: "lsh02002",
+      reviews: 0,
+      createAt: "2025-11-15T16:30:35.734242",
+      modifyAt: "2025-11-15T16:30:35.734242",
+    },
   ],
   number: 0,
   size: 20,
-  totalElements: 4,
+  totalElements: 5,
   totalPages: 1,
   last: true,
   sort: {
@@ -50,6 +60,6 @@ export const noticeData = {
     unsorted: true,
   },
   first: true,
-  numberOfElements: 4,
+  numberOfElements: 5,
   empty: false,
 };
