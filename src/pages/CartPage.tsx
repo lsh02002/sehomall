@@ -7,12 +7,15 @@ import { useNavigate } from "react-router-dom";
 import { itemCartType } from "../types/type";
 
 const CartPage = () => {
-  const { totalPrice, setTotalPrice, cartItems, isEditing } = useCart()
+  const { totalPrice, setTotalPrice, cartItems, isEditing } = useCart();
   const navigate = useNavigate();
 
   useEffect(() => {
     let total = 0;
-    cartItems.map((item: itemCartType) => item.checked && (total += item.price * item.itemCount));
+    cartItems.map(
+      (item: itemCartType) =>
+        item.checked && (total += item.price * item.itemCount)
+    );
     setTotalPrice(total);
   }, [cartItems, setTotalPrice, isEditing]);
 
@@ -47,7 +50,7 @@ const CartPage = () => {
 export default CartPage;
 
 const Main = styled.div`
-  width: 100%;  
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

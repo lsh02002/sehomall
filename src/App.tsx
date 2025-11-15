@@ -6,7 +6,6 @@ import { lazy, Suspense, useEffect } from "react";
 import { useLogin } from "./api/loginContextApi";
 import PageLoading from "./components/layout/PageLoading";
 import { userInfoData } from "./components/data/userInfoData";
-import CategoryPage from "./pages/CategoryPage";
 
 const Loading = <PageLoading />;
 const About = lazy(() => import("./pages/AboutPage"));

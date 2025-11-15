@@ -27,8 +27,13 @@ const DetailPage = () => {
   const itemId = parseInt(id ? id : "0");
 
   useEffect(() => {
+    if(!itemData?.content?.find((i: itemType)=> i.id === itemId)) {
+      alert("해당 상품을 찾을 수 없습니다.");
+      navigate(-1);
+    }
+    
     setItem(itemData?.content?.find((i: itemType) => i.id === itemId) ?? null);
-  }, [itemId]);
+  }, [itemId, navigate]);
 
   const OnAddToCartClick = () => {
     if (!isLogin) {
