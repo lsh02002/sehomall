@@ -269,7 +269,7 @@ const Enroll = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-item: center;
+    align-items: center;
     padding-top: 20px;
 
     button {
