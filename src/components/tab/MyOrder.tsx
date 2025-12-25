@@ -4,13 +4,12 @@ import OrderCard from "../card/OrderCard";
 import Paging from "../pagination/Paging";
 import { useMyPage } from "../../api/myPageTabContextApi";
 import { useItem } from "../../api/itemContextApi";
-import { orderData } from "../data/orderData";
 import { styled } from "styled-components";
 
 const MyOrder = () => {
-  const { myOrders, setMyOrders } = useItem();
+  const { myOrders } = useItem();
   const { setOrderPage } = useMyPage(); 
-  const [orderTotal, setOrderTotal] = useState(0);
+  const [orderTotal] = useState(0);
   const [isOrderStatusUpdated, setIsOrderStatusUpdated] = useState(false);
 
   const [searchParams] = useSearchParams();
@@ -20,11 +19,6 @@ const MyOrder = () => {
   useEffect(() => {
     setOrderPage(page);
   }, [page, setOrderPage]);
-
-  useEffect(() => {
-    setMyOrders(orderData?.content);
-    setOrderTotal(orderData?.totalElements);
-  }, [isOrderStatusUpdated, setIsOrderStatusUpdated, size, page, setMyOrders]);
 
   return (
     <Container>

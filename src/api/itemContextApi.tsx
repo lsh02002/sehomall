@@ -9,6 +9,7 @@ import React, {
 import { heartData } from "../components/data/heartData";
 import { itemData } from "../components/data/itemData";
 import { itemType, orderResponseType } from "../types/type";
+import { orderData } from "../components/data/orderData";
 
 export type ItemContextValue = {
   items: itemType[];
@@ -26,7 +27,7 @@ const ItemContext = createContext<ItemContextValue | undefined>(undefined);
 const ItemProvider = ({ children }: { children: ReactNode }) => {
   const [items, setItems] = useState<itemType[]>(itemData?.content);
   const [myHearts, setMyHearts] = useState<itemType[]>(heartData?.content);
-  const [myOrders, setMyOrders] = useState<orderResponseType[]>([]);
+  const [myOrders, setMyOrders] = useState<orderResponseType[]>(orderData?.content);
   const [isHeartUpdated, setIsHeartUpdated] = useState(false);
 
   const value: ItemContextValue = {

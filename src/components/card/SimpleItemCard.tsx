@@ -6,11 +6,11 @@ import { itemOrderType } from "../../types/type";
 const SimpleItemCard = ({ item }: { item: itemOrderType }) => {
   return (
     <Container>
-      <Link to={`/detail/${item.item.id}`}>
+      <Link to={`/detail/${item.item?.id}`}>
         <Info>
-          <img src={item?.item.files[0].fileUrl} alt="" />
-          <div>상품명: {item.item.name}</div>
-          <div>가격: {item.item.price?.toLocaleString()}원</div>
+          <img src={item.item?.files[0].fileUrl} alt="" />
+          <div>상품명: {item.item?.name}</div>
+          <div>가격: {item.item?.price?.toLocaleString()}원</div>
           <div>수량: {item.count}</div>
         </Info>
       </Link>
@@ -23,7 +23,7 @@ export default SimpleItemCard;
 const Container = styled.article`
   display: flex;
   justify-content: start;
-  align-items; center;
+  align-items: center;
   max-width: 600px;
   width: 140px;
   overflow: hidden;

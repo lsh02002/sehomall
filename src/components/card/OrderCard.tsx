@@ -7,7 +7,7 @@ type orderCardPropsType = {
   order: orderResponseType;
   isOrderStatusUpdated: boolean;
   setIsOrderStatusUpdated: (o: boolean) => void;
-}
+};
 
 const OrderCard = ({
   order,
@@ -36,7 +36,7 @@ const OrderCard = ({
         <OrderInfo>
           <div>주문 아이디: {order.id}</div>
           <div>
-            주문 상품: {order.items[0]?.item.name} 외 {order.items.length} 개
+            주문 상품: {order.items[0]?.item?.name} 외 {order.items?.length} 개
           </div>
           <div>작성자: {order.deliveryName}</div>
           <div>전화번호: {order.deliveryPhone}</div>
@@ -113,10 +113,10 @@ const Container = styled.div`
     padding: 0px 10px;
     object-fit: cover;
   }
-    a{
+  a {
     text-decoration: none;
     color: black;
-    }
+  }
 `;
 
 const OrderInfo = styled.div`
@@ -141,7 +141,7 @@ const OrderStatusInfo = styled.div`
   margin-left: 20px;
   font-size: var(--main-font-size);
 
-  div {    
+  div {
     padding-bottom: 5px;
   }
 

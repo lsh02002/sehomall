@@ -58,7 +58,7 @@ export type itemCartTypeWithAllString = {
 
 export type itemOrderType = {
   id: number;
-  item: itemType;
+  item?: itemType;
   count: number;
 };
 

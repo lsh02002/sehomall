@@ -7,6 +7,7 @@ import { itemCartType, orderResponseType } from "../types/type";
 import { userInfoData } from "../components/data/userInfoData";
 import { useItem } from "../api/itemContextApi";
 import { useCart } from "../api/cartContextApi";
+import { itemData } from "../components/data/itemData";
 
 const PaymentPage = () => {
   const { cartItems } = useCart();
@@ -78,7 +79,8 @@ const PaymentPage = () => {
     if (isFromCart === "true") {
       let total = 0;
       payItems.map(
-        (item) => item.checked && (total += (item.price * item.itemCount)))
+        (item) => item.checked && (total += item.price * item.itemCount)
+      );
 
       setTotalPayPrice(total);
     } else {
@@ -118,8 +120,13 @@ const PaymentPage = () => {
       alert("주문자란에 입력되지 않은 란이 있습니다");
       return;
     }
-    const items = payItems.filter((item) => {
-      return { itemId, count: item.itemCount };
+
+    const items = payItems.map((pitem) => {
+      return {
+        id: Number(pitem?.itemId),
+        item: itemData?.content.find((it) => it.id === Number(pitem.itemId)),
+        count: pitem.itemCount,
+      };
     });
 
     if (items.length <= 0) {
@@ -128,16 +135,16 @@ const PaymentPage = () => {
     }
 
     const paymentResponse: orderResponseType = {
-      id: 0,
+      id: myOrders[myOrders.length - 1].id + 1,
       productSum: totalPayPrice,
       email,
       deliveryName: name,
       deliveryAddress: address,
       deliveryPhone: phoneNumber,
       deliveryMessage,
-      orderStatus: "COMPLETED",
+      orderStatus: "ORDERED",
       createAt: new Date().toString(),
-      items: [],
+      items,
     };
 
     setMyOrders([...myOrders, paymentResponse]);
@@ -241,7 +248,7 @@ const PaymentPage = () => {
 
 export default PaymentPage;
 
-const Container = styled.div`  
+const Container = styled.div`
   width: 100%;
   max-width: 870px;
   display: flex;
@@ -256,7 +263,7 @@ const ItemInfo = styled.div`
   display: flex;
   justify-content: center;
   align-items: start;
-  flex-direction: column;  
+  flex-direction: column;
   & > span {
     box-sizing: border-box;
     margin: 25px 0 0 0;
