@@ -6,6 +6,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { useLogin } from "./api/loginContextApi";
 import PageLoading from "./components/layout/PageLoading";
 import { userInfoData } from "./components/data/userInfoData";
+import { Analytics } from "@vercel/analytics/react"
 
 const Loading = <PageLoading />;
 const About = lazy(() => import("./pages/AboutPage"));
@@ -168,6 +169,7 @@ function App() {
         </Routes>
         <Nav />
         {/* <Footer /> */}
+        <Analytics />
       </Router>
     </Container>
   );
