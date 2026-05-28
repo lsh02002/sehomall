@@ -134,7 +134,6 @@ const Container = styled.div`
 
 const ItemInfo = styled.div`
   width: 100%;
-  margin: 0 10px;
   display: flex;
   justify-content: center;
   align-items: start;
@@ -159,22 +158,151 @@ const ItemInfo = styled.div`
 
 const TextInput = styled.div`
   width: 100%;
-  box-sizing: border-box;
-  padding: 5px 20px;
+
   display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 8px 20px;
+
+  box-sizing: border-box;
+
   & > span {
-    display: inline-block;
-    width: 130px;
+    min-width: 120px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    color: #555;
+
+    flex-shrink: 0;
   }
+
   input[type="text"] {
     width: 100%;
+    height: 48px;
+
+    padding: 0 16px;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+
+    background: #fafafa;
+
+    font-size: 15px;
+
+    color: #222;
+
     box-sizing: border-box;
-    padding: 5px;
+
+    transition:
+      border-color 0.2s,
+      background 0.2s,
+      box-shadow 0.2s;
+
+    &:focus {
+      outline: none;
+
+      background: white;
+
+      border-color: #d0d0d0;
+
+      box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04);
+    }
+
+    &::placeholder {
+      color: #aaa;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 8px;
+
+    & > span {
+      min-width: auto;
+    }
   }
 `;
 
 const ButtonInput = styled.div`
   width: 100%;
-  text-align: right;
-  margin-top: 20px;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  button {
+    min-width: 110px;
+    height: 46px;
+
+    padding: 0 20px;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+
+    background: #fafafa;
+
+    color: #333;
+
+    font-size: var(--button-font-size);
+    font-weight: 700;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    box-shadow:
+      0 4px 10px rgba(0, 0, 0, 0.04),
+      0 1px 3px rgba(0, 0, 0, 0.03);
+
+    transition:
+      background 0.2s,
+      transform 0.2s,
+      box-shadow 0.25s,
+      border-color 0.2s,
+      color 0.2s;
+
+    &:hover {
+      background: white;
+
+      border-color: #d0d0d0;
+
+      color: #111;
+
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.06),
+        0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    &:active {
+      transform: scale(0.96);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    justify-content: stretch;
+
+    button {
+      flex: 1;
+    }
+  }
 `;
