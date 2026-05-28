@@ -5,7 +5,7 @@ import MyReview from "./MyReview";
 import MyHeart from "./MyHeart";
 import MyOrder from "./MyOrder";
 import { useMyPage } from "../../api/myPageTabContextApi";
-import { layout } from "../../them/them";
+import { layout } from "../../theme/theme";
 
 const MyPageTab = ({ cate }: { cate: string | undefined }) => {
   const { reviewPage, heartPage, orderPage } = useMyPage();

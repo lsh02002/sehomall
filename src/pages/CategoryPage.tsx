@@ -4,7 +4,7 @@ import { useItem } from "../api/itemContextApi";
 import CardOne from "../components/card/CardOne";
 import Layout from "../components/layout/Layout";
 import { itemType } from "../types/type";
-import { layout } from "../them/them";
+import { layout } from "../theme/theme";
 
 const CategoryPage = () => {
   const { cate } = useParams();

@@ -5,7 +5,7 @@ import {
   flexRender,
   type ColumnDef,
 } from "@tanstack/react-table";
-import { layout } from "../them/them";
+import { layout } from "../theme/theme";
 
 type TablePropsType<TData extends object> = {
   columns: ColumnDef<TData, any>[];

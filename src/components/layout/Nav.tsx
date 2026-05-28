@@ -8,7 +8,7 @@ import Category from "../../assets/category.svg";
 import Review from "../../assets/review.svg";
 import MyPage from "../../assets/my-page.svg";
 import Cart from "../../assets/cart.svg";
-import { layout } from "../../them/them";
+import { layout } from "../../theme/theme";
 
 const Nav = () => {
   const { reviewPage } = useMyPage();

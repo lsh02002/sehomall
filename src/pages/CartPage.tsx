@@ -4,7 +4,7 @@ import CartCard from "../components/card/CartCard";
 import { useCart } from "../api/cartContextApi";
 import { useNavigate } from "react-router-dom";
 import { itemCartType } from "../types/type";
-import { layout } from "../them/them";
+import { layout } from "../theme/theme";
 
 const CartPage = () => {
   const { totalPrice, setTotalPrice, cartItems, isEditing } = useCart();

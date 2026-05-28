@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useCart } from "../../api/cartContextApi";
 import HeartCount from "../HeartCount";
 import { itemCartType } from "../../types/type";
-import { layout } from "../../them/them";
+import { layout } from "../../theme/theme";
 
 const CartCard = ({ item }: { item: itemCartType }) => {
   const { setCartCount, cartItems, setCartItems } = useCart();

@@ -14,7 +14,7 @@ import { itemData } from "../components/data/itemData";
 
 import { itemCartType, itemType, reviewType } from "../types/type";
 
-import { layout } from "../them/them";
+import { layout } from "../theme/theme";
 
 const DetailPage = () => {
   const { isLogin } = useLogin();

@@ -9,7 +9,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 import CardOne from "../card/CardOne";
 import { itemType } from "../../types/type";
-import { layout } from "../../them/them";
+import { layout } from "../../theme/theme";
 
 const CARD_WIDTH = 140;
 

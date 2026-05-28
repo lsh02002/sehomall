@@ -7,7 +7,7 @@ import { itemData } from "../components/data/itemData";
 
 import { itemType } from "../types/type";
 
-import { layout } from "../them/them";
+import { layout } from "../theme/theme";
 
 const SearchPage = () => {
   const [searchItems, setSearchItems] = useState<itemType[]>([]);

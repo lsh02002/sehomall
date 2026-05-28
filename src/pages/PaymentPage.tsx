@@ -14,7 +14,7 @@ import { useCart } from "../api/cartContextApi";
 
 import { itemData } from "../components/data/itemData";
 
-import { layout } from "../them/them";
+import { layout } from "../theme/theme";
 
 const PaymentPage = () => {
   const { cartItems } = useCart();

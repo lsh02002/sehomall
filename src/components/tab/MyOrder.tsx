@@ -4,7 +4,7 @@ import OrderCard from "../card/OrderCard";
 import Paging from "../pagination/Paging";
 import { useMyPage } from "../../api/myPageTabContextApi";
 import { useItem } from "../../api/itemContextApi";
-import { layout } from "../../them/them";
+import { layout } from "../../theme/theme";
 
 const MyOrder = () => {
   const { myOrders } = useItem();

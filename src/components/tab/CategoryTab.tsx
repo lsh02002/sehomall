@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useRef } from "react";
 import { itemType } from "../../types/type";
 import CardTwo from "../card/CardTwo";
-import { layout } from "../../them/them";
+import { layout } from "../../theme/theme";
 
 type CategoryTabPropsType = {
   cate: string;

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import NoImage from "../../assets/no-image.jpg";
 import { reviewType } from "../../types/type";
 import StarRating from "../StarRating";
-import { layout } from "../../them/them";
+import { layout } from "../../theme/theme";
 
 const ReviewCard = ({ review }: { review: reviewType | null }) => {
   return (

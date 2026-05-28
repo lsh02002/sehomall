@@ -1,6 +1,6 @@
 import React from "react";
 import { itemCartType } from "../../types/type";
-import { layout } from "../../them/them";
+import { layout } from "../../theme/theme";
 
 const PayCard = ({ item }: { item: itemCartType }) => {
   return (

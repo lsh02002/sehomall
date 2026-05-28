@@ -5,7 +5,7 @@ import ReviewEnroll from "../components/modal/ReviewEnroll";
 import Paging from "../components/pagination/Paging";
 import { useSearchParams } from "react-router-dom";
 import { useReview } from "../api/reviewContextApi";
-import { layout } from "../them/them";
+import { layout } from "../theme/theme";
 
 const ReviewPage = () => {
   const { reviews, isReviewUpdated, setIsReviewUpdated } = useReview();

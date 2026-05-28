@@ -10,7 +10,7 @@ import { useItem } from "../api/itemContextApi";
 
 import { itemType } from "../types/type";
 
-import { layout } from "../them/them";
+import { layout } from "../theme/theme";
 
 const MainPage = () => {
   const { items } = useItem();

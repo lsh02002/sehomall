@@ -1,7 +1,7 @@
 import Intro01 from "../assets/intro-01.jpg";
 import Intro02 from "../assets/intro-02.jpg";
 import { Link } from "react-router-dom";
-import { layout } from "../them/them";
+import { layout } from "../theme/theme";
 
 const introItems = [
   {

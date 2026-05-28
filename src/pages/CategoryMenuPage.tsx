@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Layout from "../components/layout/Layout";
-import { layout } from "../them/them";
+import { layout } from "../theme/theme";
 
 const menuItems = [
   {

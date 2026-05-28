@@ -5,7 +5,7 @@ import Paging from "../pagination/Paging";
 import { useMyPage } from "../../api/myPageTabContextApi";
 import ReviewEnroll from "../modal/ReviewEnroll";
 import { useReview } from "../../api/reviewContextApi";
-import { layout } from "../../them/them";
+import { layout } from "../../theme/theme";
 
 const MyReview = () => {
   const { setReviewPage } = useMyPage();

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SimpleItemCard from "./SimpleItemCard";
 import { itemOrderType, orderResponseType } from "../../types/type";
-import { layout } from "../../them/them";
+import { layout } from "../../theme/theme";
 
 type orderCardPropsType = {
   order: orderResponseType;

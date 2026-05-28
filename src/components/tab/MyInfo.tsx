@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 import { userInfoData } from "../data/userInfoData";
-import { layout } from "../../them/them";
+import { layout } from "../../theme/theme";
 
 const MyInfo = () => {
   const [myInfo, setMyInfo] = useState({
