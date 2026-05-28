@@ -10,6 +10,7 @@ import { itemCartType, itemType, reviewType } from "../types/type";
 import { useCart } from "../api/cartContextApi";
 import { itemData } from "../components/data/itemData";
 import { useReview } from "../api/reviewContextApi";
+import { layout } from "../them/them";
 
 const DetailPage = () => {
   const { isLogin } = useLogin();
@@ -27,11 +28,11 @@ const DetailPage = () => {
   const itemId = parseInt(id ? id : "0");
 
   useEffect(() => {
-    if(!itemData?.content?.find((i: itemType)=> i.id === itemId)) {
+    if (!itemData?.content?.find((i: itemType) => i.id === itemId)) {
       alert("해당 상품을 찾을 수 없습니다.");
       navigate(-1);
     }
-    
+
     setItem(itemData?.content?.find((i: itemType) => i.id === itemId) ?? null);
   }, [itemId, navigate]);
 
@@ -73,7 +74,7 @@ const DetailPage = () => {
         item?.price
       }&fileUrl=${item?.files[0].fileUrl}&heartCount=${
         item?.heartCount
-      }&itemCount=${itemCount}&isCheckedItem=${true}`
+      }&itemCount=${itemCount}&isCheckedItem=${true}`,
     );
   };
 
@@ -143,9 +144,9 @@ const DetailPage = () => {
       )}
       <ReviewBody>
         {reviews?.filter((i: reviewType) => i?.itemId === itemId).length > 0 &&
-          reviews?.filter((i: reviewType) => i?.itemId === itemId).map((review, index) => (
-            <ReviewCard key={index} review={review} />
-          ))}
+          reviews
+            ?.filter((i: reviewType) => i?.itemId === itemId)
+            .map((review, index) => <ReviewCard key={index} review={review} />)}
       </ReviewBody>
     </Layout>
   );
@@ -154,147 +155,355 @@ const DetailPage = () => {
 export default DetailPage;
 
 const Main = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
-  max-width: 870px;
-  margin: 40px 0 0 10px;
-  position: relative;
+  max-width: ${layout.maxWidth};
+
+  margin: 60px auto 0 auto;
+  padding: 0 20px;
+
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  gap: 60px;
+
+  box-sizing: border-box;
+
+  @media (max-width: 980px) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 `;
 
 const Image = styled.div`
-  width: 400px;
-  height: 400px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
   overflow: hidden;
+
+  border-radius: 32px;
+
+  background: #f7f7f7;
+
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    0 4px 10px rgba(0, 0, 0, 0.04);
+
+  position: sticky;
+  top: 100px;
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+
+    transition: transform 0.5s;
+  }
+
+  &:hover img {
+    transform: scale(1.03);
+  }
+
+  @media (max-width: 980px) {
+    position: relative;
+    top: 0;
   }
 `;
 
 const Info = styled.div`
   width: 100%;
-  max-width: 435px;
-  margin-left: 70px;
+
+  padding: 10px 0;
+
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  text-align: left;
+
   h1 {
-    width: 100%;
-    margin: 0;
-    padding: 10px 0;
-    box-sizing: border-box;
-    font-size: var(--main-h1-size);
+    margin: 0 0 30px 0;
+
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 800;
+
+    color: #111;
+
+    line-height: 1.1;
   }
 
   div {
     width: 100%;
-    font-size: 1em;
+
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
 
-    & > span {
-      width: 100%;
-    }
+    padding: 18px 0;
+
+    border-bottom: 1px solid #efefef;
+
+    gap: 20px;
+  }
+
+  span {
+    min-width: 120px;
+
+    color: #666;
+
+    font-size: 15px;
+    font-weight: 600;
   }
 
   em {
-    display: flex;
-    width: 100%;
+    flex: 1;
+
+    font-style: normal;
+
+    color: #111;
+
+    line-height: 1.6;
+
+    text-align: right;
   }
 `;
 
-const CountButton = styled.span`
+const CountButton = styled.div`
   width: 100%;
+
+  margin-top: 30px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 18px 20px;
+
+  border-radius: 18px;
+
+  background: #f8f8f8;
+
+  font-weight: 700;
+
+  box-sizing: border-box;
+
   button {
-    text-align: right;
-    border: none;
-    padding: 5px 10px;
-    color: white;
-    background-color: gray;
-    transition: 0.2s;
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid #e8e8e8;
+    border-radius: 50%;
+
+    background: #fafafa;
+
+    color: #333;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     cursor: pointer;
-    font-size: var(--button-font-size);
+
+    box-shadow:
+      0 4px 10px rgba(0, 0, 0, 0.04),
+      0 1px 3px rgba(0, 0, 0, 0.03);
+
+    transition:
+      background 0.2s,
+      transform 0.2s,
+      box-shadow 0.25s,
+      border-color 0.2s,
+      color 0.2s;
+
     &:hover {
-      background-color: lightgray;
+      background: white;
+
+      border-color: #d0d0d0;
+
+      color: #111;
+
+      transform: translateY(-1px) scale(1.04);
+
+      box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.06),
+        0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    &:active {
+      transform: scale(0.94);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none;
     }
   }
 `;
 
 const BuyNow = styled.button`
-  margin-top: 30px;
-  border: none;
-  padding: 10px;
-  color: white;
-  background-color: gray;
-  transition: 0.2s;
-  cursor: pointer;
   width: 100%;
-  font-size: var(--button-font-size);
+
+  margin-top: 30px;
+
+  padding: 20px;
+
+  border: none;
+  border-radius: 18px;
+
+  background: linear-gradient(135deg, #111, #333);
+
+  color: white;
+
+  font-size: 17px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s,
+    opacity 0.2s,
+    box-shadow 0.25s;
+
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+
   &:hover {
-    background-color: lightgray;
+    transform: translateY(-2px);
+
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22);
   }
 `;
 
 const AddToCartButton = styled.button`
-  margin-top: 10px;
   width: 100%;
-  border: none;
-  padding: 10px;
-  background-color: #fff;
+
+  padding: 20px;
+
+  margin-top: 14px;
+
+  border-radius: 18px;
+
+  border: 1px solid #ddd;
+
+  background: white;
+
+  color: #111;
+
+  font-size: 16px;
+  font-weight: 700;
+
   cursor: pointer;
-  border: 1px solid black;
-  transition: 0.3s;
-  font-size: var(--button-font-size);
+
+  transition:
+    background 0.2s,
+    transform 0.2s,
+    border 0.2s;
+
   &:hover {
-    color: gray;
+    background: #f8f8f8;
+    transform: translateY(-1px);
+    border-color: #bbb;
   }
 `;
 
 const Review = styled.div`
   width: 100%;
-  box-sizing: border-box;
+
   position: fixed;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 5;
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.45);
+
+  backdrop-filter: blur(4px);
+
+  z-index: 100;
 `;
 
 const ReviewTitle = styled.div`
   width: 100%;
-  max-width: 870px;
-  margin-top: 80px;
-  padding: 10px;
-  box-sizing: border-box;
+  max-width: ${layout.maxWidth};
+
+  margin: 100px auto 24px auto;
+  padding: 0 20px;
+
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  span {
+    font-size: 28px;
+    font-weight: 800;
+    color: #111;
+  }
 
   button {
-    text-align: right;
-    border: none;
-    padding: 5px 10px;
-    color: white;
-    background-color: gray;
-    transition: 0.2s;
-    cursor: pointer;
+    height: 48px;
+
+    padding: 0 24px;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 999px;
+
+    background: #fafafa;
+
+    color: #333;
+
     font-size: var(--button-font-size);
+    font-weight: 700;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    box-shadow:
+      0 4px 10px rgba(0, 0, 0, 0.04),
+      0 1px 3px rgba(0, 0, 0, 0.03);
+
+    transition:
+      background 0.2s,
+      transform 0.2s,
+      box-shadow 0.25s,
+      border-color 0.2s,
+      color 0.2s;
+
     &:hover {
-      background-color: lightgray;
+      background: white;
+
+      border-color: #d0d0d0;
+
+      color: #111;
+
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.06),
+        0 2px 6px rgba(0, 0, 0, 0.04);
+    }
+
+    &:active {
+      transform: scale(0.97);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none;
     }
   }
 `;
 
 const ReviewBody = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   width: 100%;
-  max-width: 870px;
+  max-width: ${layout.maxWidth};
+
+  margin: 0 auto 120px auto;
+  padding: 0 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  box-sizing: border-box;
 `;

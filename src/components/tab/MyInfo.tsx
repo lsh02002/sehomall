@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
 import styled from "styled-components";
 import { userInfoData } from "../data/userInfoData";
+import { layout } from "../../them/them";
 
 const MyInfo = () => {
   const [myInfo, setMyInfo] = useState({
@@ -22,7 +23,7 @@ const MyInfo = () => {
   return (
     <Layout>
       <Container>
-        <ItemInfo>          
+        <ItemInfo>
           <TextInput>
             <span>닉네임: </span>
             <input type="text" value={myInfo.nickname} disabled />
@@ -68,23 +69,66 @@ export default MyInfo;
 
 const Container = styled.div`
   width: 100%;
-  max-width: 870px;
+  max-width: ${layout.maxWidth};
   display: flex;
   justify-content: center;
   align-items: center;
   
   button {
-    text-align: right;
-    border: none;
-    padding: 5px 10px;
-    color: white;
-    background-color: gray;
-    transition: 0.2s;
-    cursor: pointer;
-    font-size: var(--button-font-size);
-    &:hover {
-      background-color: lightgray;
-    }
+  min-width: 90px;
+  height: 40px;
+
+  padding: 0 16px;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+
+  background: #fafafa;
+
+  color: #333;
+
+  font-size: var(--button-font-size);
+  font-weight: 600;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.04),
+    0 1px 3px rgba(0, 0, 0, 0.03);
+
+  transition:
+    background 0.2s,
+    transform 0.2s,
+    box-shadow 0.25s,
+    border-color 0.2s,
+    color 0.2s;
+
+  &:hover {
+    background: white;
+
+    border-color: #d0d0d0;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+      0 8px 18px rgba(0, 0, 0, 0.06),
+      0 2px 6px rgba(0, 0, 0, 0.04);
+
+    color: #111;
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
   }
 `;
 

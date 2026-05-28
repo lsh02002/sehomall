@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import SimpleItemCard from "./SimpleItemCard";
 import { itemOrderType, orderResponseType } from "../../types/type";
+import { layout } from "../../them/them";
 
 type orderCardPropsType = {
   order: orderResponseType;
@@ -17,38 +18,46 @@ const OrderCard = ({
   const [isModal, setIsModal] = useState(false);
 
   const OnStatusUpdated = (status: string) => {
-    // ChangePaymentStatus(order.id, status)
-    //   .then((res) => {
-    //     // console.log(res);
-    //     if (res.headers?.accesstoken) {
-    //       localStorage.setItem("accessToken", res.headers?.accesstoken);
-    //     }
-    //     setIsOrderStatusUpdated(!isOrderStatusUpdated);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
+    console.log(status);
+    setIsOrderStatusUpdated(!isOrderStatusUpdated);
   };
 
+  const isDisabled =
+    order.orderStatus === "COMPLETED" || order.orderStatus === "CANCELED";
+
   return (
-    <>
-      <Container>
-        <OrderInfo>
-          <div>주문 아이디: {order.id}</div>
-          <div>
-            주문 상품: {order.items[0]?.item?.name} 외 {order.items?.length} 개
-          </div>
-          <div>작성자: {order.deliveryName}</div>
-          <div>전화번호: {order.deliveryPhone}</div>
-          <div>배송주소: {order.deliveryAddress}</div>
-          <CreatedDate>주문 날짜: {order.createAt}</CreatedDate>
-          <button
-            onMouseEnter={() => setIsModal(true)}
-            onMouseLeave={() => setIsModal(false)}
-          >
-            상품정보 보기▽
-          </button>
-        </OrderInfo>
+    <Container>
+      <OrderInfo>
+        <OrderBadge>ORDER #{order.id}</OrderBadge>
+
+        <ProductTitle>
+          {order.items[0]?.item?.name} 외 {order.items?.length}개
+        </ProductTitle>
+
+        <InfoRow>
+          <span>주문자</span>
+          <em>{order.deliveryName}</em>
+        </InfoRow>
+
+        <InfoRow>
+          <span>전화번호</span>
+          <em>{order.deliveryPhone}</em>
+        </InfoRow>
+
+        <InfoRow>
+          <span>배송주소</span>
+          <em>{order.deliveryAddress}</em>
+        </InfoRow>
+
+        <CreatedDate>주문 날짜: {order.createAt}</CreatedDate>
+
+        <ViewButton
+          onMouseEnter={() => setIsModal(true)}
+          onMouseLeave={() => setIsModal(false)}
+        >
+          상품정보 보기
+        </ViewButton>
+
         {isModal && (
           <Modal
             onMouseEnter={() => setIsModal(true)}
@@ -59,143 +68,339 @@ const OrderCard = ({
             ))}
           </Modal>
         )}
-        <OrderStatusInfo>
-          <div>결제상태: {"완료 (가상)"}</div>
-          <div>
-            총 가격: <span>{order.productSum.toLocaleString()}원</span>
-          </div>
-          <div>
-            주문배송상태: <span>{order.orderStatus}</span>
-          </div>
-        </OrderStatusInfo>
-        <CancelOrComplete>
-          <button
-            onClick={() => OnStatusUpdated("CANCELED")}
-            disabled={
-              order.orderStatus === "COMPLETED" ||
-              order.orderStatus === "CANCELED"
-            }
-          >
-            주문 취소
-          </button>
-          <button
-            onClick={() => OnStatusUpdated("COMPLETED")}
-            disabled={
-              order.orderStatus === "COMPLETED" ||
-              order.orderStatus === "CANCELED"
-            }
-          >
-            구입 확정
-          </button>
-        </CancelOrComplete>
-      </Container>
-    </>
+      </OrderInfo>
+
+      <OrderStatusInfo>
+        <StatusBox>
+          <span>결제상태</span>
+          <strong>완료</strong>
+        </StatusBox>
+
+        <StatusBox>
+          <span>총 가격</span>
+          <strong className="price">
+            {order.productSum.toLocaleString()}원
+          </strong>
+        </StatusBox>
+
+        <StatusBox>
+          <span>주문배송상태</span>
+          <StatusText status={order.orderStatus}>
+            {order.orderStatus}
+          </StatusText>
+        </StatusBox>
+      </OrderStatusInfo>
+
+      <CancelOrComplete>
+        <CancelButton
+          onClick={() => OnStatusUpdated("CANCELED")}
+          disabled={isDisabled}
+        >
+          주문 취소
+        </CancelButton>
+
+        <CompleteButton
+          onClick={() => OnStatusUpdated("COMPLETED")}
+          disabled={isDisabled}
+        >
+          구입 확정
+        </CompleteButton>
+      </CancelOrComplete>
+    </Container>
   );
 };
 
 export default OrderCard;
 
 const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 870px;
   width: 100%;
-  box-sizing: border-box;
-  position: relative;
-  border: 1px solid lightgray;
-  margin: 10px;
-  padding: 5px;
+  max-width: ${layout.maxWidth};
 
-  img {
-    width: 100px;
-    height: 100px;
-    padding: 0px 10px;
-    object-fit: cover;
+  margin: 16px auto;
+  padding: 24px;
+
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 160px;
+  gap: 28px;
+  align-items: center;
+
+  position: relative;
+
+  border: 1px solid #eee;
+  border-radius: 24px;
+
+  background: #fff;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.04),
+    0 2px 8px rgba(0, 0, 0, 0.03);
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 16px 36px rgba(0, 0, 0, 0.07),
+      0 4px 12px rgba(0, 0, 0, 0.04);
   }
+
   a {
     text-decoration: none;
-    color: black;
+    color: inherit;
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 22px;
   }
 `;
 
 const OrderInfo = styled.div`
-  padding: 5px;
-  width: 35%;
   position: relative;
-  font-size: var(--main-font-size);
 
-  button {
-    border: none;
-    background-color: #fff;
-    font-size: var(--button-font-size);
+  min-width: 0;
+
+  font-size: var(--main-font-size);
+`;
+
+const OrderBadge = styled.div`
+  display: inline-flex;
+  align-items: center;
+
+  height: 28px;
+
+  padding: 0 12px;
+
+  margin-bottom: 12px;
+
+  border-radius: 999px;
+
+  background: #f5f5f5;
+
+  color: #777;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+`;
+
+const ProductTitle = styled.div`
+  margin-bottom: 18px;
+
+  font-size: 20px;
+  font-weight: 800;
+
+  color: #111;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const InfoRow = styled.div`
+  display: flex;
+  gap: 14px;
+
+  margin-bottom: 8px;
+
+  span {
+    width: 72px;
+    flex-shrink: 0;
+
+    color: #888;
+
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  em {
+    min-width: 0;
+
+    color: #333;
+
+    font-style: normal;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 `;
 
 const CreatedDate = styled.div`
-  width: 290px;
+  margin-top: 10px;
+
+  color: #999;
+
+  font-size: 13px;
+`;
+
+const ViewButton = styled.button`
+  margin-top: 16px;
+
+  height: 38px;
+
+  padding: 0 16px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: #111;
+
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+
+  &:hover {
+    transform: translateY(-1px);
+    background: #333;
+  }
 `;
 
 const OrderStatusInfo = styled.div`
-  width: 35%;
-  margin-left: 20px;
-  font-size: var(--main-font-size);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
 
-  div {
-    padding-bottom: 5px;
-  }
+const StatusBox = styled.div`
+  padding: 16px 18px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-radius: 18px;
+
+  background: #fafafa;
 
   span {
-    color: red;
+    color: #777;
+
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  strong {
+    color: #111;
+
+    font-size: 15px;
+  }
+
+  .price {
+    color: #e60023;
   }
 `;
 
+const StatusText = styled.strong<{ status: string }>`
+  color: ${({ status }) =>
+    status === "COMPLETED"
+      ? "#16a34a"
+      : status === "CANCELED"
+        ? "#e60023"
+        : "#111"} !important;
+`;
+
 const CancelOrComplete = styled.div`
-  width: 15%;
   display: flex;
-  justify-content: start;
-  align-items: start;
   flex-direction: column;
-  button {
-    border: none;
-    margin: 10px;
-    padding: 5px;
-    transition: 0.2s;
-    cursor: pointer;
-    width: 70%;
-    font-size: var(--button-font-size);
+  gap: 12px;
 
-    // &:nth-child(1) {
-    //   color: white;
-    //   background-color: red;
-    // }
+  @media (max-width: 900px) {
+    flex-direction: row;
+  }
+`;
 
-    // &:nth-child(2) {
-    //   color: white;
-    //   background-color: gray;
-    // }
+const ActionButton = styled.button`
+  width: 100%;
+  height: 46px;
 
-    // &:hover:nth-child(1) {
-    //   background-color: salmon;
-    // }
+  border: none;
+  border-radius: 14px;
 
-    // &:hover:nth-child(2) {
-    //   background-color: lightgray;
-    // }
+  font-size: var(--button-font-size);
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s,
+    opacity 0.2s,
+    background 0.2s;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+`;
+
+const CancelButton = styled(ActionButton)`
+  background: #fff1f1;
+  color: #e60023;
+
+  &:hover:not(:disabled) {
+    background: #e60023;
+    color: #fff;
+  }
+`;
+
+const CompleteButton = styled(ActionButton)`
+  background: #111;
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background: #333;
   }
 `;
 
 const Modal = styled.div`
-  display: flex;
-  margin-top: 150px;
-  background-color: #fff;
   position: absolute;
-  width: 600px;
-  height: 200px;
-  left: 10px;
-  bottom: -190px;
-  padding: 0 20px;
+
+  left: 0;
+  top: calc(100% + 12px);
+
+  width: min(620px, 90vw);
+  max-height: 260px;
+
+  padding: 18px;
+
+  display: flex;
+  gap: 14px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  background: #fff;
+
+  border: 1px solid #eee;
+  border-radius: 20px;
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+
   box-sizing: border-box;
-  z-index: 5;
-  border: 1px solid gray;
+
+  z-index: 20;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 999px;
+  }
 `;

@@ -1,70 +1,113 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-// import required modules
+
 import { Navigation } from "swiper/modules";
+
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
 import CardOne from "../card/CardOne";
 import { itemType } from "../../types/type";
+import { layout } from "../../them/them";
+
+import styled from "styled-components";
+
+const CARD_WIDTH = 140;
 
 function ItemSlider({ items }: { items: itemType[] }) {
   return (
-    <>
+    <Wrapper>
+      <CustomPrevButton className="custom-prev">
+        <FaChevronLeft />
+      </CustomPrevButton>
+
+      <CustomNextButton className="custom-next">
+        <FaChevronRight />
+      </CustomNextButton>
+
       <Swiper
-        navigation={true}
-        modules={[Navigation]}        
-        breakpoints={{
-          0: {
-            slidesPerView: 2,
-            spaceBetween: 1,
-          },
-          320: {
-            slidesPerView: 2,
-            spaceBetween: 1,
-          },
-          480: {
-            slidesPerView: 4,
-            spaceBetween: 1,
-          },
-          860: {
-            slidesPerView: 5,
-            spaceBetween: 1,
-          },
-          1024: {
-            slidesPerView: 6,
-            spaceBetween: 1,
-          },
-          1200: {
-            slidesPerView: 8,
-            spaceBetween: 1,
-          },
-          1400: {
-            slidesPerView: 9,
-            spaceBetween: 1,
-          }
+        slidesPerView="auto"
+        spaceBetween={20}
+        navigation={{
+          prevEl: ".custom-prev",
+          nextEl: ".custom-next",
         }}
-        pagination={{
-          clickable: true,
-        }}
+        modules={[Navigation]}
         style={{
-          width: "100%",
-          height: "100%",
-          maxWidth: "1600px",
-          justifyContent: "flex-start",
+          width: "100%",          
         }}
       >
-        {items.length > 0 &&
-          items.map((item) => (
-            <SwiperSlide key={item.id}>
-              <CardOne item={item} />
-            </SwiperSlide>
-          ))}
+        {items.map((item) => (
+          <SwiperSlide
+            key={item.id}
+            style={{
+              width: `${CARD_WIDTH}px`,
+              flexShrink: 0,
+            }}
+          >
+            <CardOne item={item} />
+          </SwiperSlide>
+        ))}
       </Swiper>
-    </>
+    </Wrapper>
   );
 }
 
 export default ItemSlider;
+
+const Wrapper = styled.div`
+  width: 100%;
+  max-width: ${layout.maxWidth};
+  margin: 0 auto;
+  position: relative;
+`;
+
+const ArrowButton = styled.button`
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  z-index: 100;
+
+  width: 42px;
+  height: 42px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.12),
+    0 2px 4px rgba(0, 0, 0, 0.08);
+
+  transition: 0.2s;
+
+  svg {
+    font-size: 14px;
+    color: #222;
+  }
+
+  &:hover {
+    transform: translateY(-50%) scale(1.08);
+    background: white;
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.96);
+  }
+`;
+
+const CustomPrevButton = styled(ArrowButton)`
+  left: -10px;
+`;
+
+const CustomNextButton = styled(ArrowButton)`
+  right: -10px;
+`;

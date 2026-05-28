@@ -5,6 +5,7 @@ import { useItem } from "../api/itemContextApi";
 import CardOne from "../components/card/CardOne";
 import Layout from "../components/layout/Layout";
 import { itemType } from "../types/type";
+import { layout } from "../them/them";
 
 const CategoryPage = () => {
   const { cate } = useParams();
@@ -62,7 +63,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  max-width: 870px;
+  max-width: ${layout.maxWidth};
   padding: 0 20px;  
 `;
 
@@ -72,4 +73,5 @@ const Main = styled.div`
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;    
+    gap: 16px;
 `;

@@ -6,7 +6,7 @@ type PagingPropsType = {
   total: number;
   size: number;
   page: number;
-}
+};
 
 function Paging({ to, total, size, page }: PagingPropsType) {
   const numPages = Math.ceil(total / size);
@@ -53,31 +53,87 @@ const Nav = styled.nav`
 `;
 
 const Button = styled.button`
-  border: none;
-  padding: 8px;
+  min-width: 42px;
+  height: 42px;
+
+  padding: 0 16px;
   margin: 0;
-  color: white;
+
+  border: 1px solid #e5e5e5;
+  border-radius: 14px;
+
+  background: #fafafa;
+
+  color: #333;
+
   font-size: var(--button-font-size);
-  background: gray;
+  font-weight: 700;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.04),
+    0 1px 3px rgba(0, 0, 0, 0.03);
+
+  transition:
+    background 0.2s,
+    transform 0.2s,
+    box-shadow 0.25s,
+    border-color 0.2s,
+    color 0.2s;
+
+  user-select: none;
 
   &:hover {
-    background: lightgray;
-    cursor: pointer;
+    background: white;
+
+    border-color: #d0d0d0;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+      0 8px 18px rgba(0, 0, 0, 0.06),
+      0 2px 6px rgba(0, 0, 0, 0.04);
+
+    color: #111;
+  }
+
+  &:active {
+    transform: scale(0.96);
   }
 
   &[disabled] {
-    cursor: revert;
-    // transform: revert;
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
   }
 
   &[aria-current] {
-    background: red;
-    font-weight: bold;
-    cursor: revert;
-    // transform: revert;
+    background: #f5f5f5;
+
+    color: #111;
+
+    border-color: #d9d9d9;
+
+    font-weight: 800;
+
+    box-shadow:
+      inset 0 1px 2px rgba(0, 0, 0, 0.04),
+      0 4px 10px rgba(0, 0, 0, 0.04);
+
+    cursor: default;
   }
-  
+
   &[aria-current]:hover {
-    background: lightgray;
+    background: #f5f5f5;
+
+    color: #111;
+
+    transform: none;
   }
 `;

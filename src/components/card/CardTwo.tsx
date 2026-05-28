@@ -63,14 +63,14 @@ const Container = styled.article`
   width: 140px;
   height: 200px;
   box-sizing: border-box;
-  margin: 20px;
-  position: relative;
+  margin: 10px;
   transition: 0.4s;
+  border-radius: 16px;
   img {
-    width: 132px;
+    width: 140px;
     height: 140px;
-    margin: 2px;
     object-fit: cover;
+    border-radius: 16px;
     transition: 0.1s;
   }
   &:hover {
@@ -85,28 +85,24 @@ const Container = styled.article`
 const Title = styled.span`
   font-size: var(--main-font-size);
   display: block;
-  padding: 5px 5px;
   background-color: #fff;
 `;
 
 const Price = styled.span`
-  font-size: var(--main-font-size);
+  font-size: var(--main-price-font-size);
   color: red;
   display: block;
   background-color: #fff;
-  padding: 0px 5px 0px 5px;
 `;
 
 const CartImage = styled.div`
-  position: absolute;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  width: 45px;
-  height: 20px;
-  right: 10px;
-  bottom: 25px;
-  z-index: 10;
+  width: 100%;
+  z-index: 300;
+  padding-right: 2px;
+  box-sizing: border-box;
   img {
     width: 18px;
     height: 18px;

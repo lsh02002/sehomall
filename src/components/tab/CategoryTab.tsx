@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { itemType } from "../../types/type";
 import CardTwo from "../card/CardTwo";
+import { layout } from "../../them/them";
 
 type CategoryTabPropsType = {
   cate: string;
@@ -113,37 +114,70 @@ export default CategoryTab;
 const TabInner = styled.div`
   margin-top: 30px;
   width: 100%;
-  max-width: 1400px;
+  height: 100%;
+  max-width: ${layout.maxWidth};  
 
   .btn {
     list-style: none;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-    margin-left: 10px;
+    padding: 6px;
+    margin: 0 0 24px 0;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    background: #f5f5f5;
+    border-radius: 999px;
+
+    box-shadow:
+      inset 0 1px 2px rgba(0, 0, 0, 0.05),
+      0 4px 12px rgba(0, 0, 0, 0.04);
   }
 
   .btn li {
-    float: left;
-    width: 150px;
-    text-align: center;
+    min-width: 140px;
+    height: 48px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 20px;
+
+    border-radius: 999px;
+
     cursor: pointer;
-    background-color: #eee;
-    border-right: 1px solid #ddd;
-    padding: 10px;
-    border-top: 2px solid transparent;
+
     font-size: var(--button-font-size);
+    font-weight: 600;
+
+    color: #666;
+    background: transparent;
+
+    transition:
+      background 0.25s,
+      color 0.25s,
+      transform 0.2s,
+      box-shadow 0.25s;
+
+    user-select: none;
   }
 
-  .btn li:last-child {
-    width: 180px;
-    border-right: none;
+  .btn li:hover {
+    background: rgba(255, 255, 255, 0.8);
+    color: #111;
+    transform: translateY(-1px);
   }
 
-  .btn li:hover,
   .btn li.active {
-    background-color: #fff;
-    border-top: 2px solid red;
+    background: white;
+    color: #e60023;
+
+    box-shadow:
+      0 6px 18px rgba(230, 0, 35, 0.15),
+      0 2px 6px rgba(0, 0, 0, 0.06);
+
+    transform: translateY(-1px);
   }
 
   .tabs > div {
@@ -151,20 +185,51 @@ const TabInner = styled.div`
     justify-content: center;
     align-items: center;
   }
+
+  @media (max-width: ${layout.maxWidth}) {
+    .btn {
+      width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .btn::-webkit-scrollbar {
+      display: none;
+    }
+
+    .btn li {
+      min-width: 120px;
+      flex-shrink: 0;
+      font-size: 14px;
+    }
+  }
 `;
 
 const Items = styled.div`
-  padding-top: 30px;
-  max-width: 1400px;
+  border: 1px solid #efefef;
+  border-radius: 24px;
+
+  background: white;
+  
   display: flex;
   justify-content: center;
   align-items: center;
+
   width: 100%;
+  min-height: 600px;
+
   flex-wrap: wrap;
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.04),
+    0 2px 8px rgba(0, 0, 0, 0.03);
+
   em {
     display: inline-block;
     text-align: left;
     width: 100%;
-    padding-left: 100px;
+    padding-left: 20px;
+    color: #666;
+    font-style: normal;
   }
 `;

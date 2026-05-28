@@ -6,16 +6,17 @@ import ReviewEnroll from "../components/modal/ReviewEnroll";
 import Paging from "../components/pagination/Paging";
 import { useSearchParams } from "react-router-dom";
 import { useReview } from "../api/reviewContextApi";
+import { layout } from "../them/them";
 
 const ReviewPage = () => {
-  const {reviews} = useReview();  
+  const { reviews } = useReview();
 
   const [searchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") ?? "1");
   const size = parseInt(searchParams.get("size") ?? "5");
 
   const [isReview, setIsReview] = useState(false);
-  const {isReviewUpdated, setIsReviewUpdated} = useReview();
+  const { isReviewUpdated, setIsReviewUpdated } = useReview();
 
   // useEffect(() => {
   //   setReviews(reviewData?.content);
@@ -35,7 +36,12 @@ const ReviewPage = () => {
             reviews.map((review, index) => (
               <ReviewCard key={index} review={review} />
             ))}
-          <Paging to={"/reviews"} total={reviews.length} size={size} page={page} />
+          <Paging
+            to={"/reviews"}
+            total={reviews.length}
+            size={size}
+            page={page}
+          />
         </ReviewBody>
       </Container>
       {isReview && (
@@ -54,11 +60,14 @@ const ReviewPage = () => {
 
 export default ReviewPage;
 
-const Container = styled.div`  
+const Container = styled.div`
   width: 100%;
-  max-width: 870px;  
-  padding: 0 20px;
-  //잃어 버리지 말자!!!
+  max-width: ${layout.maxWidth};
+  min-height: calc(100vh - 220px);
+
+  margin: 0 auto;
+  // padding: 40px 20px 100px;
+
   box-sizing: border-box;
 
   h1 {
@@ -67,27 +76,39 @@ const Container = styled.div`
   }
 
   span {
-    display: inline-block;
+    display: flex;
+    justify-content: flex-end;
     width: 100%;
-    text-align: right;
   }
 
   button {
-    text-align: right;
-    border: none;
-    padding: 5px 10px;
-    color: white;
-    background-color: gray;
-    transition: 0.2s;
-    cursor: pointer;
+    min-width: 90px;
+    height: 40px;
+
+    padding: 0 16px;
+
+    margin-right: 20px;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+
+    background: #fafafa;
+    color: #333;
+
     font-size: var(--button-font-size);
-    &:hover {
-      background-color: lightgray;
-    }
+    font-weight: 600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
   }
 `;
 
-const ReviewBody = styled.div``;
+const ReviewBody = styled.div`
+  padding: 20px;
+`;
 
 const Review = styled.div`
   position: fixed;

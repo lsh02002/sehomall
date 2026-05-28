@@ -7,11 +7,12 @@
   --main-h6-size: 0.67em;
 
   --main-font-size: 1rem;
+  --main-price-font-size: 0.8rem;
   --button-font-size: 1rem;
 }
 
-html {
-  scrollbar-gutter: stable both-edges;  
+* {
+  box-sizing: border-box;
 }
 
 body {

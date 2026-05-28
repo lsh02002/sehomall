@@ -1,25 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 // import { useLogin } from "../../api/loginContextApi";
 import { useCart } from "../../api/cartContextApi";
-import SimpleCartCard from "../card/SimpleCartCard";
 import { useMyPage } from "../../api/myPageTabContextApi";
-import { itemCartType } from "../../types/type";
 import { cartData } from "../data/cartData";
 
 import Category from "../../assets/category.svg";
 import Review from "../../assets/review.svg";
 import MyPage from "../../assets/my-page.svg";
 import Cart from "../../assets/cart.svg";
+import { layout } from "../../them/them";
 
 const Nav = () => {
   // const { isLogin, setIsLogin } = useLogin();
   const { reviewPage } = useMyPage();
-  const { cartCount, setCartCount, cartItems, setCartItems } = useCart();
-
-  const [isModal, setIsModal] = useState(false);
-  const navigate = useNavigate();
+  const { cartCount, setCartCount, setCartItems } = useCart();
 
   useEffect(() => {
     setCartItems(cartData?.content);
@@ -33,10 +29,6 @@ const Nav = () => {
   //     setIsLogin(true);
   //   }
   // };
-
-  const OnMoveToCart = () => {
-    navigate("/cart");
-  };
 
   return (
     <Container>
@@ -80,32 +72,13 @@ const Nav = () => {
         )} */}
         <>
           {/* <Link to="/pay">PAY</Link> */}
-          <IconLink
-            to="/cart"
-            onMouseEnter={() => setIsModal(true)}
-            onMouseLeave={() => setIsModal(false)}
-          >
+          <IconLink to="/cart">
             <div>
               <img src={Cart} alt="" />
               <span>{cartCount}</span>
             </div>
             <div>장바구니</div>
           </IconLink>
-          {isModal && (
-            <Modal
-              onMouseEnter={() => setIsModal(true)}
-              onMouseLeave={() => setIsModal(false)}
-            >
-              {cartItems.length > 0 ? (
-                cartItems.map((item: itemCartType, index) => (
-                  <SimpleCartCard key={index} item={item} />
-                ))
-              ) : (
-                <div>카트가 비어있습니다.</div>
-              )}
-              <button onClick={OnMoveToCart}>카트로 이동</button>
-            </Modal>
-          )}
         </>
       </Menu>
     </Container>
@@ -115,85 +88,126 @@ const Nav = () => {
 export default Nav;
 
 const Container = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 70px;
-  width: 100%;
-  box-sizing: border-box;
-  opacity: 1;
-  z-index: 200;
-  border-top: 1px solid lightgray;
-  position: fixed !important;
-  bottom: 0 !important;
+  position: fixed;
   left: 0;
   right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 72px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 200;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  backdrop-filter: blur(14px);
+
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+
+  box-shadow:
+    0 -6px 20px rgba(0, 0, 0, 0.04),
+    0 -2px 6px rgba(0, 0, 0, 0.03);
+
+  box-sizing: border-box;
+
+  padding-bottom: env(safe-area-inset-bottom);
 `;
 
 const Menu = styled.div`
+  width: 100%;
+  max-width: ${layout.maxWidth};
+
+  height: 100%;
+
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  width: 100%;
-  height: 70px;
-  font-size: 14px;
-  background-color: rgba(255, 255, 255, 1);
+
+  background: transparent;
+
+  font-size: 13px;
+
+  box-sizing: border-box;
+
   a {
     text-decoration: none;
-    color: black;
-  }
-  span {
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    background-color: gray;
-    color: white;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 14px;
-    padding-left: 2px;
-    position: absolute;
+    color: #444;
   }
 `;
 
 const IconLink = styled(Link)`
+  position: relative;
+
+  width: 72px;
+  height: 100%;
+
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  img {
-    width: 2rem;
+
+  gap: 4px;
+
+  border-radius: 18px;
+
+  transition:
+    background 0.2s,
+    transform 0.2s,
+    color 0.2s;
+
+  color: #666 !important;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+
+    transform: translateY(-1px);
+
+    color: #111 !important;
   }
-`;
 
-const Modal = styled.div`
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  flex-direction: column;
-  background-color: #fff;
-  position: absolute;
-  width: 250px;
-  height: 500px;
-  right: 10px;
-  bottom: 50px;
-  padding: 0 20px;
-  box-sizing: border-box;
-  z-index: 5;
-  border: 1px solid lightgray;  
-  box-sizing: border-box;
+  img {
+    width: 1.8rem;
+    height: 1.8rem;
 
-  button {
-    border: none;
-    padding: 5px 10px;
+    object-fit: contain;
+
+    transition: transform 0.2s;
+  }
+
+  &:hover img {
+    transform: scale(1.06);
+  }
+
+  span {
+    position: absolute;
+
+    top: 10px;
+    right: 14px;
+
+    min-width: 18px;
+    height: 18px;
+
+    padding: 0 5px;
+
+    border-radius: 999px;
+
+    background: #111;
+
     color: white;
-    background-color: gray;
-    transition: 0.2s;
-    cursor: pointer;
-    font-size: var(--button-font-size);
-    margin-top: 20px;
-    margin-left: 95px;
-    &:hover {
-      background-color: lightgray;
-    }
+
+    font-size: 11px;
+    font-weight: 700;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
   }
 `;

@@ -6,20 +6,21 @@ import { useMyPage } from "../../api/myPageTabContextApi";
 import ReviewEnroll from "../modal/ReviewEnroll";
 import styled from "styled-components";
 import { useReview } from "../../api/reviewContextApi";
+import { layout } from "../../them/them";
 
 const MyReview = () => {
   const { setReviewPage } = useMyPage();
 
   const [isReview, setIsReview] = useState(false);
-  const {isReviewUpdated, setIsReviewUpdated} = useReview();
+  const { isReviewUpdated, setIsReviewUpdated } = useReview();
 
   const { reviews } = useReview();
- 
+
   const [searchParams] = useSearchParams();
   const page = parseInt(searchParams.get("page") ?? "1");
   const size = parseInt(searchParams.get("size") ?? "4");
 
-  const myReviews = reviews?.filter(review=>review.nickname === "lsh02002");
+  const myReviews = reviews?.filter((review) => review.nickname === "lsh02002");
 
   useEffect(() => {
     setReviewPage(page);
@@ -63,7 +64,7 @@ export default MyReview;
 
 const Container = styled.div`
   width: 100%;
-  max-width: 870px;
+  max-width: ${layout.maxWidth};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,16 +76,60 @@ const ReviewButtonWrapper = styled.div`
   text-align: right;
 
   button {
-    text-align: right;
-    border: none;
-    padding: 5px 10px;
-    color: white;
-    background-color: gray;
-    transition: 0.2s;
-    cursor: pointer;
+    min-width: 90px;
+    height: 40px;
+
+    padding: 0 16px;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+
+    background: #fafafa;
+
+    color: #333;
+
     font-size: var(--button-font-size);
+    font-weight: 600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    box-shadow:
+      0 4px 10px rgba(0, 0, 0, 0.04),
+      0 1px 3px rgba(0, 0, 0, 0.03);
+
+    transition:
+      background 0.2s,
+      transform 0.2s,
+      box-shadow 0.25s,
+      border-color 0.2s,
+      color 0.2s;
+
     &:hover {
-      background-color: lightgray;
+      background: white;
+
+      border-color: #d0d0d0;
+
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.06),
+        0 2px 6px rgba(0, 0, 0, 0.04);
+
+      color: #111;
+    }
+
+    &:active {
+      transform: scale(0.96);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none;
     }
   }
 `;

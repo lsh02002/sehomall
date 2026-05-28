@@ -151,14 +151,34 @@ const AboutPage = () => {
 
 export default AboutPage;
 
-const Container = styled.div`  
-  .tab-inner {    
-    height: 900px;    
+const Container = styled.div`
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 60px 20px;
+
+  display: flex;
+  justify-content: center;
+
+  background: radial-gradient(circle at top, #f7f7f7, #ececec);
+
+  box-sizing: border-box;
+
+  .tab-inner {
+    width: 100%;
+    max-width: 1100px;
   }
 
   .tab-inner h1 {
-    text-align: center;    
-    font-size: var(--main-h1-size);
+    margin-bottom: 50px;
+
+    text-align: center;
+
+    font-size: clamp(38px, 6vw, 62px);
+    font-weight: 900;
+
+    color: #111;
+    letter-spacing: -2px;
   }
 
   input[name="tabmenu"] {
@@ -166,78 +186,138 @@ const Container = styled.div`
   }
 
   .tabs {
-    width: 370px;
-    height: 800px;
-    position: relative;
+    width: 100%;
     overflow: hidden;
   }
 
   .items {
-    width: 1110px;
-    height: 700px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: 0.5s;    
+    width: 300%;
+    display: flex;
+
+    transition: transform 0.5s ease;
   }
 
-  .items div {
-    width: 370px;
-    height: 500px;
-    float: left;    
-    text-align: center;
+  .items > div {
+    width: 100%;
+    min-height: 620px;
+
     padding: 50px;
+
+    border-radius: 32px;
+
+    background: rgba(255, 255, 255, 0.82);
+
+    backdrop-filter: blur(10px);
+
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.08),
+      0 4px 10px rgba(0, 0, 0, 0.04);
+
     box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     position: relative;
   }
 
-  .btn {
-    text-align: center;
-  }
+  .items div p {
+    margin: 0;
 
-  .btn label {
-    width: 15px;
-    height: 15px;
-    background-color: lightgray;
-    display: inline-block;
-    cursor: pointer;
-    transition: 0.5s;
-    margin-right: 5px;
-  }
+    color: #333;
 
-  .items div img {
-    position: absolute;
-    width: 50%;
-    height: 50%;
-    left: 0;
-    top: 90px;
+    line-height: 1.9;
+
+    font-size: 16px;
   }
 
   .items div p b {
-    display: block;
+    margin-top: 30px;
+
+    display: inline-block;
+
+    font-size: 18px;
+    color: #111;
   }
 
-  .items div p {
-    text-align: right;
-    padding: 20px;    
+  .items div img {
+    width: 260px;
+    height: 260px;
+
+    object-fit: cover;
+
+    border-radius: 28px;
+
+    margin: 0 auto 40px auto;
+
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  }
+
+  .btn {
+    margin-top: 30px;
+
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .btn label {
+    width: 16px;
+    height: 16px;
+
+    border-radius: 50%;
+
+    background: #d9d9d9;
+
+    cursor: pointer;
+
+    transition:
+      transform 0.25s,
+      background 0.25s;
+  }
+
+  .btn label:hover {
+    transform: scale(1.2);
   }
 
   .tab-inner input[id="about-tab1"]:checked ~ .tabs .items {
-    left: 0;
+    transform: translateX(0%);
   }
 
   .tab-inner input[id="about-tab2"]:checked ~ .tabs .items {
-    left: -370px;
+    transform: translateX(-33.3333%);
   }
 
   .tab-inner input[id="about-tab3"]:checked ~ .tabs .items {
-    left: -740px;
+    transform: translateX(-66.6666%);
   }
 
   .tab-inner input[id="about-tab1"]:checked ~ .btn label[for="about-tab1"],
   .tab-inner input[id="about-tab2"]:checked ~ .btn label[for="about-tab2"],
   .tab-inner input[id="about-tab3"]:checked ~ .btn label[for="about-tab3"] {
-    background-color: red;
-    border-radius: 50%;
+    background: linear-gradient(135deg, #ff4d4f, #ff1f5a);
+
+    transform: scale(1.3);
+
+    box-shadow: 0 8px 20px rgba(255, 31, 90, 0.35);
+  }
+
+  @media (max-width: 768px) {
+    padding: 40px 16px;
+
+    .items > div {
+      padding: 32px 24px;
+      min-height: auto;
+    }
+
+    .items div img {
+      width: 180px;
+      height: 180px;
+    }
+
+    .items div p {
+      font-size: 14px;
+    }
   }
 `;

@@ -6,6 +6,7 @@ import {
   flexRender,
   type ColumnDef,
 } from "@tanstack/react-table";
+import { layout } from "../them/them";
 
 type TablePropsType<TData extends object> = {
   columns: ColumnDef<TData, any>[];
@@ -55,11 +56,10 @@ function NoticeTable<TData extends object>({ columns, data }: TablePropsType<TDa
 export default NoticeTable;
 
 const Container = styled.div`
-max-width: 100%;
+max-width: ${layout.maxWidth};
+width: 100%;
 overflow-x: auto;
   table {
-    width: 100%;
-    max-width: 870px;
     border-collapse: collapse;    
   }
   table th {

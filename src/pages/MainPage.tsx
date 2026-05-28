@@ -7,6 +7,7 @@ import CategoryTab from "../components/tab/CategoryTab";
 import Intro from "../components/Intro";
 import { useItem } from "../api/itemContextApi";
 import { itemType } from "../types/type";
+import { layout } from "../them/them";
 
 const MainPage = () => {
   const { items } = useItem();
@@ -69,15 +70,15 @@ const Main = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
+  box-sizing: border-box;  
 `;
 
 const Title = styled.div`
   width: 100%;
-  max-width: 1400px;
+  max-width: ${layout.maxWidth};
   font-size: var(--main-h2-size);
   margin: 80px 0 0 0;
-  padding: 0 80px;
+  padding: 0;
   text-align: left;
   box-sizing: border-box;
 `;

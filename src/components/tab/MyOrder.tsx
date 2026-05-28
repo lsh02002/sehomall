@@ -5,6 +5,7 @@ import Paging from "../pagination/Paging";
 import { useMyPage } from "../../api/myPageTabContextApi";
 import { useItem } from "../../api/itemContextApi";
 import { styled } from "styled-components";
+import { layout } from "../../them/them";
 
 const MyOrder = () => {
   const { myOrders } = useItem();
@@ -48,9 +49,11 @@ export default MyOrder;
 
 const Container = styled.div`
   width: 100%;
-  max-width: 870px;
+  max-width: ${layout.maxWidth};
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
 `;

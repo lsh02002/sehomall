@@ -45,8 +45,8 @@ const HeartCount = ({ id, heartCount }: HeartCountPropsType) => {
       prev.map((it) =>
         it.id === id
           ? { ...it, heartCount: it.heartCount + (exists ? -1 : 1) }
-          : it
-      )
+          : it,
+      ),
     );
 
     // 4) myHearts는 함수형 업데이트로 추가/삭제 (타입 정규화로 안전)
@@ -74,7 +74,7 @@ const HeartCount = ({ id, heartCount }: HeartCountPropsType) => {
           <img src={LikeSolid} alt="" />
         )}
       </HeartImage>
-      <span>{countHeart}</span>
+      <span>({countHeart})</span>
     </Container>
   );
 };
@@ -82,28 +82,31 @@ const HeartCount = ({ id, heartCount }: HeartCountPropsType) => {
 export default HeartCount;
 
 const Container = styled.div`
-  width: 60px;
+  width: 36px;
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  margin-left: 5px;
+  margin-right: 5px;
 
   span {
     font-size: 0.9rem;
     color: red;
     padding-left: 1px;
+    line-height: 0.9rem;
   }
 `;
 
 const HeartImage = styled.div`
-  width: 18px;
+  display: flex;
+  align-items: center;
+  width: 22px;
   height: 18px;
   text-align: left;
   img {
-    width: 18px;
-    height: 18px;
+    width: 1rem;
+    height: 1rem;
     object-fit: cover;
   }
 `;

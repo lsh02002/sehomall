@@ -11,7 +11,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import styled from "styled-components";
 import bannerImages from "../../api/bannerImages";
 
-function BannerSlider() {
+function BannerSlider() {  
   return (
     <>
       <Swiper
@@ -23,16 +23,15 @@ function BannerSlider() {
           delay: 3000,
           disableOnInteraction: false,
         }}
-        loop="true"
+        loop={true}
         speed={1000}
         pagination={{
           clickable: true,
         }}
         style={{
           width: "100%",
-          maxWidth: "1600px",
-          height: "300px",
-          padding: "20px",
+          height: "400px",
+          padding: "0px",
           boxSizing: "border-box",
         }}
       >
@@ -51,7 +50,7 @@ function BannerSlider() {
 
 export default BannerSlider;
 
-const Slide = styled.div`  
+const Slide = styled.div`
   height: 100%;
   line-height: 100%;
   display: flex;

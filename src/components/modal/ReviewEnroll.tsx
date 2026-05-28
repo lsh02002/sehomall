@@ -17,7 +17,7 @@ const ReviewEnroll = ({
   isReviewUpdated,
   setIsReviewUpdated,
 }: ReviewEnrollPropsType) => {
-  const { reviews, setReviews, reviewId } = useReview();  
+  const { reviews, setReviews, reviewId } = useReview();
 
   const nickname = localStorage.getItem("nickname");
 
@@ -122,7 +122,7 @@ const ReviewEnroll = ({
             구매완료 상품명:
             <select
               style={{ marginLeft: "20px", width: "70%", height: "40px" }}
-              value={state.unReviewedItemId}              
+              value={state.unReviewedItemId}
               name="unReviewedItemId"
               onChange={(e) => OnSelectChangeField(e)}
             >
@@ -193,100 +193,268 @@ const Enroll = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 280px;
+
+  width: 320px;
+
   transform: translate(-50%, -50%);
-  background-color: #fff;
-  padding: 10px;
+
+  padding: 24px;
+
+  border-radius: 28px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 24px 50px rgba(0, 0, 0, 0.12),
+    0 6px 14px rgba(0, 0, 0, 0.05);
+
   z-index: 10;
+
   box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
 
   div:nth-child(1) {
     width: 100%;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
 
+    font-size: 20px;
+    font-weight: 800;
+    color: #111;
+
     button {
       border: none;
       background-color: transparent;
+
       font-size: var(--button-font-size);
+      font-weight: 600;
+
+      color: #666;
+
       cursor: pointer;
+
+      transition:
+        transform 0.2s,
+        color 0.2s,
+        opacity 0.2s;
+
       &:hover {
+        transform: scale(0.96);
+        color: #111;
+        opacity: 0.8;
+      }
+
+      &:active {
         transform: scale(0.9);
+      }
+
+      &:disabled {
+        opacity: 0.35;
+        cursor: not-allowed;
       }
     }
   }
 
   & > span {
-    display: inline-block;
     width: 100%;
-    margin: 10px 10px 0 0;
-    padding: 5px;
-    border: 1px solid lightgray;
+
+    padding: 14px 16px;
+
+    border: 1px solid #ececec;
+    border-radius: 16px;
+
+    background: #fafafa;
+
     box-sizing: border-box;
-    font-size: 0.9rem;
+
+    font-size: 14px;
+    color: #444;
   }
 
   input[type="file"] {
     display: none;
   }
+
   .btn {
-    padding: 10px 0;
     width: 100%;
-    margin-bottom: 5px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
   }
 
   .btn span {
     width: 100%;
+
     display: flex;
     align-items: center;
-    padding: 5px;
-    border: 1px solid lightgray;
+
+    padding: 12px;
+
+    border: 1px solid #ececec;
+    border-radius: 18px;
+
+    background: #fafafa;
+
     box-sizing: border-box;
-    font-size: 0.9rem;
+
+    font-size: 14px;
+    color: #444;
   }
 
   .btn label {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    background-color: lightgray;
-    margin-right: 20px;
+    width: 42px;
+    height: 42px;
+
+    margin-right: 14px;
+
+    border-radius: 14px;
+
+    background: #f0f0f0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #555;
+
+    font-size: 18px;
+    font-weight: 700;
+
     cursor: pointer;
-    text-align: center;
-    line-height: 40px;
-    margin-left: 10px;
+
+    transition:
+      background 0.2s,
+      transform 0.2s,
+      color 0.2s;
+
+    &:hover {
+      background: #111;
+      color: white;
+      transform: translateY(-1px);
+    }
   }
 
   textarea {
     width: 100%;
-    height: 170px;
+    min-height: 180px;
+
+    padding: 16px;
+
+    border: 1px solid #e8e8e8;
+    border-radius: 20px;
+
+    background: #fafafa;
+
     box-sizing: border-box;
-    border: 1px solid gray;
+
+    resize: none;
+
+    font-size: 14px;
+    line-height: 1.7;
+
+    transition:
+      border 0.2s,
+      background 0.2s,
+      box-shadow 0.2s;
+
+    &:focus {
+      outline: none;
+
+      background: white;
+
+      border-color: #111;
+
+      box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04);
+    }
   }
 
   .add-button {
     width: 100%;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 20px;
+
+    gap: 12px;
+
+    padding-top: 8px;
 
     button {
+      flex: 1;
+
+      height: 48px;
+
+      border: 1px solid #e5e5e5;
+      border-radius: 16px;
+
+      background: #fafafa;
+
+      color: #333;
+
       font-size: var(--button-font-size);
-      border: none;
-      padding: 5px 10px;
-      color: white;
-      background-color: gray;
+      font-weight: 700;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
       cursor: pointer;
-      font-size: 1em;
+
+      box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.04),
+        0 1px 3px rgba(0, 0, 0, 0.03);
+
+      transition:
+        background 0.2s,
+        transform 0.2s,
+        box-shadow 0.25s,
+        border-color 0.2s,
+        color 0.2s;
+
       &:hover {
-        background-color: lightgray;
+        background: white;
+
+        border-color: #d0d0d0;
+
+        transform: translateY(-1px);
+
+        box-shadow:
+          0 8px 18px rgba(0, 0, 0, 0.06),
+          0 2px 6px rgba(0, 0, 0, 0.04);
+
+        color: #111;
+      }
+
+      &:active {
+        transform: scale(0.96);
+      }
+
+      &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        box-shadow: none;
       }
     }
   }
 `;
 
 const TextMessage = styled.div`
-  color: red;
+  margin-top: -8px;
+
+  padding-left: 4px;
+
+  color: #e60023;
+
+  font-size: 13px;
+  font-weight: 600;
 `;

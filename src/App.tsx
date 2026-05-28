@@ -6,13 +6,13 @@ import { lazy, Suspense, useEffect } from "react";
 import { useLogin } from "./api/loginContextApi";
 import PageLoading from "./components/layout/PageLoading";
 import { userInfoData } from "./components/data/userInfoData";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
 
 const Loading = <PageLoading />;
 const About = lazy(() => import("./pages/AboutPage"));
 const Main = lazy(() => import("./pages/MainPage"));
 const CategoryMenu = lazy(() => import("./pages/CategoryMenuPage"));
-const Category = lazy(()=>import("./pages/CategoryPage"));
+const Category = lazy(() => import("./pages/CategoryPage"));
 const Login = lazy(() => import("./pages/LoginPage"));
 const SignUp = lazy(() => import("./pages/SignupPage"));
 const Enroll = lazy(() => import("./pages/EnrollItemPage"));
@@ -61,7 +61,7 @@ function App() {
                 <CategoryMenu />
               </Suspense>
             }
-          />          
+          />
           <Route
             path="/cat/:cate"
             element={
@@ -178,6 +178,7 @@ function App() {
 export default App;
 
 const Container = styled.div`
+  width: 100%;
   display: flex;
   justify-content: start;
   align-items: center;

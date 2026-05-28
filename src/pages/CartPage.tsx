@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useCart } from "../api/cartContextApi";
 import { useNavigate } from "react-router-dom";
 import { itemCartType } from "../types/type";
+import { layout } from "../them/them";
 
 const CartPage = () => {
   const { totalPrice, setTotalPrice, cartItems, isEditing } = useCart();
@@ -14,7 +15,7 @@ const CartPage = () => {
     let total = 0;
     cartItems.map(
       (item: itemCartType) =>
-        item.checked && (total += item.price * item.itemCount)
+        item.checked && (total += item.price * item.itemCount),
     );
     setTotalPrice(total);
   }, [cartItems, setTotalPrice, isEditing]);
@@ -68,7 +69,7 @@ const TotalSum = styled.div`
   font-size: 20px;
   text-align: right;
   width: 100%;
-  max-width: 500px;
+  max-width: ${layout.maxWidth};
   span {
     color: red;
   }
@@ -76,20 +77,64 @@ const TotalSum = styled.div`
 
 const Order = styled.div`
   width: 100%;
-  max-width: 600px;
+  max-width: ${layout.maxWidth};
   text-align: right;
   margin-top: 40px;
   button {
-    text-align: right;
-    border: none;
-    padding: 8px;
-    color: white;
-    background-color: gray;
+    min-width: 90px;
+    height: 42px;
+
+    padding: 0 18px;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 14px;
+
+    background: #fafafa;
+
+    color: #333;
+
     font-size: var(--button-font-size);
-    transition: 0.3s;
+    font-weight: 600;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     cursor: pointer;
+
+    box-shadow:
+      0 4px 10px rgba(0, 0, 0, 0.04),
+      0 1px 3px rgba(0, 0, 0, 0.03);
+
+    transition:
+      background 0.2s,
+      transform 0.2s,
+      box-shadow 0.25s,
+      border-color 0.2s,
+      color 0.2s;
+
     &:hover {
-      background-color: lightgray;
+      background: white;
+
+      border-color: #d0d0d0;
+
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.06),
+        0 2px 6px rgba(0, 0, 0, 0.04);
+
+      color: #111;
+    }
+
+    &:active {
+      transform: scale(0.96);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none;
     }
   }
 `;

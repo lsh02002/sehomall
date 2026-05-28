@@ -16,9 +16,10 @@ export default Layout;
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  align-items: start;  
+  align-items: center;  
   box-sizing: border-box;
   width: 100%;
+  margin-bottom: 150px;
 `;
 
 const Main = styled.div`  
@@ -27,5 +28,6 @@ const Main = styled.div`
   align-items: center;
   flex-direction: column;
   width: 100%;
+  box-sizing: border-box;
   padding-bottom: 70px;
 `;

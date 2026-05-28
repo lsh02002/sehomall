@@ -8,6 +8,7 @@ import { userInfoData } from "../components/data/userInfoData";
 import { useItem } from "../api/itemContextApi";
 import { useCart } from "../api/cartContextApi";
 import { itemData } from "../components/data/itemData";
+import { layout } from "../them/them";
 
 const PaymentPage = () => {
   const { cartItems } = useCart();
@@ -49,7 +50,7 @@ const PaymentPage = () => {
   useEffect(() => {
     if (isFromCart === "true") {
       setPayItems(
-        cartItems?.filter((item: itemCartType) => item.checked === true)
+        cartItems?.filter((item: itemCartType) => item.checked === true),
       );
     } else {
       const detail: itemCartType = {
@@ -79,15 +80,18 @@ const PaymentPage = () => {
     if (isFromCart === "true") {
       let total = 0;
       payItems.map(
-        (item) => item.checked && (total += item.price * item.itemCount)
+        (item) => item.checked && (total += item.price * item.itemCount),
       );
 
       setTotalPayPrice(total);
     } else {
       let total = 0;
-      const price2 = typeof price === "string" ? parseFloat(price) : price ?? 0;
+      const price2 =
+        typeof price === "string" ? parseFloat(price) : (price ?? 0);
       const itemCount2 =
-        typeof itemCount === "string" ? parseFloat(itemCount) : itemCount ?? 0;
+        typeof itemCount === "string"
+          ? parseFloat(itemCount)
+          : (itemCount ?? 0);
       total += price2 * itemCount2;
       setTotalPayPrice(total);
     }
@@ -250,68 +254,178 @@ export default PaymentPage;
 
 const Container = styled.div`
   width: 100%;
-  max-width: 870px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  max-width: ${layout.maxWidth};
+
+  margin: 50px auto 120px auto;
+  
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 40px;
+
   box-sizing: border-box;
+
+  @media (max-width: 980px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const ItemInfo = styled.div`
   width: 100%;
-  margin: 0 10px;
+
+  padding: 20px;
+
+  background: #fff;
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.06),
+    0 4px 10px rgba(0, 0, 0, 0.03);
+
+  box-sizing: border-box;
+
   display: flex;
-  justify-content: center;
-  align-items: start;
   flex-direction: column;
+
   & > span {
-    box-sizing: border-box;
-    margin: 25px 0 0 0;
-    width: 100%;
-    text-align: left;
-    padding-left: 20px;
-    padding-bottom: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 24px;
+    font-weight: 800;
+
+    color: #111;
+
     label {
-      display: inline-block;
-      text-align: right;
-      width: 100%;
-      padding-right: 20px;
-      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      font-size: 14px;
+      font-weight: 600;
+
+      color: #666;
+
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+
+      accent-color: #111;
     }
   }
 
   h3 {
-    padding-left: 20px;
-    color: red;
+    margin-top: 40px;
+
+    padding: 24px;
+
+    border-radius: 20px;
+
+    background: linear-gradient(135deg, #fafafa, #f3f3f3);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: #111;
+
+    font-size: 18px;
+    font-weight: 800;
+
+    box-sizing: border-box;
   }
 `;
 
 const TextInput = styled.div`
   width: 100%;
-  box-sizing: border-box;
-  padding: 5px 20px;
+
+  margin-bottom: 18px;
+
   display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  box-sizing: border-box;
+
   & > span {
-    display: inline-block;
-    width: 100px;
+    font-size: 14px;
+    font-weight: 700;
+
+    color: #444;
   }
+
   input[type="text"] {
     width: 100%;
+    height: 54px;
+
+    padding: 0 18px;
+
+    border: 1px solid #e5e5e5;
+    border-radius: 16px;
+
+    background: #fafafa;
+
+    font-size: 15px;
+
+    transition:
+      border 0.2s,
+      background 0.2s,
+      box-shadow 0.2s;
+
     box-sizing: border-box;
-    padding: 3px;
+
+    &:focus {
+      outline: none;
+
+      border-color: #111;
+
+      background: #fff;
+
+      box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
+    }
+
+    &:disabled {
+      background: #f2f2f2;
+      color: #888;
+    }
   }
 `;
 
 const Order = styled.div`
   width: 100%;
-  text-align: right;
+
+  margin-top: 30px;
 
   button {
+    width: 100%;
+    height: 64px;
+
     border: none;
-    margin: 10px;
-    padding: 5px 10px;
-    font-size: var(--button-font-size);
+    border-radius: 20px;
+
+    background: linear-gradient(135deg, #111, #333);
+
     color: #fff;
-    background-color: gray;
+
+    font-size: 18px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+      transform 0.2s,
+      box-shadow 0.25s;
+
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.18);
+
+    &:hover {
+      transform: translateY(-2px);
+
+      box-shadow: 0 22px 44px rgba(0, 0, 0, 0.22);
+    }
   }
 `;

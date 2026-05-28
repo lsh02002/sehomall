@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Intro01 from "../assets/intro-01.jpg";
 import Intro02 from "../assets/intro-02.jpg";
 import { Link } from "react-router-dom";
+import { layout } from "../them/them";
 
 const Intro = () => {
   return (
@@ -62,15 +63,16 @@ const Introduction = styled.section`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  max-width: 1600px;
+  max-width: ${layout.maxWidth};
   height: 100%;
   flex-wrap: wrap;
   border: 1px solid lightgray;
+  border-radius: 16px;
   margin-top: 50px;
 
   .main__intro-container-img {
-    width: 135px;
-    height: 135px;
+    width: 110px;
+    height: 110px;
     overflow: hidden;
     margin: 15px;
     display: flex;

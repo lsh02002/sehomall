@@ -6,6 +6,7 @@ import MyReview from "./MyReview";
 import MyHeart from "./MyHeart";
 import MyOrder from "./MyOrder";
 import { useMyPage } from "../../api/myPageTabContextApi";
+import { layout } from "../../them/them";
 
 const MyPageTab = ({ cate }: { cate: string | undefined }) => {
   const { reviewPage, heartPage, orderPage } = useMyPage();
@@ -93,39 +94,78 @@ export default MyPageTab;
 
 const TabInner = styled.div`
   margin-top: 30px;
-  width: 100vw;
-  max-width: 870px;
-  height: 900px;  
+  width: 100%;
+  height: 100%;
+  max-width: ${layout.maxWidth};
+  min-height: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
 
   .mybtn {
     list-style: none;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-    margin-left: 10px;
+    padding: 6px;
+    margin: 0 0 24px 0;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    background: #f5f5f5;
+    border-radius: 999px;
+
+    box-shadow:
+      inset 0 1px 2px rgba(0, 0, 0, 0.05),
+      0 4px 12px rgba(0, 0, 0, 0.04);
   }
 
   .mybtn li {
-    float: left;
-    width: 150px;
-    text-align: center;
+    min-width: 140px;
+    height: 48px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0 20px;
+    border-radius: 999px;
+
     cursor: pointer;
-    background-color: #eee;
-    border-right: 1px solid #ddd;
-    padding: 10px;
-    border-top: 2px solid transparent;
+
     font-size: var(--button-font-size);
+    font-weight: 600;
+
+    color: #666;
+    background: transparent;
+
+    transition:
+      background 0.25s,
+      color 0.25s,
+      transform 0.2s,
+      box-shadow 0.25s;
+
+    user-select: none;
   }
 
   .mybtn li:last-child {
-    width: 190px;
-    border-right: none;
+    min-width: 170px;
   }
 
-  .mybtn li:hover,
+  .mybtn li:hover {
+    background: rgba(255, 255, 255, 0.8);
+    color: #111;
+    transform: translateY(-1px);
+  }
+
   .mybtn li.active {
-    background-color: #fff;
-    border-top: 2px solid red;
+    background: #fff;
+    color: #e60023;
+
+    box-shadow:
+      0 6px 18px rgba(230, 0, 35, 0.15),
+      0 2px 6px rgba(0, 0, 0, 0.06);
+
+    transform: translateY(-1px);
   }
 
   .mytabs > div {
@@ -133,21 +173,53 @@ const TabInner = styled.div`
     justify-content: center;
     align-items: center;
   }
+
+  @media (max-width: 768px) {
+    .mybtn {
+      width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .mybtn::-webkit-scrollbar {
+      display: none;
+    }
+
+    .mybtn li {
+      min-width: 120px;
+      flex-shrink: 0;
+      font-size: 14px;
+    }
+  }
 `;
 
 const Content = styled.div`
-  padding-top: 30px;
-  max-width: 870px;
+  background: #fff;
+
+  gap: 20px;
+  
+  box-sizing: border-box;
+
+  width: 100%;
+  max-width: ${layout.maxWidth};
+
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   flex-wrap: wrap;
+
   font-size: var(--main-font-size);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.04),
+    0 2px 8px rgba(0, 0, 0, 0.03);
+
   em {
     display: inline-block;
     text-align: left;
     width: 100%;
-    padding-left: 100px;
+    padding-left: 20px;
+    color: #666;
+    font-style: normal;
   }
 `;

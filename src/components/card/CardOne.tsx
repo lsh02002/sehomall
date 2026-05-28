@@ -8,7 +8,8 @@ import { useCart } from "../../api/cartContextApi";
 
 const CardOne = ({ item }: { item: itemType }) => {
   const { isLogin } = useLogin();
-  const { setCartCount, cartItems, setCartItems, isEditing, setIsEditing } = useCart();
+  const { setCartCount, cartItems, setCartItems, isEditing, setIsEditing } =
+    useCart();
 
   const OnAddToCartClick = () => {
     if (!isLogin) {
@@ -16,19 +17,19 @@ const CardOne = ({ item }: { item: itemType }) => {
       return;
     }
 
-    if(cartItems?.find(it=>it.itemId === item?.id)) {
+    if (cartItems?.find((it) => it.itemId === item.id)) {
       alert("이미 이 상품이 장바구니에 있습니다.");
       return;
     }
 
     const tempItem: itemCartType = {
-      itemId: item?.id,
+      itemId: item.id,
       itemCount: 1,
-      itemName: item?.name,
-      price: item?.price,
-      fileUrl: item?.files[0].fileUrl,
+      itemName: item.name,
+      price: item.price,
+      fileUrl: item.files?.[0]?.fileUrl,
       checked: true,
-      heartCount: item?.heartCount,
+      heartCount: item.heartCount,
     };
 
     setCartItems([...cartItems, tempItem]);
@@ -39,19 +40,20 @@ const CardOne = ({ item }: { item: itemType }) => {
   return (
     <Container>
       <Link to={`/detail/${item.id}`}>
-        <img width="230px" height="230px" src={item.files[0].fileUrl} alt="" />
+        <ProductImage src={item.files?.[0]?.fileUrl} alt={item.name} />
         <Title>{item.name}</Title>
         <Price>{item.price.toLocaleString()}원</Price>
       </Link>
+
       <CartImage>
         <HeartCount id={item.id} heartCount={item.heartCount} />
-        <img
-          style={{ cursor: "pointer" }}
+        <CartIcon
           src={ShoppingCart}
-          alt=""
+          alt="장바구니"
           onClick={OnAddToCartClick}
         />
       </CartImage>
+
       <Link to={`/detail/${item.id}`}>
         <ItemInfo>
           <div>{item.name}</div>
@@ -75,82 +77,91 @@ const CardOne = ({ item }: { item: itemType }) => {
 
 export default CardOne;
 
-const Container = styled.article`  
-  width: 140px;
+const Container = styled.article`
+  width: 130px;
   height: 200px;
-  img {
-    width: 132px;
-    height: 140px;
-    margin: 2px;
-    object-fit: cover;
-  }
   box-sizing: border-box;
-  margin: 20px;
   position: relative;
+  transition: 0.4s;
+  overflow: hidden;
+
   a {
     text-decoration: none;
     color: black;
   }
 `;
 
+const ProductImage = styled.img`
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+`;
+
 const Title = styled.span`
   font-size: var(--main-font-size);
   display: block;
-  padding: 5px 5px;
   background-color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Price = styled.span`
-  font-size: var(--main-font-size);
+  font-size: var(--main-price-font-size);
   color: red;
   display: block;
   background-color: #fff;
-  padding: 0px 5px 0px 5px;
 `;
 
 const CartImage = styled.div`
-  position: absolute;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-  right: 10px;
-  bottom: 25px;
-  width: 45px;
-  height: 20px;
+  gap: 6px;
+  width: 100%;
+  margin-top: 4px;
   z-index: 300;
-  img {
-    width: 18px;
-    height: 18px;
-    object-fit: cover;
-  }
+  position: relative;
+
   span {
     color: red;
   }
 `;
 
+const CartIcon = styled.img`
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  cursor: pointer;
+`;
+
 const ItemInfo = styled.div`
   position: absolute;
-  width: calc(100% + 20px);
-  height: calc(100% + 20px);
-  top: -10px;
-  left: -10px;
+  inset: 0;
   opacity: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.35);
   transition: 0.5s;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-size: var(--main-font-size);
+  font-size: var(--main-price-font-size);
   z-index: 200;
+  border-radius: 16px;
+
   &:hover {
     opacity: 1;
   }
+
   div {
     color: white;
     padding-bottom: 5px;
   }
+
   span {
     color: red;
   }

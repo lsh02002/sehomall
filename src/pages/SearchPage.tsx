@@ -4,21 +4,26 @@ import styled from "styled-components";
 import CardOne from "../components/card/CardOne";
 import { itemData } from "../components/data/itemData";
 import { itemType } from "../types/type";
+import { layout } from "../them/them";
 
 const SearchPage = () => {
   const [searchItems, setSearchItems] = useState<itemType[]>([]);
   const [searchResult, setSearchResult] = useState<itemType[]>([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setSearchItems(itemData?.content);
   }, [searchItems]);
 
   const OnSearchKeyDown = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.trim() === "") {      
+    if (e.target.value.trim() === "") {
       return;
     }
-    
-    setSearchResult(searchItems?.filter((item: itemType) =>item?.name?.includes(e.target.value)));
+
+    setSearchResult(
+      searchItems?.filter((item: itemType) =>
+        item?.name?.includes(e.target.value),
+      ),
+    );
   };
 
   return (
@@ -81,7 +86,7 @@ const ItemsInner = styled.div`
 `;
 
 const Items = styled.div`
-  max-width: 1280px;
+  max-width: ${layout.maxWidth};
   display: flex;
   justify-content: flex-start;
   align-items: center;

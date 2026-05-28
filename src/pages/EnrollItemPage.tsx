@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Layout from "../components/layout/Layout";
-import { useNavigate } from "react-router-dom";
-import { itemType } from "../types/type";
-import { useItem } from "../api/itemContextApi";
 
 const EnrollItemPage = () => {
-  const { items, setItems } = useItem();
   const [state, setState] = useState({
     id: 0,
     icat: "BAGS",
@@ -22,14 +18,13 @@ const EnrollItemPage = () => {
     images: null,
   });
   const [errMessage, setErrMessage] = useState("");
-  const navigate = useNavigate();
 
   const OnSelectFieldChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setErrMessage("");
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
-   const OnInputFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const OnInputFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setErrMessage("");
     setState({ ...state, [e.target.name]: e.target.value });
   };
@@ -39,34 +34,33 @@ const EnrollItemPage = () => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  const OnFieldImagesChange = (e: React.ChangeEvent<HTMLInputElement>) => {    
+  const OnFieldImagesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setErrMessage("");
 
     const file = e.target.files?.[0];
-    if(!file) return;
+    if (!file) return;
 
     setState({ ...state, [e.target.name]: file });
   };
 
   const OnRegister = () => {
-    const data: itemType = {
-      id: items.length + 1,
-      count: state.icount,
-      price: state.iprice,
-      size: state.isize,
-      careGuide: state.careGuide,
-      name: state.iname,
-      description: state.idesc,
-      category: state.icat,
-      deliveryFee: state.ideliveryFee,
-      userNickname: state.userNickname,
-      views: 0,
-      heartCount: 0,
-      createAt: new Date().toString(),
-      files: [],
-      reviewCount: 0,
-    };
-
+    // const data: itemType = {
+    //   id: items.length + 1,
+    //   count: state.icount,
+    //   price: state.iprice,
+    //   size: state.isize,
+    //   careGuide: state.careGuide,
+    //   name: state.iname,
+    //   description: state.idesc,
+    //   category: state.icat,
+    //   deliveryFee: state.ideliveryFee,
+    //   userNickname: state.userNickname,
+    //   views: 0,
+    //   heartCount: 0,
+    //   createAt: new Date().toString(),
+    //   files: [],
+    //   reviewCount: 0,
+    // };
     // setItems([...items, data]);
     // navigate("/");
   };
@@ -79,7 +73,11 @@ const EnrollItemPage = () => {
           <span>(포트폴리오 참고용으로 노출함, 관리자 등급만 등록 가능)</span>
           <CategorySelect>
             <div>카테고리</div>
-            <select value={state.icat} name="icat" onChange={OnSelectFieldChange}>
+            <select
+              value={state.icat}
+              name="icat"
+              onChange={OnSelectFieldChange}
+            >
               <option>BAGS</option>
               <option>WALLETS</option>
               <option>ACCESSORIES</option>
