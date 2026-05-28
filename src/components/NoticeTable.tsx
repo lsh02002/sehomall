@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import {
   useReactTable,
   getCoreRowModel,
@@ -13,7 +12,10 @@ type TablePropsType<TData extends object> = {
   data: TData[];
 };
 
-function NoticeTable<TData extends object>({ columns, data }: TablePropsType<TData>) {
+function NoticeTable<TData extends object>({
+  columns,
+  data,
+}: TablePropsType<TData>) {
   const table = useReactTable({
     data,
     columns,
@@ -21,16 +23,24 @@ function NoticeTable<TData extends object>({ columns, data }: TablePropsType<TDa
   });
 
   return (
-    <Container>
-      <table>
-        <thead>
+    <div
+      className="w-100 overflow-auto"
+      style={{
+        maxWidth: layout.maxWidth,
+      }}
+    >
+      <table className="table table-bordered table-hover align-middle mb-0">
+        <thead className="table-light">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>
+                <th key={header.id} className="text-center">
                   {header.isPlaceholder
                     ? null
-                    : flexRender(header.column.columnDef.header, header.getContext())}
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
                 </th>
               ))}
             </tr>
@@ -41,7 +51,7 @@ function NoticeTable<TData extends object>({ columns, data }: TablePropsType<TDa
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
+                <td key={cell.id} className="px-2 py-2">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
@@ -49,25 +59,8 @@ function NoticeTable<TData extends object>({ columns, data }: TablePropsType<TDa
           ))}
         </tbody>
       </table>
-    </Container>
+    </div>
   );
 }
 
 export default NoticeTable;
-
-const Container = styled.div`
-max-width: ${layout.maxWidth};
-width: 100%;
-overflow-x: auto;
-  table {
-    border-collapse: collapse;    
-  }
-  table th {
-    background-color: lightgray;
-    border: 1px solid white;
-  }
-  table td {
-    border: 1px solid lightgray;
-    padding: 5px;
-  }
-`;

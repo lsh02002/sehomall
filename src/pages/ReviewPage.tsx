@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Layout from "../components/layout/Layout";
-import styled from "styled-components";
 import ReviewCard from "../components/card/ReviewCard";
 import ReviewEnroll from "../components/modal/ReviewEnroll";
 import Paging from "../components/pagination/Paging";
@@ -9,113 +8,87 @@ import { useReview } from "../api/reviewContextApi";
 import { layout } from "../them/them";
 
 const ReviewPage = () => {
-  const { reviews } = useReview();
+  const { reviews, isReviewUpdated, setIsReviewUpdated } = useReview();
 
   const [searchParams] = useSearchParams();
+
   const page = parseInt(searchParams.get("page") ?? "1");
   const size = parseInt(searchParams.get("size") ?? "5");
 
   const [isReview, setIsReview] = useState(false);
-  const { isReviewUpdated, setIsReviewUpdated } = useReview();
-
-  // useEffect(() => {
-  //   setReviews(reviewData?.content);
-  //   setTotal(reviewData?.totalElements);
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   return (
     <Layout>
-      <Container>
-        <h1>리뷰 전체 ({reviews.length})</h1>
-        <span>
-          <button onClick={() => setIsReview(true)}>후기 등록</button>
-        </span>
-        <ReviewBody>
-          {reviews.length > 0 &&
+      <div
+        className="w-100 mx-auto"
+        style={{
+          maxWidth: layout.maxWidth,
+          minHeight: "calc(100vh - 220px)",
+          boxSizing: "border-box",
+        }}
+      >
+        <h1
+          className="text-center"
+          style={{
+            fontSize: "var(--main-h1-size)",
+          }}
+        >
+          리뷰 전체 ({reviews.length})
+        </h1>
+
+        <div className="d-flex justify-content-end w-100">
+          <button
+            onClick={() => setIsReview(true)}
+            className="btn btn-light border rounded-4 fw-semibold"
+            style={{
+              minWidth: "90px",
+              height: "40px",
+              marginRight: "20px",
+              fontSize: "var(--button-font-size)",
+            }}
+          >
+            후기 등록
+          </button>
+        </div>
+
+        <div className="p-3">
+          {reviews.length > 0 ? (
             reviews.map((review, index) => (
               <ReviewCard key={index} review={review} />
-            ))}
+            ))
+          ) : (
+            <div className="text-center text-secondary py-5">
+              등록된 리뷰가 없습니다.
+            </div>
+          )}
+
           <Paging
-            to={"/reviews"}
+            to="/reviews"
             total={reviews.length}
             size={size}
             page={page}
           />
-        </ReviewBody>
-      </Container>
+        </div>
+      </div>
+
       {isReview && (
-        <Review>
+        <div
+          className="position-fixed top-0 start-0 w-100 h-100"
+          style={{
+            backgroundColor: "rgba(0,0,0,0.4)",
+            zIndex: 50,
+          }}
+        >
           <ReviewEnroll
             item={null}
             setIsReview={setIsReview}
             isReviewUpdated={isReviewUpdated}
             setIsReviewUpdated={setIsReviewUpdated}
           />
-        </Review>
+        </div>
       )}
     </Layout>
   );
 };
 
 export default ReviewPage;
-
-const Container = styled.div`
-  width: 100%;
-  max-width: ${layout.maxWidth};
-  min-height: calc(100vh - 220px);
-
-  margin: 0 auto;
-  // padding: 40px 20px 100px;
-
-  box-sizing: border-box;
-
-  h1 {
-    text-align: center;
-    font-size: var(--main-h1-size);
-  }
-
-  span {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-  }
-
-  button {
-    min-width: 90px;
-    height: 40px;
-
-    padding: 0 16px;
-
-    margin-right: 20px;
-
-    border: 1px solid #e5e5e5;
-    border-radius: 12px;
-
-    background: #fafafa;
-    color: #333;
-
-    font-size: var(--button-font-size);
-    font-weight: 600;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    cursor: pointer;
-  }
-`;
-
-const ReviewBody = styled.div`
-  padding: 20px;
-`;
-
-const Review = styled.div`
-  position: fixed;
-  width: 100%;
-  box-sizing: border-box;
-  inset: 0;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 50;
-`;

@@ -1,5 +1,4 @@
 import React, { Dispatch, SetStateAction } from "react";
-import styled from "styled-components";
 import { itemType } from "../../types/type";
 import CardTwo from "../card/CardTwo";
 import { layout } from "../../them/them";
@@ -10,226 +9,99 @@ type CategoryTabPropsType = {
   cateItems: itemType[];
 };
 
+const categories = ["ALL", "BAGS", "WALLETS", "ACCESSORIES", "SCARVES"];
+
 const CategoryTab = ({ cate, setCate, cateItems }: CategoryTabPropsType) => {
   const OnTabClick = (cat: string) => {
     setCate(cat);
   };
+
   return (
-    <TabInner>
-      <ul className="btn">
-        <li
-          className={`${cate === "ALL" ? "active" : ""}`}
-          onClick={() => OnTabClick("ALL")}
-        >
-          전체
-        </li>
-        <li
-          className={`${cate === "BAGS" ? "active" : ""}`}
-          onClick={() => OnTabClick("BAGS")}
-        >
-          BAGS
-        </li>
-        <li
-          className={`${cate === "WALLETS" ? "active" : ""}`}
-          onClick={() => OnTabClick("WALLETS")}
-        >
-          WALLETS
-        </li>
-        <li
-          className={`${cate === "ACCESSORIES" ? "active" : ""}`}
-          onClick={() => OnTabClick("ACCESSORIES")}
-        >
-          ACCESSORIES
-        </li>
-        <li
-          className={`${cate === "SCARVES" ? "active" : ""}`}
-          onClick={() => OnTabClick("SCARVES")}
-        >
-          SCARVES
-        </li>
+    <div
+      className="w-100 h-100 mt-4"
+      style={{
+        maxWidth: layout.maxWidth,
+      }}
+    >
+      {/* TAB BUTTONS */}
+      <ul
+        className="
+          list-unstyled
+          d-inline-flex align-items-center gap-2
+          p-2 mb-4
+          rounded-pill
+          bg-light
+          overflow-auto
+        "
+        style={{
+          boxShadow:
+            "inset 0 1px 2px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.04)",
+          scrollbarWidth: "none",
+        }}
+      >
+        {categories.map((cat) => {
+          const isActive = cate === cat;
+
+          return (
+            <li
+              key={cat}
+              onClick={() => OnTabClick(cat)}
+              className={`
+                d-flex justify-content-center align-items-center
+                rounded-pill
+                fw-semibold
+              `}
+              style={{
+                minWidth: "140px",
+                height: "48px",
+                padding: "0 20px",
+                cursor: "pointer",
+                userSelect: "none",
+                transition: "0.25s",
+                color: isActive ? "#e60023" : "#666",
+                background: isActive ? "white" : "transparent",
+                boxShadow: isActive
+                  ? "0 6px 18px rgba(230,0,35,0.15), 0 2px 6px rgba(0,0,0,0.06)"
+                  : "none",
+                transform: isActive ? "translateY(-1px)" : "translateY(0)",
+              }}
+            >
+              {cat === "ALL" ? "전체" : cat}
+            </li>
+          );
+        })}
       </ul>
-      <div className="tabs">
-        {cate === "ALL" && (
-          <div id="tab1">
-            <Items>
-              {cateItems.length > 0 ? (
-                cateItems.map((item) => <CardTwo key={item.id} item={item} />)
-              ) : (
-                <em>상품이 없습니다.</em>
-              )}
-            </Items>
-          </div>
-        )}
-        {cate === "BAGS" && (
-          <div id="tab2">
-            <Items>
-              {cateItems.length > 0 ? (
-                cateItems.map((item) => <CardTwo key={item.id} item={item} />)
-              ) : (
-                <em>상품이 없습니다.</em>
-              )}
-            </Items>
-          </div>
-        )}
-        {cate === "WALLETS" && (
-          <div id="tab3">
-            <Items>
-              {cateItems.length > 0 ? (
-                cateItems.map((item) => <CardTwo key={item.id} item={item} />)
-              ) : (
-                <em>상품이 없습니다.</em>
-              )}
-            </Items>
-          </div>
-        )}
-        {cate === "ACCESSORIES" && (
-          <div id="tab4">
-            <Items>
-              {cateItems.length > 0 ? (
-                cateItems.map((item) => <CardTwo key={item.id} item={item} />)
-              ) : (
-                <em>상품이 없습니다.</em>
-              )}
-            </Items>
-          </div>
-        )}
-        {cate === "SCARVES" && (
-          <div id="tab5">
-            <Items>
-              {cateItems.length > 0 ? (
-                cateItems.map((item) => <CardTwo key={item.id} item={item} />)
-              ) : (
-                <em>상품이 없습니다.</em>
-              )}
-            </Items>
-          </div>
+
+      {/* ITEMS */}
+      <div
+        className="
+          border rounded-5 bg-white
+          d-flex justify-content-center align-items-center
+          flex-wrap
+          w-100
+          p-3
+        "
+        style={{
+          minHeight: "600px",
+          boxShadow: "0 10px 30px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.03)",
+        }}
+      >
+        {cateItems.length > 0 ? (
+          cateItems.map((item) => <CardTwo key={item.id} item={item} />)
+        ) : (
+          <em
+            className="w-100 ps-3"
+            style={{
+              color: "#666",
+              fontStyle: "normal",
+            }}
+          >
+            상품이 없습니다.
+          </em>
         )}
       </div>
-    </TabInner>
+    </div>
   );
 };
 
 export default CategoryTab;
-
-const TabInner = styled.div`
-  margin-top: 30px;
-  width: 100%;
-  height: 100%;
-  max-width: ${layout.maxWidth};  
-
-  .btn {
-    list-style: none;
-    padding: 6px;
-    margin: 0 0 24px 0;
-
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-
-    background: #f5f5f5;
-    border-radius: 999px;
-
-    box-shadow:
-      inset 0 1px 2px rgba(0, 0, 0, 0.05),
-      0 4px 12px rgba(0, 0, 0, 0.04);
-  }
-
-  .btn li {
-    min-width: 140px;
-    height: 48px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 0 20px;
-
-    border-radius: 999px;
-
-    cursor: pointer;
-
-    font-size: var(--button-font-size);
-    font-weight: 600;
-
-    color: #666;
-    background: transparent;
-
-    transition:
-      background 0.25s,
-      color 0.25s,
-      transform 0.2s,
-      box-shadow 0.25s;
-
-    user-select: none;
-  }
-
-  .btn li:hover {
-    background: rgba(255, 255, 255, 0.8);
-    color: #111;
-    transform: translateY(-1px);
-  }
-
-  .btn li.active {
-    background: white;
-    color: #e60023;
-
-    box-shadow:
-      0 6px 18px rgba(230, 0, 35, 0.15),
-      0 2px 6px rgba(0, 0, 0, 0.06);
-
-    transform: translateY(-1px);
-  }
-
-  .tabs > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  @media (max-width: ${layout.maxWidth}) {
-    .btn {
-      width: 100%;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-
-    .btn::-webkit-scrollbar {
-      display: none;
-    }
-
-    .btn li {
-      min-width: 120px;
-      flex-shrink: 0;
-      font-size: 14px;
-    }
-  }
-`;
-
-const Items = styled.div`
-  border: 1px solid #efefef;
-  border-radius: 24px;
-
-  background: white;
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  min-height: 600px;
-
-  flex-wrap: wrap;
-
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.04),
-    0 2px 8px rgba(0, 0, 0, 0.03);
-
-  em {
-    display: inline-block;
-    text-align: left;
-    width: 100%;
-    padding-left: 20px;
-    color: #666;
-    font-style: normal;
-  }
-`;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import { useLogin } from "../api/loginContextApi";
 import Like from "../assets/heart.svg";
 import LikeSolid from "../assets/heart-solid.svg";
@@ -12,24 +11,26 @@ type HeartCountPropsType = {
 
 const HeartCount = ({ id, heartCount }: HeartCountPropsType) => {
   const { isLogin } = useLogin();
+
   const { myHearts, setMyHearts, items, setItems, setIsHeartUpdated } =
     useItem();
 
   const [isHearted, setIsHearted] = useState(false);
   const [countHeart, setCountHeart] = useState(heartCount);
 
-  // 1) 하트 여부는 myHearts에서 파생
+  // 하트 여부 동기화
   useEffect(() => {
     setIsHearted(!!myHearts?.some((item) => item.id === id));
   }, [myHearts, id]);
 
-  // 2) 카운트는 items에서 파생 (직접 변이 금지, 여기서만 동기화)
+  // 좋아요 수 동기화
   useEffect(() => {
     const found = items.find((item) => item.id === id);
+
     setCountHeart(found?.heartCount ?? heartCount);
   }, [items, id, heartCount]);
 
-  // 로그인 변화에 따른 초기화(선택적)
+  // 로그아웃 시 초기화
   useEffect(() => {
     if (!isLogin) {
       setIsHearted(false);
@@ -40,73 +41,82 @@ const HeartCount = ({ id, heartCount }: HeartCountPropsType) => {
   const onLikeClick = () => {
     const exists = myHearts?.some((h) => h.id === id);
 
-    // 3) items는 불변 업데이트로 +1/-1
+    // item 업데이트
     setItems((prev) =>
       prev.map((it) =>
         it.id === id
-          ? { ...it, heartCount: it.heartCount + (exists ? -1 : 1) }
+          ? {
+              ...it,
+              heartCount: it.heartCount + (exists ? -1 : 1),
+            }
           : it,
       ),
     );
 
-    // 4) myHearts는 함수형 업데이트로 추가/삭제 (타입 정규화로 안전)
+    // myHearts 업데이트
     setMyHearts((prev) => {
       const already = prev.some((p) => String(p.id) === String(id));
+
       if (!already) {
-        // 추가
         const toAdd = items.find((it) => it.id === id);
+
         return toAdd ? [...prev, toAdd] : prev;
       }
-      // 삭제
+
       return prev.filter((p) => String(p.id) !== String(id));
     });
 
-    // 5) 토글/업데이트 플래그
+    // 상태 업데이트
     setIsHeartUpdated((v) => !v);
   };
 
   return (
-    <Container onClick={onLikeClick}>
-      <HeartImage>
-        {!isHearted ? (
-          <img src={Like} alt="" />
-        ) : (
-          <img src={LikeSolid} alt="" />
-        )}
-      </HeartImage>
-      <span>({countHeart})</span>
-    </Container>
+    <div
+      onClick={onLikeClick}
+      className="
+        d-flex align-items-center
+        cursor-pointer
+      "
+      style={{
+        width: "36px",
+        height: "100%",
+        marginRight: "5px",
+        gap: "2px",
+        cursor: "pointer",
+      }}
+    >
+      {/* ICON */}
+      <div
+        className="d-flex align-items-center justify-content-center"
+        style={{
+          width: "22px",
+          height: "18px",
+        }}
+      >
+        <img
+          src={!isHearted ? Like : LikeSolid}
+          alt="heart"
+          style={{
+            width: "1rem",
+            height: "1rem",
+            objectFit: "cover",
+          }}
+        />
+      </div>
+
+      {/* COUNT */}
+      <span
+        className="fw-semibold"
+        style={{
+          fontSize: "0.9rem",
+          color: "red",
+          lineHeight: "0.9rem",
+        }}
+      >
+        ({countHeart})
+      </span>
+    </div>
   );
 };
 
 export default HeartCount;
-
-const Container = styled.div`
-  width: 36px;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  margin-right: 5px;
-
-  span {
-    font-size: 0.9rem;
-    color: red;
-    padding-left: 1px;
-    line-height: 0.9rem;
-  }
-`;
-
-const HeartImage = styled.div`
-  display: flex;
-  align-items: center;
-  width: 22px;
-  height: 18px;
-  text-align: left;
-  img {
-    width: 1rem;
-    height: 1rem;
-    object-fit: cover;
-  }
-`;

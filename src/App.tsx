@@ -1,29 +1,50 @@
 import "./app.css";
-import styled from "styled-components";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Nav from "./components/layout/Nav";
+
 import { lazy, Suspense, useEffect } from "react";
-import { useLogin } from "./api/loginContextApi";
-import PageLoading from "./components/layout/PageLoading";
-import { userInfoData } from "./components/data/userInfoData";
+
 import { Analytics } from "@vercel/analytics/react";
 
+import Nav from "./components/layout/Nav";
+import PageLoading from "./components/layout/PageLoading";
+
+import { useLogin } from "./api/loginContextApi";
+
+import { userInfoData } from "./components/data/userInfoData";
+
 const Loading = <PageLoading />;
+
 const About = lazy(() => import("./pages/AboutPage"));
+
 const Main = lazy(() => import("./pages/MainPage"));
+
 const CategoryMenu = lazy(() => import("./pages/CategoryMenuPage"));
+
 const Category = lazy(() => import("./pages/CategoryPage"));
+
 const Login = lazy(() => import("./pages/LoginPage"));
+
 const SignUp = lazy(() => import("./pages/SignupPage"));
+
 const Enroll = lazy(() => import("./pages/EnrollItemPage"));
+
 const Detail = lazy(() => import("./pages/DetailPage"));
+
 const Cart = lazy(() => import("./pages/CartPage"));
+
 const MyPage = lazy(() => import("./pages/MyPage"));
+
 const Notice = lazy(() => import("./pages/NoticePage"));
+
 const Contact = lazy(() => import("./pages/ContactPage"));
+
 const Instagram = lazy(() => import("./pages/InstagramPage"));
+
 const Search = lazy(() => import("./pages/SearchPage"));
+
 const Review = lazy(() => import("./pages/ReviewPage"));
+
 const Payment = lazy(() => import("./pages/PaymentPage"));
 
 function App() {
@@ -31,11 +52,25 @@ function App() {
 
   useEffect(() => {
     setIsLogin(true);
+
     localStorage.setItem("nickname", userInfoData?.nickname);
   }, [setIsLogin]);
 
   return (
-    <Container>
+    <div
+      className="
+        w-100 min-vh-100
+        d-flex flex-column
+        justify-content-start
+        align-items-center
+      "
+      style={{
+        position: "relative",
+        boxSizing: "border-box",
+        overflowX: "hidden",
+        paddingBottom: "110px",
+      }}
+    >
       <Router>
         <Routes>
           <Route
@@ -46,6 +81,7 @@ function App() {
               </Suspense>
             }
           />
+
           <Route
             path="/about"
             element={
@@ -54,6 +90,7 @@ function App() {
               </Suspense>
             }
           />
+
           <Route
             path="/category"
             element={
@@ -62,6 +99,7 @@ function App() {
               </Suspense>
             }
           />
+
           <Route
             path="/cat/:cate"
             element={
@@ -70,6 +108,7 @@ function App() {
               </Suspense>
             }
           />
+
           <Route
             path="/login"
             element={
@@ -78,6 +117,7 @@ function App() {
               </Suspense>
             }
           />
+
           <Route
             path="/signup"
             element={
@@ -86,6 +126,7 @@ function App() {
               </Suspense>
             }
           />
+
           <Route
             path="/enroll"
             element={
@@ -94,6 +135,7 @@ function App() {
               </Suspense>
             }
           />
+
           <Route
             path="/detail/:id"
             element={
@@ -102,6 +144,7 @@ function App() {
               </Suspense>
             }
           />
+
           <Route
             path="/cart"
             element={
@@ -110,6 +153,7 @@ function App() {
               </Suspense>
             }
           />
+
           <Route
             path="/mypage/:cate"
             element={
@@ -118,6 +162,7 @@ function App() {
               </Suspense>
             }
           />
+
           <Route
             path="/notice"
             element={
@@ -126,6 +171,7 @@ function App() {
               </Suspense>
             }
           />
+
           <Route
             path="/contact"
             element={
@@ -134,6 +180,7 @@ function App() {
               </Suspense>
             }
           />
+
           <Route
             path="/instagram"
             element={
@@ -142,6 +189,7 @@ function App() {
               </Suspense>
             }
           />
+
           <Route
             path="/search"
             element={
@@ -150,6 +198,7 @@ function App() {
               </Suspense>
             }
           />
+
           <Route
             path="/reviews"
             element={
@@ -158,6 +207,7 @@ function App() {
               </Suspense>
             }
           />
+
           <Route
             path="/pay"
             element={
@@ -167,30 +217,15 @@ function App() {
             }
           />
         </Routes>
+
         <Nav />
+
         {/* <Footer /> */}
+
         <Analytics />
       </Router>
-    </Container>
+    </div>
   );
 }
 
 export default App;
-
-const Container = styled.div`
-  width: 100%;
-  min-height: 100vh;
-
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-
-  position: relative;
-
-  box-sizing: border-box;
-
-  overflow-x: hidden;
-
-  padding-bottom: 110px;
-`;

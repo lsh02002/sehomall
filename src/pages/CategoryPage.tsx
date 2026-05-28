@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import { useParams } from "react-router-dom";
-import { styled } from "styled-components";
 import { useItem } from "../api/itemContextApi";
 import CardOne from "../components/card/CardOne";
 import Layout from "../components/layout/Layout";
@@ -13,65 +12,66 @@ const CategoryPage = () => {
 
   const parseKoreanDate = (dateStr?: string): number => {
     if (!dateStr) return 0;
+
     const match = dateStr.match(/(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/);
+
     if (!match) return 0;
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [_, year, month, day] = match;
-    return new Date(
-      Number(year),
-      Number(month) - 1, // JS Date에서 month는 0~11
-      Number(day)
-    ).getTime();
+    const [, year, month, day] = match;
+
+    return new Date(Number(year), Number(month) - 1, Number(day)).getTime();
   };
 
-  const newItems = [...items].sort((a, b) => {
-    const aTime = parseKoreanDate(a?.createAt);
-    const bTime = parseKoreanDate(b?.createAt);
-    return bTime - aTime; // 최신순
-  }).slice(0, 5);
+  const newItems = useMemo(() => {
+    return [...items]
+      .sort((a, b) => {
+        const aTime = parseKoreanDate(a?.createAt);
+        const bTime = parseKoreanDate(b?.createAt);
+
+        return bTime - aTime;
+      })
+      .slice(0, 5);
+  }, [items]);
 
   const cateItems: itemType[] = useMemo(() => {
     if (cate === "ALL") return items;
     if (cate === "new") return newItems;
+
     return items.filter((item) => item?.category === cate);
   }, [cate, items, newItems]);
 
   return (
     <Layout>
-      <Container>
+      <div
+        className="
+          w-100 h-100
+          d-flex flex-column
+          justify-content-center align-items-center
+          px-3
+        "
+        style={{
+          maxWidth: layout.maxWidth,
+          boxSizing: "border-box",
+        }}
+      >
         <h1>카테고리: {cate}</h1>
-        <Main>
+
+        <div
+          className="
+            d-flex justify-content-center align-items-center
+            flex-wrap gap-3
+            mt-5
+          "
+        >
           {cateItems.length > 0 ? (
             cateItems.map((item) => <CardOne key={item?.id} item={item} />)
           ) : (
-            <div>해당 상품이 없습니다.</div>
+            <div className="text-secondary py-5">해당 상품이 없습니다.</div>
           )}
-        </Main>
-      </Container>
+        </div>
+      </div>
     </Layout>
   );
 };
 
 export default CategoryPage;
-
-const Container = styled.div`  
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  max-width: ${layout.maxWidth};
-  padding: 0 20px;  
-`;
-
-const Main = styled.div`
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;    
-    gap: 16px;
-`;

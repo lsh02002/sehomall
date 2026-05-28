@@ -11,21 +11,73 @@ import CardOne from "../card/CardOne";
 import { itemType } from "../../types/type";
 import { layout } from "../../them/them";
 
-import styled from "styled-components";
-
 const CARD_WIDTH = 140;
 
 function ItemSlider({ items }: { items: itemType[] }) {
   return (
-    <Wrapper>
-      <CustomPrevButton className="custom-prev">
-        <FaChevronLeft />
-      </CustomPrevButton>
+    <div
+      className="position-relative mx-auto w-100"
+      style={{
+        maxWidth: layout.maxWidth,
+      }}
+    >
+      {/* PREV */}
+      <button
+        className="
+          custom-prev
+          position-absolute
+          top-50 start-0
+          translate-middle-y
+          rounded-circle border-0
+          d-flex justify-content-center align-items-center
+          bg-white shadow
+        "
+        style={{
+          width: "42px",
+          height: "42px",
+          zIndex: 100,
+          left: "-10px",
+          cursor: "pointer",
+          transition: "0.2s",
+        }}
+      >
+        <FaChevronLeft
+          style={{
+            fontSize: "14px",
+            color: "#222",
+          }}
+        />
+      </button>
 
-      <CustomNextButton className="custom-next">
-        <FaChevronRight />
-      </CustomNextButton>
+      {/* NEXT */}
+      <button
+        className="
+          custom-next
+          position-absolute
+          top-50 end-0
+          translate-middle-y
+          rounded-circle border-0
+          d-flex justify-content-center align-items-center
+          bg-white shadow
+        "
+        style={{
+          width: "42px",
+          height: "42px",
+          zIndex: 100,
+          right: "-10px",
+          cursor: "pointer",
+          transition: "0.2s",
+        }}
+      >
+        <FaChevronRight
+          style={{
+            fontSize: "14px",
+            color: "#222",
+          }}
+        />
+      </button>
 
+      {/* SWIPER */}
       <Swiper
         slidesPerView="auto"
         spaceBetween={20}
@@ -35,7 +87,7 @@ function ItemSlider({ items }: { items: itemType[] }) {
         }}
         modules={[Navigation]}
         style={{
-          width: "100%",          
+          width: "100%",
         }}
       >
         {items.map((item) => (
@@ -50,64 +102,8 @@ function ItemSlider({ items }: { items: itemType[] }) {
           </SwiperSlide>
         ))}
       </Swiper>
-    </Wrapper>
+    </div>
   );
 }
 
 export default ItemSlider;
-
-const Wrapper = styled.div`
-  width: 100%;
-  max-width: ${layout.maxWidth};
-  margin: 0 auto;
-  position: relative;
-`;
-
-const ArrowButton = styled.button`
-  position: absolute;
-  top: 45%;
-  transform: translateY(-50%);
-  z-index: 100;
-
-  width: 42px;
-  height: 42px;
-
-  border: none;
-  border-radius: 50%;
-
-  background: rgba(255, 255, 255, 0.95);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 4px 10px rgba(0, 0, 0, 0.12),
-    0 2px 4px rgba(0, 0, 0, 0.08);
-
-  transition: 0.2s;
-
-  svg {
-    font-size: 14px;
-    color: #222;
-  }
-
-  &:hover {
-    transform: translateY(-50%) scale(1.08);
-    background: white;
-  }
-
-  &:active {
-    transform: translateY(-50%) scale(0.96);
-  }
-`;
-
-const CustomPrevButton = styled(ArrowButton)`
-  left: -10px;
-`;
-
-const CustomNextButton = styled(ArrowButton)`
-  right: -10px;
-`;

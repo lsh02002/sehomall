@@ -1,33 +1,40 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+
 import { useLogin } from "../api/loginContextApi";
 import { useMyPage } from "../api/myPageTabContextApi";
+
 import Layout from "../components/layout/Layout";
+
 import { userInfoData } from "../components/data/userInfoData";
 
 const LoginPage = () => {
   const { setIsLogin } = useLogin();
+
   const { setReviewPage, setHeartPage, setOrderPage } = useMyPage();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [errMessage, setErrMessage] = useState("");
 
   const navigate = useNavigate();
 
   const OnEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setErrMessage("");
+
     setEmail(e.target.value);
   };
 
   const OnPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setErrMessage("");
+
     setPassword(e.target.value);
   };
 
   const OnLogin = () => {
     console.log("login ", userInfoData);
+
     localStorage.setItem("nickname", userInfoData.nickname);
 
     setReviewPage(1);
@@ -35,99 +42,107 @@ const LoginPage = () => {
     setOrderPage(1);
 
     setIsLogin(true);
+
     navigate("/");
   };
 
   return (
     <Layout>
-      <Main>
-        <Title>LOGIN</Title>
-        <Email>
-          <div>이메일</div>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => OnEmailChange(e)}
-          />
-        </Email>
-        <Password>
-          <div>패스워드</div>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => OnPasswordChange(e)}
-          />
-        </Password>
-        {errMessage && <Error>{errMessage}</Error>}
-        <Login onClick={OnLogin}>로그인</Login>
-      </Main>
+      <div
+        className="
+          d-flex justify-content-center align-items-center
+          w-100
+          px-3
+        "
+        style={{
+          marginTop: "50px",
+        }}
+      >
+        <div
+          className="
+            d-flex flex-column
+            justify-content-center align-items-center
+            border rounded-5
+            shadow-sm bg-white
+            p-4
+          "
+          style={{
+            width: "100%",
+            maxWidth: "360px",
+            boxSizing: "border-box",
+            borderColor: "lightgray",
+          }}
+        >
+          {/* TITLE */}
+          <h1
+            className="fw-normal mb-4"
+            style={{
+              fontSize: "var(--main-h1-size)",
+            }}
+          >
+            LOGIN
+          </h1>
+
+          {/* EMAIL */}
+          <div className="w-100 mb-3">
+            <div
+              className="mb-2"
+              style={{
+                fontSize: "14px",
+              }}
+            >
+              이메일
+            </div>
+
+            <input
+              type="email"
+              value={email}
+              onChange={OnEmailChange}
+              className="form-control rounded-4"
+            />
+          </div>
+
+          {/* PASSWORD */}
+          <div className="w-100 mb-3">
+            <div
+              className="mb-2"
+              style={{
+                fontSize: "14px",
+              }}
+            >
+              패스워드
+            </div>
+
+            <input
+              type="password"
+              value={password}
+              onChange={OnPasswordChange}
+              className="form-control rounded-4"
+            />
+          </div>
+
+          {/* ERROR */}
+          {errMessage && <span className="text-danger mb-3">{errMessage}</span>}
+
+          {/* BUTTON */}
+          <button
+            onClick={OnLogin}
+            className="
+              btn btn-secondary
+              w-100
+              rounded-4
+              py-2 fw-semibold
+            "
+            style={{
+              fontSize: "var(--button-font-size)",
+            }}
+          >
+            로그인
+          </button>
+        </div>
+      </div>
     </Layout>
   );
 };
 
 export default LoginPage;
-
-const Main = styled.div`
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 360px;
-  border: 1px solid lightgray;
-  padding: 20px;
-  box-sizing: border-box;
-`;
-
-const Title = styled.h1`
-  font-size: var(--main-h1-size);
-  font-weight: normal;
-  margin: 5px;
-`;
-
-const Email = styled.div`
-  width: 100%;
-  overflow: hidden;
-  div {
-    font-size: 14px;
-  }
-  input[type="email"] {
-    width: 95%;
-    padding: 5px;
-    outline: none;
-  }
-`;
-
-const Password = styled.div`
-  padding-top: 20px;
-  width: 100%;
-  overflow: hidden;
-  div {
-    font-size: 14px;
-  }
-  input[type="password"] {
-    width: 95%;
-    padding: 5px;
-    outline: none;
-  }
-`;
-
-const Login = styled.button`
-  margin-top: 20px;
-  width: 100%;
-  border: none;
-  padding: 10px;
-  background-color: gray;
-  cursor: pointer;
-  color: white;
-  transition: 0.2s;
-  font-size: var(--button-font-size);
-  &:hover {
-    background-color: lightgray;
-  }
-`;
-
-const Error = styled.span`
-  color: red;
-  padding: 20px 0 0 0;
-`;

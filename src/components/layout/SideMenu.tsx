@@ -1,76 +1,106 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 
 const SideMenu = () => {
   return (
-    <Container>
-      <Title>
-        <Link to="/">
-          SEHOMALL <span>(clone coding)</span>
+    <div
+      className="
+        position-fixed top-0 start-0
+        d-flex flex-column align-items-center
+        bg-white bg-opacity-75
+      "
+      style={{
+        width: "200px",
+        marginTop: "10px",
+        padding: "30px 0",
+        zIndex: 5,
+        backdropFilter: "blur(8px)",
+      }}
+    >
+      {/* TITLE */}
+      <div
+        className="w-100 text-center mb-4"
+        style={{
+          fontSize: "40px",
+          color: "red",
+          fontWeight: 700,
+        }}
+      >
+        <Link
+          to="/"
+          className="text-decoration-none"
+          style={{
+            color: "inherit",
+          }}
+        >
+          SEHOMALL{" "}
+          <span
+            style={{
+              fontSize: "18px",
+              fontWeight: 400,
+            }}
+          >
+            (clone coding)
+          </span>
         </Link>
-      </Title>
-      <CatLink to={"/cat/new"}>NEW ARRIVAL</CatLink>
-      <CatLink to={"/cat/BAGS"}>BAGS</CatLink>
-      <CatLink to={"/cat/WALLETS"}>WALLETS</CatLink>
-      <CatLink to={"/cat/ACCESSORIES"}>ACCESSORIES</CatLink>
-      <CatLink to={"/cat/SCARVES"}>SCARVES</CatLink>
-      <CatLink to={"/about"}>ABOUT</CatLink>
-      <CatLink to={"/notice?page=1&size=5"}>NOTICE</CatLink>
-      <CatLink to={"/contact"}>CONTACT</CatLink>
-      <CatLink to={"/instagram"}>INSTAGRAM</CatLink>
-      <Message>
+      </div>
+
+      {/* MENU */}
+      <MenuLink to="/cat/new">NEW ARRIVAL</MenuLink>
+      <MenuLink to="/cat/BAGS">BAGS</MenuLink>
+      <MenuLink to="/cat/WALLETS">WALLETS</MenuLink>
+      <MenuLink to="/cat/ACCESSORIES">ACCESSORIES</MenuLink>
+      <MenuLink to="/cat/SCARVES">SCARVES</MenuLink>
+      <MenuLink to="/about">ABOUT</MenuLink>
+      <MenuLink to="/notice?page=1&size=5">NOTICE</MenuLink>
+      <MenuLink to="/contact">CONTACT</MenuLink>
+      <MenuLink to="/instagram">INSTAGRAM</MenuLink>
+
+      {/* MESSAGE */}
+      <div
+        className="
+          w-100 mt-4 p-3
+          text-white
+        "
+        style={{
+          fontSize: "14px",
+          background: "gray",
+          lineHeight: "1.6",
+        }}
+      >
         백엔드 비용이 발생하여 프론트엔드에서 가짜(더미)데이터를 사용하기로
-        했습니다. 작업을 놓고 있었는데 디자인도 업데이트 노력하겠습니다.        
-      </Message>
-    </Container>
+        했습니다. 작업을 놓고 있었는데 디자인도 업데이트 노력하겠습니다.
+      </div>
+    </div>
   );
 };
 
 export default SideMenu;
 
-const Container = styled.div`
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 200px;
-  margin-top: 10px;
-  padding: 30px 0 30px 0;
-  // border: 1px solid lightgray;
-  left: 0;
-  top: 0;
-  z-index: 5;
-  background-color: rgba(255, 255, 255, 0.65);
-  a {
-    text-decoration: none;
-    color: black;
-  }
-`;
+type MenuLinkProps = {
+  to: string;
+  children: React.ReactNode;
+};
 
-const Title = styled.div`
-  width: 100%;
-  font-size: 40px;
-  color: red;
-  span {
-    font-size: 18px;
-  }
-`;
-
-const Message = styled.div`
-  font-size: 14px;
-  width: 100%;
-  margin-top: 20px;
-  background-color: gray;
-  color: white;
-`;
-
-const CatLink = styled(Link)`
-  width: 100%;
-  padding: 0 0 0 30px;
-  box-sizing: border-box;
-  &:hover {
-    background-color: rgba(82, 72, 72, 0.1);
-  }
-`;
+const MenuLink = ({ to, children }: MenuLinkProps) => {
+  return (
+    <Link
+      to={to}
+      className="
+        w-100 text-decoration-none text-dark
+      "
+      style={{
+        padding: "10px 30px",
+        transition: "0.2s",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.background = "rgba(82,72,72,0.1)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.background = "transparent";
+      }}
+    >
+      {children}
+    </Link>
+  );
+};

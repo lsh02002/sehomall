@@ -1,199 +1,198 @@
-import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import { layout } from "../them/them";
 
+const menuItems = [
+  {
+    to: "/cat/new",
+    title: "NEW",
+    desc: "새 상품",
+  },
+  {
+    to: "/cat/BAGS",
+    title: "BAGS",
+    desc: "가방",
+  },
+  {
+    to: "/cat/WALLETS",
+    title: "WALLETS",
+    desc: "지갑",
+  },
+  {
+    to: "/cat/ACCESSORIES",
+    title: "ACCESSORIES",
+    desc: "악세서리",
+  },
+  {
+    to: "/cat/SCARVES",
+    title: "SCARVES",
+    desc: "스카프",
+  },
+  {
+    to: "/about",
+    title: "ABOUT",
+    desc: "쇼핑몰 소개",
+  },
+  {
+    to: "/notice?page=1&size=5",
+    title: "NOTICE",
+    desc: "공지사항",
+  },
+  {
+    to: "/contact",
+    title: "CONTACT",
+    desc: "연락처",
+  },
+  {
+    to: "/instagram",
+    title: "INSTAGRAM",
+    desc: "인스타그램",
+  },
+];
+
 const CategoryMenuPage = () => {
   return (
     <Layout>
-      <Container>
-        <Card>
-          <TopText>SEHO SHOPPING</TopText>
+      <div
+        className="
+          w-100 min-vh-100
+          d-flex justify-content-center align-items-center
+        "
+        style={{
+          maxWidth: layout.maxWidth,
+          background: "transparent",
+        }}
+      >
+        <div
+          className="w-100"
+          style={{
+            margin: "20px",
+            borderRadius: "32px",
+            boxSizing: "border-box",
+          }}
+        >
+          {/* TOP TEXT */}
+          <div
+            className="mb-3 text-secondary"
+            style={{
+              fontSize: "13px",
+              letterSpacing: "4px",
+            }}
+          >
+            SEHO SHOPPING
+          </div>
 
-          <MainTitle>
+          {/* TITLE */}
+          <h1
+            className="d-flex flex-column fw-bold"
+            style={{
+              margin: 0,
+              fontSize: "clamp(36px, 6vw, 56px)",
+              color: "#111",
+            }}
+          >
             카테고리
-            <span>세호쇼핑몰 클론코딩</span>
-          </MainTitle>
+            <span
+              className="fw-normal text-secondary mt-3"
+              style={{
+                fontSize: "16px",
+              }}
+            >
+              세호쇼핑몰 클론코딩
+            </span>
+          </h1>
 
-          <MenuGrid>
-            <CatLink to={"/cat/new"}>
-              <strong>NEW</strong>
-              <span>새 상품</span>
-            </CatLink>
+          {/* GRID */}
+          <div
+            className="mt-5"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+              gap: "20px",
+            }}
+          >
+            {menuItems.map((item, index) => (
+              <Link
+                key={index}
+                to={item.to}
+                className="
+                  text-decoration-none
+                  d-flex flex-column justify-content-between
+                  rounded-5
+                "
+                style={{
+                  height: "100px",
+                  padding: "20px",
+                  background: "#fafafa",
+                  border: "1px solid #f0f0f0",
+                  transition:
+                    "transform 0.25s, box-shadow 0.25s, background 0.25s",
+                  boxSizing: "border-box",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-6px)";
 
-            <CatLink to={"/cat/BAGS"}>
-              <strong>BAGS</strong>
-              <span>가방</span>
-            </CatLink>
+                  e.currentTarget.style.background = "white";
 
-            <CatLink to={"/cat/WALLETS"}>
-              <strong>WALLETS</strong>
-              <span>지갑</span>
-            </CatLink>
+                  e.currentTarget.style.boxShadow =
+                    "0 16px 30px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.04)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
 
-            <CatLink to={"/cat/ACCESSORIES"}>
-              <strong>ACCESSORIES</strong>
-              <span>악세서리</span>
-            </CatLink>
+                  e.currentTarget.style.background = "#fafafa";
 
-            <CatLink to={"/cat/SCARVES"}>
-              <strong>SCARVES</strong>
-              <span>스카프</span>
-            </CatLink>
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              >
+                <strong
+                  style={{
+                    fontSize: "20px",
+                    color: "#111",
+                    letterSpacing: "1px",
+                  }}
+                >
+                  {item.title}
+                </strong>
 
-            <CatLink to={"/about"}>
-              <strong>ABOUT</strong>
-              <span>쇼핑몰 소개</span>
-            </CatLink>
+                <span
+                  style={{
+                    fontSize: "15px",
+                    color: "#666",
+                  }}
+                >
+                  {item.desc}
+                </span>
+              </Link>
+            ))}
+          </div>
 
-            <CatLink to={"/notice?page=1&size=5"}>
-              <strong>NOTICE</strong>
-              <span>공지사항</span>
-            </CatLink>
-
-            <CatLink to={"/contact"}>
-              <strong>CONTACT</strong>
-              <span>연락처</span>
-            </CatLink>
-
-            <CatLink to={"/instagram"}>
-              <strong>INSTAGRAM</strong>
-              <span>인스타그램</span>
-            </CatLink>
-          </MenuGrid>
-
-          <HomeLink to="/">세호쇼핑몰 메인으로 이동 →</HomeLink>
-        </Card>
-      </Container>
+          {/* HOME LINK */}
+          <Link
+            to="/"
+            className="
+              mt-5
+              d-inline-flex align-items-center
+              text-decoration-none
+              fw-semibold
+            "
+            style={{
+              color: "#111",
+              transition: "0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateX(4px)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateX(0)";
+            }}
+          >
+            세호쇼핑몰 메인으로 이동 →
+          </Link>
+        </div>
+      </div>
     </Layout>
   );
 };
 
 export default CategoryMenuPage;
-
-const Container = styled.div`
-  width: 100%;
-  max-width: ${layout.maxWidth};
-  min-height: 100vh;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background: transparent;
-`;
-
-const Card = styled.div`
-  width: 100%; 
-
-  background: transparent;
-
-  margin: 20px;
-
-  border-radius: 32px;
-
-  box-sizing: border-box;
-`;
-
-const TopText = styled.div`
-  font-size: 13px;
-  letter-spacing: 4px;
-  color: #999;
-  margin-bottom: 18px;
-`;
-
-const MainTitle = styled.h1`
-  margin: 0;
-
-  font-size: clamp(36px, 6vw, 56px);
-  font-weight: 800;
-
-  color: #111;
-
-  display: flex;
-  flex-direction: column;
-
-  span {
-    margin-top: 12px;
-
-    font-size: 16px;
-    font-weight: 400;
-
-    color: #777;
-  }
-`;
-
-const MenuGrid = styled.div`
-  margin-top: 50px;
-
-  display: grid;
-
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-
-  gap: 20px;
-`;
-
-const CatLink = styled(Link)`
-  height: 100px;
-
-  padding: 20px;
-
-  border-radius: 24px;
-
-  background: #fafafa;
-
-  border: 1px solid #f0f0f0;
-
-  text-decoration: none;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  transition:
-    transform 0.25s,
-    box-shadow 0.25s,
-    background 0.25s;
-
-  box-sizing: border-box;
-
-  strong {
-    font-size: 20px;
-    color: #111;
-    letter-spacing: 1px;
-  }
-
-  span {
-    font-size: 15px;
-    color: #666;
-  }
-
-  &:hover {
-    transform: translateY(-6px);
-
-    background: white;
-
-    box-shadow:
-      0 16px 30px rgba(0, 0, 0, 0.08),
-      0 4px 10px rgba(0, 0, 0, 0.04);
-  }
-`;
-
-const HomeLink = styled(Link)`
-  margin-top: 40px;
-
-  display: inline-flex;
-  align-items: center;
-
-  text-decoration: none;
-
-  color: #111;
-
-  font-weight: 600;
-
-  transition: 0.2s;
-
-  &:hover {
-    transform: translateX(4px);
-  }
-`;

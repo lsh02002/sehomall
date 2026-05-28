@@ -1,128 +1,85 @@
 import React from "react";
-import styled from "styled-components";
 import { itemCartType } from "../../types/type";
 
 const SimpleCartCard = ({ item }: { item: itemCartType }) => {
   return (
-    <Container>
-      <Info>
-        <ProductImage src={item?.fileUrl} alt={item?.itemName} />
+    <div
+      className="border rounded-4 bg-white p-3 shadow-sm"
+      style={{
+        width: "100%",
+        transition: "0.2s",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "translateY(-1px)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "translateY(0)";
+      }}
+    >
+      <div className="d-flex align-items-center gap-3 min-w-0">
+        <img
+          src={item?.fileUrl}
+          alt={item?.itemName}
+          className="rounded-4 flex-shrink-0"
+          style={{
+            width: "72px",
+            height: "72px",
+            objectFit: "cover",
+            background: "#f5f5f5",
+          }}
+        />
 
-        <TextInfo>
-          <ProductName>{item?.itemName}</ProductName>
+        <div className="flex-grow-1 min-w-0 d-flex flex-column justify-content-center">
+          <div
+            className="fw-bold text-truncate mb-2"
+            style={{
+              fontSize: "15px",
+            }}
+          >
+            {item?.itemName}
+          </div>
 
-          <MetaRow>
-            <span>가격</span>
-            <em>{item?.price?.toLocaleString()}원</em>
-          </MetaRow>
+          <div className="d-flex justify-content-between align-items-center py-1">
+            <span
+              className="text-secondary fw-semibold"
+              style={{
+                fontSize: "12px",
+              }}
+            >
+              가격
+            </span>
 
-          <MetaRow>
-            <span>수량</span>
-            <em>{item?.itemCount}개</em>
-          </MetaRow>
-        </TextInfo>
-      </Info>
-    </Container>
+            <strong
+              style={{
+                fontSize: "13px",
+              }}
+            >
+              {item?.price?.toLocaleString()}원
+            </strong>
+          </div>
+
+          <div className="d-flex justify-content-between align-items-center py-1">
+            <span
+              className="text-secondary fw-semibold"
+              style={{
+                fontSize: "12px",
+              }}
+            >
+              수량
+            </span>
+
+            <strong
+              style={{
+                fontSize: "13px",
+              }}
+            >
+              {item?.itemCount}개
+            </strong>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default SimpleCartCard;
-
-const Container = styled.div`
-  width: 100%;
-
-  padding: 12px;
-
-  border: 1px solid #efefef;
-  border-radius: 18px;
-
-  background: #fff;
-
-  box-sizing: border-box;
-
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s;
-
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.03),
-    0 2px 6px rgba(0, 0, 0, 0.02);
-
-  &:hover {
-    transform: translateY(-1px);
-
-    box-shadow:
-      0 10px 22px rgba(0, 0, 0, 0.06),
-      0 4px 10px rgba(0, 0, 0, 0.03);
-  }
-`;
-
-const Info = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 14px;
-
-  min-width: 0;
-`;
-
-const ProductImage = styled.img`
-  width: 72px;
-  height: 72px;
-
-  object-fit: cover;
-
-  border-radius: 16px;
-
-  background: #f5f5f5;
-
-  flex-shrink: 0;
-
-  display: block;
-`;
-
-const TextInfo = styled.div`
-  flex: 1;
-
-  min-width: 0;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-const ProductName = styled.div`
-  margin-bottom: 10px;
-
-  font-size: 15px;
-  font-weight: 800;
-
-  color: #111;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-const MetaRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 2px 0;
-
-  span {
-    color: #888;
-
-    font-size: 12px;
-    font-weight: 600;
-  }
-
-  em {
-    font-style: normal;
-
-    color: #111;
-
-    font-size: 13px;
-    font-weight: 700;
-  }
-`;

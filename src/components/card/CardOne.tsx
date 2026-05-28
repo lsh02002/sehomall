@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import ShoppingCart from "../../assets/shopping-cart.svg";
 import HeartCount from "../HeartCount";
 import { useLogin } from "../../api/loginContextApi";
@@ -38,131 +37,97 @@ const CardOne = ({ item }: { item: itemType }) => {
   };
 
   return (
-    <Container>
-      <Link to={`/detail/${item.id}`}>
-        <ProductImage src={item.files?.[0]?.fileUrl} alt={item.name} />
-        <Title>{item.name}</Title>
-        <Price>{item.price.toLocaleString()}원</Price>
+    <div
+      className="card border-0 position-relative overflow-hidden"
+      style={{ width: "130px" }}
+    >
+      <Link
+        to={`/detail/${item.id}`}
+        className="text-decoration-none text-dark"
+      >
+        <img
+          src={item.files?.[0]?.fileUrl}
+          alt={item.name}
+          className="card-img-top rounded-4"
+          style={{
+            aspectRatio: "1 / 1",
+            objectFit: "cover",
+          }}
+        />
+
+        <div className="card-body px-0 py-2">
+          <div
+            className="text-truncate"
+            style={{ fontSize: "var(--main-font-size)" }}
+          >
+            {item.name}
+          </div>
+
+          <div
+            className="text-danger fw-bold"
+            style={{ fontSize: "var(--main-price-font-size)" }}
+          >
+            {item.price.toLocaleString()}원
+          </div>
+        </div>
       </Link>
 
-      <CartImage>
+      <div className="d-flex justify-content-end align-items-center gap-2 mt-1 position-relative z-3">
         <HeartCount id={item.id} heartCount={item.heartCount} />
-        <CartIcon
+
+        <img
           src={ShoppingCart}
           alt="장바구니"
           onClick={OnAddToCartClick}
+          style={{
+            width: "18px",
+            height: "18px",
+            objectFit: "contain",
+            cursor: "pointer",
+          }}
         />
-      </CartImage>
+      </div>
 
-      <Link to={`/detail/${item.id}`}>
-        <ItemInfo>
-          <div>{item.name}</div>
-          <span>{item.price.toLocaleString()}원</span>
-          <div>조회수: {item.views}</div>
-          <div>등록날짜: {item.createAt}</div>
-          <div>등록자: {item.userNickname}</div>
-          <div>Review 수: {item.reviewCount}</div>
+      <Link to={`/detail/${item.id}`} className="text-decoration-none">
+        <div
+          className="
+            position-absolute top-0 start-0 w-100 h-100
+            d-flex flex-column justify-content-center align-items-center
+            text-white rounded-4
+            opacity-0
+          "
+          style={{
+            backgroundColor: "rgba(0,0,0,0.35)",
+            transition: "0.5s",
+            fontSize: "var(--main-price-font-size)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.opacity = "1";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.opacity = "0";
+          }}
+        >
+          <div className="pb-1">{item.name}</div>
+          <div className="pb-1 text-danger">
+            {item.price.toLocaleString()}원
+          </div>
+          <div className="pb-1">조회수: {item.views}</div>
+          <div className="pb-1">등록날짜: {item.createAt}</div>
+          <div className="pb-1">등록자: {item.userNickname}</div>
+          <div className="pb-1">Review 수: {item.reviewCount}</div>
+
           {item.count < 1 ? (
             <div>
-              재고 수량: <span>품절됨</span>
+              재고 수량: <span className="text-danger">품절됨</span>
             </div>
           ) : (
             <div>재고 수량: {item.count}</div>
           )}
-        </ItemInfo>
+        </div>
       </Link>
-    </Container>
+    </div>
   );
 };
 
 export default CardOne;
-
-const Container = styled.article`
-  width: 130px;
-  height: 200px;
-  box-sizing: border-box;
-  position: relative;
-  transition: 0.4s;
-  overflow: hidden;
-
-  a {
-    text-decoration: none;
-    color: black;
-  }
-`;
-
-const ProductImage = styled.img`
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  height: auto;
-  object-fit: cover;
-  border-radius: 16px;
-  display: block;
-`;
-
-const Title = styled.span`
-  font-size: var(--main-font-size);
-  display: block;
-  background-color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-const Price = styled.span`
-  font-size: var(--main-price-font-size);
-  color: red;
-  display: block;
-  background-color: #fff;
-`;
-
-const CartImage = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 6px;
-  width: 100%;
-  margin-top: 4px;
-  z-index: 300;
-  position: relative;
-
-  span {
-    color: red;
-  }
-`;
-
-const CartIcon = styled.img`
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
-  cursor: pointer;
-`;
-
-const ItemInfo = styled.div`
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0.35);
-  transition: 0.5s;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-size: var(--main-price-font-size);
-  z-index: 200;
-  border-radius: 16px;
-
-  &:hover {
-    opacity: 1;
-  }
-
-  div {
-    color: white;
-    padding-bottom: 5px;
-  }
-
-  span {
-    color: red;
-  }
-`;

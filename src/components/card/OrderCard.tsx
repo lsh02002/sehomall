@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import SimpleItemCard from "./SimpleItemCard";
 import { itemOrderType, orderResponseType } from "../../types/type";
 import { layout } from "../../them/them";
@@ -26,381 +25,209 @@ const OrderCard = ({
     order.orderStatus === "COMPLETED" || order.orderStatus === "CANCELED";
 
   return (
-    <Container>
-      <OrderInfo>
-        <OrderBadge>ORDER #{order.id}</OrderBadge>
+    <div
+      className="
+        container-fluid
+        border rounded-5 bg-white p-4 my-3
+        shadow-sm
+      "
+      style={{
+        maxWidth: layout.maxWidth,
+        transition: "0.2s",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "translateY(-2px)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "translateY(0)";
+      }}
+    >
+      <div className="row g-4 align-items-center">
+        {/* LEFT */}
+        <div className="col-lg-6 position-relative">
+          <div
+            className="
+              d-inline-flex align-items-center
+              px-3 mb-3 rounded-pill
+              bg-light text-secondary fw-bold
+            "
+            style={{
+              height: "28px",
+              fontSize: "12px",
+              letterSpacing: "0.5px",
+            }}
+          >
+            ORDER #{order.id}
+          </div>
 
-        <ProductTitle>
-          {order.items[0]?.item?.name} 외 {order.items?.length}개
-        </ProductTitle>
+          <div
+            className="fw-bold text-truncate mb-4"
+            style={{
+              fontSize: "20px",
+            }}
+          >
+            {order.items[0]?.item?.name} 외 {order.items?.length}개
+          </div>
 
-        <InfoRow>
-          <span>주문자</span>
-          <em>{order.deliveryName}</em>
-        </InfoRow>
+          <div className="mb-2 d-flex gap-3">
+            <span
+              className="text-secondary fw-semibold"
+              style={{ width: "72px" }}
+            >
+              주문자
+            </span>
 
-        <InfoRow>
-          <span>전화번호</span>
-          <em>{order.deliveryPhone}</em>
-        </InfoRow>
+            <span>{order.deliveryName}</span>
+          </div>
 
-        <InfoRow>
-          <span>배송주소</span>
-          <em>{order.deliveryAddress}</em>
-        </InfoRow>
+          <div className="mb-2 d-flex gap-3">
+            <span
+              className="text-secondary fw-semibold"
+              style={{ width: "72px" }}
+            >
+              전화번호
+            </span>
 
-        <CreatedDate>주문 날짜: {order.createAt}</CreatedDate>
+            <span>{order.deliveryPhone}</span>
+          </div>
 
-        <ViewButton
-          onMouseEnter={() => setIsModal(true)}
-          onMouseLeave={() => setIsModal(false)}
-        >
-          상품정보 보기
-        </ViewButton>
+          <div className="mb-2 d-flex gap-3">
+            <span
+              className="text-secondary fw-semibold"
+              style={{ width: "72px" }}
+            >
+              배송주소
+            </span>
 
-        {isModal && (
-          <Modal
+            <span className="text-truncate">{order.deliveryAddress}</span>
+          </div>
+
+          <div
+            className="text-secondary mt-3"
+            style={{
+              fontSize: "13px",
+            }}
+          >
+            주문 날짜: {order.createAt}
+          </div>
+
+          {/* MODAL BUTTON */}
+          <button
+            className="btn btn-dark rounded-pill fw-bold mt-3"
             onMouseEnter={() => setIsModal(true)}
             onMouseLeave={() => setIsModal(false)}
           >
-            {order.items.map((item: itemOrderType, index: number) => (
-              <SimpleItemCard key={index} item={item} />
-            ))}
-          </Modal>
-        )}
-      </OrderInfo>
+            상품정보 보기
+          </button>
 
-      <OrderStatusInfo>
-        <StatusBox>
-          <span>결제상태</span>
-          <strong>완료</strong>
-        </StatusBox>
+          {/* MODAL */}
+          {isModal && (
+            <div
+              className="
+                position-absolute
+                bg-white border rounded-5 p-3
+                d-flex gap-3 overflow-auto
+                shadow-lg
+              "
+              style={{
+                left: 0,
+                top: "calc(100% + 12px)",
+                width: "min(620px, 90vw)",
+                maxHeight: "260px",
+                zIndex: 20,
+              }}
+              onMouseEnter={() => setIsModal(true)}
+              onMouseLeave={() => setIsModal(false)}
+            >
+              {order.items.map((item: itemOrderType, index: number) => (
+                <SimpleItemCard key={index} item={item} />
+              ))}
+            </div>
+          )}
+        </div>
 
-        <StatusBox>
-          <span>총 가격</span>
-          <strong className="price">
-            {order.productSum.toLocaleString()}원
-          </strong>
-        </StatusBox>
+        {/* CENTER */}
+        <div className="col-lg-4">
+          <div className="d-flex flex-column gap-3">
+            <div
+              className="
+                d-flex justify-content-between align-items-center
+                bg-light rounded-4 p-3
+              "
+            >
+              <span className="text-secondary fw-semibold">결제상태</span>
 
-        <StatusBox>
-          <span>주문배송상태</span>
-          <StatusText status={order.orderStatus}>
-            {order.orderStatus}
-          </StatusText>
-        </StatusBox>
-      </OrderStatusInfo>
+              <strong>완료</strong>
+            </div>
 
-      <CancelOrComplete>
-        <CancelButton
-          onClick={() => OnStatusUpdated("CANCELED")}
-          disabled={isDisabled}
-        >
-          주문 취소
-        </CancelButton>
+            <div
+              className="
+                d-flex justify-content-between align-items-center
+                bg-light rounded-4 p-3
+              "
+            >
+              <span className="text-secondary fw-semibold">총 가격</span>
 
-        <CompleteButton
-          onClick={() => OnStatusUpdated("COMPLETED")}
-          disabled={isDisabled}
-        >
-          구입 확정
-        </CompleteButton>
-      </CancelOrComplete>
-    </Container>
+              <strong className="text-danger">
+                {order.productSum.toLocaleString()}원
+              </strong>
+            </div>
+
+            <div
+              className="
+                d-flex justify-content-between align-items-center
+                bg-light rounded-4 p-3
+              "
+            >
+              <span className="text-secondary fw-semibold">주문배송상태</span>
+
+              <strong
+                className={
+                  order.orderStatus === "COMPLETED"
+                    ? "text-success"
+                    : order.orderStatus === "CANCELED"
+                      ? "text-danger"
+                      : "text-dark"
+                }
+              >
+                {order.orderStatus}
+              </strong>
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT */}
+        <div className="col-lg-2">
+          <div className="d-flex flex-lg-column gap-3">
+            <button
+              className="btn fw-bold rounded-4 w-100"
+              disabled={isDisabled}
+              onClick={() => OnStatusUpdated("CANCELED")}
+              style={{
+                background: "#fff1f1",
+                color: "#e60023",
+                border: "none",
+                height: "46px",
+              }}
+            >
+              주문 취소
+            </button>
+
+            <button
+              className="btn btn-dark fw-bold rounded-4 w-100"
+              disabled={isDisabled}
+              onClick={() => OnStatusUpdated("COMPLETED")}
+              style={{
+                height: "46px",
+              }}
+            >
+              구입 확정
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
 export default OrderCard;
-
-const Container = styled.div`
-  width: 100%;
-  max-width: ${layout.maxWidth};
-
-  margin: 16px auto;
-  padding: 24px;
-
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 160px;
-  gap: 28px;
-  align-items: center;
-
-  position: relative;
-
-  border: 1px solid #eee;
-  border-radius: 24px;
-
-  background: #fff;
-
-  box-sizing: border-box;
-
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.04),
-    0 2px 8px rgba(0, 0, 0, 0.03);
-
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow:
-      0 16px 36px rgba(0, 0, 0, 0.07),
-      0 4px 12px rgba(0, 0, 0, 0.04);
-  }
-
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  @media (max-width: 900px) {
-    grid-template-columns: 1fr;
-    gap: 22px;
-  }
-`;
-
-const OrderInfo = styled.div`
-  position: relative;
-
-  min-width: 0;
-
-  font-size: var(--main-font-size);
-`;
-
-const OrderBadge = styled.div`
-  display: inline-flex;
-  align-items: center;
-
-  height: 28px;
-
-  padding: 0 12px;
-
-  margin-bottom: 12px;
-
-  border-radius: 999px;
-
-  background: #f5f5f5;
-
-  color: #777;
-
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-`;
-
-const ProductTitle = styled.div`
-  margin-bottom: 18px;
-
-  font-size: 20px;
-  font-weight: 800;
-
-  color: #111;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-const InfoRow = styled.div`
-  display: flex;
-  gap: 14px;
-
-  margin-bottom: 8px;
-
-  span {
-    width: 72px;
-    flex-shrink: 0;
-
-    color: #888;
-
-    font-size: 14px;
-    font-weight: 600;
-  }
-
-  em {
-    min-width: 0;
-
-    color: #333;
-
-    font-style: normal;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-`;
-
-const CreatedDate = styled.div`
-  margin-top: 10px;
-
-  color: #999;
-
-  font-size: 13px;
-`;
-
-const ViewButton = styled.button`
-  margin-top: 16px;
-
-  height: 38px;
-
-  padding: 0 16px;
-
-  border: none;
-  border-radius: 999px;
-
-  background: #111;
-
-  color: #fff;
-
-  font-size: 14px;
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition: 0.2s;
-
-  &:hover {
-    transform: translateY(-1px);
-    background: #333;
-  }
-`;
-
-const OrderStatusInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`;
-
-const StatusBox = styled.div`
-  padding: 16px 18px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  border-radius: 18px;
-
-  background: #fafafa;
-
-  span {
-    color: #777;
-
-    font-size: 14px;
-    font-weight: 600;
-  }
-
-  strong {
-    color: #111;
-
-    font-size: 15px;
-  }
-
-  .price {
-    color: #e60023;
-  }
-`;
-
-const StatusText = styled.strong<{ status: string }>`
-  color: ${({ status }) =>
-    status === "COMPLETED"
-      ? "#16a34a"
-      : status === "CANCELED"
-        ? "#e60023"
-        : "#111"} !important;
-`;
-
-const CancelOrComplete = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-
-  @media (max-width: 900px) {
-    flex-direction: row;
-  }
-`;
-
-const ActionButton = styled.button`
-  width: 100%;
-  height: 46px;
-
-  border: none;
-  border-radius: 14px;
-
-  font-size: var(--button-font-size);
-  font-weight: 700;
-
-  cursor: pointer;
-
-  transition:
-    transform 0.2s,
-    opacity 0.2s,
-    background 0.2s;
-
-  &:hover:not(:disabled) {
-    transform: translateY(-2px);
-  }
-
-  &:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-  }
-`;
-
-const CancelButton = styled(ActionButton)`
-  background: #fff1f1;
-  color: #e60023;
-
-  &:hover:not(:disabled) {
-    background: #e60023;
-    color: #fff;
-  }
-`;
-
-const CompleteButton = styled(ActionButton)`
-  background: #111;
-  color: #fff;
-
-  &:hover:not(:disabled) {
-    background: #333;
-  }
-`;
-
-const Modal = styled.div`
-  position: absolute;
-
-  left: 0;
-  top: calc(100% + 12px);
-
-  width: min(620px, 90vw);
-  max-height: 260px;
-
-  padding: 18px;
-
-  display: flex;
-  gap: 14px;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  background: #fff;
-
-  border: 1px solid #eee;
-  border-radius: 20px;
-
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.12),
-    0 4px 12px rgba(0, 0, 0, 0.06);
-
-  box-sizing: border-box;
-
-  z-index: 20;
-
-  &::-webkit-scrollbar {
-    height: 6px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: #ddd;
-    border-radius: 999px;
-  }
-`;

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import Layout from "../components/layout/Layout";
 
 const EnrollItemPage = () => {
@@ -15,243 +14,268 @@ const EnrollItemPage = () => {
     idesc: "",
     ideliveryFee: 0,
     userNickname: "lsh02002",
-    images: null,
+    images: null as File | null,
   });
+
   const [errMessage, setErrMessage] = useState("");
 
   const OnSelectFieldChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setErrMessage("");
-    setState({ ...state, [e.target.name]: e.target.value });
+
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const OnInputFieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setErrMessage("");
-    setState({ ...state, [e.target.name]: e.target.value });
+
+    setState({
+      ...state,
+      [e.target.name]:
+        e.target.type === "number" ? Number(e.target.value) : e.target.value,
+    });
   };
 
   const OnTextAreaFieldChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setErrMessage("");
-    setState({ ...state, [e.target.name]: e.target.value });
+
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
   };
 
   const OnFieldImagesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setErrMessage("");
 
     const file = e.target.files?.[0];
+
     if (!file) return;
 
-    setState({ ...state, [e.target.name]: file });
+    setState({
+      ...state,
+      [e.target.name]: file,
+    });
   };
 
   const OnRegister = () => {
-    // const data: itemType = {
-    //   id: items.length + 1,
-    //   count: state.icount,
-    //   price: state.iprice,
-    //   size: state.isize,
-    //   careGuide: state.careGuide,
-    //   name: state.iname,
-    //   description: state.idesc,
-    //   category: state.icat,
-    //   deliveryFee: state.ideliveryFee,
-    //   userNickname: state.userNickname,
-    //   views: 0,
-    //   heartCount: 0,
-    //   createAt: new Date().toString(),
-    //   files: [],
-    //   reviewCount: 0,
-    // };
-    // setItems([...items, data]);
-    // navigate("/");
+    console.log(state);
+
+    alert("상품 등록 완료");
   };
 
   return (
     <Layout>
-      <Main>
-        <EnrollInner>
-          <Title>상품 등록</Title>
-          <span>(포트폴리오 참고용으로 노출함, 관리자 등급만 등록 가능)</span>
-          <CategorySelect>
-            <div>카테고리</div>
+      <div
+        className="
+          d-flex justify-content-center align-items-center
+          flex-wrap
+          w-100
+          px-3
+        "
+        style={{
+          marginTop: "20px",
+        }}
+      >
+        <div
+          className="
+            d-flex flex-column
+            justify-content-center align-items-center
+            bg-white
+            border rounded-5
+            shadow-sm
+            p-4
+          "
+          style={{
+            width: "100%",
+            maxWidth: "520px",
+            borderColor: "#e9e9e9",
+          }}
+        >
+          {/* TITLE */}
+          <h1
+            className="fw-normal mb-2"
+            style={{
+              fontSize: "var(--main-h1-size)",
+            }}
+          >
+            상품 등록
+          </h1>
+
+          <span
+            className="
+              w-100 text-secondary
+              mb-4
+            "
+            style={{
+              fontSize: "14px",
+            }}
+          >
+            (포트폴리오 참고용으로 노출함, 관리자 등급만 등록 가능)
+          </span>
+
+          {/* CATEGORY */}
+          <FormField label="카테고리">
             <select
               value={state.icat}
               name="icat"
               onChange={OnSelectFieldChange}
+              className="form-select rounded-4"
             >
               <option>BAGS</option>
               <option>WALLETS</option>
               <option>ACCESSORIES</option>
               <option>SCARVES</option>
             </select>
-          </CategorySelect>
-          <Text>
-            <div>제품 이름</div>
+          </FormField>
+
+          {/* NAME */}
+          <FormField label="제품 이름">
             <input
               type="text"
               value={state.iname}
               name="iname"
               onChange={OnInputFieldChange}
+              className="form-control rounded-4"
             />
-          </Text>
-          <Text>
-            <div>제품 사진</div>
-            <input name="images" type="file" onChange={OnFieldImagesChange} />
-          </Text>
-          <Text>
-            <div>제품 가격</div>
+          </FormField>
+
+          {/* IMAGE */}
+          <FormField label="제품 사진">
+            <input
+              name="images"
+              type="file"
+              onChange={OnFieldImagesChange}
+              className="form-control rounded-4"
+            />
+          </FormField>
+
+          {/* PRICE */}
+          <FormField label="제품 가격">
             <input
               type="number"
               value={state.iprice}
               name="iprice"
               onChange={OnInputFieldChange}
+              className="form-control rounded-4"
             />
-          </Text>
-          <Text>
-            <div>제품 크기</div>
+          </FormField>
+
+          {/* SIZE */}
+          <FormField label="제품 크기">
             <input
               type="text"
               value={state.isize}
               name="isize"
               onChange={OnInputFieldChange}
+              className="form-control rounded-4"
             />
-          </Text>
-          <Text>
-            <div>제품 재질</div>
+          </FormField>
+
+          {/* MATERIAL */}
+          <FormField label="제품 재질">
             <input
               type="text"
               value={state.imaterial}
               name="imaterial"
               onChange={OnInputFieldChange}
+              className="form-control rounded-4"
             />
-          </Text>
-          <Text>
-            <div>제품 재고량</div>
+          </FormField>
+
+          {/* COUNT */}
+          <FormField label="제품 재고량">
             <input
               type="number"
               value={state.icount}
               name="icount"
               onChange={OnInputFieldChange}
+              className="form-control rounded-4"
             />
-          </Text>
-          <Text>
-            <div>제품 설명</div>
+          </FormField>
+
+          {/* DESC */}
+          <FormField label="제품 설명">
             <input
               type="text"
               value={state.idesc}
               name="idesc"
               onChange={OnInputFieldChange}
+              className="form-control rounded-4"
             />
-          </Text>
-          <Text>
-            <div>배송비</div>
+          </FormField>
+
+          {/* DELIVERY */}
+          <FormField label="배송비">
             <input
               type="number"
               value={state.ideliveryFee}
               name="ideliveryFee"
               onChange={OnInputFieldChange}
+              className="form-control rounded-4"
             />
-          </Text>
-          <Text>
-            <div>제품취급 주의사항</div>
+          </FormField>
+
+          {/* CARE GUIDE */}
+          <FormField label="제품취급 주의사항">
             <textarea
               value={state.careGuide}
               name="careGuide"
               onChange={OnTextAreaFieldChange}
+              className="form-control rounded-4"
+              rows={5}
             />
-          </Text>
-          <TextMessage>{errMessage}</TextMessage>
-          <Register onClick={OnRegister}>상품 등록</Register>
-        </EnrollInner>
-      </Main>
+          </FormField>
+
+          {/* ERROR */}
+          <div
+            className="
+              text-danger
+              w-100 mb-3
+            "
+          >
+            {errMessage}
+          </div>
+
+          {/* BUTTON */}
+          <button
+            onClick={OnRegister}
+            className="
+              btn btn-secondary
+              w-100 rounded-4
+              py-3 fw-semibold
+            "
+          >
+            상품 등록
+          </button>
+        </div>
+      </div>
     </Layout>
   );
 };
 
 export default EnrollItemPage;
 
-const Main = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: calc(100% - 190px);
-  margin: 10px 0 0 10px;
-  flex-wrap: wrap;
-`;
+type FormFieldProps = {
+  label: string;
+  children: React.ReactNode;
+};
 
-const EnrollInner = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 500px;
-  margin: 0 150px;
-  border: 1px solid lightgray;
-  margin-top: 50px;
-  span {
-    font-size: 16px;
-    display: inline-block;
-    width: 100%;
-    margin: 20px;
-    margin-left: 70px;
-  }
-`;
+const FormField = ({ label, children }: FormFieldProps) => {
+  return (
+    <div className="w-100 mb-3">
+      <div
+        className="mb-2"
+        style={{
+          fontSize: "14px",
+        }}
+      >
+        {label}
+      </div>
 
-const Title = styled.h1`
-  font-weight: normal;
-  font-size: var(--main-h1-size);
-  margin: 5px;
-`;
-
-const CategorySelect = styled.div`
-  width: 90%;
-  overflow: hidden;
-  div {
-    font-size: 14px;
-  }
-  select {
-    width: 100%;
-    font-size: 14px;
-    padding: 5px;
-    box-sizing: border-box;
-  }
-  margin-bottom: 15px;
-`;
-
-const Text = styled.div`
-  width: 90%;
-  overflow: hidden;
-  div {
-    font-size: 14px;
-  }
-  input[type="text"],
-  input[type="number"],
-  textarea {
-    width: 100%;
-    padding: 5px;
-    outline: none;
-    box-sizing: border-box;
-    margin-bottom: 15px;
-  }
-`;
-
-const TextMessage = styled.div`
-  color: red;
-`;
-
-const Register = styled.button`
-  border: none;
-  margin: 10px;
-  background-color: gray;
-  transition: 0.3s;
-  cursor: pointer;
-  width: 90%;
-  box-sizing: border-box;
-  padding: 10px;
-  font-size: var(--button-font-size);
-  margin-bottom: 30px;
-  color: white;
-  transition: 0.2s;
-  &:hover {
-    background-color: lightgray;
-  }
-`;
+      {children}
+    </div>
+  );
+};

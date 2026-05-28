@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../layout/Layout";
-import styled from "styled-components";
 import { userInfoData } from "../data/userInfoData";
 import { layout } from "../../them/them";
 
@@ -22,287 +21,105 @@ const MyInfo = () => {
 
   return (
     <Layout>
-      <Container>
-        <ItemInfo>
-          <TextInput>
-            <span>닉네임: </span>
-            <input type="text" value={myInfo.nickname} disabled />
-          </TextInput>
-          <TextInput>
-            <span>이름: </span>
-            <input type="text" value={myInfo.name} />
-          </TextInput>
-          <TextInput>
-            <span>이메일: </span>
-            <input type="text" value={myInfo.email} />
-          </TextInput>
-          <TextInput>
-            <span>휴대전화: </span>
-            <input type="text" value={myInfo.phoneNumber} />
-          </TextInput>
-          <TextInput>
-            <span>주소: </span>
-            <input type="text" value={myInfo.address} />
-          </TextInput>
-          <TextInput>
-            <span>성별: </span>
-            <input type="text" value={myInfo.gender} />
-          </TextInput>
-          <TextInput>
-            <span>생일: </span>
-            <input type="text" value={myInfo.birthDate} />
-          </TextInput>
-          <TextInput>
-            <span>계정 생성일: </span>
-            <input type="text" value={myInfo.createAt} disabled />
-          </TextInput>
-          <ButtonInput>
-            <button>정보 수정하기</button>
-          </ButtonInput>
-        </ItemInfo>
-      </Container>
+      <div
+        className="
+          w-100
+          d-flex justify-content-center align-items-center
+        "
+        style={{
+          maxWidth: layout.maxWidth,
+        }}
+      >
+        <div
+          className="
+            w-100
+            d-flex flex-column align-items-start
+            pb-4
+          "
+        >
+          <InfoInput label="닉네임" value={myInfo.nickname} disabled />
+
+          <InfoInput label="이름" value={myInfo.name} />
+
+          <InfoInput label="이메일" value={myInfo.email} />
+
+          <InfoInput label="휴대전화" value={myInfo.phoneNumber} />
+
+          <InfoInput label="주소" value={myInfo.address} />
+
+          <InfoInput label="성별" value={myInfo.gender} />
+
+          <InfoInput label="생일" value={myInfo.birthDate} />
+
+          <InfoInput label="계정 생성일" value={myInfo.createAt} disabled />
+
+          {/* BUTTON */}
+          <div
+            className="
+              w-100
+              d-flex justify-content-end
+              p-3
+            "
+          >
+            <button
+              className="
+                btn btn-light
+                border rounded-4 fw-bold shadow-sm
+              "
+              style={{
+                minWidth: "110px",
+                height: "46px",
+              }}
+            >
+              정보 수정하기
+            </button>
+          </div>
+        </div>
+      </div>
     </Layout>
   );
 };
 
 export default MyInfo;
 
-const Container = styled.div`
-  width: 100%;
-  max-width: ${layout.maxWidth};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  button {
-  min-width: 90px;
-  height: 40px;
-
-  padding: 0 16px;
-
-  border: 1px solid #e5e5e5;
-  border-radius: 12px;
-
-  background: #fafafa;
-
-  color: #333;
-
-  font-size: var(--button-font-size);
-  font-weight: 600;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  cursor: pointer;
-
-  box-shadow:
-    0 4px 10px rgba(0, 0, 0, 0.04),
-    0 1px 3px rgba(0, 0, 0, 0.03);
-
-  transition:
-    background 0.2s,
-    transform 0.2s,
-    box-shadow 0.25s,
-    border-color 0.2s,
-    color 0.2s;
-
-  &:hover {
-    background: white;
-
-    border-color: #d0d0d0;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-      0 8px 18px rgba(0, 0, 0, 0.06),
-      0 2px 6px rgba(0, 0, 0, 0.04);
-
-    color: #111;
-  }
-
-  &:active {
-    transform: scale(0.96);
-  }
-
-  &:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    box-shadow: none;
-  }
-`;
-
-const ItemInfo = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: start;
-  flex-direction: column;
-  padding-bottom: 20px;
-  & > span {
-    box-sizing: border-box;
-    margin: 25px 0 0 0;
-    width: 100%;
-    text-align: left;
-    padding-left: 20px;
-    padding-bottom: 10px;
-    label {
-      display: inline-block;
-      text-align: right;
-      width: 100%;
-      padding-right: 20px;
-      box-sizing: border-box;
-    }
-  }
-`;
-
-const TextInput = styled.div`
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  gap: 14px;
-
-  padding: 8px 20px;
-
-  box-sizing: border-box;
-
-  & > span {
-    min-width: 120px;
-
-    font-size: 14px;
-    font-weight: 700;
-
-    color: #555;
-
-    flex-shrink: 0;
-  }
-
-  input[type="text"] {
-    width: 100%;
-    height: 48px;
-
-    padding: 0 16px;
-
-    border: 1px solid #e5e5e5;
-    border-radius: 14px;
-
-    background: #fafafa;
-
-    font-size: 15px;
-
-    color: #222;
-
-    box-sizing: border-box;
-
-    transition:
-      border-color 0.2s,
-      background 0.2s,
-      box-shadow 0.2s;
-
-    &:focus {
-      outline: none;
-
-      background: white;
-
-      border-color: #d0d0d0;
-
-      box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.04);
-    }
-
-    &::placeholder {
-      color: #aaa;
-    }
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-
-    gap: 8px;
-
-    & > span {
-      min-width: auto;
-    }
-  }
-`;
-
-const ButtonInput = styled.div`
-  width: 100%;
-
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-
-  gap: 12px;
-
-  padding: 20px;
-
-  box-sizing: border-box;
-
-  button {
-    min-width: 110px;
-    height: 46px;
-
-    padding: 0 20px;
-
-    border: 1px solid #e5e5e5;
-    border-radius: 14px;
-
-    background: #fafafa;
-
-    color: #333;
-
-    font-size: var(--button-font-size);
-    font-weight: 700;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    cursor: pointer;
-
-    box-shadow:
-      0 4px 10px rgba(0, 0, 0, 0.04),
-      0 1px 3px rgba(0, 0, 0, 0.03);
-
-    transition:
-      background 0.2s,
-      transform 0.2s,
-      box-shadow 0.25s,
-      border-color 0.2s,
-      color 0.2s;
-
-    &:hover {
-      background: white;
-
-      border-color: #d0d0d0;
-
-      color: #111;
-
-      transform: translateY(-1px);
-
-      box-shadow:
-        0 8px 18px rgba(0, 0, 0, 0.06),
-        0 2px 6px rgba(0, 0, 0, 0.04);
-    }
-
-    &:active {
-      transform: scale(0.96);
-    }
-
-    &:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-      box-shadow: none;
-    }
-  }
-
-  @media (max-width: 768px) {
-    justify-content: stretch;
-
-    button {
-      flex: 1;
-    }
-  }
-`;
+type InfoInputProps = {
+  label: string;
+  value: string;
+  disabled?: boolean;
+};
+
+const InfoInput = ({ label, value, disabled = false }: InfoInputProps) => {
+  return (
+    <div
+      className="
+        w-100
+        d-flex align-items-center
+        gap-3
+        px-3 py-2
+        flex-column flex-md-row
+      "
+    >
+      <span
+        className="fw-bold text-secondary"
+        style={{
+          minWidth: "120px",
+          fontSize: "14px",
+        }}
+      >
+        {label}:
+      </span>
+
+      <input
+        type="text"
+        value={value}
+        disabled={disabled}
+        className="form-control rounded-4"
+        style={{
+          height: "48px",
+          background: "#fafafa",
+          fontSize: "15px",
+        }}
+      />
+    </div>
+  );
+};

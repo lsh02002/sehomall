@@ -4,12 +4,11 @@ import OrderCard from "../card/OrderCard";
 import Paging from "../pagination/Paging";
 import { useMyPage } from "../../api/myPageTabContextApi";
 import { useItem } from "../../api/itemContextApi";
-import { styled } from "styled-components";
 import { layout } from "../../them/them";
 
 const MyOrder = () => {
   const { myOrders } = useItem();
-  const { setOrderPage } = useMyPage(); 
+  const { setOrderPage } = useMyPage();
   const [orderTotal] = useState(0);
   const [isOrderStatusUpdated, setIsOrderStatusUpdated] = useState(false);
 
@@ -22,7 +21,18 @@ const MyOrder = () => {
   }, [page, setOrderPage]);
 
   return (
-    <Container>
+    <div
+      className="
+        w-100
+        d-flex flex-column
+        justify-content-center align-items-center
+        p-3
+      "
+      style={{
+        maxWidth: layout.maxWidth,
+        boxSizing: "border-box",
+      }}
+    >
       {myOrders?.length > 0 ? (
         myOrders.map((order, index) => (
           <OrderCard
@@ -33,27 +43,12 @@ const MyOrder = () => {
           />
         ))
       ) : (
-        <div>주문내역이 없습니다.</div>
+        <div className="text-secondary py-5">주문내역이 없습니다.</div>
       )}
-      <Paging
-        to={`/mypage/ORDERS`}
-        total={orderTotal}
-        size={size}
-        page={page}
-      />
-    </Container>
+
+      <Paging to="/mypage/ORDERS" total={orderTotal} size={size} page={page} />
+    </div>
   );
 };
 
 export default MyOrder;
-
-const Container = styled.div`
-  width: 100%;
-  max-width: ${layout.maxWidth};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 20px;
-  box-sizing: border-box;
-`;

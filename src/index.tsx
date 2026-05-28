@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
 import { LoginProvider } from "./api/loginContextApi";
 import { CartProvider } from "./api/cartContextApi";
@@ -21,5 +22,5 @@ ReactDOM.createRoot(root).render(
         </ItemProvider>
       </MyPageTabProvider>
     </CartProvider>
-  </LoginProvider>
+  </LoginProvider>,
 );

@@ -1,127 +1,91 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { itemOrderType } from "../../types/type";
 
 const SimpleItemCard = ({ item }: { item: itemOrderType }) => {
   return (
-    <Container>
-      <StyledLink to={`/detail/${item.item?.id}`}>
-        <ProductImage
+    <article
+      className="border rounded-4 bg-white p-3 shadow-sm"
+      style={{
+        width: "180px",
+        transition: "0.2s",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = "translateY(-2px)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = "translateY(0)";
+      }}
+    >
+      <Link
+        to={`/detail/${item.item?.id}`}
+        className="
+          text-decoration-none text-dark
+          d-flex flex-column gap-3
+        "
+      >
+        <img
           src={item.item?.files?.[0]?.fileUrl}
           alt={item.item?.name}
+          className="rounded-4 d-block w-100"
+          style={{
+            aspectRatio: "1 / 1",
+            objectFit: "cover",
+            background: "#f5f5f5",
+          }}
         />
 
-        <Info>
-          <ProductName>{item.item?.name}</ProductName>
+        <div className="d-flex flex-column gap-2 min-w-0">
+          <div
+            className="fw-bold text-truncate"
+            style={{
+              fontSize: "15px",
+            }}
+          >
+            {item.item?.name}
+          </div>
 
-          <MetaRow>
-            <span>가격</span>
-            <em>{item.item?.price?.toLocaleString()}원</em>
-          </MetaRow>
+          <div className="d-flex justify-content-between align-items-center">
+            <span
+              className="text-secondary fw-semibold"
+              style={{
+                fontSize: "12px",
+              }}
+            >
+              가격
+            </span>
 
-          <MetaRow>
-            <span>수량</span>
-            <em>{item.count}개</em>
-          </MetaRow>
-        </Info>
-      </StyledLink>
-    </Container>
+            <strong
+              style={{
+                fontSize: "13px",
+              }}
+            >
+              {item.item?.price?.toLocaleString()}원
+            </strong>
+          </div>
+
+          <div className="d-flex justify-content-between align-items-center">
+            <span
+              className="text-secondary fw-semibold"
+              style={{
+                fontSize: "12px",
+              }}
+            >
+              수량
+            </span>
+
+            <strong
+              style={{
+                fontSize: "13px",
+              }}
+            >
+              {item.count}개
+            </strong>
+          </div>
+        </div>
+      </Link>
+    </article>
   );
 };
 
 export default SimpleItemCard;
-
-const Container = styled.article`
-  width: 180px;
-
-  padding: 12px;
-
-  border: 1px solid #efefef;
-  border-radius: 20px;
-
-  background: #fff;
-
-  box-sizing: border-box;
-
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.03),
-    0 2px 6px rgba(0, 0, 0, 0.02);
-
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s;
-
-  &:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-      0 12px 26px rgba(0, 0, 0, 0.06),
-      0 4px 10px rgba(0, 0, 0, 0.03);
-  }
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-
-  display: flex;
-  flex-direction: column;
-
-  gap: 14px;
-`;
-
-const ProductImage = styled.img`
-  width: 100%;
-  aspect-ratio: 1 / 1;
-
-  object-fit: cover;
-
-  border-radius: 16px;
-
-  background: #f5f5f5;
-
-  display: block;
-`;
-
-const Info = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  gap: 8px;
-
-  min-width: 0;
-`;
-
-const ProductName = styled.div`
-  font-size: 15px;
-  font-weight: 800;
-
-  color: #111;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-const MetaRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  span {
-    color: #888;
-
-    font-size: 12px;
-    font-weight: 600;
-  }
-
-  em {
-    font-style: normal;
-
-    color: #111;
-
-    font-size: 13px;
-    font-weight: 700;
-  }
-`;

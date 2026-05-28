@@ -6,61 +6,63 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+
 // import required modules
 import { Autoplay, Navigation } from "swiper/modules";
-import styled from "styled-components";
+
 import bannerImages from "../../api/bannerImages";
 
-function BannerSlider() {  
+function BannerSlider() {
   return (
-    <>
-      <Swiper
-        navigation={true}
-        modules={[Navigation, Autoplay]}
-        spaceBetween={20}
-        slidesPerView={1}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        loop={true}
-        speed={1000}
-        pagination={{
-          clickable: true,
-        }}
-        style={{
-          width: "100%",
-          height: "400px",
-          padding: "0px",
-          boxSizing: "border-box",
-        }}
-      >
-        {bannerImages.length > 0 &&
-          bannerImages.map((item) => (
-            <SwiperSlide key={item.id}>
-              <Slide>
-                <img src={item.image} alt="" />
-              </Slide>
-            </SwiperSlide>
-          ))}
-      </Swiper>
-    </>
+    <Swiper
+      navigation
+      modules={[Navigation, Autoplay]}
+      spaceBetween={20}
+      slidesPerView={1}
+      autoplay={{
+        delay: 3000,
+        disableOnInteraction: false,
+      }}
+      loop
+      speed={1000}
+      pagination={{
+        clickable: true,
+      }}
+      style={{
+        width: "100%",
+        height: "400px",
+        padding: "0",
+        boxSizing: "border-box",
+      }}
+      className="rounded-4 overflow-hidden"
+    >
+      {bannerImages.length > 0 &&
+        bannerImages.map((item) => (
+          <SwiperSlide key={item.id}>
+            <div
+              className="
+                h-100 d-flex
+                justify-content-center
+                align-items-center
+                overflow-hidden
+              "
+              style={{
+                backgroundColor: "rgba(0,0,0,0.05)",
+              }}
+            >
+              <img
+                src={item.image}
+                alt=""
+                className="h-100"
+                style={{
+                  objectFit: "cover",
+                }}
+              />
+            </div>
+          </SwiperSlide>
+        ))}
+    </Swiper>
   );
 }
 
 export default BannerSlider;
-
-const Slide = styled.div`
-  height: 100%;
-  line-height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.05);
-  img {
-    height: 100%;
-    object-fit: cover;
-  }
-`;

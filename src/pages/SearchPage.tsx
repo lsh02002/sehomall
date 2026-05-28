@@ -1,100 +1,124 @@
 import React, { useEffect, useState } from "react";
+
 import Layout from "../components/layout/Layout";
-import styled from "styled-components";
 import CardOne from "../components/card/CardOne";
+
 import { itemData } from "../components/data/itemData";
+
 import { itemType } from "../types/type";
+
 import { layout } from "../them/them";
 
 const SearchPage = () => {
   const [searchItems, setSearchItems] = useState<itemType[]>([]);
+
   const [searchResult, setSearchResult] = useState<itemType[]>([]);
+
+  const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
     setSearchItems(itemData?.content);
-  }, [searchItems]);
+  }, []);
 
-  const OnSearchKeyDown = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.trim() === "") {
+  const OnSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    setKeyword(value);
+
+    if (value.trim() === "") {
+      setSearchResult([]);
+
       return;
     }
 
     setSearchResult(
-      searchItems?.filter((item: itemType) =>
-        item?.name?.includes(e.target.value),
+      searchItems.filter((item) =>
+        item?.name?.toLowerCase().includes(value.toLowerCase()),
       ),
     );
   };
 
   return (
     <Layout>
-      <Container>
-        <ItemsInner>
-          <Title>상품 검색</Title>
+      <div
+        className="
+          d-flex flex-column
+          justify-content-start align-items-center
+          w-100
+          mt-5 px-3
+        "
+      >
+        <div
+          className="
+            w-100
+            d-flex flex-column
+            justify-content-center align-items-center
+          "
+        >
+          {/* TITLE */}
+          <h1
+            className="mb-4"
+            style={{
+              fontSize: "var(--main-h1-size)",
+            }}
+          >
+            상품 검색
+          </h1>
+
+          {/* SEARCH INPUT */}
           <input
             type="text"
+            value={keyword}
             placeholder="키워드를 입력하시면 자동으로 조회됩니다."
-            onChange={OnSearchKeyDown}
+            onChange={OnSearchChange}
+            className="
+              form-control
+              rounded-4
+              shadow-sm
+            "
+            style={{
+              width: "100%",
+              maxWidth: "360px",
+              padding: "12px 16px",
+            }}
           />
-          <Items>
+
+          {/* ITEMS */}
+          <div
+            className="
+              d-flex flex-wrap
+              justify-content-start align-items-center
+              gap-3
+              mt-5
+              w-100
+            "
+            style={{
+              maxWidth: layout.maxWidth,
+            }}
+          >
             {searchResult.length > 0 ? (
               searchResult.map((item, index) => (
                 <CardOne key={index} item={item} />
               ))
             ) : (
-              <div>상품이 없습니다.</div>
+              <div
+                className="
+                  w-100
+                  text-center
+                  text-secondary
+                  py-5
+                "
+              >
+                {keyword.trim() === ""
+                  ? "상품명을 검색해 주세요."
+                  : "상품이 없습니다."}
+              </div>
             )}
-          </Items>
-        </ItemsInner>
-      </Container>
+          </div>
+        </div>
+      </div>
     </Layout>
   );
 };
 
 export default SearchPage;
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: start;
-  flex-direction: column;
-  width: 100%;
-  margin: 10px;
-  margin-top: 50px;
-`;
-
-const Title = styled.h1`
-  margin: 10px 0 0 10px;
-  font-size: var(--main-h1-size);
-  span {
-    font-size: 0.8em;
-  }
-`;
-
-const ItemsInner = styled.div`
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-
-  input[type="text"] {
-    width: 300px;
-    padding: 5px;
-    margin: 20px;
-  }
-`;
-
-const Items = styled.div`
-  max-width: ${layout.maxWidth};
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  flex-wrap: wrap;
-  & > div {
-    width: 100%;
-    text-align: center;
-    margin-top: 50px;
-  }
-`;

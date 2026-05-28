@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import ShoppingCart from "../../assets/shopping-cart.svg";
 import { useLogin } from "../../api/loginContextApi";
 import HeartCount from "../HeartCount";
@@ -8,6 +7,7 @@ import { useCart } from "../../api/cartContextApi";
 
 const CardTwo = ({ item }: { item: itemType }) => {
   const { isLogin } = useLogin();
+
   const { setCartCount, cartItems, setCartItems, isEditing, setIsEditing } =
     useCart();
 
@@ -38,77 +38,72 @@ const CardTwo = ({ item }: { item: itemType }) => {
   };
 
   return (
-    <Container>
-      <Link to={`/detail/${item.id}`}>
-        <img width="230px" height="230px" src={item.files[0].fileUrl} alt="" />
-        <Title>{item.name}</Title>
-        <Price>{item.price.toLocaleString()}원</Price>
-      </Link>
-      <CartImage>
-        <HeartCount id={item.id} heartCount={item.heartCount} />
+    <div
+      className="card border-0 m-2 rounded-4 overflow-hidden"
+      style={{
+        width: "140px",
+        transition: "0.4s",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.boxShadow = "5px 5px 5px rgba(0,0,0,0.1)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.boxShadow = "none";
+      }}
+    >
+      <Link
+        to={`/detail/${item.id}`}
+        className="text-decoration-none text-dark"
+      >
         <img
-          style={{ cursor: "pointer" }}
-          src={ShoppingCart}
-          alt=""
-          onClick={OnAddToCartClick}
+          src={item.files[0].fileUrl}
+          alt={item.name}
+          className="card-img-top rounded-4"
+          style={{
+            width: "140px",
+            height: "140px",
+            objectFit: "cover",
+          }}
         />
-      </CartImage>
-    </Container>
+
+        <div className="card-body px-1 py-2">
+          <div
+            className="text-truncate"
+            style={{
+              fontSize: "var(--main-font-size)",
+            }}
+          >
+            {item.name}
+          </div>
+
+          <div
+            className="text-danger"
+            style={{
+              fontSize: "var(--main-price-font-size)",
+            }}
+          >
+            {item.price.toLocaleString()}원
+          </div>
+        </div>
+      </Link>
+
+      <div className="d-flex justify-content-end align-items-center pe-1">
+        <HeartCount id={item.id} heartCount={item.heartCount} />
+
+        <img
+          src={ShoppingCart}
+          alt="장바구니"
+          onClick={OnAddToCartClick}
+          style={{
+            width: "18px",
+            height: "18px",
+            objectFit: "cover",
+            cursor: "pointer",
+          }}
+        />
+      </div>
+    </div>
   );
 };
 
 export default CardTwo;
-
-const Container = styled.article`
-  width: 140px;
-  height: 200px;
-  box-sizing: border-box;
-  margin: 10px;
-  transition: 0.4s;
-  border-radius: 16px;
-  img {
-    width: 140px;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 16px;
-    transition: 0.1s;
-  }
-  &:hover {
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
-  }
-  a {
-    text-decoration: none;
-    color: black;
-  }
-`;
-
-const Title = styled.span`
-  font-size: var(--main-font-size);
-  display: block;
-  background-color: #fff;
-`;
-
-const Price = styled.span`
-  font-size: var(--main-price-font-size);
-  color: red;
-  display: block;
-  background-color: #fff;
-`;
-
-const CartImage = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
-  z-index: 300;
-  padding-right: 2px;
-  box-sizing: border-box;
-  img {
-    width: 18px;
-    height: 18px;
-    object-fit: cover;
-  }
-  span {
-    color: red;
-  }
-`;

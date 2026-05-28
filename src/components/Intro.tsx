@@ -1,121 +1,136 @@
-import styled from "styled-components";
 import Intro01 from "../assets/intro-01.jpg";
 import Intro02 from "../assets/intro-02.jpg";
 import { Link } from "react-router-dom";
 import { layout } from "../them/them";
 
+const introItems = [
+  {
+    to: "/about",
+    image: Intro01,
+    title: "ABOUT",
+    description: "홈페이지 소개",
+  },
+  {
+    to: "/notice",
+    image: Intro02,
+    title: "공지사항",
+    description: "알려드릴 소식",
+  },
+  {
+    to: "https://github.com/lsh02002",
+    image: Intro01,
+    title: (
+      <>
+        개발자
+        <br />
+        깃허브
+      </>
+    ),
+    description: "개발자의 웹 관련 소스들",
+    external: true,
+  },
+  {
+    to: "/contact",
+    image: Intro02,
+    title: "연락처",
+    description: "연락처를 구하는 곳",
+  },
+];
+
 const Intro = () => {
   return (
-    <>
-      <Introduction>
-        <Link to="/about">
-          <div className="main__intro-container-img">
-            <img className="main__intro-image" src={Intro01} alt="" />
-            <div className="main__intro-text-container">
-              <h3 className="main__intro-title">ABOUT</h3>
-              <span className="main__intro-description">홈페이지 소개</span>
-            </div>
-          </div>
-        </Link>
-        <Link to="/notice">
-          <div className="main__intro-container-img">
-            <img className="main__intro-image" src={Intro02} alt="" />
-            <div className="main__intro-text-container">
-              <h3 className="main__intro-title">공지사항</h3>
-              <span className="main__intro-description">알려드릴 소식</span>
-            </div>
-          </div>
-        </Link>
-        <Link to="https://github.com/lsh02002">
-          <div className="main__intro-container-img">
-            <img className="main__intro-image" src={Intro01} alt="" />
-            <div className="main__intro-text-container">
-              <h3 className="main__intro-title">
-                개발자
-                <br /> 깃허브
+    <section
+      className="
+        d-flex flex-wrap
+        justify-content-start align-items-center
+        border rounded-4
+        mt-5 p-3
+      "
+      style={{
+        width: "100%",
+        maxWidth: layout.maxWidth,
+        borderColor: "lightgray",
+      }}
+    >
+      {introItems.map((item, index) => {
+        const content = (
+          <div
+            className="
+              position-relative
+              overflow-hidden
+              rounded-circle
+              d-flex flex-column
+              justify-content-center align-items-center
+            "
+            style={{
+              width: "110px",
+              height: "110px",
+              margin: "15px",
+              cursor: "pointer",
+            }}
+          >
+            <img
+              src={item.image}
+              alt=""
+              className="w-100 h-100"
+              style={{
+                objectFit: "cover",
+                filter: "brightness(0.8)",
+                transition: "transform 0.5s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "scale(1.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "scale(1)";
+              }}
+            />
+
+            <div
+              className="
+                position-absolute
+                d-flex flex-column align-items-center
+                text-center
+              "
+              style={{
+                bottom: "20px",
+                left: "50%",
+                transform: "translateX(-50%)",
+                width: "100%",
+              }}
+            >
+              <h3
+                className="text-white fw-semibold mb-2"
+                style={{
+                  fontSize: "var(--main-h3-size)",
+                }}
+              >
+                {item.title}
               </h3>
-              <span className="main__intro-description">
-                개발자의 웹 관련 소스들
-              </span>
+
+              <span className="text-white small">{item.description}</span>
             </div>
           </div>
-        </Link>
-        <Link to="/contact">
-          <div className="main__intro-container-img">
-            <img className="main__intro-image" src={Intro02} alt="" />
-            <div className="main__intro-text-container">
-              <h3 className="main__intro-title">연락처</h3>
-              <span className="main__intro-description">
-                연락처를 구하는 곳
-              </span>
-            </div>
-          </div>
-        </Link>
-      </Introduction>
-    </>
+        );
+
+        return item.external ? (
+          <a
+            key={index}
+            href={item.to}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-decoration-none"
+          >
+            {content}
+          </a>
+        ) : (
+          <Link key={index} to={item.to} className="text-decoration-none">
+            {content}
+          </Link>
+        );
+      })}
+    </section>
   );
 };
 
 export default Intro;
-
-const Introduction = styled.section`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  max-width: ${layout.maxWidth};
-  height: 100%;
-  flex-wrap: wrap;
-  border: 1px solid lightgray;
-  border-radius: 16px;
-  margin-top: 50px;
-
-  .main__intro-container-img {
-    width: 110px;
-    height: 110px;
-    overflow: hidden;
-    margin: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    
-    &:hover .main__intro-image {      
-      transform: scale(1.1);
-    }
-  }
-
-  .main__intro-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.8);
-
-    transition: transform 0.5s ease;
-  }
-
-  .main__intro-container-img {
-    position: relative;
-  }
-
-  .main__intro-text-container {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .main__intro-title {
-    color: white;
-    font-size: var(--main-h3-size);
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-
-  .main__intro-description {
-    color: white;
-  }
-`;
