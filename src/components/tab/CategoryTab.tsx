@@ -32,6 +32,7 @@ const CategoryTab = ({ cate, setCate, cateItems }: CategoryTabPropsType) => {
           rounded-pill
           bg-light
           overflow-auto
+          w-100
         "
         style={{
           boxShadow:

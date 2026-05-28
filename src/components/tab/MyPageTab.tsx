@@ -57,6 +57,7 @@ const MyPageTab = ({ cate }: { cate: string | undefined }) => {
           p-2 mb-4
           rounded-pill bg-light
           overflow-auto
+          w-100
         "
         style={{
           boxShadow:
