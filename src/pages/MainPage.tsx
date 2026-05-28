@@ -23,7 +23,7 @@ const MainPage = () => {
     return new Date(
       Number(year),
       Number(month) - 1, // JS Date에서 month는 0~11
-      Number(day)
+      Number(day),
     ).getTime();
   };
 
@@ -33,7 +33,7 @@ const MainPage = () => {
     return bTime - aTime; // 최신순
   });
 
-  const popularItems = [...items].sort((a, b) => {    
+  const popularItems = [...items].sort((a, b) => {
     return (b?.views ?? 0) - (a?.views ?? 0);
   });
 
@@ -44,41 +44,69 @@ const MainPage = () => {
 
   return (
     <Layout>
-      <Banner />
-      <Title>인기있는 아이템</Title>
-      <Main>
-        <ItemSlider items={popularItems} />
-      </Main>
-      <Title>새로운 아이템</Title>
-      <Main>
-        <ItemSlider items={newItems} />
-      </Main>
-      <Intro />
-      <Title>전체 상품</Title>
-      <Main>
-        <CategoryTab cate={cate} setCate={setCate} cateItems={cateItems} />
-      </Main>
+      <Page>
+        <Banner />
+
+        <Title>인기있는 아이템</Title>
+        <Main>
+          <ItemSlider items={popularItems} />
+        </Main>
+
+        <Title>새로운 아이템</Title>
+        <Main>
+          <ItemSlider items={newItems} />
+        </Main>
+
+        <Intro />
+
+        <Title>전체 상품</Title>
+        <Main>
+          <CategoryTab cate={cate} setCate={setCate} cateItems={cateItems} />
+        </Main>
+      </Page>
     </Layout>
   );
 };
 
 export default MainPage;
 
-const Main = styled.div`
+const Page = styled.main`
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-bottom: 120px;
+
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+`;
+
+const Main = styled.section`
+  width: 100%;
+  max-width: ${layout.maxWidth};
+
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;  
+
+  box-sizing: border-box;
 `;
 
-const Title = styled.div`
+const Title = styled.h2`
   width: 100%;
   max-width: ${layout.maxWidth};
+
+  margin: 80px auto 24px auto;
+  padding: 0 20px;
+
   font-size: var(--main-h2-size);
-  margin: 80px 0 0 0;
-  padding: 0;
+  font-weight: 800;
+
   text-align: left;
+
   box-sizing: border-box;
 `;

@@ -4,9 +4,7 @@ import styled from "styled-components";
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <Container>
-      <Main>        
-        {children}
-      </Main>
+      <Main>{children}</Main>
     </Container>
   );
 };
@@ -14,20 +12,32 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 export default Layout;
 
 const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;  
-  box-sizing: border-box;
   width: 100%;
-  margin-bottom: 150px;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  position: relative;
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+
+  padding-bottom: 110px;
 `;
 
-const Main = styled.div`  
+const Main = styled.main`
+  width: 100%;
+  min-height: 100vh;
+
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  width: 100%;
+
   box-sizing: border-box;
-  padding-bottom: 70px;
+
+  padding-bottom: 110px;
 `;

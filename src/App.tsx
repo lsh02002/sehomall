@@ -179,9 +179,18 @@ export default App;
 
 const Container = styled.div`
   width: 100%;
+  min-height: 100vh;
+
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+
   position: relative;
+
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+
+  padding-bottom: 110px;
 `;
