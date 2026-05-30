@@ -24,7 +24,7 @@ const PayCard = ({ item }: { item: itemCartType }) => {
         e.currentTarget.style.boxShadow = "none";
       }}
     >
-      <div className="flex-shrink-0 w-100 w-sm-auto">
+      <div className="w-100 w-sm-auto">
         {item?.fileUrl && (
           <img
             src={item.fileUrl}
