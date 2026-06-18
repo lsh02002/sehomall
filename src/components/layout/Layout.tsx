@@ -1,4 +1,5 @@
 import React from "react";
+import { BackwardButton } from "./BackwardButton";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -28,6 +29,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           boxSizing: "border-box",
         }}
       >
+        <BackwardButton />
         {children}
       </main>
     </div>
